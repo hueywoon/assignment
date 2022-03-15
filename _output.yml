@@ -10,7 +10,7 @@ bookdown::gitbook:
         <li><a href="./">PSYC208 Take Home Assignment</a></li>
       after: |
         <li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
-    edit: https://github.com/jules32/bookdown-tutorial/edit/master/%s
+    edit: https://github.com/hueywoon/assignment
     download: ["pdf"]
 #bookdown::pdf_book:
 #  includes:
