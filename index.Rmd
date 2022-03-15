@@ -1,6 +1,6 @@
 --- 
-title: "Making free books with RStudio’s RMarkdown & Bookdown"
-author: "Julie Lowndes"
+title: "PSYC208 Take Home Assignments"
+author: "Huey Woon LEE"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 # output: bookdown::gitbook
@@ -8,38 +8,44 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-github-repo: openscapes/series
-description: "A mini bookdown tutorial book on how to make bookdown books."
+github-repo: hueywoon/assignment
+description: "This website contains materials related to the take home assignments used in my PSYC208 class."
 ---
 
-# Welcome {#welcome}
+# Introduction {-}
 
-hi
+This website contains materials related to the take home assignments used in my PSYC208 class. These assignments are graded on a PASS/FAIL basis. If the assignment is correctly done, the assignment is marked as PASS; otherwise, it is marked as FAIL. Unless there are exceptional circumstances (please inform TA or me), responses submitted after a grace period of 5 minutes will also be graded as FAIL. 
 
-It's possible to create beautiful books for free using [RStudio's R Markdown](http://rmarkdown.rstudio.com/) and Yihui Xie's [bookdown](https://bookdown.org/yihui/bookdown/) and hosting them on [Github](http://github.com). This is pretty new and incredibly cool. It is a really powerful way to communicate science using the same reproducible workflow you use for your analyses and collaborations.
+To complete the take home assignments, you will need R and RStudio. R is a programming language for statistical computing and RStudio is an integrated development environment to write and run code written in R.
 
-This tutorial borrows heavily from a lot of great tutorials and resources you should check out too -- there are links throughout. It also parallels a previous tutorial [Making free websites with RStudio’s R Markdown](https://jules32.github.io/rmarkdown-website-tutorial/).
+## Install R and RStudio for Windows {-}
 
-The best way to learn is to follow along with your own laptop, but all are welcome. We'll spend half the time with the tutorial and half the time for you to work on your own website and get help. If you bring your laptop please do this beforehand: 
+### Install R {-}
+1.	Open an internet browser and go to [https://www.r-project.org/](https://www.r-project.org/).
+2.	Click the "download R" link in the middle of the page under "Getting Started."
+3.	Select a CRAN location (a mirror site) and click the corresponding link.  
+4.	Click on the "Download R for Windows" link at the top of the page.  
+5.	Click on the "install R for the first time" link at the top of the page.
+6.	Click "Download R for Windows" and save the executable file somewhere on your computer.  Run the .exe file and follow the installation instructions.  
+7.	Now that R is installed, you need to download and install RStudio. 
 
-1. install [RStudio](https://www.rstudio.com/products/rstudio/download/)
-1. create a [GitHub]((http://github.com)) account ([advice](http://happygitwithr.com/github-acct.html))
-1. set up your computer to talk to GitHub
-    - have RStudio linked directly (highly recommended) ([instructions sections 8-14](http://happygitwithr.com/hello-git.html))
-    - or install the [Desktop App](https://desktop.github.com/)
-    - or be familiar with git commands for the command line ([tutorial](https://try.github.io/levels/1/challenges/1))
+### Install RStudio {-}
+1.	Go to www.rstudio.com and click on the "Download RStudio" button.
+2.	Click on "Download RStudio Desktop."
+3.	Click on the version recommended for your system, or the latest Windows version, and save the executable file.  Run the .exe file and follow the installation instructions
 
-----
+## Install R and RStudio for Mac {-}
 
+### Install R {-}
+1.	Open an internet browser and go to [https://www.r-project.org/](https://www.r-project.org/).
+2.	Click the "download R" link in the middle of the page under "Getting Started."
+3.	Select a CRAN location (a mirror site) and click the corresponding link.
+4.	Click on the "Download R for (Mac) OS X" link at the top of the page.
+5.	Click on the file containing the latest version of R under "Files."
+6.	Save the .pkg file, double-click it to open, and follow the installation instructions.
+7.	Now that R is installed, you need to download and install RStudio.
 
-**Examples:**
-
-We have been using bookdown for the Ocean Health Index:  [**ohi-science.org/data-science-training**](http://ohi-science.org/data-science-training) and Openscapes: [**openscapes.org/series**](https://openscapes.org/series).  
-And R Markdown is much more than books and websites -- here's a [**one-minute video about R Markdown**](http://rmarkdown.rstudio.com/lesson-1.html) to get you excited. 
-
-----
-
-## Learn all about Bookdown
-
-The best way to learn more about bookdown is from Yihui Xie himself. You can read his book [bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown/) or watch his webinar [introducing bookdown](https://www.rstudio.com/resources/webinars/introducing-bookdown/).
-
+### Install RStudio {-}
+1.	Go to www.rstudio.com and click on the "Download RStudio" button.
+2.	Click on "Download RStudio Desktop."
+3.	Click on the version recommended for your system, or the latest Mac version, save the .dmg file on your computer, double-click it to open, and then drag and drop it to your applications folder.     
