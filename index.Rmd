@@ -48,4 +48,6 @@ To complete the take home assignments, you will need R and RStudio. R is a progr
 ### Install RStudio {-}
 1.	Go to www.rstudio.com and click on the "Download RStudio" button.
 2.	Click on "Download RStudio Desktop."
-3.	Click on the version recommended for your system, or the latest Mac version, save the .dmg file on your computer, double-click it to open, and then drag and drop it to your applications folder.     
+3.	Click on the version recommended for your system, or the latest Mac version, save the .dmg file on your computer, double-click it to open, and then drag and drop it to your applications folder.
+
+----
