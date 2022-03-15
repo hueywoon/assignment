@@ -1,5 +1,3 @@
-# bookdown-tutorial
-Mini tutorial for bookdown 
+# Materials for PSYC208 Take Home Assignment
 
-
-afdafadjl
+This website contains materials related to the take home assignments used in my PSYC208 class.
