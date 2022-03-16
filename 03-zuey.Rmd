@@ -1,6 +1,0 @@
-# Final comments {#final}
-
-Coming soon: 
-
-- Adding chapters
-- Citations
