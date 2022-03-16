@@ -151,8 +151,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.6" data-path="getting-started.html"><a href="getting-started.html#some-tips-and-tricks"><i class="fa fa-check"></i><b>1.6</b> Some Tips and Tricks<span></span></a>
 <ul>
 <li class="chapter" data-level="1.6.1" data-path="getting-started.html"><a href="getting-started.html#softwrap-long-lines"><i class="fa fa-check"></i><b>1.6.1</b> Softwrap Long Lines<span></span></a></li>
+<li class="chapter" data-level="1.6.2" data-path="getting-started.html"><a href="getting-started.html#using-r-projects"><i class="fa fa-check"></i><b>1.6.2</b> Using R Projects<span></span></a></li>
 </ul></li>
-<li><a href="getting-started.html#using-r-projects">Using R Projects<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>2</b> Using dplyr<span></span></a></li>
 <li class="chapter" data-level="3" data-path="tha1.html"><a href="tha1.html"><i class="fa fa-check"></i><b>3</b> Assignment 1<span></span></a></li>
@@ -180,26 +180,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="getting-started" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">1</span> Getting Started<a href="getting-started.html#getting-started" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>To complete the take home assignments, you need both R and RStudio. These are <em>different</em> programmes. I think of R as the software that executes your commands and RStudio as the interface between us and R that makes interacting with R a much more pleasant experience. For example, RStudio has keyboard shortcuts that allow you to paste specific code with just a few keystrokes so you don’t have to type them over and over. This makse writing R code just a tad faster!</p>
+<p>To complete the take home assignments, you need both R and RStudio. These are <em>different</em> programmes. I think of R as the software that executes our commands and RStudio as the interface between us and R that makes interacting with R a much more pleasant experience. RStudio has many nifty features, like the spellchecker and the keyboard shortcuts that make writing code much faster and easier. For the sake of your sanity, I strongly recommend you download both programmes!</p>
 <div id="install-r-and-rstudio" class="section level2 hasAnchor" number="1.1">
 <h2><span class="header-section-number">1.1</span> Install R and RStudio<a href="getting-started.html#install-r-and-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Install R</p>
 <p>For Windows</p>
 <ol style="list-style-type: decimal">
-<li>Open an internet browser and go to <a href="https://cloud.r-project.org/">https://cloud.r-project.org/</a>.</li>
+<li>Open an internet browser and go to <a href="https://cloud.r-project.org/" class="uri">https://cloud.r-project.org/</a>.</li>
 <li>Under <strong>Download and Install R</strong>, Click on <strong>Download R for Windows</strong>. Click on <em>base</em>.</li>
 <li>Download the latest release by saving the .exe file on your computer. Double-click the file and follow the installation instructions.</li>
 </ol>
 <p>For macOS</p>
 <ol style="list-style-type: decimal">
-<li>Open an internet browser and go to <a href="https://cloud.r-project.org/">https://cloud.r-project.org/</a>.</li>
+<li>Open an internet browser and go to <a href="https://cloud.r-project.org/" class="uri">https://cloud.r-project.org/</a>.</li>
 <li>Under <strong>Download and Install R</strong>, click on <strong>Download R for macOS</strong>.</li>
 <li>Download the latest release by saving the .pkg file to your computer. Double-click the file and follow the installation instructions.</li>
 </ol>
 <p>Install RStudio</p>
 <p>Now that R is installed, download and install RStudio.</p>
 <ol style="list-style-type: decimal">
-<li>Go to <a href="https://www.rstudio.com/products/rstudio/download/">https://www.rstudio.com/products/rstudio/download/</a>.</li>
+<li>Go to <a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a>.</li>
 <li>Click <strong>Download under RStudio Desktop</strong>.</li>
 <li>Click on the version recommended for your system, or the latest Windows / macOS version, and save the file. Double-click the file and follow the installation instructions.</li>
 </ol>
@@ -226,7 +226,7 @@ Figure 1.1: R Studio Interface With Three Panes
 <li><strong>Files</strong>: We can create new folders on our computer, move, delete, and rename files here.</li>
 <li><strong>Plots</strong>: We can find all the plots we instructed R to produce during the session here.</li>
 <li><strong>Packages</strong>: We can find, install, and update packages. Packages contain functions that other people have created to supplement those in R. We will talk more about specific packages later.</li>
-<li><strong>Help</strong>: We can find information about a given command or package. We can also find more information about various commands and the packages on this website: <a href="https://www.rdocumentation.org/">https://www.rdocumentation.org/</a></li>
+<li><strong>Help</strong>: We can find information about a given command or package. We can also find more information about various commands and the packages on this website: <a href="https://www.rdocumentation.org/" class="uri">https://www.rdocumentation.org/</a></li>
 </ul></li>
 </ol>
 <p><em>Note. Because the Terminal tab, the Connections tab, and the Viewer tab will not be used in this course, I will not talk about them.</em></p>
@@ -247,12 +247,10 @@ Figure 1.2: R Studio With Four Panes
 <p>Before typing commands into the script editor, it might be useful for you to know some of the following basic commands.</p>
 <ol style="list-style-type: decimal">
 <li>To place a comment in the script file, begin the line with #.</li>
-<li>To run (execute) a line in the script file, place the cursor on the line, hit Ctrl + Enter (Windows) or Cmd + Enter (macOS).</li>
-</ol>
+<li>To run (execute) a line in the script file, place the cursor on the line, hit Ctrl + Enter (Windows) or Cmd + Enter (macOS).
 <ul>
 <li>If we typed the command directly into the console, we only need to hit Enter</li>
-</ul>
-<ol style="list-style-type: decimal">
+</ul></li>
 <li>To run multiple lines in the script file, select the lines, hit Ctrl + Enter (Windows) or Cmd + Enter (macOS).</li>
 <li>To clear the console when it becomes too messy, hit Ctrl + L (Windows) or Cmd + L (macOS).</li>
 <li>To request help, type a question mark in front of the command or the package name (e.g., ?cor). Information about the command will appear in the Help tab (lower right pane).</li>
@@ -262,9 +260,9 @@ Figure 1.2: R Studio With Four Panes
 <h2><span class="header-section-number">1.5</span> Typing and Executing Commands<a href="getting-started.html#typing-and-executing-commands" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Now, let’s actually get R to do stuff for us! Copy and paste the following R codes into the Script Editor pane. Run each line (Ctrl/Cmd + Enter) to see what they do. Note that # denotes a comment, and therefore it will run as a line of text. Experiment and have fun!</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="getting-started.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign a value (e.g., 9) to an object, say x.  </span></span>
-<span id="cb1-2"><a href="getting-started.html#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">9</span>  <span class="co"># what this means is that x gets the value of 9</span></span>
+<span id="cb1-2"><a href="getting-started.html#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">9</span>  <span class="co"># this means &quot;x gets the value of 9&quot;</span></span>
 <span id="cb1-3"><a href="getting-started.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="getting-started.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the value for x.</span></span>
+<span id="cb1-4"><a href="getting-started.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the value for x.</span></span>
 <span id="cb1-5"><a href="getting-started.html#cb1-5" aria-hidden="true" tabindex="-1"></a>x   <span class="co"># Note that R is case-sensitive. If you typed X, you&#39;ll get an error message.</span></span>
 <span id="cb1-6"><a href="getting-started.html#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="getting-started.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># If you want to know what objects are in the workspace (i.e., R&#39;s memory), look at the Environments tab or type ls().</span></span>
@@ -279,7 +277,7 @@ Figure 1.2: R Studio With Four Panes
 <span id="cb1-16"><a href="getting-started.html#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign a non-numerical value by putting the value in quotation marks.</span></span>
 <span id="cb1-17"><a href="getting-started.html#cb1-17" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="st">&quot;hello!&quot;</span></span>
 <span id="cb1-18"><a href="getting-started.html#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="getting-started.html#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Get value of y. Notice value of y is in quotation marks, indicating it is a non-numerical value.</span></span>
+<span id="cb1-19"><a href="getting-started.html#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the value of y. Notice the value of y is in quotation marks, indicating it is a non-numerical value.</span></span>
 <span id="cb1-20"><a href="getting-started.html#cb1-20" aria-hidden="true" tabindex="-1"></a>y</span>
 <span id="cb1-21"><a href="getting-started.html#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-22"><a href="getting-started.html#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform the following mathematical operations in R.</span></span>
@@ -295,7 +293,7 @@ Figure 1.2: R Studio With Four Panes
 <span id="cb1-32"><a href="getting-started.html#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">11</span>)    <span class="co"># taking the exponential</span></span>
 <span id="cb1-33"><a href="getting-started.html#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-34"><a href="getting-started.html#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform mathematical operations in R with an object (e.g., a). </span></span>
-<span id="cb1-35"><a href="getting-started.html#cb1-35" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">11</span>  </span>
+<span id="cb1-35"><a href="getting-started.html#cb1-35" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">11</span>  <span class="co"># a gets the value of 11</span></span>
 <span id="cb1-36"><a href="getting-started.html#cb1-36" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> <span class="dv">10</span></span>
 <span id="cb1-37"><a href="getting-started.html#cb1-37" aria-hidden="true" tabindex="-1"></a>a <span class="sc">-</span> <span class="dv">10</span></span>
 <span id="cb1-38"><a href="getting-started.html#cb1-38" aria-hidden="true" tabindex="-1"></a>a <span class="sc">*</span> <span class="dv">10</span></span>
@@ -324,15 +322,14 @@ Figure 1.2: R Studio With Four Panes
 <h3><span class="header-section-number">1.6.1</span> Softwrap Long Lines<a href="getting-started.html#softwrap-long-lines" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Sometimes, we might write commands in the Script editor section that are too long (horizontally) to fit the window. To see the entire command, we might need to scroll horizontally. This can be frustrating. (It’s like notepad, without word wrap.) Fortunately, we can wrap the text such that the code fits into the size of the window. Go to <em>Code &gt; Soft Wrap Long Lines</em>. I highly recommend you do this, especially if you tend to write a lot of comments in the script file like I do.</p>
 </div>
-</div>
-<div id="using-r-projects" class="section level2 unnumbered hasAnchor">
-<h2>Using R Projects<a href="getting-started.html#using-r-projects" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>When we analyse data, we may have a bunch of different files, such as the input data, R scripts, results, figures etc. To stay organised, it is best that we have a projects. <em>File &gt; New Project</em></p>
-<p>A dialogue window with three options appears: “New Directory”, “Existing Directory” and “Version Control”.</p>
-<p>Select “New Directory” followed by “New Project”.</p>
-<p>After you created a project, RStudio changes the working directory to the project directory so that you can conveniently access data and R scripts in this directory without having to manually change directories. RStudio also placed a file with the extension .Rproj in the project directory. When you open this file, RStudio automatically starts a new session with the project directory as your working directory.</p>
-<p>I strongly recommend you make RStudio projects a regular part of your workflow. They help you stay organised. As a rule of thumb, whenever you work on a new data set, you create a new project dedicated to these data. The project folder is where you store the data files and save all R scripts that have to do with these data. Do not hesitate to create many small projects. Projects with only a few files are much easier to navigate than projects in which many unrelated files were dumped into one and the same directory.</p>
+<div id="using-r-projects" class="section level3 hasAnchor" number="1.6.2">
+<h3><span class="header-section-number">1.6.2</span> Using R Projects<a href="getting-started.html#using-r-projects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When we analyse data, we may have a bunch of different files from different projects all strewn in a single directory. This can be quite messy. To stay organised, it is best that we create a project.</p>
+<p>To do this, go to <em>File &gt; New Project</em>. A dialogue window with three options, “New Directory”, “Existing Directory” and “Version Control”, will appear. Select “New Directory”, followed by “New Project”.</p>
+<p>After RStudio has created the project, it will change the working directory to the project directory so that you can access all the files (e.g., data, script) related to this project in this directory. RStudio will also create a file with the extension .Rproj in the project directory. When you open this file, RStudio will automatically start a new session with the project directory as your working directory.</p>
+<p>While it is not absolutely necessary to use RStudio projects in this course, I recommend it because it will help keep you organized.</p>
 
+</div>
 </div>
 </div>
             </section>

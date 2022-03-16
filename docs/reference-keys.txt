@@ -8,6 +8,7 @@ some-basic-commands
 typing-and-executing-commands
 some-tips-and-tricks
 softwrap-long-lines
+using-r-projects
 dplyr
 tha1
 tha2
