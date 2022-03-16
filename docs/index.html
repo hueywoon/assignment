@@ -24,7 +24,7 @@
 <meta name="author" content="Huey Woon LEE" />
 
 
-<meta name="date" content="2022-03-15" />
+<meta name="date" content="2022-03-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 
-<link rel="next" href="setup.html"/>
+<link rel="next" href="getting-started.html"/>
 <script src="libs/header-attrs-2.12/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -76,18 +76,24 @@
 <li><a href="./">PSYC208 Take Home Assignment</a></li>
 
 <li class="divider"></li>
-<li><a href="index.html#introduction">Introduction<span></span></a>
+<li><a href="index.html#about-this-website">About This Website<span></span></a></li>
+<li><a href="getting-started.html#getting-started">Getting Started<span></span></a>
 <ul>
-<li><a href="index.html#install-r-and-rstudio-for-windows">Install R and RStudio for Windows<span></span></a>
+<li><a href="getting-started.html#install-r-and-rstudio">Install R and RStudio<span></span></a>
 <ul>
-<li><a href="index.html#install-r">Install R<span></span></a></li>
-<li><a href="index.html#install-rstudio">Install RStudio<span></span></a></li>
+<li><a href="getting-started.html#install-r">Install R<span></span></a></li>
+<li><a href="getting-started.html#a-windows">(A) Windows<span></span></a></li>
+<li><a href="getting-started.html#b-macos">(B) macOS<span></span></a></li>
+<li><a href="getting-started.html#install-rstudio">Install RStudio<span></span></a></li>
 </ul></li>
-<li><a href="index.html#install-r-and-rstudio-for-mac">Install R and RStudio for Mac<span></span></a>
+<li><a href="getting-started.html#start-up-rstudio">Start-Up RStudio<span></span></a></li>
+<li><a href="getting-started.html#typing-commands-into-the-r-console">Typing Commands Into the R Console<span></span></a></li>
+<li><a href="getting-started.html#r-script">R Script<span></span></a></li>
+<li><a href="getting-started.html#customizing-rstudio">Customizing RStudio<span></span></a>
 <ul>
-<li><a href="index.html#install-r-1">Install R<span></span></a></li>
-<li><a href="index.html#install-rstudio-1">Install RStudio<span></span></a></li>
+<li><a href="getting-started.html#softwrap-long-lines">Softwrap Long Lines<span></span></a></li>
 </ul></li>
+<li class="chapter" data-level="0.1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>0.1</b> Using R Projects<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>1</b> Setting up Bookdown<span></span></a>
 <ul>
@@ -122,63 +128,12 @@
 <div id="header">
 <h1 class="title">PSYC208 Take Home Assignments</h1>
 <p class="author"><em>Huey Woon LEE</em></p>
-<p class="date"><em>2022-03-15</em></p>
+<p class="date"><em>2022-03-16</em></p>
 </div>
-<div id="introduction" class="section level1 unnumbered hasAnchor">
-<h1>Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="about-this-website" class="section level1 unnumbered hasAnchor">
+<h1>About This Website<a href="index.html#about-this-website" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This website contains materials related to the take home assignments used in my PSYC208 class. These assignments are graded on a PASS/FAIL basis. If the assignment is correctly done, the assignment is marked as PASS; otherwise, it is marked as FAIL. Unless there are exceptional circumstances (please inform TA or me), responses submitted after a grace period of 5 minutes will also be graded as FAIL.</p>
-<p>To complete the take home assignments, you will need R and RStudio. R is a programming language for statistical computing and RStudio is an integrated development environment to write and run code written in R.</p>
-<div id="install-r-and-rstudio-for-windows" class="section level2 unnumbered hasAnchor">
-<h2>Install R and RStudio for Windows<a href="index.html#install-r-and-rstudio-for-windows" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="install-r" class="section level3 unnumbered hasAnchor">
-<h3>Install R<a href="index.html#install-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ol style="list-style-type: decimal">
-<li>Open an internet browser and go to <a href="https://www.r-project.org/">https://www.r-project.org/</a>.</li>
-<li>Click the “download R” link in the middle of the page under “Getting Started.”</li>
-<li>Select a CRAN location (a mirror site) and click the corresponding link.<br />
-</li>
-<li>Click on the “Download R for Windows” link at the top of the page.<br />
-</li>
-<li>Click on the “install R for the first time” link at the top of the page.</li>
-<li>Click “Download R for Windows” and save the executable file somewhere on your computer. Run the .exe file and follow the installation instructions.<br />
-</li>
-<li>Now that R is installed, you need to download and install RStudio.</li>
-</ol>
-</div>
-<div id="install-rstudio" class="section level3 unnumbered hasAnchor">
-<h3>Install RStudio<a href="index.html#install-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ol style="list-style-type: decimal">
-<li>Go to www.rstudio.com and click on the “Download RStudio” button.</li>
-<li>Click on “Download RStudio Desktop.”</li>
-<li>Click on the version recommended for your system, or the latest Windows version, and save the executable file. Run the .exe file and follow the installation instructions</li>
-</ol>
-</div>
-</div>
-<div id="install-r-and-rstudio-for-mac" class="section level2 unnumbered hasAnchor">
-<h2>Install R and RStudio for Mac<a href="index.html#install-r-and-rstudio-for-mac" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="install-r-1" class="section level3 unnumbered hasAnchor">
-<h3>Install R<a href="index.html#install-r-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ol style="list-style-type: decimal">
-<li>Open an internet browser and go to <a href="https://www.r-project.org/">https://www.r-project.org/</a>.</li>
-<li>Click the “download R” link in the middle of the page under “Getting Started.”</li>
-<li>Select a CRAN location (a mirror site) and click the corresponding link.</li>
-<li>Click on the “Download R for (Mac) OS X” link at the top of the page.</li>
-<li>Click on the file containing the latest version of R under “Files.”</li>
-<li>Save the .pkg file, double-click it to open, and follow the installation instructions.</li>
-<li>Now that R is installed, you need to download and install RStudio.</li>
-</ol>
-</div>
-<div id="install-rstudio-1" class="section level3 unnumbered hasAnchor">
-<h3>Install RStudio<a href="index.html#install-rstudio-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ol style="list-style-type: decimal">
-<li>Go to www.rstudio.com and click on the “Download RStudio” button.</li>
-<li>Click on “Download RStudio Desktop.”</li>
-<li>Click on the version recommended for your system, or the latest Mac version, save the .dmg file on your computer, double-click it to open, and then drag and drop it to your applications folder.</li>
-</ol>
-<hr />
-
-</div>
-</div>
+<p>To complete the take home assignments, you need both R and RStudio. I like to think of R as the software that executes your commands, and RStudio as the interface between us and R that makes interacting with R much easier. You can run R commands independent of RStudio, but you <em>cannot</em> run R commands with just RStudio.</p>
 </div>
             </section>
 
@@ -186,7 +141,7 @@
         </div>
       </div>
 
-<a href="setup.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="getting-started.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -217,7 +172,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/jules32/bookdown-tutorial/edit/master/index.Rmd",
+"link": "https://github.com/hueywoon/assignment/blob/master/index.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -228,7 +183,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["series.pdf"],
+"download": null,
 "search": {
 "engine": "fuse",
 "options": null

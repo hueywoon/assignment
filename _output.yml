@@ -10,10 +10,16 @@ bookdown::gitbook:
         <li><a href="./">PSYC208 Take Home Assignment</a></li>
       after: |
         <li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
-    edit: https://github.com/hueywoon/assignment
-    download: ["pdf"]
+    edit: https://github.com/hueywoon/assignment/blob/master/%s
+
+
+# download: [["book.pdf", "PDF"]]
+
+# download: ["pdf"]
 #bookdown::pdf_book:
 #  includes:
 #    in_header: _preamble.tex
 #  latex_engine: xelatex
 #  keep_tex: no
+
+  

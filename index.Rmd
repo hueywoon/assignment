@@ -12,42 +12,86 @@ github-repo: hueywoon/assignment
 description: "This website contains materials related to the take home assignments used in my PSYC208 class."
 ---
 
-# Introduction {-}
+# About This Website {-}
 
 This website contains materials related to the take home assignments used in my PSYC208 class. These assignments are graded on a PASS/FAIL basis. If the assignment is correctly done, the assignment is marked as PASS; otherwise, it is marked as FAIL. Unless there are exceptional circumstances (please inform TA or me), responses submitted after a grace period of 5 minutes will also be graded as FAIL. 
 
-To complete the take home assignments, you will need R and RStudio. R is a programming language for statistical computing and RStudio is an integrated development environment to write and run code written in R.
+To complete the take home assignments, you need both R and RStudio. I like to think of R as the software that executes your commands, and RStudio as the interface between us and R that makes interacting with R much easier. You can run R commands independent of RStudio, but you _cannot_ run R commands with just RStudio. 
 
-## Install R and RStudio for Windows {-}
+# Getting Started {-}
 
-### Install R {-}
-1.	Open an internet browser and go to [https://www.r-project.org/](https://www.r-project.org/).
-2.	Click the "download R" link in the middle of the page under "Getting Started."
-3.	Select a CRAN location (a mirror site) and click the corresponding link.  
-4.	Click on the "Download R for Windows" link at the top of the page.  
-5.	Click on the "install R for the first time" link at the top of the page.
-6.	Click "Download R for Windows" and save the executable file somewhere on your computer.  Run the .exe file and follow the installation instructions.  
-7.	Now that R is installed, you need to download and install RStudio. 
-
-### Install RStudio {-}
-1.	Go to www.rstudio.com and click on the "Download RStudio" button.
-2.	Click on "Download RStudio Desktop."
-3.	Click on the version recommended for your system, or the latest Windows version, and save the executable file.  Run the .exe file and follow the installation instructions
-
-## Install R and RStudio for Mac {-}
+## Install R and RStudio {-}
 
 ### Install R {-}
-1.	Open an internet browser and go to [https://www.r-project.org/](https://www.r-project.org/).
-2.	Click the "download R" link in the middle of the page under "Getting Started."
-3.	Select a CRAN location (a mirror site) and click the corresponding link.
-4.	Click on the "Download R for (Mac) OS X" link at the top of the page.
-5.	Click on the file containing the latest version of R under "Files."
-6.	Save the .pkg file, double-click it to open, and follow the installation instructions.
-7.	Now that R is installed, you need to download and install RStudio.
+
+### (A) Windows {-}
+
+1.	Open an internet browser and go to [https://cloud.r-project.org/](https://cloud.r-project.org/).
+1.	Under *Download and Install R*, Click on *Download R for Windows*. 
+1. Download the latest release by saving the .exe file on your computer. Double-click the file and follow the installation instructions.  
+
+### (B) macOS {-}
+1.	Open an internet browser and go to [https://cloud.r-project.org/](https://cloud.r-project.org/).
+1.	Under *Download and Install R*, click on *Download R for macOS*. 
+1.	Download the latest release by saving the .pkg file to your computer. Double-click the file and follow the installation instructions.  
 
 ### Install RStudio {-}
-1.	Go to www.rstudio.com and click on the "Download RStudio" button.
-2.	Click on "Download RStudio Desktop."
-3.	Click on the version recommended for your system, or the latest Mac version, save the .dmg file on your computer, double-click it to open, and then drag and drop it to your applications folder.
 
-----
+Now that R is installed, download and install RStudio. 
+
+1.	Go to  [https://www.rstudio.com/products/rstudio/download/](https://www.rstudio.com/products/rstudio/download/).
+1.	Click *Download` under `RStudio Desktop*. 
+1.	Click on the version recommended for your system, or the latest Windows / macOS version, and save the  file. Double-click the file and follow the installation instructions. 
+
+## Start-Up RStudio {-}
+
+Now, start up RStudio. You should see something like this: 
+
+```{r 001-threepane, echo = FALSE, out.width = "100%", fig.cap = "R Studio With Three Panes"}
+
+knitr::include_graphics("img/001-threepane.png")
+
+```
+
+When you start up RStudio, you will see three panes: the R console, the workspace, and the files, plots, packages, help, and viewer pane. Each pane serves different purposes.
+
+1.	R console: The R console is where commands are submitted to R for R to execute. It is also where we find some of the output from R (e.g., analysis results). 
+1.	Workspace: We can also call this R's short-term memory. There are two tabs that are particularly useful. 
+    - Environment tab: Here is where we can find the list of objects (e.g., variables) that we created in the session.
+    - History tab: Here is where we can find all the previous commands we submitted to R in the session. 
+1.	Files, plots, packages, help, and viewer: 
+    - Files: We can create new folders on our computer, move, delete, and rename files here.
+    - Plots: We can find all the plots we instructed R to produce during the session here.
+    - Packages: We can find, install, and update packages. Packages contain functions that other people have created to supplement those in R. We will talk more about specific packages throughout this class.
+    - Help: We can find information about a given command or package. We can also find more information about various commands and the packages on this website: [https://www.rdocumentation.org/](https://www.rdocumentation.org/)
+
+_Note. Because the Terminal tab, the Connections tab, and the Viewer tab will not be used in this course, I will not talk about them._
+
+
+## Typing Commands Into the R Console {-}
+
+
+
+## R Script {-}
+
+To get R to do stuff (e.g., conduct analyses), we submit commands to R. R then executes those commands. Typically, we type those commands into what is called a script editor and then send the commands from the script editor to the console. R users prefer to type the commands into the script editor because we can save the commands in the script editor into script files (with the extension .R). The script files allow us to keep long-term records of the analyses that we have conducted. We can also share the script files with other R users so that they can replicate our analyses. (In this class, I will use command and code interchangeably.)
+
+To open a blank R script, go to _File > New File > R Script_. In Windows, the shortcut is ctrl + shift + N. So, now, your RStudio should have four panes. 
+
+```{r 002-fourpane, echo = FALSE, out.width = "100%", fig.cap = "R Studio With  Four Panes"}
+
+knitr::include_graphics("img/002-fourpane.png")
+
+```
+
+## Customizing RStudio {-}
+
+
+
+
+### Softwrap Long Lines {-}
+
+Sometimes, we might write commands in the Script editor section that is too long (horizontally) to fit the window. To see the entire command, we might need to scroll horizontally. This can be frustrating. (It’s like notepad, without word wrap.) Fortunately, we can wrap the text such that the code fits into the size of the window. Go to Code > Soft Wrap Long Lines. I highly recommend you do this, especially if you tend to write a lot of comments in the script file like I do. 
+
+
+## Using R Projects

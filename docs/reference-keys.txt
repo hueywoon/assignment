@@ -1,3 +1,6 @@
+fig:001-threepane
+fig:002-fourpane
+using-r-projects
 setup
 get-bookdown-tutorial-going-on-your-local-computer
 create-your-awesome-book-github-repo
