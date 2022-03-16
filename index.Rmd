@@ -159,7 +159,7 @@ x ^ (1/y)
 Sometimes, we might write commands in the Script editor section that is too long (horizontally) to fit the window. To see the entire command, we might need to scroll horizontally. This can be frustrating. (It’s like notepad, without word wrap.) Fortunately, we can wrap the text such that the code fits into the size of the window. Go to Code > Soft Wrap Long Lines. I highly recommend you do this, especially if you tend to write a lot of comments in the script file like I do. 
 
 
-## Using R Projects
+## Using R Projects {-}
 
 When we analyse data, we may have a bunch of different files, such as the input data, R scripts, results, figures etc. To stay organised, it is best that we have a projects. _File > New Project_
 

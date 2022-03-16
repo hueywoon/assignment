@@ -1,6 +1,5 @@
 fig:001-threepane
 fig:002-fourpane
-using-r-projects
 tha1
 tha2
 tha3
