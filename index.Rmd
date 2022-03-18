@@ -16,6 +16,8 @@ description: "This website contains materials related to the take home assignmen
 
 This website contains materials related to the take home assignments used in my PSYC208 Research Methods II class. These assignments are graded on a PASS/FAIL basis. If the assignment is correctly done, the assignment is marked as PASS; otherwise, it is marked as FAIL. Unless there are exceptional circumstances (please inform TA or me), responses submitted after a grace period of 5 minutes will also be graded as FAIL.
 
+These take home assignments would not have been possible without the generosity of Dr. Kevin P. McIntyre, who created many of them for the [OSL Open Stats Lab](https://sites.google.com/view/openstatslab).
+
 # Getting Started
 
 To complete the take home assignments, you need both R and RStudio. These are *different* programmes. I think of R as the software that executes our commands and RStudio as the interface between us and R that makes interacting with R a much more pleasant experience. RStudio has many nifty features, like the spellchecker and the keyboard shortcuts that make writing code much faster and easier. For the sake of your sanity, I strongly recommend you download both programmes!
