@@ -1,3 +1,0 @@
-# Using dplyr {#dplyr} 
-
-Under construction

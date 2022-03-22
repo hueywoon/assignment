@@ -1,0 +1,13 @@
+# Using tidyverse {#tidyverse} 
+
+The tidyverse is a collection of R packages that many data analysts use. In this course, we will be heavily relying on at least two of the packages: dplyr and ggplot2. Installing tidyverse will install all the packages in tidyverse, including dplyr and ggplot2. 
+
+
+## Installing tidyverse
+
+```{r eval=FALSE}
+install.packages("tidyverse")
+
+```
+
+

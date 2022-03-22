@@ -9,7 +9,8 @@ typing-and-executing-commands
 some-tips-and-tricks
 softwrap-long-lines
 using-r-projects
-dplyr
+tidyverse
+installing-tidyverse
 tha1
 tha2
 tha3
