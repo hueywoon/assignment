@@ -88,11 +88,10 @@ Before typing commands into the script editor, it might be useful for you to kno
 
 1.  To place a comment in the script file, begin the line with #.
 2.  To run (execute) a line in the script file, place the cursor on the line, hit Ctrl + Enter (Windows) or Cmd + Enter (macOS).
-    - If we typed the command directly into the console, we only need to hit Enter
-
-1.  To run multiple lines in the script file, select the lines, hit Ctrl + Enter (Windows) or Cmd + Enter (macOS).
-2.  To clear the console when it becomes too messy, hit Ctrl + L (Windows) or Cmd + L (macOS).
-3.  To request help, type a question mark in front of the command or the package name (e.g., ?cor). Information about the command will appear in the Help tab (lower right pane).
+    -   If we typed the command directly into the console, we only need to hit Enter
+3.  To run multiple lines in the script file, select the lines, hit Ctrl + Enter (Windows) or Cmd + Enter (macOS).
+4.  To clear the console when it becomes too messy, hit Ctrl + L (Windows) or Cmd + L (macOS).
+5.  To request help, type a question mark in front of the command or the package name (e.g., ?cor). Information about the command will appear in the Help tab (lower right pane).
 
 ## Typing and Executing Commands
 
@@ -156,6 +155,11 @@ a ^ (1/y)
 b <- "1"  # recall, putting things in between quotation marks makes it non-numerical, even if 1 is a number.
 a + b  # you get an error here because you cannot perform mathematical operations with non-numerical objects.
 
+# An object can store more than one thing, such as a set of numbers or a set of characters. This is known as a vector and can be created using c(). 
+
+# Let's say we have 3 people, Alice, Bob, and Calvin. We can create a vector called "name" to store the three people's names. 
+name <- c("Alice", "Bob", "Calvin")
+
 ```
 
 ## Some Tips and Tricks
@@ -173,3 +177,34 @@ To do this, go to *File \> New Project*. A dialogue window with three options, "
 After RStudio has created the project, it will change the working directory to the project directory so that you can access all the files (e.g., data, script) related to this project in this directory. RStudio will also create a file with the extension .Rproj in the project directory. When you open this file, RStudio will automatically start a new session with the project directory as your working directory.
 
 While it is not absolutely necessary to use RStudio projects in this course, I recommend it because it will help keep you organized.
+
+## Entering Data Directly Into R
+
+Before we can conduct any analysis, we need to give R some data. One way is to key the data directly into R.
+
+Let's say we have three people, Bob, Andrea, and Calvin. We have their ages, the number of children each of them has, and their gender.
+
+| Name   | Age | No. of Children | Gender |
+|:-------|:----|:----------------|:-------|
+| Bob    | 48  | 1               | Male   |
+| Andrea | 47  | 3               | Female |
+| Calvin | 49  | 2               | Male   |
+
+First, we create a variable we call name, with the three people’s names.
+
+```{r}
+
+name <- c("Bob", "Andrea", "Calvin")  
+# notice the names are between quotation marks
+# this  tells R that name is a string (non-numerical) variable
+
+```
+So, if we type `name` into the console, we should get: 
+
+```{r echo = FALSE}
+
+name
+
+```
+
+

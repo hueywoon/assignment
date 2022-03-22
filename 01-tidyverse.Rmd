@@ -1,7 +1,6 @@
 # Using tidyverse {#tidyverse} 
 
-The tidyverse is a collection of R packages that many data analysts use. In this course, we will be heavily relying on at least two of the packages: dplyr and ggplot2. Installing tidyverse will install all the packages in tidyverse, including dplyr and ggplot2. 
-
+The `tidyverse` is a collection of R packages that many data analysts use. In this course, we will be heavily relying on a few of the packages such as `readr`, `dplyr` and `ggplot2` that are in this collection. Instead of installing each package separately as we normally would, we can simply install `tidyverse` and that would install all the other packages that we want.
 
 ## Installing tidyverse
 
@@ -10,4 +9,164 @@ install.packages("tidyverse")
 
 ```
 
+Although we have installed tidyverse, we cannot use it unless we load it. To load it, we need the `library()` function. 
 
+## Load tidyverse
+
+```{r echo = TRUE, message = FALSE, warning = FALSE, error = FALSE}
+
+library(tidyverse)
+
+```
+
+Now that we have tidyverse loaded, let's do stuff with it. Let's start with importing data. 
+
+## Import Data
+
+Typically, R users do not have to enter their data into R directly. Instead, they already have their dataset in various formats, such as .csv, .txt, .sav, .xlsx, etc. So what they need to do is to import the dataset into R. 
+
+In this class, I typically use .csv files. To import .csv files, we can use the `read_csv()` function from the `readr` package in `tidyverse`. 
+
+
+```{r echo = TRUE, message = FALSE, warning = FALSE, error = FALSE}
+
+data <- read_csv("Materialism.csv")
+# this code is saying...
+# read in the .csv file, "Materialism.csv" and assign it to "data"
+# from now on, "data" will refer to the data in this csv file
+
+```
+
+You may also use the built-in R function `read.csv()`. If you do so, you don't have to load the `tidyverse` package. `read.csv()` is supposedly slower than `read_csv()`, which in turn is slower than `data.table`'s `fread()`. For our purposes, though, it really doesn't matter which you use, so long as you can successfully import the data file. 
+
+```{r}
+
+data <- read.csv("Materialism.csv")
+
+```
+
+If you have other file types, such as .txt, .sav, .xlsx, you might need different packages. For example, for excel files (.xlsx), you will need the `readxl` package. For SPSS (.sav), you will need the `haven` package or the `foreign` package. For this class, I won't use file types aside from .csv, but it is good to be aware of the packages to use if you want to import other file types. 
+
+
+### Check Imported Dataset
+
+Before conducting any analyses, check that the dataset has been imported correctly. Go to the `Environment` pane (top right pane). Click `data`. The top left pane should show the imported data. Alternatively, you may type `View(data)` into the console. 
+
+1. **Rows**: The data for each participant is recorded in a single row (e.g., data for Participant 1 is in Row 1)
+1. **Columns**: The data for each variable is recorded in a single column. Names of the variables are in the headers for each column
+
+Scroll down to ensure all rows have been imported correctly. There should be 99 rows. Scroll right to ensure all columns have been imported correctly. There should be 17 columns. 
+
+Another way to check the imported dataset is using the `str()` or the `glimpse()` functions. Both give you roughly similar information (e.g., that there are 99 rows and 17 columns, the names of the variables)
+
+```{r}
+
+str(data)
+
+glimpse(data)
+
+
+```
+
+
+## Data wrangling with dplyr package
+
+Sometimes, a data set can be overwhelming. We might want to, say, select specific columns to analyse. Or, we might only want to look at specific participants. Or we might want to create new variables from existing ones. All of these is made possible with functions in the `dplyr` package in `tidyverse`.
+
+The functions we will use in this class from the `dplyr` package are as follows:
+
+| dplyr verbs |	Description |
+|:---|:---|
+|select() | select specific columns |
+|filter() |	filter (keep, select) specific rows |
+|mutate()	| create new columns |
+|summarise()	| summarise values |
+|group_by()	| apply operations to different groups | 
+
+### Select() 
+
+This function allows us to select specific columns. This is especially useful if we have many columns to work with and we only want to focus on a few. 
+
+Let's say we only want to select PIN, and the MVS01 to MVS09 columns, we can: 
+
+```{r}
+
+MVS_only <- data %>%   # create the subset called "MVS_only" from "data"
+  select(PIN, MVS01:MVS09)  # and select only PIN and the columns MVS01 to MVS09
+
+```
+
+This is what the first six rows of MVS_only should look like: 
+
+```{r echo = FALSE}
+head(MVS_only)
+
+```
+
+Although `select()` is used to select specific columns, I sometimes also use it to re-arrange the order of the columns. (In `dplyr`, the function to re-arrange the order of the columns is `arrange()`, which also helps you re-arrange rows in addition to columns) 
+
+Let's say we want the MVS01 to MVS09 columns to come _before_ PIN. We can: 
+
+```{r}
+
+MVS_Pinfirst <- data %>%   
+  select(MVS01:MVS09, PIN)  
+
+```
+
+This is what the first six rows of MVS_Pinfirst should look like: 
+
+```{r echo = FALSE}
+head(MVS_Pinfirst)
+
+```
+
+### Filter()
+
+Sometimes, we want to select specific kinds of participants to do our analyses on (e.g., say from specific conditions, or maybe only male or female participants). We use `filter()` to select those. New R users sometimes confuse `select()` with `filter()`. I like to differentiate them this way: `filter()` is used to select rows whereas `select()` is used to select columns. 
+
+So, let's say we want to select only male participants. 
+
+``` {r}
+
+male_only <- data %>%	 # create "male_only" from "data", 
+  filter(Gender == "male")  # then filter (keep) only male participants
+
+```
+Notice that the double equal sign `==` is used here. In programming languages, the `==` sign is used when we are comparing the left and the right hand side. Here, we're comparing each row under the column `Gender` to the word "male". If  that row matches the word "male", we will filter (keep) that row. Otherwise, we will toss it out. 
+
+This is what the first six rows of male_only should look like: 
+
+```{r echo = FALSE}
+head(male_only)
+
+```
+
+### Mutate()
+
+Sometimes, we might want to create new variables, say averages or totals. 
+
+Let's say we want to find the average of time spent on YouTube in the two years. To help us make the data set more manageable, maybe we first select the variables PIN, YT2016, and YT2017. Then, we create an average called average_YT from YT2016 and YT2017.
+
+```{r}
+
+with_average <- data %>% 
+  select(PIN, YT2016, YT2017) %>% 
+  mutate(average_YT = (YT2016 + YT2017) / 2)
+
+```
+
+The first 6 rows of with_average looks like this: 
+
+```{r}
+head(with_average)
+
+```
+
+### Summarise()
+
+
+### Group_by()
+
+
+Reference: [http://genomicsclass.github.io/book/pages/dplyr_tutorial.html](http://genomicsclass.github.io/book/pages/dplyr_tutorial.html)
