@@ -24,3 +24,7 @@ group_by
 tha1
 tha2
 tha3
+basics
+debugging
+output-bookdowngitbook
+testing

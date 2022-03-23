@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Basics | PSYC208 Take Home Assignments</title>
+  <meta name="description" content="This is the companion website to my PSYC208 class." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Basics | PSYC208 Take Home Assignments" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is the companion website to my PSYC208 class." />
+  <meta name="github-repo" content="hueywoon/assignment" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Basics | PSYC208 Take Home Assignments" />
+  
+  <meta name="twitter:description" content="This is the companion website to my PSYC208 class." />
+  
+
+<meta name="author" content="Huey Woon LEE" />
+
+
+<meta name="date" content="2022-03-23" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="tidyverse.html"/>
+<script src="libs/header-attrs-2.12/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="lib/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="lib/css/style.css" type="text/css" />
+<link rel="stylesheet" href="lib/css/lesson.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">PSYC208 Take Home Assignment</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> output: bookdown::gitbook<span></span></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#install-r-and-rstudio"><i class="fa fa-check"></i><b>1.1</b> Install R and RStudio<span></span></a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#the-rstudio-interface"><i class="fa fa-check"></i><b>1.2</b> The RStudio Interface<span></span></a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#r-script"><i class="fa fa-check"></i><b>1.3</b> R Script<span></span></a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#some-tips-and-tricks"><i class="fa fa-check"></i><b>1.4</b> Some Tips and Tricks<span></span></a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="index.html"><a href="index.html#softwrap-long-lines"><i class="fa fa-check"></i><b>1.4.1</b> Softwrap Long Lines<span></span></a></li>
+<li class="chapter" data-level="1.4.2" data-path="index.html"><a href="index.html#using-r-projects"><i class="fa fa-check"></i><b>1.4.2</b> Using R Projects<span></span></a></li>
+<li class="chapter" data-level="1.4.3" data-path="index.html"><a href="index.html#debugging"><i class="fa fa-check"></i><b>1.4.3</b> Debugging<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Basics<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="basics.html"><a href="basics.html#some-basic-commands"><i class="fa fa-check"></i><b>2.1</b> Some Basic Commands<span></span></a></li>
+<li class="chapter" data-level="2.2" data-path="basics.html"><a href="basics.html#typing-and-executing-commands"><i class="fa fa-check"></i><b>2.2</b> Typing and Executing Commands<span></span></a></li>
+<li class="chapter" data-level="2.3" data-path="basics.html"><a href="basics.html#entering-data-directly-into-r"><i class="fa fa-check"></i><b>2.3</b> Entering Data Directly Into R<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>3</b> Using tidyverse<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="tidyverse.html"><a href="tidyverse.html#installing-tidyverse"><i class="fa fa-check"></i><b>3.1</b> Installing tidyverse<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="tidyverse.html"><a href="tidyverse.html#load-tidyverse"><i class="fa fa-check"></i><b>3.2</b> Load tidyverse<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="tidyverse.html"><a href="tidyverse.html#import-data"><i class="fa fa-check"></i><b>3.3</b> Import Data<span></span></a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="tidyverse.html"><a href="tidyverse.html#check-imported-dataset"><i class="fa fa-check"></i><b>3.3.1</b> Check Imported Dataset<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="tidyverse.html"><a href="tidyverse.html#data-wrangling-with-dplyr-package"><i class="fa fa-check"></i><b>3.4</b> Data wrangling with dplyr package<span></span></a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="tidyverse.html"><a href="tidyverse.html#select"><i class="fa fa-check"></i><b>3.4.1</b> Select()<span></span></a></li>
+<li class="chapter" data-level="3.4.2" data-path="tidyverse.html"><a href="tidyverse.html#filter"><i class="fa fa-check"></i><b>3.4.2</b> Filter()<span></span></a></li>
+<li class="chapter" data-level="3.4.3" data-path="tidyverse.html"><a href="tidyverse.html#mutate"><i class="fa fa-check"></i><b>3.4.3</b> Mutate()<span></span></a></li>
+<li class="chapter" data-level="3.4.4" data-path="tidyverse.html"><a href="tidyverse.html#summarise"><i class="fa fa-check"></i><b>3.4.4</b> Summarise()<span></span></a></li>
+<li class="chapter" data-level="3.4.5" data-path="tidyverse.html"><a href="tidyverse.html#group_by"><i class="fa fa-check"></i><b>3.4.5</b> Group_by()<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="tha2.html"><a href="tha2.html"><i class="fa fa-check"></i><b>4</b> Assignment 2<span></span></a></li>
+<li class="chapter" data-level="5" data-path="tha3.html"><a href="tha3.html"><i class="fa fa-check"></i><b>5</b> Assignment 3<span></span></a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">PSYC208 Take Home Assignments</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="basics" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Basics<a href="basics.html#basics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="some-basic-commands" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Some Basic Commands<a href="basics.html#some-basic-commands" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Before typing commands into the script editor, it might be useful for you to know some of the following basic commands.</p>
+<ol style="list-style-type: decimal">
+<li>To place a comment in the script file, begin the line with #.</li>
+<li>To run (execute) a line in the script file, place the cursor on the line, hit Ctrl + Enter (Windows) or Cmd + Enter (macOS).
+<ul>
+<li>If we typed the command directly into the console, we only need to hit Enter</li>
+</ul></li>
+<li>To run multiple lines in the script file, select the lines, hit Ctrl + Enter (Windows) or Cmd + Enter (macOS).</li>
+<li>To clear the console when it becomes too messy, hit Ctrl + L (Windows) or Cmd + L (macOS).</li>
+<li>To request help, type a question mark in front of the command or the package name (e.g., ?cor). Information about the command will appear in the Help tab (lower right pane).</li>
+</ol>
+</div>
+<div id="typing-and-executing-commands" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Typing and Executing Commands<a href="basics.html#typing-and-executing-commands" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now, let’s actually get R to do stuff for us! Copy and paste the following R codes into the Script Editor pane. Run each line (Ctrl/Cmd + Enter) to see what they do. Note that # denotes a comment, and therefore it will run as a line of text. Experiment and have fun!</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="basics.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign a single value (e.g., 9) to an object, say x.  </span></span>
+<span id="cb1-2"><a href="basics.html#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">9</span>  <span class="co"># this means &quot;x gets the value of 9&quot;</span></span>
+<span id="cb1-3"><a href="basics.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="basics.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the value for x.</span></span>
+<span id="cb1-5"><a href="basics.html#cb1-5" aria-hidden="true" tabindex="-1"></a>x   <span class="co"># remember that R is case-sensitive. If you typed X, you&#39;ll get an error message.</span></span>
+<span id="cb1-6"><a href="basics.html#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="basics.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># If you want to know what objects are in the workspace (i.e., R&#39;s memory), look at the Environments tab or type ls().</span></span>
+<span id="cb1-8"><a href="basics.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span>
+<span id="cb1-9"><a href="basics.html#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="basics.html#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># You may remove an object (e.g., x) from the workspace.</span></span>
+<span id="cb1-11"><a href="basics.html#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)  <span class="co"># where rm stands for remove</span></span>
+<span id="cb1-12"><a href="basics.html#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="basics.html#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># If there are too many objects in the workspace, you may remove all objects from the workspace using rm(list=ls()).</span></span>
+<span id="cb1-14"><a href="basics.html#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb1-15"><a href="basics.html#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="basics.html#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign a non-numerical value by putting the value in quotation marks.</span></span>
+<span id="cb1-17"><a href="basics.html#cb1-17" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="st">&quot;hello!&quot;</span></span>
+<span id="cb1-18"><a href="basics.html#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="basics.html#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the value of y. Notice the value of y is in quotation marks, indicating it is a non-numerical value.</span></span>
+<span id="cb1-20"><a href="basics.html#cb1-20" aria-hidden="true" tabindex="-1"></a>y</span>
+<span id="cb1-21"><a href="basics.html#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="basics.html#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform the following mathematical operations in R.</span></span>
+<span id="cb1-23"><a href="basics.html#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span> <span class="sc">+</span> <span class="dv">10</span>  </span>
+<span id="cb1-24"><a href="basics.html#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span> <span class="sc">-</span> <span class="dv">10</span>  </span>
+<span id="cb1-25"><a href="basics.html#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span> <span class="sc">*</span> <span class="dv">10</span></span>
+<span id="cb1-26"><a href="basics.html#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span> <span class="sc">/</span> <span class="dv">10</span></span>
+<span id="cb1-27"><a href="basics.html#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span> <span class="sc">^</span> <span class="dv">10</span></span>
+<span id="cb1-28"><a href="basics.html#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span> <span class="sc">^</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb1-29"><a href="basics.html#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">11</span>)   <span class="co"># this number should be the same as above line</span></span>
+<span id="cb1-30"><a href="basics.html#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">11</span>)    <span class="co"># taking natural log (log base e) </span></span>
+<span id="cb1-31"><a href="basics.html#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">log10</span>(<span class="dv">11</span>)  <span class="co"># taking log base 10</span></span>
+<span id="cb1-32"><a href="basics.html#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">11</span>)    <span class="co"># taking the exponential</span></span>
+<span id="cb1-33"><a href="basics.html#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="basics.html#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform mathematical operations in R with an object (e.g., a). </span></span>
+<span id="cb1-35"><a href="basics.html#cb1-35" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">11</span>  <span class="co"># a gets the value of 11</span></span>
+<span id="cb1-36"><a href="basics.html#cb1-36" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> <span class="dv">10</span></span>
+<span id="cb1-37"><a href="basics.html#cb1-37" aria-hidden="true" tabindex="-1"></a>a <span class="sc">-</span> <span class="dv">10</span></span>
+<span id="cb1-38"><a href="basics.html#cb1-38" aria-hidden="true" tabindex="-1"></a>a <span class="sc">*</span> <span class="dv">10</span></span>
+<span id="cb1-39"><a href="basics.html#cb1-39" aria-hidden="true" tabindex="-1"></a>a <span class="sc">/</span> <span class="dv">10</span></span>
+<span id="cb1-40"><a href="basics.html#cb1-40" aria-hidden="true" tabindex="-1"></a>a <span class="sc">^</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb1-41"><a href="basics.html#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(a)</span>
+<span id="cb1-42"><a href="basics.html#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(a)</span>
+<span id="cb1-43"><a href="basics.html#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="fu">log10</span>(a)</span>
+<span id="cb1-44"><a href="basics.html#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(a)</span>
+<span id="cb1-45"><a href="basics.html#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="basics.html#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform mathematical operations with more than one object.</span></span>
+<span id="cb1-47"><a href="basics.html#cb1-47" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span>  <span class="co"># notice that 2 now replaces the value “hello”. </span></span>
+<span id="cb1-48"><a href="basics.html#cb1-48" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> y</span>
+<span id="cb1-49"><a href="basics.html#cb1-49" aria-hidden="true" tabindex="-1"></a>a <span class="sc">-</span> y</span>
+<span id="cb1-50"><a href="basics.html#cb1-50" aria-hidden="true" tabindex="-1"></a>a <span class="sc">*</span> y</span>
+<span id="cb1-51"><a href="basics.html#cb1-51" aria-hidden="true" tabindex="-1"></a>a <span class="sc">/</span> y</span>
+<span id="cb1-52"><a href="basics.html#cb1-52" aria-hidden="true" tabindex="-1"></a>a <span class="sc">^</span> (<span class="dv">1</span><span class="sc">/</span>y)</span>
+<span id="cb1-53"><a href="basics.html#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="basics.html#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="co"># You cannot perform mathematical operations with non-numerical objects. </span></span>
+<span id="cb1-55"><a href="basics.html#cb1-55" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="st">&quot;1&quot;</span>  <span class="co"># recall, putting things in between quotation marks makes it non-numerical, even if 1 is a number.</span></span>
+<span id="cb1-56"><a href="basics.html#cb1-56" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> b  <span class="co"># you get an error here because you cannot perform mathematical operations with non-numerical objects.</span></span>
+<span id="cb1-57"><a href="basics.html#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="basics.html#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="co"># An object can store more than one value, such as a set of numbers or a set of characters. This is known as a vector and can be created using c(). </span></span>
+<span id="cb1-59"><a href="basics.html#cb1-59" aria-hidden="true" tabindex="-1"></a>num_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)  <span class="co"># numeric vector</span></span>
+<span id="cb1-60"><a href="basics.html#cb1-60" aria-hidden="true" tabindex="-1"></a>fruits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;orange&quot;</span>)  <span class="co"># non-numeric vector</span></span>
+<span id="cb1-61"><a href="basics.html#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="basics.html#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the values stored in the vectors </span></span>
+<span id="cb1-63"><a href="basics.html#cb1-63" aria-hidden="true" tabindex="-1"></a>num_vector</span>
+<span id="cb1-64"><a href="basics.html#cb1-64" aria-hidden="true" tabindex="-1"></a>fruits</span>
+<span id="cb1-65"><a href="basics.html#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="basics.html#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="co"># You can do mathematical operations with numerical vectors but not with non-numerical vectors. </span></span>
+<span id="cb1-67"><a href="basics.html#cb1-67" aria-hidden="true" tabindex="-1"></a>num_vector <span class="sc">*</span> <span class="dv">5</span>  <span class="co"># each value in num_vector is multiplied by 5</span></span>
+<span id="cb1-68"><a href="basics.html#cb1-68" aria-hidden="true" tabindex="-1"></a>fruits <span class="sc">*</span> <span class="dv">5</span>  <span class="co"># this throws an error that tells you that you cannot use non-numeric values for this operation</span></span></code></pre></div>
+</div>
+<div id="entering-data-directly-into-r" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Entering Data Directly Into R<a href="basics.html#entering-data-directly-into-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Before we can conduct any analysis, we need to give R some data. One way is to key the data directly into R.</p>
+<p>Let’s say we have three people, Bob, Andrea, and Calvin. We have their ages, the number of children each of them has, and their gender.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">Age</th>
+<th align="left">No. of Children</th>
+<th align="left">Gender</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Bob</td>
+<td align="left">48</td>
+<td align="left">1</td>
+<td align="left">Male</td>
+</tr>
+<tr class="even">
+<td align="left">Andrea</td>
+<td align="left">47</td>
+<td align="left">3</td>
+<td align="left">Female</td>
+</tr>
+<tr class="odd">
+<td align="left">Calvin</td>
+<td align="left">49</td>
+<td align="left">2</td>
+<td align="left">Male</td>
+</tr>
+</tbody>
+</table>
+<p>First, we create an object called <code>name</code>, and assign the three people’s names to it.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="basics.html#cb2-1" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Bob&quot;</span>, <span class="st">&quot;Andrea&quot;</span>, <span class="st">&quot;Calvin&quot;</span>)  </span>
+<span id="cb2-2"><a href="basics.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># notice the names are between quotation marks</span></span>
+<span id="cb2-3"><a href="basics.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this  tells R that name is a string (non-numerical) variable</span></span></code></pre></div>
+<p>If we type <code>name</code> into the console, we should get:</p>
+<pre><code>## [1] &quot;Bob&quot;    &quot;Andrea&quot; &quot;Calvin&quot;</code></pre>
+<p>Next, we create the object <code>age</code>, with the three people’s ages.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="basics.html#cb4-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">48</span>, <span class="dv">47</span>, <span class="dv">49</span>)  <span class="co"># notice the order of age should match the order of the names</span></span></code></pre></div>
+<p>If we type <code>age</code> into the console, we should get:</p>
+<pre><code>## [1] 48 47 49</code></pre>
+<p>Now, let’s combine the two variables into a data frame, such that each row represents data for one person, and <code>name</code> and <code>age</code> are in side-by-side columns by using the <code>data.frame()</code> function.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="basics.html#cb6-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Name =</span> name, <span class="at">Age =</span> age)  </span>
+<span id="cb6-2"><a href="basics.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Name = name tells R that the variable name should have the header Name. </span></span>
+<span id="cb6-3"><a href="basics.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Age = age tells R that the variable age should have the header Age.</span></span></code></pre></div>
+<p>Type <code>data</code> into the console. You should see:</p>
+<pre><code>##     Name Age
+## 1    Bob  48
+## 2 Andrea  47
+## 3 Calvin  49</code></pre>
+<p>Notice that the output has the Name and the Age columns. Name lists the names of the three individuals. Age lists the ages of the three individuals.</p>
+<p>The values of Name and Age in the data frame were copied from the original objects. This means that the original objects, name and age, are still in R’s memory. You can see that this is the case from the Environment tab or when you use the ls() function.</p>
+<pre><code>## [1] &quot;age&quot;  &quot;data&quot; &quot;name&quot;</code></pre>
+<p>Let’s remove the original variables name and age.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="basics.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(name)</span>
+<span id="cb9-2"><a href="basics.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(age)</span></code></pre></div>
+<p>Now, when you type ls() into the console, you’ll see that all is left is the data frame, data.</p>
+<pre><code>## [1] &quot;data&quot;</code></pre>
+<p>If we want to use the variables in the data frame <code>data</code>, we need to attach data$ (a dollar sign after the name of the data frame) before the variable name. For example, if we want to know the ages of the three participants:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="basics.html#cb11-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Age</span></code></pre></div>
+<pre><code>## [1] 48 47 49</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="basics.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remember that R is case-sensitive. So if you&#39;d typed data$age, you&#39;ll get an error.</span></span></code></pre></div>
+<p>Let’s say we have more variables to add to the data frame <code>data</code>: the number of children the person has and the person’s gender. Let’s label the number of children each person has as Children and the gender of each person as Gender.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="basics.html#cb14-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Children <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>)</span>
+<span id="cb14-2"><a href="basics.html#cb14-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Gender <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>) </span></code></pre></div>
+<p>Now, when you type <code>data</code> into the console, you’ll get:</p>
+<pre><code>##     Name Age Children Gender
+## 1    Bob  48        1   male
+## 2 Andrea  47        3 female
+## 3 Calvin  49        2   male</code></pre>
+<p>Note that we created Children and Gender within the data frame. So if you type Children and Gender without data$, you will get an error message in the console telling you that the object cannot be found.</p>
+<p>Now, let’s say we made a mistake and need to remove Children from the data frame. You can type:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="basics.html#cb16-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Children <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb16-2"><a href="basics.html#cb16-2" aria-hidden="true" tabindex="-1"></a>data <span class="co"># the Children column is now gone</span></span></code></pre></div>
+<pre><code>##     Name Age Gender
+## 1    Bob  48   male
+## 2 Andrea  47 female
+## 3 Calvin  49   male</code></pre>
+<p>Finally, if we want to save the data frame into a .csv file, we use write.csv().</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="basics.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(data, <span class="st">&quot;bobandreacalvin.csv&quot;</span>)  </span>
+<span id="cb18-2"><a href="basics.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># specify the name and extension of the file (bobandreacalvin.csv). </span></span></code></pre></div>
+<p>The .csv file will now be saved as bobandreacalvin.csv within your current directory. If you use an R project, it will be saved in your project directory. Otherwise, it will be in your default directory. If you don’t know what the directory is, type getwd() into the console.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tidyverse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/hueywoon/assignment/blob/master/01-basics.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

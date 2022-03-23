@@ -9,18 +9,16 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: hueywoon/assignment
-description: "This website contains materials related to the take home assignments used in my PSYC208 class."
+description: "This is the companion website to my PSYC208 class."
 ---
 
 # About This Website {.unnumbered}
 
-This website contains materials related to the take home assignments used in my PSYC208 Research Methods II class. These assignments are graded on a PASS/FAIL basis. If the assignment is correctly done, the assignment is marked as PASS; otherwise, it is marked as FAIL. Unless there are exceptional circumstances (please inform TA or me), responses submitted after a grace period of 5 minutes will also be graded as FAIL.
-
-These take home assignments would not have been possible without the generosity of Dr. Kevin P. McIntyre, who created many of them for the [OSL Open Stats Lab](https://sites.google.com/view/openstatslab).
+This is the companion website for my PSYC208 class. It was written as a gentle introduction to R. So, it is most certainly not exhaustive or comprehensive. If you're interested in further your skills in R, there are plenty of resources available online which you can check out [here](https://r4ds.had.co.nz/), [here](https://stat545.com/index.html) or [here](http://adv-r.had.co.nz/).
 
 # Getting Started
 
-To complete the take home assignments, you need both R and RStudio. These are *different* programmes. I think of R as the software that executes our commands and RStudio as the interface between us and R that makes interacting with R a much more pleasant experience. RStudio has many nifty features, like the spellchecker and the keyboard shortcuts that make writing code much faster and easier. For the sake of your sanity, I strongly recommend you download both programmes!
+To analyse data in R, you need both R and RStudio. These are _different_ programmes. Think of R as the software that executes our commands and RStudio as the interface between us and R that makes interacting with R a much more pleasant experience. RStudio has many nifty features, like the spellchecker and the keyboard shortcuts that make writing code much faster and easier. For the sake of your sanity, I strongly recommend you download both programmes!
 
 ## Install R and RStudio
 
@@ -29,7 +27,7 @@ Install R
 For Windows
 
 1.  Open an internet browser and go to <https://cloud.r-project.org/>.
-2.  Under **Download and Install R**, Click on **Download R for Windows**. Click on *base*.
+2.  Under **Download and Install R**, Click on **Download R for Windows**. Click on **base**.
 3.  Download the latest release by saving the .exe file on your computer. Double-click the file and follow the installation instructions.
 
 For macOS
@@ -59,22 +57,22 @@ knitr::include_graphics("img/001-threepane.png")
 When you start up RStudio, you will see three panes: the R console, the workspace, and the files, plots, packages, help, and viewer pane. Each pane serves different purposes.
 
 1.  **R console**: The R console is where commands are submitted to R for R to execute. It is also where we find some of the output from R (e.g., analysis results).
-2.  **Workspace**: I think of this as R's short-term memory. There are two tabs that are particularly useful.
-    -   **Environment tab**: We can find the list of objects (e.g., variables) that we created in the session here.
-    -   **History tab**: Here is where we can find all the previous commands we submitted to R in the session.
-3.  **Files, plots, packages, help, and viewer**:
-    -   **Files**: We can create new folders on our computer, move, delete, and rename files here.
-    -   **Plots**: We can find all the plots we instructed R to produce during the session here.
-    -   **Packages**: We can find, install, and update packages. Packages contain functions that other people have created to supplement those in R. We will talk more about specific packages later.
-    -   **Help**: We can find information about a given command or package. We can also find more information about various commands and the packages on this website: <https://www.rdocumentation.org/>
+1.  **Workspace**: I think of this as R's short-term memory. There are two tabs that are particularly useful.
+    - **Environment tab**: We can find the list of objects (e.g., variables) that we created in the session here.
+    - **History tab**: Here is where we can find all the previous commands we submitted to R in the session.
+1.  **Files, plots, packages, help, and viewer**:
+    - **Files**: We can create new folders on our computer, move, delete, and rename files here.
+    - **Plots**: We can find all the plots we instructed R to produce during the session here.
+    - **Packages**: We can find, install, and update packages. Packages contain data, functions, help menus, etc. that other people have created to supplement those in R. We will talk more about specific packages later.
+    - **Help**: We can find information about a given command or package. We can also find more information about various commands and the packages on this website: <https://www.rdocumentation.org/>
 
-*Note. Because the Terminal tab, the Connections tab, and the Viewer tab will not be used in this course, I will not talk about them.*
+_Note. Because the Terminal tab, the Connections tab, and the Viewer tab will not be used in this course, I will not talk about them._
 
 ## R Script
 
 To get R to do stuff (e.g., conduct analyses), we submit commands to R through RStudio. Although we can type the commands directly into the console, R users prefer to type the commands into what is called the script editor because we can save the commands in the script editor into script files (with the extension .R). The script files allow us to keep long-term records of the analyses that we have conducted. We can also share the script files with other R users so that they can replicate our analyses. (In this class, I will use command and code interchangeably.)
 
-To open a blank R script, go to *File \> New File \> R Script*. Or, you can use the shortcut Ctrl + Shift + N (Windows) or Cmd + Shift + N (macOS). Notice now, your RStudio has four panes. The script editor now takes up the top half of the left hand side of the screen.
+To open a blank R script, go to **File > New File > R Script**. Or, you can use the shortcut Ctrl + Shift + N (Windows) or Cmd + Shift + N (macOS). Notice that now, your RStudio has four panes. The script editor now takes up the top half of the left hand side of the screen.
 
 ```{r 002-fourpane, echo = FALSE, out.width = "100%", fig.cap = "R Studio With  Four Panes"}
 
@@ -82,129 +80,33 @@ knitr::include_graphics("img/002-fourpane.png")
 
 ```
 
-## Some Basic Commands
-
-Before typing commands into the script editor, it might be useful for you to know some of the following basic commands.
-
-1.  To place a comment in the script file, begin the line with #.
-2.  To run (execute) a line in the script file, place the cursor on the line, hit Ctrl + Enter (Windows) or Cmd + Enter (macOS).
-    -   If we typed the command directly into the console, we only need to hit Enter
-3.  To run multiple lines in the script file, select the lines, hit Ctrl + Enter (Windows) or Cmd + Enter (macOS).
-4.  To clear the console when it becomes too messy, hit Ctrl + L (Windows) or Cmd + L (macOS).
-5.  To request help, type a question mark in front of the command or the package name (e.g., ?cor). Information about the command will appear in the Help tab (lower right pane).
-
-## Typing and Executing Commands
-
-Now, let's actually get R to do stuff for us! Copy and paste the following R codes into the Script Editor pane. Run each line (Ctrl/Cmd + Enter) to see what they do. Note that \# denotes a comment, and therefore it will run as a line of text. Experiment and have fun!
-
-```{r eval=FALSE}
-# Assign a value (e.g., 9) to an object, say x.  
-x <- 9  # this means "x gets the value of 9"
-
-# Get the value for x.
-x   # Note that R is case-sensitive. If you typed X, you'll get an error message.
-
-# If you want to know what objects are in the workspace (i.e., R's memory), look at the Environments tab or type ls().
-ls()
-
-# You may remove an object (e.g., x) from the workspace.
-rm(x)  # where rm stands for remove
-
-# If there are too many objects in the workspace, you may remove all objects from the workspace using rm(list=ls()).
-rm(list = ls())
-
-# Assign a non-numerical value by putting the value in quotation marks.
-y <- "hello!"
-
-# Get the value of y. Notice the value of y is in quotation marks, indicating it is a non-numerical value.
-y
-
-# Perform the following mathematical operations in R.
-11 + 10  
-11 - 10  
-11 * 10
-11 / 10
-11 ^ 10
-11 ^ (1/2)
-sqrt(11)   # this number should be the same as above line
-log(11)    # taking natural log (log base e) 
-log10(11)  # taking log base 10
-exp(11)    # taking the exponential
-
-# Perform mathematical operations in R with an object (e.g., a). 
-a <- 11  # a gets the value of 11
-a + 10
-a - 10
-a * 10
-a / 10
-a ^ (1/2)
-sqrt(a)
-log(a)
-log10(a)
-exp(a)
-
-# Perform mathematical operations with more than one object.
-y <- 2  # notice that 2 now replaces the value “hello”. 
-a + y
-a - y
-a * y
-a / y
-a ^ (1/y)
-
-# You cannot perform mathematical operations with non-numerical objects. 
-b <- "1"  # recall, putting things in between quotation marks makes it non-numerical, even if 1 is a number.
-a + b  # you get an error here because you cannot perform mathematical operations with non-numerical objects.
-
-# An object can store more than one thing, such as a set of numbers or a set of characters. This is known as a vector and can be created using c(). 
-
-# Let's say we have 3 people, Alice, Bob, and Calvin. We can create a vector called "name" to store the three people's names. 
-name <- c("Alice", "Bob", "Calvin")
-
-```
-
 ## Some Tips and Tricks
 
 ### Softwrap Long Lines
 
-Sometimes, we might write commands in the Script editor section that are too long (horizontally) to fit the window. To see the entire command, we might need to scroll horizontally. This can be frustrating. (It's like notepad, without word wrap.) Fortunately, we can wrap the text such that the code fits into the size of the window. Go to *Code \> Soft Wrap Long Lines*. I highly recommend you do this, especially if you tend to write a lot of comments in the script file like I do.
+Sometimes, we might write commands in the Script editor section that are too long (horizontally) to fit the window. To see the entire command, we might need to scroll horizontally. This can be frustrating. (It's like notepad, without word wrap.) Fortunately, we can wrap the text such that the code fits into the size of the window. Go to **Code > Soft Wrap Long Lines**. I highly recommend you do this, especially if you tend to write a lot of comments in the script file like I do.
 
 ### Using R Projects
 
-When we analyse data, we may have a bunch of different files from different projects all strewn in a single directory. This can be quite messy. To stay organised, it is best that we create a project.
+When we analyse data, we may have a bunch of different files from different projects all strewn in a single directory (folder). This can get quite messy. To stay organised, it is best that we create a project.
 
-To do this, go to *File \> New Project*. A dialogue window with three options, "New Directory", "Existing Directory" and "Version Control", will appear. Select "New Directory", followed by "New Project".
+To do this, go to **File > New Project**. A dialogue window with three options, "New Directory", "Existing Directory" and "Version Control", will appear. Select "New Directory", followed by "New Project".
 
 After RStudio has created the project, it will change the working directory to the project directory so that you can access all the files (e.g., data, script) related to this project in this directory. RStudio will also create a file with the extension .Rproj in the project directory. When you open this file, RStudio will automatically start a new session with the project directory as your working directory.
 
 While it is not absolutely necessary to use RStudio projects in this course, I recommend it because it will help keep you organized.
 
-## Entering Data Directly Into R
+### Debugging
 
-Before we can conduct any analysis, we need to give R some data. One way is to key the data directly into R.
+When you are programming, you will make errors ("bugs") in your code. Trying to figure out where you made the error ("debugging") can be extremely time-consuming and frustrating. To help you along, here are some of the most common bugs that you'll run into. 
 
-Let's say we have three people, Bob, Andrea, and Calvin. We have their ages, the number of children each of them has, and their gender.
-
-| Name   | Age | No. of Children | Gender |
-|:-------|:----|:----------------|:-------|
-| Bob    | 48  | 1               | Male   |
-| Andrea | 47  | 3               | Female |
-| Calvin | 49  | 2               | Male   |
-
-First, we create a variable we call name, with the three people’s names.
-
-```{r}
-
-name <- c("Bob", "Andrea", "Calvin")  
-# notice the names are between quotation marks
-# this  tells R that name is a string (non-numerical) variable
-
-```
-So, if we type `name` into the console, we should get: 
-
-```{r echo = FALSE}
-
-name
-
-```
-
-
+1. Misspelled object or function
+    - Misspelled object will throw this error message: _Error: object not found_
+    - Misspelled function will throw this error message: _Error: could not find function_
+    - R is case-sensitive. So if your object is called _Data_, you need to type _Data_ and not _data_, else it will throw an error message. 
+1. Punctuation mistake
+    - Remember to close the parenthesis ()
+    - Don't add a space where there shouldn't be. For example, if your object is called _datafile_, don't type _data file_.
+    - Use the correct punctuation for the function. For example, if the function requires a comma, don't put in full stops. If it requires a double equal sign, don't put in a single equal sign. 
+  
+Congrats! You've now installed R and RStudio! You're now ready to move on to some basics! =D 
