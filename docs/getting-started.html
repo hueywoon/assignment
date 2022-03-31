@@ -24,7 +24,7 @@
 <meta name="author" content="Huey Woon LEE" />
 
 
-<meta name="date" content="2022-03-23" />
+<meta name="date" content="2022-03-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -85,14 +85,17 @@
 <li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#some-tips-and-tricks"><i class="fa fa-check"></i><b>1.4</b> Some Tips and Tricks<span></span></a>
 <ul>
 <li class="chapter" data-level="1.4.1" data-path="getting-started.html"><a href="getting-started.html#softwrap-long-lines"><i class="fa fa-check"></i><b>1.4.1</b> Softwrap Long Lines<span></span></a></li>
-<li class="chapter" data-level="1.4.2" data-path="getting-started.html"><a href="getting-started.html#using-r-projects"><i class="fa fa-check"></i><b>1.4.2</b> Using R Projects<span></span></a></li>
-<li class="chapter" data-level="1.4.3" data-path="getting-started.html"><a href="getting-started.html#debugging"><i class="fa fa-check"></i><b>1.4.3</b> Debugging<span></span></a></li>
+<li class="chapter" data-level="1.4.2" data-path="getting-started.html"><a href="getting-started.html#style-guide"><i class="fa fa-check"></i><b>1.4.2</b> Style Guide<span></span></a></li>
+<li class="chapter" data-level="1.4.3" data-path="getting-started.html"><a href="getting-started.html#using-r-projects"><i class="fa fa-check"></i><b>1.4.3</b> Using R Projects<span></span></a></li>
+<li class="chapter" data-level="1.4.4" data-path="getting-started.html"><a href="getting-started.html#setting-working-directory"><i class="fa fa-check"></i><b>1.4.4</b> Setting working directory<span></span></a></li>
+<li class="chapter" data-level="1.4.5" data-path="getting-started.html"><a href="getting-started.html#debugging"><i class="fa fa-check"></i><b>1.4.5</b> Debugging<span></span></a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Basics<span></span></a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="basics.html"><a href="basics.html#some-basic-commands"><i class="fa fa-check"></i><b>2.1</b> Some Basic Commands<span></span></a></li>
 <li class="chapter" data-level="2.2" data-path="basics.html"><a href="basics.html#typing-and-executing-commands"><i class="fa fa-check"></i><b>2.2</b> Typing and Executing Commands<span></span></a></li>
+<li class="chapter" data-level="2.3" data-path="basics.html"><a href="basics.html#entering-data-directly-into-r"><i class="fa fa-check"></i><b>2.3</b> Entering Data Directly Into R<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>3</b> Using tidyverse<span></span></a>
 <ul>
@@ -110,9 +113,10 @@
 <li class="chapter" data-level="3.4.4" data-path="tidyverse.html"><a href="tidyverse.html#summarise"><i class="fa fa-check"></i><b>3.4.4</b> Summarise()<span></span></a></li>
 <li class="chapter" data-level="3.4.5" data-path="tidyverse.html"><a href="tidyverse.html#group_by"><i class="fa fa-check"></i><b>3.4.5</b> Group_by()<span></span></a></li>
 </ul></li>
+<li class="chapter" data-level="3.5" data-path="tidyverse.html"><a href="tidyverse.html#forcats"><i class="fa fa-check"></i><b>3.5</b> forcats<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="tha2.html"><a href="tha2.html"><i class="fa fa-check"></i><b>4</b> Assignment 2<span></span></a></li>
-<li class="chapter" data-level="5" data-path="tha3.html"><a href="tha3.html"><i class="fa fa-check"></i><b>5</b> Assignment 3<span></span></a></li>
+<li class="chapter" data-level="5" data-path="tha1.html"><a href="tha1.html"><i class="fa fa-check"></i><b>5</b> Assignment 1<span></span></a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
 
@@ -135,7 +139,7 @@
             <section class="normal" id="section-">
 <div id="getting-started" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">1</span> Getting Started<a href="getting-started.html#getting-started" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>To analyse data in R, you need both R and RStudio. These are <em>different</em> programmes. Think of R as the software that executes our commands and RStudio as the interface between us and R that makes interacting with R a much more pleasant experience. RStudio has many nifty features, like the spellchecker and the keyboard shortcuts that make writing code much faster and easier. For the sake of your sanity, I strongly recommend you download both programmes!</p>
+<p>To analyse data in R, you need both R and RStudio. These are <em>different</em> programmes. Think of R as the software that executes our commands and RStudio as the interface between us and R that makes interacting with R a much more pleasant experience. RStudio has many nifty features, like providing code suggestions and the keyboard shortcuts that make writing code much faster and easier. For the sake of your sanity, I strongly recommend you download both programmes!</p>
 <div id="install-r-and-rstudio" class="section level2 hasAnchor" number="1.1">
 <h2><span class="header-section-number">1.1</span> Install R and RStudio<a href="getting-started.html#install-r-and-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Install R</p>
@@ -203,28 +207,36 @@ Figure 1.2: R Studio With Four Panes
 <h3><span class="header-section-number">1.4.1</span> Softwrap Long Lines<a href="getting-started.html#softwrap-long-lines" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Sometimes, we might write commands in the Script editor section that are too long (horizontally) to fit the window. To see the entire command, we might need to scroll horizontally. This can be frustrating. (It’s like notepad, without word wrap.) Fortunately, we can wrap the text such that the code fits into the size of the window. Go to <strong>Code &gt; Soft Wrap Long Lines</strong>. I highly recommend you do this, especially if you tend to write a lot of comments in the script file like I do.</p>
 </div>
-<div id="using-r-projects" class="section level3 hasAnchor" number="1.4.2">
-<h3><span class="header-section-number">1.4.2</span> Using R Projects<a href="getting-started.html#using-r-projects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>When we analyse data, we may have a bunch of different files from different projects all strewn in a single directory (folder). This can get quite messy. To stay organised, it is best that we create a project.</p>
+<div id="style-guide" class="section level3 hasAnchor" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> Style Guide<a href="getting-started.html#style-guide" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>I strongly believe that people should be able to reproduce each others’ analyses. This provides the checks and balances that is important for science to advance. Therefore, you should be willing and able to share your code. But if your code is unintelligible, it will be entirely useless. Therefore, there are certain conventions that I recommend you follow when you write R code so that the code is understandable to others. These conventions are laid out in the tidyverse Style Guide. You can read the Style Guide <a href="https://style.tidyverse.org/syntax.html">HERE</a>.</p>
+</div>
+<div id="using-r-projects" class="section level3 hasAnchor" number="1.4.3">
+<h3><span class="header-section-number">1.4.3</span> Using R Projects<a href="getting-started.html#using-r-projects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When we analyse data, we may have a bunch of different files from different projects all strewn in a single directory (folder). This can get quite messy. It is especially confusing if you have relative paths. To stay organised, it is best that we create a project.</p>
 <p>To do this, go to <strong>File &gt; New Project</strong>. A dialogue window with three options, “New Directory”, “Existing Directory” and “Version Control”, will appear. Select “New Directory”, followed by “New Project”.</p>
 <p>After RStudio has created the project, it will change the working directory to the project directory so that you can access all the files (e.g., data, script) related to this project in this directory. RStudio will also create a file with the extension .Rproj in the project directory. When you open this file, RStudio will automatically start a new session with the project directory as your working directory.</p>
 <p>While it is not absolutely necessary to use RStudio projects in this course, I recommend it because it will help keep you organized.</p>
 </div>
-<div id="debugging" class="section level3 hasAnchor" number="1.4.3">
-<h3><span class="header-section-number">1.4.3</span> Debugging<a href="getting-started.html#debugging" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="setting-working-directory" class="section level3 hasAnchor" number="1.4.4">
+<h3><span class="header-section-number">1.4.4</span> Setting working directory<a href="getting-started.html#setting-working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If you choose not to use R projects,</p>
+</div>
+<div id="debugging" class="section level3 hasAnchor" number="1.4.5">
+<h3><span class="header-section-number">1.4.5</span> Debugging<a href="getting-started.html#debugging" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>When you are programming, you will make errors (“bugs”) in your code. Trying to figure out where you made the error (“debugging”) can be extremely time-consuming and frustrating. To help you along, here are some of the most common bugs that you’ll run into.</p>
 <ol style="list-style-type: decimal">
 <li>Misspelled object or function
 <ul>
-<li>Misspelled object will throw this error message: <em>Error: object ‘dta’ not found</em></li>
-<li>Misspelled function will throw this error message: <em>Error: could not find function “meeen”</em></li>
-<li>R is case-sensitive. So if your object is called “Data”, you need to type <em>Data</em> and not <em>data</em>, else it will throw an error message.</li>
+<li>Misspelled object will throw this error message: <em>Error: object not found</em></li>
+<li>Misspelled function will throw this error message: <em>Error: could not find function</em></li>
+<li>R is case-sensitive. So if your object is called <em>Data</em>, you need to type <em>Data</em> and not <em>data</em>, else it will throw an error message.</li>
 </ul></li>
 <li>Punctuation mistake
 <ul>
 <li>Remember to close the parenthesis ()</li>
 <li>Don’t add a space where there shouldn’t be. For example, if your object is called <em>datafile</em>, don’t type <em>data file</em>.</li>
-<li>Use the correct punctuation. For example, if the function requires a comma, don’t put in full stops. If it requires a double equal sign, don’t put in a single equal sign.</li>
+<li>Use the correct punctuation for the function. For example, if the function requires a comma, don’t put in full stops. If it requires a double equal sign, don’t put in a single equal sign.</li>
 </ul></li>
 </ol>
 <p>Congrats! You’ve now installed R and RStudio! You’re now ready to move on to some basics! =D</p>

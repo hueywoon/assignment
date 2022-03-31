@@ -19,13 +19,18 @@ library(tidyverse)
 
 ```
 
+
+_Note._ You can temporarily load a package without using the `library()` function using the notation `package::function`. This tells R to load the package for this specific chunk of code and not for the entire session. This allows anyone who reads the code to know which package the function comes from. But I typically don't do this because it can be quite tiresome to keep typing the name of the package over and over. 
+
+However, this notation comes in especially handy when we want to help R distinguish between two packages with the same function names. For example, the packages ggplot2 and psych both have a function `alpha()`. R doesn't know which package to choose if you load both packages. So, to specify that you want to use the function from the psych package, you should type  `psych::alpha()`.
+
 Now that we have tidyverse loaded, let's do stuff with it. Let's start with importing data. 
 
 ## Import Data
 
 Typically, R users do not have to enter their data into R directly. Instead, they already have their dataset in various formats, such as .csv, .txt, .sav, .xlsx, etc. So what they need to do is to import the dataset into R. 
 
-In this class, I typically use .csv files. To import .csv files, we can use the `read_csv()` function from the `readr` package in `tidyverse`. 
+In this class, I typically use .csv files. To import .csv files, we can use the `read_csv()` function from the `readr` package in `tidyverse`. The data set that I will use here is a hypothetical one I created. You can download it here: [Materialism.csv](Materialism.csv). 
 
 
 ```{r echo = TRUE, message = FALSE, warning = FALSE, error = FALSE}
@@ -82,6 +87,8 @@ The functions we will use in this class from the `dplyr` package are as follows:
 |mutate()	| create new columns |
 |summarise()	| summarise values |
 |group_by()	| apply operations to different groups | 
+
+There are more functions in the dplyr package. You can check out the dplyr cheat sheet [HERE](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf).
 
 ### Select() 
 
@@ -165,8 +172,41 @@ head(with_average)
 
 ### Summarise()
 
+The `summarise()` function creates summary statistics for a given column in the data frame such as the mean, median, maximum, minimum, etc. 
+
+Let's say we're interested to know the mean, minimum, maximum, variance, standard deviation, total number of participants for the variable YT2017.
+
+```{r}
+
+data %>% 
+  summarise(avg_YT2017 = mean(YT2017), 
+            min_YT2017 = min(YT2017), 
+            max_YT2017 = max(YT2017), 
+            var_YT2017 = var(YT2017), 
+            sd_YT2017 = sd(YT2017), 
+            total = n())
+
+```
 
 ### Group_by()
 
+The `group_by()` verb allows us to split the data frame by some variable, apply a function to each data frame and then combine the output. For example, we can split the data frame by gender and then find the summary statistics for YT2017 for male and female separately. 
 
-Reference: [http://genomicsclass.github.io/book/pages/dplyr_tutorial.html](http://genomicsclass.github.io/book/pages/dplyr_tutorial.html)
+Let's say we're interested to know the mean, minimum, maximum, variance, standard deviation, total number of participants for the variable YT2017.
+
+```{r}
+
+data %>% 
+  group_by(Gender) %>% 
+  summarise(avg_YT2017 = mean(YT2017), 
+            min_YT2017 = min(YT2017), 
+            max_YT2017 = max(YT2017), 
+            var_YT2017 = var(YT2017), 
+            sd_YT2017 = sd(YT2017), 
+            total = n())
+
+```
+
+## forcats
+
+
