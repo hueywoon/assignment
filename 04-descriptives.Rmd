@@ -1,0 +1,21 @@
+# Descriptive Statistics {#descriptives}
+
+Descriptive statistics are used to summarize and describe populations and samples. You will learn two types of descriptive statistics: tabular and graphical summaries of the data, and numerical summaries of the data. 
+
+We will use the hypothetical dataset that I introduced in the previous section. Please download the dataset to follow along here: [SWB.csv](SWB.csv). 
+
+## Tabular & Graphical Summaries / Measures
+
+Tables and graphs provide us a way to visualize the data. They show us the distribution of the data and allow us to discover any errors or interesting patterns. 
+
+### Frequency Table 
+A frequency table tells us the number of times each data value occurs for a given variable. 
+Let’s say we want to know how many males and how many females participated in the study. The variable is `gender`, and the data values we are interested in are `male` and `female`.
+
+# R code to make a frequency table for a categorical variable, Gender
+data %>%				# Using data, 
+  group_by(Gender) %>%		# Group (the result) by Gender
+  summarise(freq = n())  	# Count how many of each value in the dat
+
+
+
