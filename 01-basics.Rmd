@@ -13,7 +13,7 @@ Before typing commands into the script editor, it might be useful for you to kno
 
 ## Typing and Executing Commands
 
-Now, let's actually get R to do stuff for us! Copy and paste the following R codes into the Script Editor pane. Run each line (Ctrl/Cmd + Enter) to see what they do. Note that \# denotes a comment, and therefore it will run as a line of text. Experiment and have fun!
+Now, let's actually get R to do stuff for us! Open a script file. Then copy and paste the following R codes into the script file. Run each line (Ctrl/Cmd + Enter) to see what they do. Note that `#` denotes a comment, and therefore it will run as a line of text. Experiment and have fun!
 
 ```{r eval=FALSE}
 # Assign a single value (e.g., 9) to an object, say x.  
@@ -195,4 +195,4 @@ write.csv(data, "bobandreacalvin.csv")
 # specify the name and extension of the file (bobandreacalvin.csv). 
 ```
 
-The .csv file will now be saved as bobandreacalvin.csv within your current directory. If you use an R project, it will be saved in your project directory. Otherwise, it will be in your default directory. If you don't know what the directory is, type getwd() into the console.
+The .csv file will now be saved as bobandreacalvin.csv within your current directory. If you use an R project, it will be saved in your project directory. Otherwise, it will be in your default directory. If you don't know what the directory is, type getwd() into the console. (Although... If you'd read my instructions earlier, you really should have set the working directory!)

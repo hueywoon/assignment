@@ -19,10 +19,9 @@ library(tidyverse)
 
 ```
 
+_Note._ You can temporarily load a package without using the `library()` function using the notation `package::function`. This tells R to load the package for this specific chunk of code and not for the entire session. This allows anyone who reads the code to know which package the function comes from. I typically don't do this because it can be quite tiresome to keep typing the name of the package over and over.
 
-_Note._ You can temporarily load a package without using the `library()` function using the notation `package::function`. This tells R to load the package for this specific chunk of code and not for the entire session. This allows anyone who reads the code to know which package the function comes from. But I typically don't do this because it can be quite tiresome to keep typing the name of the package over and over. 
-
-However, this notation comes in especially handy when we want to help R distinguish between two packages with the same function names. For example, the packages ggplot2 and psych both have a function `alpha()`. R doesn't know which package to choose if you load both packages. So, to specify that you want to use the function from the psych package, you should type  `psych::alpha()`.
+However, `package::function` comes in especially handy when we want to help R distinguish between two packages with the same function names. For example, the packages `ggplot2` and `psych` both have a function `alpha()`. R doesn't know which package to choose if you load both packages. So, to specify that you want to use the function from the psych package, you should type  `psych::alpha()`.
 
 Now that we have tidyverse loaded, let's do stuff with it. Let's start with importing data. 
 
@@ -30,23 +29,24 @@ Now that we have tidyverse loaded, let's do stuff with it. Let's start with impo
 
 Typically, R users do not have to enter their data into R directly. Instead, they already have their dataset in various formats, such as .csv, .txt, .sav, .xlsx, etc. So what they need to do is to import the dataset into R. 
 
-In this class, I typically use .csv files. To import .csv files, we can use the `read_csv()` function from the `readr` package in `tidyverse`. The data set that I will use here is a hypothetical one I created. You can download it here: [Materialism.csv](Materialism.csv). 
+In this class, I typically use .csv files. To import .csv files, we can use the `read_csv()` function from the `readr` package in `tidyverse`. The data set that I will use here is a hypothetical one I created. You can download it here: [SWB.csv](SWB.csv). 
 
 
 ```{r echo = TRUE, message = FALSE, warning = FALSE, error = FALSE}
 
-data <- read_csv("Materialism.csv")
+data <- read_csv("SWB.csv")
+
 # this code is saying...
-# read in the .csv file, "Materialism.csv" and assign it to "data"
+# read in the .csv file, "SWB.csv" and assign it to "data"
 # from now on, "data" will refer to the data in this csv file
 
 ```
 
 You may also use the built-in R function `read.csv()`. If you do so, you don't have to load the `tidyverse` package. `read.csv()` is supposedly slower than `read_csv()`, which in turn is slower than `data.table`'s `fread()`. For our purposes, though, it really doesn't matter which you use, so long as you can successfully import the data file. 
 
-```{r}
+```{r eval = FALSE}
 
-data <- read.csv("Materialism.csv")
+data <- read.csv("SWB.csv")
 
 ```
 
@@ -60,9 +60,9 @@ Before conducting any analyses, check that the dataset has been imported correct
 1. **Rows**: The data for each participant is recorded in a single row (e.g., data for Participant 1 is in Row 1)
 1. **Columns**: The data for each variable is recorded in a single column. Names of the variables are in the headers for each column
 
-Scroll down to ensure all rows have been imported correctly. There should be 99 rows. Scroll right to ensure all columns have been imported correctly. There should be 17 columns. 
+Scroll down to ensure all rows have been imported correctly. There should be 343 rows. Scroll right to ensure all columns have been imported correctly. There should be 23 columns. 
 
-Another way to check the imported dataset is using the `str()` or the `glimpse()` functions. Both give you roughly similar information (e.g., that there are 99 rows and 17 columns, the names of the variables)
+Another way to check the imported dataset is using the `str()` or the `glimpse()` functions. Both give you roughly similar information (e.g., that there are 343 rows and 23 columns, the names of the variables)
 
 ```{r}
 
@@ -76,7 +76,7 @@ glimpse(data)
 
 ## Data wrangling with dplyr package
 
-Sometimes, a data set can be overwhelming. We might want to, say, select specific columns to analyse. Or, we might only want to look at specific participants. Or we might want to create new variables from existing ones. All of these is made possible with functions in the `dplyr` package in `tidyverse`.
+Sometimes, a dataset can be overwhelming. We might want to, say, select specific columns to analyse. Or, we might only want to look at specific participants. Or we might want to create new variables from existing ones. All of these is made possible with functions in the `dplyr` package in `tidyverse`.
 
 The functions we will use in this class from the `dplyr` package are as follows:
 
@@ -94,37 +94,37 @@ There are more functions in the dplyr package. You can check out the dplyr cheat
 
 This function allows us to select specific columns. This is especially useful if we have many columns to work with and we only want to focus on a few. 
 
-Let's say we only want to select PIN, and the MVS01 to MVS09 columns, we can: 
+Let's say we only want to select pin, and the swb2019_1 to swb2019_5 columns, we can: 
 
 ```{r}
 
-MVS_only <- data %>%   # create the subset called "MVS_only" from "data"
-  select(PIN, MVS01:MVS09)  # and select only PIN and the columns MVS01 to MVS09
+swb2019_only <- data %>%   # create the subset called "swb2019_only" from "data"
+  select(gender, swb2019_1:swb2019_5)  # and select only pin and the columns swb2019_1 to swb2019_5
 
 ```
 
-This is what the first six rows of MVS_only should look like: 
+This is what the first six rows of `swb2019_only` should look like: 
 
 ```{r echo = FALSE}
-head(MVS_only)
+head(swb2019_only)
 
 ```
 
-Although `select()` is used to select specific columns, I sometimes also use it to re-arrange the order of the columns. (In `dplyr`, the function to re-arrange the order of the columns is `arrange()`, which also helps you re-arrange rows in addition to columns) 
+Although `select()` is used to select specific columns, I sometimes also use it to re-arrange the order of the columns. (In `dplyr`, the function to re-arrange the order of the columns is `arrange()`, which helps you re-arrange rows in addition to columns) 
 
-Let's say we want the MVS01 to MVS09 columns to come _before_ PIN. We can: 
+Let's say we want the swb2019_1 to swb2019_5 columns to come _before_ PIN. We can: 
 
 ```{r}
 
-MVS_Pinfirst <- data %>%   
-  select(MVS01:MVS09, PIN)  
+swb2019_pinlast <- data %>%   
+  select(swb2019_1:swb2019_5, gender)  
 
 ```
 
-This is what the first six rows of MVS_Pinfirst should look like: 
+This is what the first six rows of `swb2019_pinlast` should look like: 
 
 ```{r echo = FALSE}
-head(MVS_Pinfirst)
+head(swb2019_pinlast)
 
 ```
 
@@ -137,10 +137,10 @@ So, let's say we want to select only male participants.
 ``` {r}
 
 male_only <- data %>%	 # create "male_only" from "data", 
-  filter(Gender == "male")  # then filter (keep) only male participants
+  filter(gender == "male")  # then filter (keep) only male participants
 
 ```
-Notice that the double equal sign `==` is used here. In programming languages, the `==` sign is used when we are comparing the left and the right hand side. Here, we're comparing each row under the column `Gender` to the word "male". If  that row matches the word "male", we will filter (keep) that row. Otherwise, we will toss it out. 
+Notice that the double equal sign `==` is used here. In programming languages, the `==` sign is used when we are comparing the left and the right hand side. Here, we're comparing each row under the column `gender` to the word "male". If  that row matches the word "male", we will filter (keep) that row. Otherwise, we will toss it out. 
 
 This is what the first six rows of male_only should look like: 
 
@@ -153,20 +153,41 @@ head(male_only)
 
 Sometimes, we might want to create new variables, say averages or totals. 
 
-Let's say we want to find the average of time spent on YouTube in the two years. To help us make the data set more manageable, maybe we first select the variables PIN, YT2016, and YT2017. Then, we create an average called average_YT from YT2016 and YT2017.
+Let's say we want to find the average of swb2019_1 to swb2019_5 for each participant. We use the subset we created just now, `swb2019_only`.
 
 ```{r}
 
-with_average <- data %>% 
-  select(PIN, YT2016, YT2017) %>% 
-  mutate(average_YT = (YT2016 + YT2017) / 2)
+swb2019_only <- swb2019_only %>% 
+  mutate(swb2019_avg = (swb2019_1 + swb2019_2 + swb2019_3 + swb2019_4 + swb2019_5) / 5)
 
 ```
 
-The first 6 rows of with_average looks like this: 
+The first 6 rows of `swb2019_only` now looks like this: 
 
 ```{r}
-head(with_average)
+head(swb2019_only)
+
+```
+
+At this point, you'll notice that it's kind of tedious to type `(swb2019_1 + swb2019_2 + swb2019_3 + swb2019_4 + swb2019_5) / 5`. Is there a shorter way to do this? 
+
+Why, thank you for asking! The answer is yes, of course! This is where rowMeans comes in. 
+
+
+```{r}
+
+swb2019_only <- swb2019_only %>% 
+  mutate(swb2019_avg_rowmeans = rowMeans(across(c(swb2019_1:swb2019_5))))
+
+```
+
+The first 6 rows of `swb2019_only` now looks like this: 
+
+```{r echo = FALSE}
+
+swb2019_only %>% 
+  head(6) %>% 
+  print(width = Inf)
 
 ```
 
@@ -174,35 +195,35 @@ head(with_average)
 
 The `summarise()` function creates summary statistics for a given column in the data frame such as the mean, median, maximum, minimum, etc. 
 
-Let's say we're interested to know the mean, minimum, maximum, variance, standard deviation, total number of participants for the variable YT2017.
+Let's say we're interested to know the mean, minimum, maximum, variance, standard deviation, total number of participants for the variable.
 
 ```{r}
 
-data %>% 
-  summarise(avg_YT2017 = mean(YT2017), 
-            min_YT2017 = min(YT2017), 
-            max_YT2017 = max(YT2017), 
-            var_YT2017 = var(YT2017), 
-            sd_YT2017 = sd(YT2017), 
+swb2019_only %>% 
+  summarise(avg_YT2017 = mean(swb2019_avg), 
+            min_YT2017 = min(swb2019_avg), 
+            max_YT2017 = max(swb2019_avg), 
+            var_YT2017 = var(swb2019_avg), 
+            sd_YT2017 = sd(swb2019_avg), 
             total = n())
 
 ```
 
 ### Group_by()
 
-The `group_by()` verb allows us to split the data frame by some variable, apply a function to each data frame and then combine the output. For example, we can split the data frame by gender and then find the summary statistics for YT2017 for male and female separately. 
+The `group_by()` verb allows us to split the data frame by some variable, apply a function to each data frame and then combine the output. For example, we can split the data frame by gender and then find the summary statistics for swb2019_avg for male and female separately. 
 
-Let's say we're interested to know the mean, minimum, maximum, variance, standard deviation, total number of participants for the variable YT2017.
+Let's say we're interested to know the mean, minimum, maximum, variance, standard deviation, total number of participants for the variable swb2019_avg.
 
 ```{r}
 
-data %>% 
-  group_by(Gender) %>% 
-  summarise(avg_YT2017 = mean(YT2017), 
-            min_YT2017 = min(YT2017), 
-            max_YT2017 = max(YT2017), 
-            var_YT2017 = var(YT2017), 
-            sd_YT2017 = sd(YT2017), 
+swb2019_only %>% 
+  group_by(gender) %>% 
+  summarise(avg_YT2017 = mean(swb2019_avg), 
+            min_YT2017 = min(swb2019_avg), 
+            max_YT2017 = max(swb2019_avg), 
+            var_YT2017 = var(swb2019_avg), 
+            sd_YT2017 = sd(swb2019_avg), 
             total = n())
 
 ```

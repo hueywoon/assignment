@@ -31,3 +31,4 @@ getting-started
 test
 style-guide
 setting-working-directory
+make-notes-or-comments
