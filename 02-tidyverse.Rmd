@@ -2,7 +2,9 @@
 
 The `tidyverse` is a collection of R packages that many data analysts use. In this course, we will be heavily relying on a few of the packages such as `readr`, `dplyr` and `ggplot2` that are in this collection. Instead of installing each package separately as we normally would, we can simply install `tidyverse` and that would install all the other packages that we want.
 
-## Installing tidyverse
+## Installing and Loading tidyverse
+
+To install `tidyverse`, use the function `install.packages()`. 
 
 ```{r eval=FALSE}
 install.packages("tidyverse")
@@ -11,25 +13,54 @@ install.packages("tidyverse")
 
 Although we have installed tidyverse, we cannot use it unless we load it. To load it, we need the `library()` function. 
 
-## Load tidyverse
-
 ```{r echo = TRUE, message = FALSE, warning = FALSE, error = FALSE}
 
 library(tidyverse)
 
 ```
 
-_Note._ You can temporarily load a package without using the `library()` function using the notation `package::function`. This tells R to load the package for this specific chunk of code and not for the entire session. This allows anyone who reads the code to know which package the function comes from. I typically don't do this because it can be quite tiresome to keep typing the name of the package over and over.
+_Note._ You can temporarily load a package without using the `library()` function using the notation `package::function`. This tells R to load the package for a specific chunk of code and not for the entire session. This allows anyone who reads the code to know which package the function comes from. I typically don't do this because it can be quite tiresome to keep typing the name of the package over and over.
 
-However, `package::function` comes in especially handy when we want to help R distinguish between two packages with the same function names. For example, the packages `ggplot2` and `psych` both have a function `alpha()`. R doesn't know which package to choose if you load both packages. So, to specify that you want to use the function from the psych package, you should type  `psych::alpha()`.
+However, `package::function` comes in especially handy when we want to help R distinguish between two packages with the same function names. For example, the packages `ggplot2` and `psych` both have a function `alpha()`. R doesn't know which package to choose if you have both packages loaded. So, to specify that you want to use the function from the `psych` package, you should type  `psych::alpha()`.
 
-Now that we have tidyverse loaded, let's do stuff with it. Let's start with importing data. 
+Now that we have `tidyverse` loaded, let's do stuff with it. Let's start with importing data. 
 
 ## Import Data
 
-Typically, R users do not have to enter their data into R directly. Instead, they already have their dataset in various formats, such as .csv, .txt, .sav, .xlsx, etc. So what they need to do is to import the dataset into R. 
+Usually, R users do not have to enter their data into R directly. Instead, they already have their dataset in various formats, such as .csv, .txt, .sav, .xlsx, etc. So what they need to do is to import the dataset into R. 
 
-In this class, I typically use .csv files. To import .csv files, we can use the `read_csv()` function from the `readr` package in `tidyverse`. The data set that I will use here is a hypothetical one I created. You can download it here: [SWB.csv](SWB.csv). 
+In this class, I will use .csv files. To import .csv files, we can use the `read_csv()` function from the `readr` package in `tidyverse`. I have created a hypothetical dataset for my examples here. To follow along, please download the dataset here: [SWB.csv](SWB.csv). 
+
+In this hypothetical dataset, 343 participants provided demographic information and responded to the Materialism Values Survey (MVS) and the Satisfaction with Life Scale in 2019 (SWLS2019). The same participants were asked to respond to the Satisfaction with Life Scale in 2021 (SWLS2021). The legend for this dataset is as follows: 
+
+| Variable Name   | Variable Label | Value Label | 
+|:-------|:----|:----------------|
+|pin|participant identification number||
+|gender|gender|0 = male, 1 = female|
+|marital_status| marital status| 1 = married, 2 = divorced, 3 = widowed|
+|have_children|parental status | 0 = no children, 1 = have children|
+|mvs_1| My life would be better if I own certain things I don't have.| 1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree|
+|mvs_2| The things I own say a lot about how well I'm doing.| 1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree|
+|mvs_3| I'd be happier if I could afford to buy more things.| 1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree|
+|mvs_4| It bothers me that I can't afford to buy things I'd like.| 1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree|
+|mvs_5| Buying things gives me a lot of pleasure.| 1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree|
+|mvs_6| I admire people who own expensive homes, cars, clothes. | 1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree|
+|mvs_7| I like to own things that impress people.| 1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree|
+|mvs_8| I like a lot of luxury in my life.| 1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree|
+|mvs_9| I try to keep my life simple, as far as possessions are concerned. (R)| 1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree|
+|swls2019_1|In most ways my life is close to my ideal. (2019)|1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree|
+|swls2019_2|The conditions of my life are excellent. (2019)|1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree|
+|swls2019_3|I am satisfied with my life. (2019)|1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree|
+|swls2019_4|So far I have gotten the important things I want in life. (2019) |1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree|
+|swls2019_5|In most ways my life is close to my ideal. (2019)|1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree|
+|swls2021_1|In most ways my life is close to my ideal. (2021)|1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree|
+|swls2021_2|The conditions of my life are excellent. (2021)|1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree|
+|swls2021_3|I am satisfied with my life. (2021)|1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree|
+|swls2021_4|So far I have gotten the important things I want in life. (2021) |1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree|
+|swls2021_5|In most ways my life is close to my ideal. (2021)|1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree|
+
+
+Let's read in the .csv file.
 
 
 ```{r echo = TRUE, message = FALSE, warning = FALSE, error = FALSE}
@@ -42,13 +73,15 @@ data <- read_csv("SWB.csv")
 
 ```
 
-You may also use the built-in R function `read.csv()`. If you do so, you don't have to load the `tidyverse` package. `read.csv()` is supposedly slower than `read_csv()`, which in turn is slower than `data.table`'s `fread()`. For our purposes, though, it really doesn't matter which you use, so long as you can successfully import the data file. 
+You may also use the built-in R function `read.csv()`. If you do so, you don't have to load the `tidyverse` package. 
 
 ```{r eval = FALSE}
 
 data <- read.csv("SWB.csv")
 
 ```
+
+`read.csv()` is supposedly slower than `read_csv()`, which in turn is slower than `data.table`'s `fread()`. For our purposes, though, it really doesn't matter which you use, so long as you can successfully import the data file. 
 
 If you have other file types, such as .txt, .sav, .xlsx, you might need different packages. For example, for excel files (.xlsx), you will need the `readxl` package. For SPSS (.sav), you will need the `haven` package or the `foreign` package. For this class, I won't use file types aside from .csv, but it is good to be aware of the packages to use if you want to import other file types. 
 
@@ -62,7 +95,7 @@ Before conducting any analyses, check that the dataset has been imported correct
 
 Scroll down to ensure all rows have been imported correctly. There should be 343 rows. Scroll right to ensure all columns have been imported correctly. There should be 23 columns. 
 
-Another way to check the imported dataset is using the `str()` or the `glimpse()` functions. Both give you roughly similar information (e.g., that there are 343 rows and 23 columns, the names of the variables)
+Another way to check the imported dataset is using the `str()` or the `glimpse()` functions. Both give you roughly similar information (e.g., that there are 343 rows and 23 columns, the names of the variables, the values for the first 10 or so participants)
 
 ```{r}
 
@@ -73,14 +106,28 @@ glimpse(data)
 
 ```
 
+## Factors
 
-## Data wrangling with dplyr package
+When you look at the output from `str(data)` or `glimpse(data)`, you can see that some values don't seem to make sense on their own. For example, what do 0 and 1 in gender mean? From the legend table produced earlier, we can see that 0 stands for male and 1 stands for female. But having to consult the table every time we do an analysis is tiresome and also error-prone. So, we use the `factor()` command to tell R what those values mean for categorical variables. 
 
-Sometimes, a dataset can be overwhelming. We might want to, say, select specific columns to analyse. Or, we might only want to look at specific participants. Or we might want to create new variables from existing ones. All of these is made possible with functions in the `dplyr` package in `tidyverse`.
+```{r}
+
+data$gender <- factor(data$gender, levels = c(0, 1), labels = c("male", "female"))
+# Here, level 0 = label “male”, level 1 = label “female”
+# Also notice that male and female are enclosed in quotation marks because these are string variables.
+
+# Check that gender is now a factor
+glimpse(data$gender)
+
+```
+
+## Data wrangling with dplyr
+
+What should we do after importing a dataset? Well, there are many things we can do! We might want to, say, select specific columns to analyse. Or, we might only want to look at specific participants. Or we might want to create new variables from existing ones. All of these is made possible with functions in the `dplyr` package in `tidyverse`.
 
 The functions we will use in this class from the `dplyr` package are as follows:
 
-| dplyr verbs |	Description |
+| dplyr functions |	Description |
 |:---|:---|
 |select() | select specific columns |
 |filter() |	filter (keep, select) specific rows |
@@ -88,59 +135,61 @@ The functions we will use in this class from the `dplyr` package are as follows:
 |summarise()	| summarise values |
 |group_by()	| apply operations to different groups | 
 
-There are more functions in the dplyr package. You can check out the dplyr cheat sheet [HERE](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf).
+There are more functions in the dplyr package! Check out the dplyr cheat sheet here: <https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf>.
+
+Now, let's go through the five listed above.  
 
 ### Select() 
 
-This function allows us to select specific columns. This is especially useful if we have many columns to work with and we only want to focus on a few. 
+The `select()` function allows us to select specific columns. This is especially useful if we have many columns to work with and we only want to focus on a few. 
 
-Let's say we only want to select pin, and the swb2019_1 to swb2019_5 columns, we can: 
-
-```{r}
-
-swb2019_only <- data %>%   # create the subset called "swb2019_only" from "data"
-  select(gender, swb2019_1:swb2019_5)  # and select only pin and the columns swb2019_1 to swb2019_5
-
-```
-
-This is what the first six rows of `swb2019_only` should look like: 
-
-```{r echo = FALSE}
-head(swb2019_only)
-
-```
-
-Although `select()` is used to select specific columns, I sometimes also use it to re-arrange the order of the columns. (In `dplyr`, the function to re-arrange the order of the columns is `arrange()`, which helps you re-arrange rows in addition to columns) 
-
-Let's say we want the swb2019_1 to swb2019_5 columns to come _before_ PIN. We can: 
+Let's say we only want to select `gender` and the `swls2019_1` to `swls2019_5` columns in the `SWB` dataset. Here's how we would do it: 
 
 ```{r}
 
-swb2019_pinlast <- data %>%   
-  select(swb2019_1:swb2019_5, gender)  
+swls2019_only <- data %>%   # create the subset called "swls2019_only" from "data"
+  select(gender, swls2019_1:swls2019_5)  # and select only gender and the columns swls2019_1 to swls2019_5
 
 ```
 
-This is what the first six rows of `swb2019_pinlast` should look like: 
+This is what the first six rows of `swls2019_only` should look like: 
 
 ```{r echo = FALSE}
-head(swb2019_pinlast)
+head(swls2019_only)
+
+```
+
+I sometimes also use `select()` to re-arrange the order of the columns. (In `dplyr`, the specific function to re-arrange the order of the columns is `arrange()`. `arrange()` allows us to re-arrange rows in addition to columns.) 
+
+So, let's say we want the `swls2019_1` to `swls2019_5` columns to come _before_ `gender`. We simply list the `swls2019_1` to `swls2019_5` columns before `gender`.
+
+```{r}
+
+swls2019_genderlast <- data %>%   
+  select(swls2019_1:swls2019_5, gender)  
+
+```
+
+This is what the first six rows of `swls2019_genderlast` should look like: 
+
+```{r echo = FALSE}
+head(swls2019_genderlast)
 
 ```
 
 ### Filter()
 
-Sometimes, we want to select specific kinds of participants to do our analyses on (e.g., say from specific conditions, or maybe only male or female participants). We use `filter()` to select those. New R users sometimes confuse `select()` with `filter()`. I like to differentiate them this way: `filter()` is used to select rows whereas `select()` is used to select columns. 
+Maybe we don't want to select specific columns. Instead, we want to select specific kinds of participants to conduct our analyses on (e.g., say from specific treatment groups, or maybe only male participants). We use `filter()` to do that. New R users sometimes confuse `select()` with `filter()`. Here's how to differentiate the two: `select()` is used to select columns (i.e., variables) whereas `filter()` is used to select rows (i.e., participants). 
 
-So, let's say we want to select only male participants. 
+So, let's say we want to select only male participants.
 
 ``` {r}
 
-male_only <- data %>%	 # create "male_only" from "data", 
+male_only <- data %>%	 # create "male_only" subset from "data", 
   filter(gender == "male")  # then filter (keep) only male participants
 
 ```
-Notice that the double equal sign `==` is used here. In programming languages, the `==` sign is used when we are comparing the left and the right hand side. Here, we're comparing each row under the column `gender` to the word "male". If  that row matches the word "male", we will filter (keep) that row. Otherwise, we will toss it out. 
+Notice that the double equal sign `==` is used here. In programming languages, the `==` sign is used when we are comparing the left and the right hand side. Here, we're comparing each row of the column `gender` to the word "male". If  that row matches the word "male", we will filter (keep) that row. Otherwise, we will toss it out. 
 
 This is what the first six rows of male_only should look like: 
 
@@ -151,41 +200,41 @@ head(male_only)
 
 ### Mutate()
 
-Sometimes, we might want to create new variables, say averages or totals. 
+Sometimes, we might want to create new variables, say averages or totals. We can do this with `mutate()`. 
 
-Let's say we want to find the average of swb2019_1 to swb2019_5 for each participant. We use the subset we created just now, `swb2019_only`.
-
-```{r}
-
-swb2019_only <- swb2019_only %>% 
-  mutate(swb2019_avg = (swb2019_1 + swb2019_2 + swb2019_3 + swb2019_4 + swb2019_5) / 5)
-
-```
-
-The first 6 rows of `swb2019_only` now looks like this: 
-
-```{r}
-head(swb2019_only)
-
-```
-
-At this point, you'll notice that it's kind of tedious to type `(swb2019_1 + swb2019_2 + swb2019_3 + swb2019_4 + swb2019_5) / 5`. Is there a shorter way to do this? 
-
-Why, thank you for asking! The answer is yes, of course! This is where rowMeans comes in. 
-
+Let's say we want to find the average of `swls2019_1` to `swls2019_5` for each participant. We use the subset we created just now, `swls2019_only`.
 
 ```{r}
 
-swb2019_only <- swb2019_only %>% 
-  mutate(swb2019_avg_rowmeans = rowMeans(across(c(swb2019_1:swb2019_5))))
+swls2019_only <- swls2019_only %>% 
+  mutate(swls2019_avg = (swls2019_1 + swls2019_2 + swls2019_3 + swls2019_4 + swls2019_5) / 5)
 
 ```
 
-The first 6 rows of `swb2019_only` now looks like this: 
+The first 6 rows of `swls2019_only` now looks like this: 
+
+```{r}
+head(swls2019_only)
+
+```
+
+There is another way you can achieve the same results using `rowMeans()`. 
+
+```{r}
+
+swls2019_only <- swls2019_only %>% 
+  mutate(swls2019_avg_rowmeans = rowMeans(across(c(swls2019_1:swls2019_5))))
+
+# rowMeans(across(c(swls2019_1:swls2019_5))) tells R that we want to find the mean (average) for each row (hence rowMeans) across the five variables, swls2019_1 to swls2019_5. 
+
+```
+
+Let's compare `swls2019_avg` and `swls2019_avg_rowmeans`. Notice that the two columns give you the exact same results: 
 
 ```{r echo = FALSE}
 
-swb2019_only %>% 
+swls2019_only %>% 
+  select(swls2019_avg, swls2019_avg_rowmeans) %>% 
   head(6) %>% 
   print(width = Inf)
 
@@ -193,41 +242,39 @@ swb2019_only %>%
 
 ### Summarise()
 
-The `summarise()` function creates summary statistics for a given column in the data frame such as the mean, median, maximum, minimum, etc. 
+The `summarise()` function is used when we want to get summary statistics such as the mean, median, maximum, minimum, etc for a given column in the data frame. 
 
-Let's say we're interested to know the mean, minimum, maximum, variance, standard deviation, total number of participants for the variable.
+Let's say we're interested to know the mean, minimum, maximum, variance, standard deviation, total number of participants for `swls2019_avg`. Again, we will use our `swls2019_only` subset.
 
 ```{r}
 
-swb2019_only %>% 
-  summarise(avg_YT2017 = mean(swb2019_avg), 
-            min_YT2017 = min(swb2019_avg), 
-            max_YT2017 = max(swb2019_avg), 
-            var_YT2017 = var(swb2019_avg), 
-            sd_YT2017 = sd(swb2019_avg), 
+swls2019_only %>% 
+  summarise(avg_swls = mean(swls2019_avg), 
+            min_swls = min(swls2019_avg), 
+            max_swls = max(swls2019_avg), 
+            var_swls = var(swls2019_avg), 
+            sd_swls = sd(swls2019_avg), 
             total = n())
 
 ```
 
 ### Group_by()
 
-The `group_by()` verb allows us to split the data frame by some variable, apply a function to each data frame and then combine the output. For example, we can split the data frame by gender and then find the summary statistics for swb2019_avg for male and female separately. 
+Sometimes, we might want to apply the same function to different groups of people. For example, we might want to know what the maximum swls score is for males and for females. We can use the `group_by()` function to do this.  
 
-Let's say we're interested to know the mean, minimum, maximum, variance, standard deviation, total number of participants for the variable swb2019_avg.
+Let's say we're interested to know the mean, minimum, maximum, variance, standard deviation, total number of participants for the variable swls2019_avg for males and females. .
 
 ```{r}
 
-swb2019_only %>% 
+swls2019_only %>% 
   group_by(gender) %>% 
-  summarise(avg_YT2017 = mean(swb2019_avg), 
-            min_YT2017 = min(swb2019_avg), 
-            max_YT2017 = max(swb2019_avg), 
-            var_YT2017 = var(swb2019_avg), 
-            sd_YT2017 = sd(swb2019_avg), 
+  summarise(avg_swls = mean(swls2019_avg), 
+            min_swls = min(swls2019_avg), 
+            max_swls = max(swls2019_avg), 
+            var_swls = var(swls2019_avg), 
+            sd_swls = sd(swls2019_avg), 
             total = n())
 
 ```
 
-## forcats
-
-
+At this point, you should realise that it is possible to combine different dplyr functions to achieve specific results. I encourage you to play around!
