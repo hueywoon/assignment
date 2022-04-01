@@ -26,5 +26,9 @@ filter
 mutate
 summarise
 group_by
-tha2
 tha1
+due-date-dd-mm-yyyy
+instructions
+legend
+check-your-results-with-mine
+tha2

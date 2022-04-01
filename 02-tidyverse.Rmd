@@ -278,3 +278,5 @@ swls2019_only %>%
 ```
 
 At this point, you should realise that it is possible to combine different dplyr functions to achieve specific results. I encourage you to play around!
+
+Now that you've gotten to this point, I think you're ready to do your first assignment! Proceed to the [next section](#tha1)!
