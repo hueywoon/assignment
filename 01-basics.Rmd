@@ -107,7 +107,7 @@ First, we create an object `name`, and assign the three people's names to it.
 ```{r}
 name <- c("Bob", "Andrea", "Calvin")  
 # notice the names are between quotation marks
-# this  tells R that name is a string (non-numerical) variable
+# this tells R that name is a string (non-numerical) variable
 ```
 If we type `name` into the console, we should get: 
 
@@ -199,6 +199,6 @@ write.csv(data, "bobandreacalvin.csv")
 # specify the name and extension of the file (bobandreacalvin.csv). 
 ```
 
-The .csv file will now be saved as `bobandreacalvin.csv` within your current directory. If you use an R project, it will be saved in your project directory. Otherwise, it will be in your default directory. If you don't know what the directory is, type `getwd()` into the console. (Although... If you'd read my instructions earlier, you would have set the working directory using `setwd()` already so this would not be necessary!)
+The .csv file will now be saved as `bobandreacalvin.csv` within your current directory. If you use an R project, it will be saved in your project directory. Otherwise, it will be in your default directory. If you don't know what the directory is, type `getwd()` into the console.
 
-And now that you know some basics, let's move on to installing and using one of the most useful packages--`dplyr` from `tidyverse`!
+Now that you've gotten to this point, I think you're ready to do your first assignment! Proceed to the [next section](#tha1)!

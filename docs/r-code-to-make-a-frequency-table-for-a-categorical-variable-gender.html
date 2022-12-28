@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 Assignment 2 | PSYC208 R Companion Website</title>
+  <title>7 R code to make a frequency table for a categorical variable, Gender | PSYC208 R Companion Website</title>
   <meta name="description" content="This is the companion website to my PSYC208 class." />
   <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 Assignment 2 | PSYC208 R Companion Website" />
+  <meta property="og:title" content="7 R code to make a frequency table for a categorical variable, Gender | PSYC208 R Companion Website" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is the companion website to my PSYC208 class." />
   <meta name="github-repo" content="hueywoon/assignment" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 Assignment 2 | PSYC208 R Companion Website" />
+  <meta name="twitter:title" content="7 R code to make a frequency table for a categorical variable, Gender | PSYC208 R Companion Website" />
   
   <meta name="twitter:description" content="This is the companion website to my PSYC208 class." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="tidyverse.html"/>
-<link rel="next" href="descriptives.html"/>
+<link rel="prev" href="descriptives.html"/>
+<link rel="next" href="scale.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -221,174 +221,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="tha2" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">5</span> Assignment 2<a href="tha2.html#tha2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="due-date-26-01-2023" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Due Date: 26-01-2023<a href="tha2.html#due-date-26-01-2023" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-</div>
-<div id="instructions-1" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Instructions<a href="tha2.html#instructions-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ol style="list-style-type: decimal">
-<li>Download the data file here: <a href="SWB.csv">SWB.csv</a>.</li>
-<li>Open up a new script file in RStudio using <code>Ctrl/Cmd + Shift + N</code>.</li>
-<li>Set working directory using <code>setwd()</code>.</li>
-<li>Load <code>tidyverse</code> using <code>library()</code>.</li>
-<li>Read in the data file <code>SWB.csv</code> using <code>read_csv()</code> or <code>read.csv()</code>.</li>
-<li>Examine the dataset with <code>glimpse()</code> or <code>View()</code> or `str(). Check that you have 343 rows and 23 columns.</li>
-<li>Convert <code>marital_status</code> and <code>have_children</code> from integer to factor using <code>factor()</code>. Add value labels to the factors. See the legend below to see how each variable is coded.</li>
-<li>Use <code>glimpse()</code> or <code>str()</code> to check that the variables are indeed converted to factors.</li>
-<li>Create a subset of the dataset of only married parents (i.e., married people who have children). Further subset the dataset such that only the variables <code>swls2021_1</code>, <code>swls2021_2</code>, <code>swls2021_3</code>, <code>swls2021_4</code>, and <code>swls2021_5</code> are in the dataset. You should have 68 rows and 5 columns in this subset.</li>
-<li>Using this subset, compute the average of <code>swls2021_1</code>, <code>swls2021_2</code>, <code>swls2021_3</code>, <code>swls2021_4</code>, and <code>swls2021_5</code> for each person. Call this variable <code>swls2021_avg</code>.</li>
-<li>Using this subset, get the following summary statistics for <code>swls2021_avg</code>: maximum, minimum, mean, and sd. Check that the maximum is 5.4, the minimum is 2.6, the mean is 4.18, and the sd is 0.707.</li>
-<li>Find out the number of married parents who have ‘swls2021_avg’ greater than or equal to 4.18. (And no, I’m not asking you to count by hand.) Check that the number is 36.</li>
-<li>For each step above, put in comments using the # sign so that you know what was done. (e.g., # set working directory, # load packages)</li>
-<li>When you’re done with the above, copy and paste your R script into a word document. Submit the word document in the eLearn Assignment for 1 point.</li>
-</ol>
-<p><em>Note.</em> Answers will be released on eLearn the day after this assignment is due.</p>
-</div>
-<div id="legend" class="section level2 hasAnchor" number="5.3">
-<h2><span class="header-section-number">5.3</span> Legend<a href="tha2.html#legend" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<table>
-<colgroup>
-<col width="26%" />
-<col width="16%" />
-<col width="56%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Variable Name</th>
-<th align="left">Variable Label</th>
-<th align="left">Value Label</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">pin</td>
-<td align="left">participant identification number</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">gender</td>
-<td align="left">gender</td>
-<td align="left">0 = male, 1 = female</td>
-</tr>
-<tr class="odd">
-<td align="left">marital_status</td>
-<td align="left">marital status</td>
-<td align="left">1 = married, 2 = divorced, 3 = widowed</td>
-</tr>
-<tr class="even">
-<td align="left">have_children</td>
-<td align="left">parental status</td>
-<td align="left">0 = no children, 1 = have children</td>
-</tr>
-<tr class="odd">
-<td align="left">mvs_1</td>
-<td align="left">My life would be better if I own certain things I don’t have.</td>
-<td align="left">1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree</td>
-</tr>
-<tr class="even">
-<td align="left">mvs_2</td>
-<td align="left">The things I own say a lot about how well I’m doing.</td>
-<td align="left">1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree</td>
-</tr>
-<tr class="odd">
-<td align="left">mvs_3</td>
-<td align="left">I’d be happier if I could afford to buy more things.</td>
-<td align="left">1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree</td>
-</tr>
-<tr class="even">
-<td align="left">mvs_4</td>
-<td align="left">It bothers me that I can’t afford to buy things I’d like.</td>
-<td align="left">1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree</td>
-</tr>
-<tr class="odd">
-<td align="left">mvs_5</td>
-<td align="left">Buying things gives me a lot of pleasure.</td>
-<td align="left">1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree</td>
-</tr>
-<tr class="even">
-<td align="left">mvs_6</td>
-<td align="left">I admire people who own expensive homes, cars, clothes.</td>
-<td align="left">1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree</td>
-</tr>
-<tr class="odd">
-<td align="left">mvs_7</td>
-<td align="left">I like to own things that impress people.</td>
-<td align="left">1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree</td>
-</tr>
-<tr class="even">
-<td align="left">mvs_8</td>
-<td align="left">I like a lot of luxury in my life.</td>
-<td align="left">1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree</td>
-</tr>
-<tr class="odd">
-<td align="left">mvs_9</td>
-<td align="left">I try to keep my life simple, as far as possessions are concerned. (R)</td>
-<td align="left">1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree</td>
-</tr>
-<tr class="even">
-<td align="left">swls2019_1</td>
-<td align="left">In most ways my life is close to my ideal. (2019)</td>
-<td align="left">1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree</td>
-</tr>
-<tr class="odd">
-<td align="left">swls2019_2</td>
-<td align="left">The conditions of my life are excellent. (2019)</td>
-<td align="left">1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree</td>
-</tr>
-<tr class="even">
-<td align="left">swls2019_3</td>
-<td align="left">I am satisfied with my life. (2019)</td>
-<td align="left">1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree</td>
-</tr>
-<tr class="odd">
-<td align="left">swls2019_4</td>
-<td align="left">So far I have gotten the important things I want in life. (2019)</td>
-<td align="left">1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree</td>
-</tr>
-<tr class="even">
-<td align="left">swls2019_5</td>
-<td align="left">In most ways my life is close to my ideal. (2019)</td>
-<td align="left">1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree</td>
-</tr>
-<tr class="odd">
-<td align="left">swls2021_1</td>
-<td align="left">In most ways my life is close to my ideal. (2021)</td>
-<td align="left">1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree</td>
-</tr>
-<tr class="even">
-<td align="left">swls2021_2</td>
-<td align="left">The conditions of my life are excellent. (2021)</td>
-<td align="left">1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree</td>
-</tr>
-<tr class="odd">
-<td align="left">swls2021_3</td>
-<td align="left">I am satisfied with my life. (2021)</td>
-<td align="left">1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree</td>
-</tr>
-<tr class="even">
-<td align="left">swls2021_4</td>
-<td align="left">So far I have gotten the important things I want in life. (2021)</td>
-<td align="left">1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree</td>
-</tr>
-<tr class="odd">
-<td align="left">swls2021_5</td>
-<td align="left">In most ways my life is close to my ideal. (2021)</td>
-<td align="left">1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree</td>
-</tr>
-</tbody>
-</table>
+<div id="r-code-to-make-a-frequency-table-for-a-categorical-variable-gender" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> R code to make a frequency table for a categorical variable, Gender<a href="r-code-to-make-a-frequency-table-for-a-categorical-variable-gender.html#r-code-to-make-a-frequency-table-for-a-categorical-variable-gender" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>data %&gt;% # Using data,
+group_by(Gender) %&gt;% # Group (the result) by Gender
+summarise(freq = n()) # Count how many of each value in the dat</p>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="tidyverse.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="descriptives.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="descriptives.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="scale.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -419,7 +265,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/hueywoon/assignment/blob/master/04-assignment02.Rmd",
+"link": "https://github.com/hueywoon/assignment/blob/master/05-descriptives.Rmd",
 "text": "Edit"
 },
 "history": {

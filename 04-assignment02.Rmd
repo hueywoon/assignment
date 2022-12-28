@@ -1,6 +1,6 @@
-# Assignment 1 {#tha1}
+# Assignment 2 {#tha2}
 
-## Due Date: DD-MM-YYYY
+## Due Date: 26-01-2023
 
 ## Instructions
 
@@ -9,14 +9,17 @@
 1. Set working directory using `setwd()`.
 1. Load `tidyverse` using `library()`.
 1. Read in the data file `SWB.csv` using `read_csv()` or `read.csv()`.
-1. Examine the dataset with `glimpse()` or `View()` or `str(). 
+1. Examine the dataset with `glimpse()` or `View()` or `str(). Check that you have 343 rows and 23 columns. 
 1. Convert `marital_status` and `have_children` from integer to factor using `factor()`. Add value labels to the factors. See the legend below to see how each variable is coded. 
 1. Use `glimpse()` or `str()` to check that the variables are indeed converted to factors.
 1. Create a subset of the dataset of only married parents (i.e., married people who have children). Further subset the dataset such that only the variables `swls2021_1`, `swls2021_2`, `swls2021_3`, `swls2021_4`, and `swls2021_5` are in the dataset. You should have 68 rows and 5 columns in this subset.
 1. Using this subset, compute the average of `swls2021_1`, `swls2021_2`, `swls2021_3`, `swls2021_4`, and `swls2021_5` for each person. Call this variable `swls2021_avg`. 
 1. Using this subset, get the following summary statistics for `swls2021_avg`: maximum, minimum, mean, and sd. Check that the maximum is 5.4, the minimum is 2.6, the mean is 4.18, and the sd is 0.707.
+1. Find out the number of married parents who have 'swls2021_avg' greater than or equal to 4.18. (And no, I'm not asking you to count by hand.) Check that the number is 36.
 1. For each step above, put in comments using the # sign so that you know what was done. (e.g., # set working directory, # load packages)
 1. When you’re done with the above, copy and paste your R script into a word document. Submit the word document in the eLearn Assignment for 1 point.
+
+_Note._ Answers will be released on eLearn the day after this assignment is due. 
 
 ## Legend
 
@@ -45,53 +48,3 @@
 |swls2021_3|I am satisfied with my life. (2021)|1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree|
 |swls2021_4|So far I have gotten the important things I want in life. (2021) |1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree|
 |swls2021_5|In most ways my life is close to my ideal. (2021)|1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree|
-
-## Check Your Results With Mine
-
-```{r echo = FALSE, message = FALSE, warning = FALSE, error = FALSE}
-
-# Set working directory
-# setwd("C:/Users/Win10/Desktop/R")
-
-# Load packages
-library(tidyverse)
-
-# Set options 
-options(scipen = 999) # Turn off scientific notation 
-options(digits = 9) # Display results to 9 dp's
-
-# Read .csv file
-data <- read_csv("SWB.csv")
-
-# Take a look at the variable names and types
-glimpse(data)
-
-# Convert integer to factor and adding value labels to the factor.
-data$marital_status <- factor(data$marital_status, levels = c(1, 2, 3), labels = c("married", "divorced", "widowed"))
-data$have_children <- factor(data$have_children, levels = c(0, 1), labels = c("no", "yes"))
-
-# Check variables are now factors
-glimpse(data$marital_status)
-glimpse(data$have_children)
-
-# Create subset 
-subset <- data %>% 
-  filter(marital_status == "married" & have_children == "yes") %>% 
-  select(swls2021_1:swls2021_5)
-
-# Take a look at the variable names and types
-glimpse(subset)
-
-# Compute rowMeans
-subset <- subset %>% 
-  mutate(swls2021_avg = rowMeans(across(c(swls2021_1:swls2021_5)))) 
-
-# Get summary statistics
-subset %>% 
-  summarise(avg_swls = mean(swls2021_avg), 
-            min_swls = min(swls2021_avg), 
-            max_swls = max(swls2021_avg), 
-            sd_swls = sd(swls2021_avg))
-
-```
-

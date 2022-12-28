@@ -1,5 +1,7 @@
 # Using tidyverse {#tidyverse} 
 
+Now that you know some basics, let's move on to installing and using one of the most useful packages--`dplyr` from `tidyverse`!
+
 The `tidyverse` is a collection of R packages that many data analysts use. In this course, we will be heavily relying on a few of the packages such as `readr`, `dplyr` and `ggplot2` that are in this collection. Instead of installing each package separately as we normally would, we can simply install `tidyverse` and that would install all the other packages that we want.
 
 ## Installing and Loading tidyverse
@@ -11,7 +13,7 @@ install.packages("tidyverse")
 
 ```
 
-Although we have installed tidyverse, we cannot use it unless we load it. To load it, we need the `library()` function. 
+Even after we have installed tidyverse, we cannot use it unless we load it. To load it, we need the `library()` function. 
 
 ```{r echo = TRUE, message = FALSE, warning = FALSE, error = FALSE}
 
@@ -113,8 +115,8 @@ When you look at the output from `str(data)` or `glimpse(data)`, you can see tha
 ```{r}
 
 data$gender <- factor(data$gender, levels = c(0, 1), labels = c("male", "female"))
-# Here, level 0 = label “male”, level 1 = label “female”
-# Also notice that male and female are enclosed in quotation marks because these are string variables.
+# Here, we are telling R that level 0 = label “male”, level 1 = label “female”
+# Also notice that male and female are enclosed in quotation marks (string variables).
 
 # Check that gender is now a factor
 glimpse(data$gender)
@@ -208,12 +210,13 @@ Let's say we want to find the average of `swls2019_1` to `swls2019_5` for each p
 
 swls2019_only <- swls2019_only %>% 
   mutate(swls2019_avg = (swls2019_1 + swls2019_2 + swls2019_3 + swls2019_4 + swls2019_5) / 5)
+# create a variable called `swls2019_avg` by adding up swls2019_1 to swls2019_5 and then dividing the total by 5
 
 ```
 
 The first 6 rows of `swls2019_only` now looks like this: 
 
-```{r}
+```{r echo=FALSE}
 head(swls2019_only)
 
 ```
@@ -244,7 +247,7 @@ swls2019_only %>%
 
 The `summarise()` function is used when we want to get summary statistics such as the mean, median, maximum, minimum, etc for a given column in the data frame. 
 
-Let's say we're interested to know the mean, minimum, maximum, variance, standard deviation, total number of participants for `swls2019_avg`. Again, we will use our `swls2019_only` subset.
+Let's say we're interested to know the mean (`avg_swls`), minimum (`min_swls`), maximum (`max_swls`), variance (`var_swls`), standard deviation (`sd_swls`), total number of participants (`total`) for `swls2019_avg`. Again, we will use our `swls2019_only` subset.
 
 ```{r}
 
@@ -260,9 +263,9 @@ swls2019_only %>%
 
 ### Group_by()
 
-Sometimes, we might want to apply the same function to different groups of people. For example, we might want to know what the maximum swls score is for males and for females. We can use the `group_by()` function to do this.  
+Sometimes, we might want to apply the same function to different groups of people. For example, we might want to know what the maximum swls score is for males and for females separately. We can use the `group_by()` function to do this.  
 
-Let's say we're interested to know the mean, minimum, maximum, variance, standard deviation, total number of participants for the variable swls2019_avg for males and females. .
+Let's say we're interested to know the mean (`avg_swls`), minimum (`min_swls`), maximum (`max_swls`), variance (`var_swls`), standard deviation (`sd_swls`), total number of participants (`total`) for `swls2019_avg` for males and females separately.
 
 ```{r}
 

@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Basics | PSYC208 R Companion Website</title>
   <meta name="description" content="This is the companion website to my PSYC208 class." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Basics | PSYC208 R Companion Website" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="This is the companion website to my PSYC208 class." />
   <meta name="github-repo" content="hueywoon/assignment" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Huey Woon LEE" />
 
 
-<meta name="date" content="2022-04-01" />
+<meta name="date" content="2022-12-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,8 +31,7 @@
   
   
 <link rel="prev" href="getting-started.html"/>
-<link rel="next" href="tidyverse.html"/>
-<script src="libs/header-attrs-2.12/header-attrs.js"></script>
+<link rel="next" href="tha1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -94,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -107,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -140,53 +138,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">PSYC208 Take Home Assignment</a></li>
 
 <li class="divider"></li>
-<li><a href="index.html#about-this-website">About This Website<span></span></a></li>
-<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started<span></span></a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About This Website</a></li>
+<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="getting-started.html"><a href="getting-started.html#install-r-and-rstudio"><i class="fa fa-check"></i><b>1.1</b> Install R and RStudio<span></span></a></li>
-<li class="chapter" data-level="1.2" data-path="getting-started.html"><a href="getting-started.html#the-rstudio-interface"><i class="fa fa-check"></i><b>1.2</b> The RStudio Interface<span></span></a></li>
-<li class="chapter" data-level="1.3" data-path="getting-started.html"><a href="getting-started.html#r-script"><i class="fa fa-check"></i><b>1.3</b> R Script<span></span></a></li>
-<li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#some-tips-and-tricks"><i class="fa fa-check"></i><b>1.4</b> Some Tips and Tricks<span></span></a>
+<li class="chapter" data-level="1.1" data-path="getting-started.html"><a href="getting-started.html#install-r-and-rstudio"><i class="fa fa-check"></i><b>1.1</b> Install R and RStudio</a></li>
+<li class="chapter" data-level="1.2" data-path="getting-started.html"><a href="getting-started.html#the-rstudio-interface"><i class="fa fa-check"></i><b>1.2</b> The RStudio Interface</a></li>
+<li class="chapter" data-level="1.3" data-path="getting-started.html"><a href="getting-started.html#r-script"><i class="fa fa-check"></i><b>1.3</b> R Script</a></li>
+<li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#some-tips-and-tricks"><i class="fa fa-check"></i><b>1.4</b> Some Tips and Tricks</a>
 <ul>
-<li class="chapter" data-level="1.4.1" data-path="getting-started.html"><a href="getting-started.html#softwrap-long-lines"><i class="fa fa-check"></i><b>1.4.1</b> Softwrap Long Lines<span></span></a></li>
-<li class="chapter" data-level="1.4.2" data-path="getting-started.html"><a href="getting-started.html#make-notes-or-comments"><i class="fa fa-check"></i><b>1.4.2</b> Make Notes or Comments<span></span></a></li>
-<li class="chapter" data-level="1.4.3" data-path="getting-started.html"><a href="getting-started.html#style-guide"><i class="fa fa-check"></i><b>1.4.3</b> Style Guide<span></span></a></li>
-<li class="chapter" data-level="1.4.4" data-path="getting-started.html"><a href="getting-started.html#setting-working-directory"><i class="fa fa-check"></i><b>1.4.4</b> Setting working directory<span></span></a></li>
-<li class="chapter" data-level="1.4.5" data-path="getting-started.html"><a href="getting-started.html#using-r-projects"><i class="fa fa-check"></i><b>1.4.5</b> Using R Projects<span></span></a></li>
-<li class="chapter" data-level="1.4.6" data-path="getting-started.html"><a href="getting-started.html#debugging"><i class="fa fa-check"></i><b>1.4.6</b> Debugging<span></span></a></li>
+<li class="chapter" data-level="1.4.1" data-path="getting-started.html"><a href="getting-started.html#softwrap-long-lines"><i class="fa fa-check"></i><b>1.4.1</b> Softwrap Long Lines</a></li>
+<li class="chapter" data-level="1.4.2" data-path="getting-started.html"><a href="getting-started.html#make-notes-or-comments"><i class="fa fa-check"></i><b>1.4.2</b> Make Notes or Comments</a></li>
+<li class="chapter" data-level="1.4.3" data-path="getting-started.html"><a href="getting-started.html#style-guide"><i class="fa fa-check"></i><b>1.4.3</b> Style Guide</a></li>
+<li class="chapter" data-level="1.4.4" data-path="getting-started.html"><a href="getting-started.html#setting-working-directory"><i class="fa fa-check"></i><b>1.4.4</b> Setting working directory</a></li>
+<li class="chapter" data-level="1.4.5" data-path="getting-started.html"><a href="getting-started.html#using-r-projects"><i class="fa fa-check"></i><b>1.4.5</b> Using R Projects</a></li>
+<li class="chapter" data-level="1.4.6" data-path="getting-started.html"><a href="getting-started.html#debugging"><i class="fa fa-check"></i><b>1.4.6</b> Debugging</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Basics<span></span></a>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Basics</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="basics.html"><a href="basics.html#some-basic-commands"><i class="fa fa-check"></i><b>2.1</b> Some Basic Commands<span></span></a></li>
-<li class="chapter" data-level="2.2" data-path="basics.html"><a href="basics.html#typing-and-executing-commands"><i class="fa fa-check"></i><b>2.2</b> Typing and Executing Commands<span></span></a></li>
-<li class="chapter" data-level="2.3" data-path="basics.html"><a href="basics.html#entering-data-directly-into-r"><i class="fa fa-check"></i><b>2.3</b> Entering Data Directly Into R<span></span></a></li>
+<li class="chapter" data-level="2.1" data-path="basics.html"><a href="basics.html#some-basic-commands"><i class="fa fa-check"></i><b>2.1</b> Some Basic Commands</a></li>
+<li class="chapter" data-level="2.2" data-path="basics.html"><a href="basics.html#typing-and-executing-commands"><i class="fa fa-check"></i><b>2.2</b> Typing and Executing Commands</a></li>
+<li class="chapter" data-level="2.3" data-path="basics.html"><a href="basics.html#entering-data-directly-into-r"><i class="fa fa-check"></i><b>2.3</b> Entering Data Directly Into R</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>3</b> Using tidyverse<span></span></a>
+<li class="chapter" data-level="3" data-path="tha1.html"><a href="tha1.html"><i class="fa fa-check"></i><b>3</b> Assignment 1</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="tidyverse.html"><a href="tidyverse.html#installing-and-loading-tidyverse"><i class="fa fa-check"></i><b>3.1</b> Installing and Loading tidyverse<span></span></a></li>
-<li class="chapter" data-level="3.2" data-path="tidyverse.html"><a href="tidyverse.html#import-data"><i class="fa fa-check"></i><b>3.2</b> Import Data<span></span></a>
+<li class="chapter" data-level="3.1" data-path="tha1.html"><a href="tha1.html#due-date-19-01-2023"><i class="fa fa-check"></i><b>3.1</b> Due Date: 19-01-2023</a></li>
+<li class="chapter" data-level="3.2" data-path="tha1.html"><a href="tha1.html#instructions"><i class="fa fa-check"></i><b>3.2</b> Instructions</a></li>
+<li class="chapter" data-level="3.3" data-path="tha1.html"><a href="tha1.html#data"><i class="fa fa-check"></i><b>3.3</b> Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>4</b> Using tidyverse</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="tidyverse.html"><a href="tidyverse.html#check-imported-dataset"><i class="fa fa-check"></i><b>3.2.1</b> Check Imported Dataset<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="tidyverse.html"><a href="tidyverse.html#factors"><i class="fa fa-check"></i><b>3.3</b> Factors<span></span></a></li>
-<li class="chapter" data-level="3.4" data-path="tidyverse.html"><a href="tidyverse.html#data-wrangling-with-dplyr"><i class="fa fa-check"></i><b>3.4</b> Data wrangling with dplyr<span></span></a>
+<li class="chapter" data-level="4.1" data-path="tidyverse.html"><a href="tidyverse.html#installing-and-loading-tidyverse"><i class="fa fa-check"></i><b>4.1</b> Installing and Loading tidyverse</a></li>
+<li class="chapter" data-level="4.2" data-path="tidyverse.html"><a href="tidyverse.html#import-data"><i class="fa fa-check"></i><b>4.2</b> Import Data</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="tidyverse.html"><a href="tidyverse.html#select"><i class="fa fa-check"></i><b>3.4.1</b> Select()<span></span></a></li>
-<li class="chapter" data-level="3.4.2" data-path="tidyverse.html"><a href="tidyverse.html#filter"><i class="fa fa-check"></i><b>3.4.2</b> Filter()<span></span></a></li>
-<li class="chapter" data-level="3.4.3" data-path="tidyverse.html"><a href="tidyverse.html#mutate"><i class="fa fa-check"></i><b>3.4.3</b> Mutate()<span></span></a></li>
-<li class="chapter" data-level="3.4.4" data-path="tidyverse.html"><a href="tidyverse.html#summarise"><i class="fa fa-check"></i><b>3.4.4</b> Summarise()<span></span></a></li>
-<li class="chapter" data-level="3.4.5" data-path="tidyverse.html"><a href="tidyverse.html#group_by"><i class="fa fa-check"></i><b>3.4.5</b> Group_by()<span></span></a></li>
+<li class="chapter" data-level="4.2.1" data-path="tidyverse.html"><a href="tidyverse.html#check-imported-dataset"><i class="fa fa-check"></i><b>4.2.1</b> Check Imported Dataset</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="tha1.html"><a href="tha1.html"><i class="fa fa-check"></i><b>4</b> Assignment 1<span></span></a>
+<li class="chapter" data-level="4.3" data-path="tidyverse.html"><a href="tidyverse.html#factors"><i class="fa fa-check"></i><b>4.3</b> Factors</a></li>
+<li class="chapter" data-level="4.4" data-path="tidyverse.html"><a href="tidyverse.html#data-wrangling-with-dplyr"><i class="fa fa-check"></i><b>4.4</b> Data wrangling with dplyr</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="tha1.html"><a href="tha1.html#due-date-dd-mm-yyyy"><i class="fa fa-check"></i><b>4.1</b> Due Date: DD-MM-YYYY<span></span></a></li>
-<li class="chapter" data-level="4.2" data-path="tha1.html"><a href="tha1.html#instructions"><i class="fa fa-check"></i><b>4.2</b> Instructions<span></span></a></li>
-<li class="chapter" data-level="4.3" data-path="tha1.html"><a href="tha1.html#legend"><i class="fa fa-check"></i><b>4.3</b> Legend<span></span></a></li>
-<li class="chapter" data-level="4.4" data-path="tha1.html"><a href="tha1.html#check-your-results-with-mine"><i class="fa fa-check"></i><b>4.4</b> Check Your Results With Mine<span></span></a></li>
+<li class="chapter" data-level="4.4.1" data-path="tidyverse.html"><a href="tidyverse.html#select"><i class="fa fa-check"></i><b>4.4.1</b> Select()</a></li>
+<li class="chapter" data-level="4.4.2" data-path="tidyverse.html"><a href="tidyverse.html#filter"><i class="fa fa-check"></i><b>4.4.2</b> Filter()</a></li>
+<li class="chapter" data-level="4.4.3" data-path="tidyverse.html"><a href="tidyverse.html#mutate"><i class="fa fa-check"></i><b>4.4.3</b> Mutate()</a></li>
+<li class="chapter" data-level="4.4.4" data-path="tidyverse.html"><a href="tidyverse.html#summarise"><i class="fa fa-check"></i><b>4.4.4</b> Summarise()</a></li>
+<li class="chapter" data-level="4.4.5" data-path="tidyverse.html"><a href="tidyverse.html#group_by"><i class="fa fa-check"></i><b>4.4.5</b> Group_by()</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="tha2.html"><a href="tha2.html"><i class="fa fa-check"></i><b>5</b> Assignment 2<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tha2.html"><a href="tha2.html"><i class="fa fa-check"></i><b>5</b> Assignment 2</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="tha2.html"><a href="tha2.html#due-date-26-01-2023"><i class="fa fa-check"></i><b>5.1</b> Due Date: 26-01-2023</a></li>
+<li class="chapter" data-level="5.2" data-path="tha2.html"><a href="tha2.html#instructions-1"><i class="fa fa-check"></i><b>5.2</b> Instructions</a></li>
+<li class="chapter" data-level="5.3" data-path="tha2.html"><a href="tha2.html#legend"><i class="fa fa-check"></i><b>5.3</b> Legend</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="descriptives.html"><a href="descriptives.html"><i class="fa fa-check"></i><b>6</b> Descriptive Statistics</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="descriptives.html"><a href="descriptives.html#tabular-graphical-summaries-measures"><i class="fa fa-check"></i><b>6.1</b> Tabular &amp; Graphical Summaries / Measures</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="descriptives.html"><a href="descriptives.html#frequency-table"><i class="fa fa-check"></i><b>6.1.1</b> Frequency Table</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="r-code-to-make-a-frequency-table-for-a-categorical-variable-gender.html"><a href="r-code-to-make-a-frequency-table-for-a-categorical-variable-gender.html"><i class="fa fa-check"></i><b>7</b> R code to make a frequency table for a categorical variable, Gender</a></li>
+<li class="chapter" data-level="8" data-path="scale.html"><a href="scale.html"><i class="fa fa-check"></i><b>8</b> Multi-Item Measures</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="scale.html"><a href="scale.html#overview"><i class="fa fa-check"></i><b>8.1</b> Overview</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
 
@@ -334,7 +348,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>First, we create an object <code>name</code>, and assign the three people’s names to it.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="basics.html#cb3-1" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Bob&quot;</span>, <span class="st">&quot;Andrea&quot;</span>, <span class="st">&quot;Calvin&quot;</span>)  </span>
 <span id="cb3-2"><a href="basics.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># notice the names are between quotation marks</span></span>
-<span id="cb3-3"><a href="basics.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this  tells R that name is a string (non-numerical) variable</span></span></code></pre></div>
+<span id="cb3-3"><a href="basics.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this tells R that name is a string (non-numerical) variable</span></span></code></pre></div>
 <p>If we type <code>name</code> into the console, we should get:</p>
 <pre><code>## [1] &quot;Bob&quot;    &quot;Andrea&quot; &quot;Calvin&quot;</code></pre>
 <p>Next, we create the object <code>age</code>, with the three people’s ages.</p>
@@ -384,8 +398,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Finally, if we want to save the data frame into a .csv file, we use write.csv().</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="basics.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(data, <span class="st">&quot;bobandreacalvin.csv&quot;</span>)  </span>
 <span id="cb20-2"><a href="basics.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># specify the name and extension of the file (bobandreacalvin.csv). </span></span></code></pre></div>
-<p>The .csv file will now be saved as <code>bobandreacalvin.csv</code> within your current directory. If you use an R project, it will be saved in your project directory. Otherwise, it will be in your default directory. If you don’t know what the directory is, type <code>getwd()</code> into the console. (Although… If you’d read my instructions earlier, you would have set the working directory using <code>setwd()</code> already so this would not be necessary!)</p>
-<p>And now that you know some basics, let’s move on to installing and using one of the most useful packages–<code>dplyr</code> from <code>tidyverse</code>!</p>
+<p>The .csv file will now be saved as <code>bobandreacalvin.csv</code> within your current directory. If you use an R project, it will be saved in your project directory. Otherwise, it will be in your default directory. If you don’t know what the directory is, type <code>getwd()</code> into the console.</p>
+<p>Now that you’ve gotten to this point, I think you’re ready to do your first assignment! Proceed to the <a href="tha1.html#tha1">next section</a>!</p>
 
 </div>
 </div>
@@ -395,7 +409,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="getting-started.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tidyverse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tha1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
