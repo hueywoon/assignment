@@ -4,11 +4,14 @@
 
 ## Instructions
 
+Please read through the Getting Started and the Basics pages before working on this assignment, especially if you have no background in R.
+
 1. Download R.
 1. Download RStudio.
 1. Set working directory. 
 1. Suppose we have the starting monthly salary of 10 men and 10 women (see **Data** section below). Enter the data provided into a data frame where one column represents the biological sex of the individual (call this column `BioSex`) and the other column represents the starting monthly salary (call this column `Salary`) of the individual. Check that you have 20 rows (one for each individual) and 2 columns (one for each variable).
-1. For each step above, put in comments using the # sign so that you know what was done. (e.g., # set working directory, # load packages)
+1. Save the data frame into a .csv file. Name this file `data.csv`.
+1. For each step above, put in comments using the # sign so that you know what was done. (e.g., # set working directory)
 1. When you’re done with the above, copy and paste your R script into a word document. Submit the word document in the eLearn Assignment for 1 point.
 
 _Note._ Answers will be released on eLearn the day after this assignment is due.

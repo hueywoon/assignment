@@ -1,14 +1,14 @@
 # Using tidyverse {#tidyverse} 
 
-Now that you know some basics, let's move on to installing and using one of the most useful packages--`dplyr` from `tidyverse`!
+Now that you have some basics under your belt, let's move on to installing and using packages from `tidyverse`!
 
-The `tidyverse` is a collection of R packages that many data analysts use. In this course, we will be heavily relying on a few of the packages such as `readr`, `dplyr` and `ggplot2` that are in this collection. Instead of installing each package separately as we normally would, we can simply install `tidyverse` and that would install all the other packages that we want.
+The `tidyverse` is a collection of R packages that many data analysts use. You can think of packages as collections of R codes (and more!) that other people have created to make R more powerful or easier to use. In this course, we will be heavily relying on a few of the packages such as `readr`, `dplyr` and `ggplot2` that are in the `tidyverse` collection. Instead of installing each package separately as we normally would, we can simply install `tidyverse` and that would install all the other packages that we want.
 
 ## Installing and Loading tidyverse
 
 To install `tidyverse`, use the function `install.packages()`. 
 
-```{r eval=FALSE}
+```{r eval = FALSE}
 install.packages("tidyverse")
 
 ```
@@ -70,7 +70,7 @@ Let's read in the .csv file.
 data <- read_csv("SWB.csv")
 
 # this code is saying...
-# read in the .csv file, "SWB.csv" and assign it to "data"
+# read in the .csv file, "SWB.csv" and assign it to the object "data"
 # from now on, "data" will refer to the data in this csv file
 
 ```
@@ -123,9 +123,9 @@ glimpse(data$gender)
 
 ```
 
-## Data wrangling with dplyr
+## Data Wrangling With dplyr
 
-What should we do after importing a dataset? Well, there are many things we can do! We might want to, say, select specific columns to analyse. Or, we might only want to look at specific participants. Or we might want to create new variables from existing ones. All of these is made possible with functions in the `dplyr` package in `tidyverse`.
+What should we do after importing a dataset? Well, there are many things we can do! We might want to, say, select specific columns to analyse. Or, we might want to select only participants who completed all the questions in the survey. Or we might want to create new variables from existing ones. Or we might want to get some descriptive statistics like mean and standard deviation. All of that is made possible with functions in the `dplyr` package in `tidyverse`.
 
 The functions we will use in this class from the `dplyr` package are as follows:
 
@@ -282,4 +282,161 @@ swls2019_only %>%
 
 At this point, you should realise that it is possible to combine different dplyr functions to achieve specific results. I encourage you to play around!
 
-Now that you've gotten to this point, I think you're ready to do your first assignment! Proceed to the [next section](#tha1)!
+## Tables and Plots
+
+Okay, so what else can we do with the data? Well, we can create tables and graphs! Why might we do this? Well... Tables and graphs provide us a way to visualize the data. They show us the distribution of the data and allow us to discover any errors or interesting patterns.
+
+Let's start with the frequency tables. 
+
+### Frequency Tables
+
+A frequency table tells us the number of times each data value occurs for a given variable. 
+
+Let’s say we want to know how many males and how many females participated in the study using the `swls2019_only` subset. The variable is `gender` and the data values we are interested in are `male` and `female`.
+
+Before looking at my code below, try coming up with your own! (HINT: Use the `summarise()` function!) 
+
+```{r}
+
+swls2019_only %>% 
+  group_by(gender) %>%  # Group the result by gender
+  summarise(freq = n())  # Count how many of each value in the data
+
+```
+
+The output tells us 168 males and 175 females participated in the study. 
+
+The number of times a data value occurs for a given variable is called the absolute frequency. If we want the relative frequency (i.e., the number of times a data value occurs relative to the total number of observations for a given variable), then we divide the absolute frequency by the total number of values.
+
+```{r}
+
+swls2019_only %>% 
+  group_by(gender) %>%   # Group the result by gender
+  summarise(freq = n()) %>%  # Count how many of each value in the data 
+  mutate (total = sum(freq),  # Count the total number of observations 
+          rel_freq = freq / total)  # Take the frequency of each value / total number of observations
+
+```
+The output (rel_freq) tells us that 49% of the sample are males and 51% of the sample are females. (Relative frequency is in proportion, and we can convert proportions into percentages by taking 100%.)
+
+### Bar Plots With ggplot2
+
+Maybe you want a bar chart or bar plot to visually represent the frequency table instead. (Note that bar charts or bar plots are used for categorical variables only.)
+
+We will use `ggplot2`, a package developed for data visualization.  Every plot in `ggplot2` is plotted with three components: data, aesthetics, and geometry.
+
+* Data: specifies the dataframe
+* Aesthetics: specifies the variables that we want to plot as well as aesthetics, like colour
+* Geometry: specifies the type of plot & other modifications
+
+These three components apply when we make any plot in ggplot2. Let's make a bar chart with `ggplot2` with the code below. 
+
+``` {r}
+
+ggplot(data = swls2019_only, aes(x = gender)) +  # dataset used is swls2019_only, x (horizontal axis) is gender
+  geom_bar(stat="count")  # we want a bar plot where the statistic is the count of the values in x 
+
+```
+
+Here's an alternative that will give you the exact same output.
+
+``` {r}
+
+# Alternative
+swls2019_only %>%  # dataset used is swls2019_only
+  ggplot(.) +  # R takes swls2019_only in the previous line and places it in the . on this line to tell ggplot that dataset used is swls2019_only
+  geom_bar(aes(x = gender), stat="count")  # we want a bar plot where x (horizontal axis) is gender and the statistic is the count of values in x
+
+```
+Notice that the `aes()` command can be either in the ggplot line or the geom function line. Where you type it doesn't affect the results at all. (Try this out yourself to confirm!) 
+
+I personally prefer the alternative because it's easier for me to read, but it doesn't matter to me which you use!
+
+### Histograms with ggplot2
+
+We create bar plots for categorical variables (such as gender). For continuous variables, we create histograms. 
+
+A histogram is a visual representation of the frequency table for a given continuous variable (i.e., it shows us the frequency distribution, or the frequency of scores for a given continuous variable).
+
+Let's use `ggplot2` to make a histogram for `swls2019_avg` with a very simple code. 
+
+``` {r}
+ggplot(swls2019_only, aes(x = swls2019_avg)) + 
+  geom_histogram()  # we want a histogram, so geom_histogram() is used
+
+```  
+
+As with the bar chart, you could do this instead and the results would be the same: 
+
+``` {r}
+
+swls2019_only %>% 
+  ggplot(.) + 
+  geom_histogram(aes(x = swls2019_avg))
+
+```
+
+
+Now, the histogram that you got is okay, but maybe you want to customise it even more. For example, you might want to add a specific label for the y-axis or the x-axis... Or maybe you might even want to change the colour of the graph! You can customise all of that! Here are some ideas. 
+
+``` {r}
+
+# Assign color “grey” to the object barfill (which we will use below to change the colour of the bars).
+barfill <- "red" 
+# Assign color “black” to the object barlines (which we will use below to change the colour of the barlines).
+barlines <- "black" 
+# Specify the data frame and the variables to plot.
+ggplot(swls2019_only, aes(x = swls2019_avg)) + 
+# Specify the type of plot and binwidth.
+  geom_histogram(binwidth = 0.5, 
+# Specify the border of the bars.
+                   color = barlines, 
+# Specify the color of the bar.
+                   fill = barfill) + 
+# Label the x-axis.
+  scale_x_continuous(name = "2019 Satisfaction With Life Scores", 
+# Force the graph to start at x = 0
+                     expand = c(0, 0), 
+# Force the graph to end at x = 7
+                     limits = c(0, 7)) + 
+# Label the y-axis.
+  scale_y_continuous(name = "Frequency", 
+# Force the graph to start at y = 0
+                     expand = c(0, 0), 
+# No maximum limit to y (hence, NA)
+                     limits = c(0, NA)) + 
+# Give the histogram a title.
+    ggtitle("Histogram of SWLS2019")
+```  
+
+Note that when you set limits on the graph, it throws up a warning: *Warning: Removed 2 rows containing missing values (`geom_bar()`).* This is a known issue, but is apparently too complex to resolve (see: https://github.com/tidyverse/ggplot2/issues/4083). You may safely ignore it if your limits are beyond the minimum and maximum values of your axes. For example, suppose your minimum value for the x-axis is 1 and your maximum value is 7. If you set the limits to 0 and 8, it should comprise all values in your dataset. You can find the minimum and maximum values using the summarise() function, or simply use max() or min().  
+
+### Scatterplot
+
+So far, we've been focusing on single variables (e.g., `gender` and `swls2019_avg`). What if we're interested in the relationship between two continuous variables? Here is where we might want to plot a scatterplot!
+
+A scatterplot is a graph of pairs of values for each subject or individual. Each individual provides two observations, one for each variable. One of the variables will be plotted along the x-axis and the other along the y-axis. 
+
+So, suppose we're interested in plotting the relationship between two items from the SWLS2019 dataset: `swls2019_1` and `swls2019_2`. The reasoning goes something like this: Both items supposedly measure satisfaction with life. So, if a participant scores higher on one item than another participant, they should also score higher on the other item. 
+
+Let's plot the scatterplot with the code below!
+
+``` {r}
+
+swls2019_only %>% 
+  ggplot(.) + 
+  geom_point(aes(x = swls2019_1, y = swls2019_2)) +  # A scatterplot is a plot of points on a graph. So we use geom_point.
+  labs(x = "swls2019_1: In most ways my life is close to my ideal",
+       y = "swls2019_2: The conditions of my life are excellent")  # labs() is another way to add labels. You can also add titles using the labs() function. 
+
+```
+
+From the scatterplot, we see that indeed, as `swls2019_1` increases, `swls2019_2` increases. 
+
+Like the histogram, there are many different customizations beyond the basics I've shown you here. You can refer to this website for more: https://t-redactyl.io/blog/2016/02/creating-plots-in-r-using-ggplot2-part-5-scatterplots.html.
+
+### Last Words
+
+I've only just scratched the surface of plots in this tutorial. For more, visit here: https://t-redactyl.io/tag/r-graphing-tutorials.html. Or here: https://r4ds.had.co.nz/data-visualisation.html. And here's a link to the ggplot2 cheatsheet: https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf. 
+
+Now that you've gotten to this point, I think you're ready to do your second assignment! Proceed to the [next section](#tha2)!

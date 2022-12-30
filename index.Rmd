@@ -143,5 +143,11 @@ When you are programming, you will make errors ("bugs") in your code. Trying to 
     - Remember to close the parenthesis ()
     - Don't add a space where there shouldn't be. For example, if your object is called _datafile_, don't type _data file_.
     - Use the correct punctuation for the function. For example, if the function requires a comma, don't put in full stops. If it requires a double equal sign, don't put in a single equal sign. 
+
+If you've tried all the above and still can't figure out what's going on, just copy and paste the warning into the search engine. 99% of the time, you'll be able to figure out what happened by reading forum posts. (Programmers are super helpful!)
+
+### Last Words
+
+In general, students new to programming tend to be hesitant to experiment, worried that they'd break the software or something. I promise you that this rarely happens (except maybe when you write a loop function that doesn't stop looping!). So just have fun and experiment. If RStudio freezes, just close it and re-start!  
   
 Congrats! You've now installed R and RStudio! You're now ready to move on to some basics! =D 
