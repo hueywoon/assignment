@@ -15,7 +15,8 @@ Before typing commands into the script editor, it might be useful for you to kno
 
 Now, let's actually get R to do stuff for us! Open a script file (Ctrl/CMD + Shift + N). Then copy and paste the following R codes into the script file. Run each line (Ctrl/Cmd + Enter) to see what they do. Note that `#` denotes a comment, and therefore it will run as a line of text. Experiment and have fun!
 
-```{r eval=FALSE}
+```{r eval = FALSE}
+
 # Assign a single value (e.g., 9) to an object, say x.  
 x <- 9  # this means "x gets the value of 9".
 
@@ -23,13 +24,13 @@ x <- 9  # this means "x gets the value of 9".
 x   # remember that R is case-sensitive. If you typed X, you'll get an error message.
 X  # see how R complains here that it can't find the object? 
 
-# If you want to know what objects are in the workspace (i.e., R's memory), look at the Environment tab or type ls().
+# If you want to know what objects are in the workspace (i.e., R's "short term" memory), look at the Environment tab or type ls().
 ls()
 
 # You may remove an object (e.g., x) from the workspace using rm(), where rm stands for remove.
 rm(x)  
 
-# If there are too many objects in the workspace, you may remove all objects from the workspace using rm(list=ls()).
+# If there are too many objects in the workspace, you may remove all objects from the workspace using rm(list=ls()). To remember this command, I think of it as telling R to remove the list of objects in the Environment tab.
 rm(list = ls())
 
 # Assign a non-numerical value by putting the value in quotation marks.
@@ -46,7 +47,7 @@ y
 11 ^ 10
 11 ^ (1/2)
 sqrt(11)   # this number should be the same as above line
-log(11)    # taking natural log (log base e) 
+log(11)    # taking natural log (log base e also known as ln) 
 log10(11)  # taking log base 10
 exp(11)    # taking the exponential
 
@@ -105,100 +106,147 @@ Let's figure out how to give R this set of data.
 First, we create an object `name`, and assign the three people's names to it.
 
 ```{r}
+
 name <- c("Bob", "Andrea", "Calvin")  
 # notice the names are between quotation marks
 # this tells R that name is a string (non-numerical) variable
+
 ```
+
 If we type `name` into the console, we should get: 
 
 ```{r echo = FALSE}
+
 name
+
 ```
 
 Next, we create the object `age`, with the three people’s ages. 
 
-
 ```{r}
+
 age <- c(48, 47, 49)  
-# notice the order of age should match the order of the names
+# the order of age should match the order of the names
+
 ```
 
 If we type `age` into the console, we should get: 
 
 ```{r echo = FALSE}
+
 age
+
 ```
-Now, let's combine the two variables into a data frame, which we will call `data`, such that each row in `data` represents the information for one person, and `name` and `age` are in side-by-side columns by using the `data.frame()` function. 
+
+Now, let's combine the two variables into a data frame such that each row represents the information for one person, and `name` and `age` are in side-by-side columns. 
+
+We will use  the `data.frame()` function and call this data frame `data`. 
 
 ```{r}
+
 data <- data.frame(Name = name, Age = age)  
-# Name = name tells R that the variable name should have the header Name. 
-# Age = age tells R that the variable age should have the header Age.
+# Name = name tells R that the column should have the header Name and the data for the column should be copied from the object name. 
+# Age = age tells R that the column should have the header Age and the data for the column should be copied from the object age. 
+
 ```
 
 Type `data` into the console. You should see: 
 
 ```{r echo = FALSE}
+
 data
+
 ```
 
-Notice that the output has the Name and the Age columns. Name lists the names of the three individuals. Age lists the ages of the three individuals.
+Notice that the output has two columns: `Name` and `Age`, where `Name` lists the names of the individuals and `Age` lists their ages.
 
-The values of Name and Age in the data frame were copied from the original objects. This means that the original objects, `name` and `age`, are still in R’s memory. You can see that this is the case from the Environment tab or when you use the ls() function. 
+The values of `Name` and `Age` in the data frame were copied from the original objects. This means that the original objects, `name` and `age`, are still in R’s memory. You can see that this is the case from the Environment tab or when you use the ls() function. 
 
 ```{r echo = FALSE}
+
 ls()
+
 ```
-Let’s remove the original variables name and age.
+
+Let’s remove the original variables `name` and `age`.
 
 ```{r}
+
 rm(name)
 rm(age)
+
 ```
+
 Now, when you type ls() into the console, you'll see that all is left is the data frame, `data`. 
 
 ```{r echo = FALSE}
+
 ls()
+
 ```
 
-If we want to use the variables in the data frame `data`, we need to attach data$ (a dollar sign after the name of the data frame) before the variable name. For example, if we want to know the ages of the three participants:
+If you wish, you can directly type the data into a data frame instead of first creating separate objects for each variable. 
 
 ```{r}
+
+data2 <- data.frame(Name = c("Bob", "Andrea", "Calvin"), Age = c(48, 47, 49))
+# data and data2 will look exactly the same
+
+```
+
+Now, suppose we want to use the variables in the data frame `data`. We will need to attach `data$` (a dollar sign after the name of the data frame) before the variable name. This will tell R that that variable comes from the data frame `data`. 
+
+For example, if we want to know the ages of the three participants. We should type: 
+
+```{r}
+
 data$Age
 # remember that R is case-sensitive. So if you'd typed data$age, you'll get an error.
+# typing age or Age won't work either because there isn't an object called age or Age.
+
 ```
 
-Let’s say we have more variables to add to the data frame `data`: the number of children the person has and the person’s gender. Let’s label the number of children each person has as `Children` and the gender of each person as `Gender`.
+From the original table, we know that there are more variables (columns) we need to add to the data frame `data`: the number of children the person has and the person’s gender. Let’s label the number of children each person has as `Children` and the gender of each person as `Gender`.
 
 ```{r}
-data$Children <- c(1, 3, 2)
-data$Gender <- c("male", "female", "male") 
-# again, notice the order of Children and Gender should match the order of the names
+
+data$Children <- c(1, 3, 2)  # Create a column in data called Children and assign it the values 1, 3, and 2
+data$Gender <- c("male", "female", "male")   # Create a column in data called Gender and assign it the values "male", "female", and "male"
+# again, notice the order of Children and Gender match the order of the names
+
 ```
 
 Now, when you type `data` into the console, you'll get: 
 
 ```{r echo = FALSE}
+
 data
+
 ```
 
-Note that we created `Children` and `Gender` within the data frame. So if you type `Children` and `Gender` without data$, you will get an error message in the console telling you that the object cannot be found. 
+Note that we created `Children` and `Gender` within the data frame. So if you type `Children` and `Gender` without `data$`, you will get an error message in the console telling you that the object cannot be found because there isn't an object (independent of the data frame) that is called `Children` or `Gender`.
 
 Now, let’s say we made a mistake and need to remove `Children` from the data frame, `data`. We can type: 
 
 ```{r}
+
 data$Children <- NULL  # assign the value of NULL to data$Children
 data 
 # notice that the Children column is now gone
+
 ```
 
-Finally, if we want to save the data frame into a .csv file, we use write.csv().
+Finally, if we want to save the data frame into a .csv file, we use `write.csv()`.
 
 ```{r}
+
 write.csv(data, "bobandreacalvin.csv")  
-# specify the name and extension of the file (bobandreacalvin.csv). 
+# specify the name and extension of the file (e.g., bobandreacalvin.csv). 
+
 ```
 
-The .csv file will now be saved as `bobandreacalvin.csv` within your current directory. If you use an R project, it will be saved in your project directory. Otherwise, it will be in your default directory. If you don't know what the directory is, type `getwd()` into the console.
+The .csv file will now be saved as `bobandreacalvin.csv` within your current directory. If you used an R project, it will be saved in your project directory. If you didn't use an R project but set the working directory, it will be in the working directory. Otherwise, it will be in the default directory. If you don't know what the directory is, type `getwd()` into the console.
+
+As an aside, some students might wonder why we don't use `write.csv2` instead. `write.csv2` uses a comma for the decimal point whereas `write.csv` uses a full stop / period for the decimal point. Since it's more usual to use the full stop / period for the decimal point, we'll stick to `write.csv`.
 
 Now that you've gotten to this point, I think you're ready to do your first assignment! Proceed to the [next section](#tha1)!
