@@ -150,4 +150,4 @@ If you've tried all the above and still can't figure out what's going on, just c
 
 In general, students new to programming tend to be hesitant to experiment, worried that they'd break the software or something. I promise you that this rarely happens (except maybe when you write a loop function that doesn't stop looping!). So just have fun and experiment. If RStudio freezes, just close it and re-start!  
   
-Congrats! You've now installed R and RStudio! You're now ready to move on to some basics! =D 
+Congrats! You've now installed R and RStudio! You're now ready to move on to some basics! =D
