@@ -1,0 +1,146 @@
+# Multi-Item Measures {#scale}
+
+## Overview
+
+This section guides you through the steps to deal with multi-item measures. 
+
+Typically, for constructs that are measured (e.g., manipulation check items and/or dependent variables), we use several items to assess the construct. Because each item is supposed to measure the same construct, instead of looking at each item separately, it is more efficient to combine participants’ responses to these multiple items into a single score. This single score is then the variable that operationalizes our construct. However, because participants do not always respond to items in the way that researchers intend, we should first check that the pattern of responses is consistent with our expectations (i.e., check which items are positively / negatively related to each other). We also need to check whether the items have adequate reliability. Then, we can create an average score out of all the items of the scale.
+
+## Dataset
+
+We will use the hypothetical dataset that I introduced in the previous section. If you do not have a copy of it, please download the dataset to follow along here: [SWB.csv](SWB.csv). 
+
+For this tutorial, we will only focus on the items measuring materialism. In this hypothetical study, materialism is measured with 9 items from the Materialism Values Survey (i.e., mvs_1–mvs_9). mvs_1–mvs_8 are positively keyed items, meaning that higher scores should indicate greater endorsement of materialistic values. mvs_9 is a reverse (or negatively) keyed item, meaning that higher scores on mvs_9 should indicate lesser endorsement of materialistic values. We want to combine all the 9 items into one overall measure of materialism. 
+
+The specific wording of each item in the MVS is listed below. 
+
+Legend
+
+| Variable Name   | Variable Label | Value Label | 
+|:-------|:----|:----------------|
+|pin|participant identification number||
+|mvs_1| My life would be better if I own certain things I don't have.| 1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree|
+|mvs_2| The things I own say a lot about how well I'm doing.| 1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree|
+|mvs_3| I'd be happier if I could afford to buy more things.| 1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree|
+|mvs_4| It bothers me that I can't afford to buy things I'd like.| 1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree|
+|mvs_5| Buying things gives me a lot of pleasure.| 1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree|
+|mvs_6| I admire people who own expensive homes, cars, clothes. | 1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree|
+|mvs_7| I like to own things that impress people.| 1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree|
+|mvs_8| I like a lot of luxury in my life.| 1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree|
+|mvs_9| I try to keep my life simple, as far as possessions are concerned. (R)| 1 = strongly disagree, 2 = disagree, 3 = neither disagree nor agree, 4 = agree, 5 = strongly agree|
+
+Let's start by reading in the dataset, then creating a subset of the dataset. We will keep mvs_1 - mvs_9 but will also keep the participant identification number so that if there are any issues with the responses (e.g., if there is missing data), we know which participant that issue came from. 
+s
+```{r echo = TRUE, message = FALSE, warning = FALSE, error = FALSE}
+# Load package
+library(tidyverse)
+
+# Read in the data
+data <- read_csv("SWB.csv")
+
+# Create subset with the required variables and call it MVS
+MVS <- data %>% 
+  select(pin, mvs_1:mvs_9)
+
+# Check that you've done the subset correctly
+glimpse(MVS)
+
+```
+
+## Checking the pattern of responses: Correlation coefficient
+
+The correlation coefficient tells us if two variables are linearly related. In general, there are two directions, positive and negative. When two variables increase or decrease in the same direction (e.g., when one increases, the other also increases; when one decreases, the other also decreases), we call this a positive linear relationship. The correlation coefficient will be a positive number. When the two variables move in different directions (e.g., when one increases, the other decreases and vice versa), we call this a negative linear relationship. The correlation coefficient will be a negative number. The correlation coefficient always has a minimum value of -1 (i.e., variables are perfectly negatively correlated) and a maximum value of 1 (i.e., variables are perfectly positively correlated). 
+
+Because all the items of the Materialism Values Survey are supposed to measure the same construct, i.e., materialism, we expect positive-keyed items to correlate positively with each other, and reverse-keyed items to correlate negatively with positive-keyed items. So, we should expect all items to be positively related to each other except for mvs_9. 
+
+To confirm our expectations, we need the correlations between each pair of items in the Materialism Values Survey. 
+
+```{r}
+
+cor(MVS) # cor() tells R to calculate the correlations for each pair of items/variables. 
+
+```
+
+(Personally, I think the output is much easier to read if you coerce it into a dataframe with this code: `cor.output <- as.data.frame(cor(MVS))` and then `View(cor.output)`. But that's just for readability--there is no difference in the actual result.)
+
+Each row by column cell in the output shows the correlation between the row item and the column item (e.g., item mvs_1 and item mvs_2 have a correlation of .4525015). 
+
+From the output, we see that positive-keyed items correlate positively with each other (i.e., the correlations are positive for all pairs of positive-keyed items). We also see that positive-keyed items correlate negatively with the reverse-keyed item. The correlations between MVS09 (in the rightmost column) and each of the other items are negative. These results indicate that participants are responding to the items as we expect. 
+
+To be honest, I much prefer to first reverse code all the reverse keyed items before getting the correlation coefficients. That way, it’s much easier to spot a problem—the moment I see a negative sign, it’s a problem. So, let’s do that instead. 
+
+The simple formula to use to reverse code data is this: 
+(max possible value on likert scale + min possible value on likert scale) - observation. If you refer to the legend, you'll see that the maximum possible value is 5 and the minimum possible value is 1.
+
+```{r}
+
+MVS <- MVS %>%              		 
+  mutate(mvs_9r = 5+1-mvs_9)
+
+View(MVS)  # Check that you’ve correctly recoded mvs_9. That is, a 1 on mvs_9 should be a 5 on mvs_9r, and so on.
+
+```
+
+_Note._ Notice that I labelled my recoded variable as `mvs_9r` (where r stands for recoded). Some people might choose to replace the variable instead of giving the recoded variable a new name. So they might code do the following: `mutate(mvs_9 = 5+1-mvs_9)`. Notice the r is missing? I strongly recommend against this as it might confuse you later on--you cannot be sure whether you have recoded the variable or not and might have to keep checking back on the code. 
+
+If all is okay, drop mvs_9 by using select() and then look at the correlation matrix. 
+
+```{r}
+
+# Drop mvs_9.
+MVS <- MVS %>%              		 
+  select(pin, mvs_1:mvs_8, mvs_9r)
+
+# Check the correlation matrix
+cor(MVS)
+
+```
+
+Now that we recoded `mvs_9` into `mvs_9r`, you can see, all correlation coefficients here are positive. So, all is good! Let's move on to the next bit. 
+
+## Reliability analysis: Cronbach’s alpha
+
+Before averaging the items to get an overall MVS score, we must demonstrate that the items have adequate reliability. Cronbach’s alpha is the most common measure of internal consistency reliability. It’s a number that ranges from 0 to 1 and indicates how well the items on the scale measure the same construct (in this case, materialism). An alpha of .70 is accepted by many researchers as adequate reliability. However, for certain purposes, an alpha of .60 to .70 can be accepted if justified (e.g., research is new and exploratory or focused on theory or items measure different facets of the construct). If reliability is too low, however, this might mean the responses were too inconsistent across items. Then it might not make sense to average them together. This would be an important limitation to discuss in your paper.
+
+We will use the `alpha()` function in the `psych` package to conduct the reliability analysis. At this point, it’s worth noting that this function is used on the data frame with the reverse-keyed items all reverse coded already. So, if you haven’t reverse-coded mvs_9 yet, do so before continuing. 
+
+It should also be noted that `ggplot2` also has an alpha function. So R will be confused as to which package you want to use. You can specify the package like this: `package::function()`. 
+
+```{r eval = FALSE}
+psych::alpha(MVS)  # tell R we want the Cronbach’s alpha for all the items in MVS.
+```
+
+_Note._ Before you use the `alpha()` function in the `psych` package, remember to install the package! If you don't have it installed, RStudio will give you a warning at the top of the script editor. Click on the warning to install the package.  
+
+Notice that we do not need to load the package using `library(psych)`. `psych::alpha()` temporarily loads the package (just for that function). If you want to use other functions in the `psych` package, then you'll probably want to load the package.
+
+
+```{r echo = FALSE}
+psych::alpha(MVS) 
+```
+
+The `Reliability analysis` section of the output tells us that the Cronbach’s alpha is .88 (raw_alpha). The last two lines tell us that the 95% confidence interval surrounding the Cronbach’s alpha is 95% CI [.85, .92]. That is, we can be 95% confident that this interval contains the population Cronbach’s alpha. We can ignore the other parts in this section as they are not relevant and look at the next section.
+
+The `Reliability if an item is dropped` section is especially helpful if we are looking at a scale that we have developed (i.e., NOT an established, well-validated scale that has been published), and are considering which items to exclude from our final scale. 
+
+The table’s second column, raw_alpha, tells you what the Cronbach's alpha would be if we re-ran the Reliability Analysis excluding that item. For example, if we computed the reliability without mvs_1 (first row), the Cronbach’s alpha would drop from .88 (from the Reliability analysis section) to .86. This means that the scale becomes less reliable when we remove mvs_1. So, we want to keep this item in our final scale. If deleting an item increases the overall Cronbach’s alpha (in this case, if the raw_alpha is larger than .88), then it means that the scale becomes more reliable when we remove the item. So, we would probably exclude the item from our final scale. In that case, re-analyse the data excluding that item. Repeat this process until there are no more items with a raw_alpha value greater than the Cronbach’s alpha for the overall scale. Take note of which items you excluded because you will need to exclude them in the next step. 
+
+If the scale is obtained from a published source (as the MVS is), we do NOT exclude items. This is because we want to be able to compare our results with previous research that has used the same scale (i.e., with all the items). Excluding items means our results will not be directly comparable anymore. However, the `Reliability if an item is dropped` table is still helpful because it tells us if each item is contributing to the overall scale in the way we expect. If the items are not working in the way we expect, this would be an important limitation to discuss in the paper. 
+
+We will ignore the `Item statistics` section and go straight to the section on `Non missing response frequency for each item`. 
+
+This is a relative frequency table for all the items in the scale. The most important thing to note is whether there are any missing data for the items (see the column `miss`). In this case, there were no missing data. So hooray! 
+
+## Compute the average score for the scale
+Now that we're sufficiently satisfied with the reliability of the scale, let’s compute the average score. 
+
+``` {r}
+
+MVS <- MVS %>%
+  mutate(MVSavg = rowMeans(across(c(mvs_1:mvs_8, mvs_9r)))) # calculate the average across the 9 items and call the average MVSavg
+
+```
+
+You might want to check if `MVSavg` is correctly calculated. Go to `View(MVS)` and manually calculate the average of mvs_1 to mvs9r for participant 1. You should get 3.44 (to 2 d,p,). 
+
+Congratulations on completing this tutorial! You're now ready to do your third assignment! Proceed to the [next section](#tha3)!

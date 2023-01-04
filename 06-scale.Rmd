@@ -1,9 +1,0 @@
-# Multi-Item Measures {#scale}
-
-## Overview
-
-This section guides you through the steps to deal with multi-item measures. 
-
-Typically, for constructs that are measured (e.g., manipulation check items and/or dependent variables), we use several items to assess the construct. Because each item is supposed to measure the same construct, instead of looking at each item separately, it is more efficient to combine participants’ responses to these multiple items into a single score. This single score is then the variable that operationalizes our construct. However, because participants do not always respond to items in the way that researchers intend, we should first check that the pattern of responses is consistent with our expectations (i.e., check which items are positively / negatively related to each other). We also need to check whether the items have adequate reliability. Then, we can create an average score out of all the items of the scale.
-
-We will use the hypothetical dataset that I introduced in the previous section. Please download the dataset to follow along here: [SWB.csv](SWB.csv). 

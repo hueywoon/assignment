@@ -1,0 +1,239 @@
+# Hypothesis Testing {#hypotest}
+
+## Overview
+
+This section guides you through the steps to conduct the various hypothesis tests we cover in class. This only serves as an overview for students who are interested to read ahead. I will go through the hypothesis tests in more detail in class.
+
+We will use the hypothetical dataset that I introduced in the previous section. Please download the dataset to follow along here: [SWB.csv](SWB.csv).
+
+## Load packages and dataset
+
+```{r echo = TRUE, message = FALSE, warning = FALSE, error = FALSE}
+
+# Load packages
+library(tidyverse)
+
+# Load dataset
+data <- read_csv("SWB.csv")
+
+```
+
+## One-Sample T Test
+
+We use a one-sample t test when we want to compare the data from one group to some hypothesized mean. So, let's say we're interested to know whether on average, in 2019, people were more satisfied with their lives than the neutral value of 4.  (In this data set, the satisfaction with life items were measured on a 7-point scale, where 4 is the neutral point.)
+
+```{r}
+
+# Calculate the average satisfaction with life score in 2019 for each participant
+data <- data %>% 
+  mutate(swls2019_avg = rowMeans(across(c(swls2019_1:swls2019_5))))
+
+# Conduct the one-sample t test to compare the satisfaction with life score in 2019 against the neutral point of 4. 
+# "two-sided" means we're conducting a two-tailed test
+# mu = 4 refers to the hypothesized value we're comparing to
+# paired = FALSE means that each observation comes from different individuals (i.e., they are not "paired")
+# conf.level = 0.95 means we want the 95% confidence level. Usually, if we use alpha = .05, then the confidence level is 0.95. 
+t.test(data$swls2019_avg, alternative = c("two.sided"), mu = 4, paired = FALSE, conf.level = 0.95)
+
+```
+
+The results indicate that the average of swls2019_avg is 4.35. When we compare 4.35 to the neutral point of 4, the resulting t value is 8.53. With degrees of freedom 342, the p value is very small, at 4.77e-16. 4.77e-16 is scientific notation expressing 4.77 x 10^-16. So 4.77e-16 would be 0.000000000000000477. The 95% confidence interval is [4.27, 4.43] which is interpreted as follows: We are 95% confident that the true 2019 satisfaction with life score is between 4.27 and 4.43. 
+
+## Correlated Groups T Test
+
+Suppose we want to know whether people's satisfaction with life scores changed from 2019 to 2021. To do this, we conduct a correlated groups t test. 
+
+```{r}
+
+# Calculate the average satisfaction with life score in 2021 for each participant. 
+# If you did not calculate the average satisfaction with life score in 2019 earlier, you might want to do that here also.
+data <- data %>% 
+  mutate(swls2021_avg = rowMeans(across(c(swls2021_1:swls2021_5)))) 
+
+# Conduct the correlated groups t test to compare the satisfaction with life score in 2019  and that in 2021 to see if there is any change over the two years. 
+# "two-sided" means we're conducting a two-tailed test
+# mu = 0 means we're comparing the difference against the value of 0. 
+# paired = TRUE means that each individual offered pairs of observations (i.e., swls2019_avg and swls2021_avg)
+# conf.level = 0.95 means we want the 95% confidence level. Usually, if we use alpha = .05, then the confidence level is 0.95. 
+t.test(data$swls2019_avg, data$swls2021_avg, alternative = c("two.sided"), mu = 0, paired = TRUE, conf.level = 0.95) 
+
+```
+
+The results indicate that the average of the difference between swls2019_avg and swls2021_avg is 0.50. When we compare this difference against 0, the resulting t value is 27.83. With degrees of freedom 342, the p value is very small, at 2.2e-16. The 95% confidence interval is [0.46, 0.54] which is interpreted as follows: We are 95% confident that the true difference between the 2019 and 2021 satisfaction with life scores is between 0.46 and 0.54. 
+
+## Independent Groups T Test
+
+Suppose we want to know whether men and women differ in satisfaction with life in 2019. To do this, we conduct a independent groups t test. 
+
+```{r}
+
+# First, we need to convert gender into a factor 
+data$gender <- factor(data$gender, levels = c(0, 1), labels = c("male", "female"))
+
+# Next, we conduct the independent groups t test
+# Notice that this t.test code takes the form of DV ~ IV
+# "two-sided" means we're conducting a two-tailed test
+# mu = 0 means we're comparing the difference against the value of 0. 
+# var.equal = TRUE means that we're assuming homogeneity of variance is met (if homogeneity of variance is violated, use var.equal = FALSE and R will conduct Welch corrections)
+# conf.level = 0.95 means we want the 95% confidence level. Usually, if we use alpha = .05, then the confidence level is 0.95. 
+
+t.test(data$swls2019_avg ~ data$gender, alternative = c("two.sided"), mu = 0, var.equal = TRUE, conf.level = 0.95)
+
+```
+The results indicate that the average satisfaction with life score for those who identify as male is 4.08 and 4.62 for those who identify as female. When we compare the difference between the two genders against 0, the resulting t value is -6.90. With degrees of freedom 341, the p value is very small, at 2.564e-11. The 95% confidence interval is [-0.69, -0.38] which is interpreted as follows: We are 95% confident that the true difference in 2019 satisfaction with life score between males and females is between -0.69 and -0.38.
+
+_Note._ In calculating the t statistic, R took male - female (since 0 = male and 1 = female, and R takes the group with the smaller number and subtracts the group with the larger number) . Because males have a smaller 2019 SWLS than females, the t statistic is negative. However, if R had taken female - male, the t statistic would be positive. Whether it is positive or negative doesn't matter so long as you know which group has a higher mean. 
+
+## One-Way Between-Subjects ANOVA
+
+Suppose we want to know whether marital status affects subjective wellbeing. In essence, we might want to find out whether there is at least one mean difference between: a) married vs divorced, b) married vs widowed, c) divorced vs widowed.
+
+```{r}
+# Convert marital status into factor
+data$marital_status <- factor(data$marital_status, levels = c(1, 2, 3), labels = c("married", "divorced", "widowed"))
+
+# Run the ANOVA
+# ANOVA is strange in that to view the results, you need to save it as an object first. 
+results <- data %>% 
+  aov(data = ., swls2019_avg ~ marital_status)  # you need to specify where the data is coming from. So, when you specify data = ., it's telling R that the data for analysis comes from the object data which is before the pipe operator, %>%.  
+
+# Look at the summary results
+summary(results)
+```
+
+There are two other ways to run the ANOVA. The results will be exactly the same. 
+
+```{r eval = FALSE}
+
+# Alternative 1
+results <- aov(data$swls2019_avg ~ data$marital_status)
+
+#Alternative 2
+results <- aov(data = data, swls2019_avg ~ marital_status)
+
+```
+
+Because the ANOVA results are statistically significant, we might want to follow up with pairwise comparisons (Tukey's HSD). To run this, we need the `DescTools` package. (Remember to install the package Before continuing.)
+
+```{r message = FALSE}
+
+# Load package
+library(DescTools)
+
+# Perform a posthoc test on the results using Tukey's HSD. Oh, and give me the 95% CI.
+PostHocTest(results, method = "hsd", conf.level = .95)
+
+```
+
+If you want other posthoc tests, you can change the `method` portion. Type `?PostHocTest` into the console to find out more about the different post hoc tests available to you. 
+
+## Two-Way Between-Subjects ANOVA
+
+Suppose you want to know whether the difference in satisfaction with life scores between male and female depends on whether they have children. To find out, you will need to conduct a two-way between-subjects ANOVA. 
+
+You'll need the `car` package to run the ANOVA.
+
+```{r message = FALSE}
+
+# Load package
+library(car)
+
+# Change have_children into a factor
+data$have_children <- factor(data$have_children, levels = c(0, 1), labels = c("no children", "have children"))
+
+# Change contrasts settings when estimating Type-3 sum of squares
+options(contrasts = c('contr.sum', 'contr.poly'))
+
+# Set up the model being tested and store the model to [mod1]
+# The model has the following format: DV ~ IV1 + IV2 + IV1*IV2
+mod1 <- lm(swls2019_avg ~ gender + have_children + gender*have_children, data = data)  
+
+# Conduct Two-Way ANOVA and get the ANOVA summary table
+# type = "3" refers to Type 3 sum of squares. For this class, we will use Type 3 sum of squares.
+Anova(mod1, type = "3")   
+
+```
+
+Because the interaction is statistically significant, we will conduct the simple effects analysis. This is essentially like conducting independent groups t tests (with some corrections). Since we want to find out whether the difference between male and female's satisfaction with life scores depends on having children, the two tests we will conduct would be: 1) difference in the satisfaction with life scores of males and females who have children; 2) difference in the satisfaction with life scores of males and females who do not have children. 
+
+To do the simple effects analyses, we need the `emmeans` package. 
+
+```{r}
+
+# Load package
+library(emmeans)
+
+# first, let's look at a plot
+# Separate Lines: have_children, X axis: gender
+emmip(mod1, have_children ~ gender)
+
+# Next, we conduct the simple effects investigating 1) the effect of gender (difference between males and females) for those who have children, and 2) the effect of gender for those who do not have children.  
+emmeans(mod1, pairwise ~ gender | have_children)  # comparing the pair of conditions in gender for each level of have_children
+
+```
+
+Suppose, though, you were interested in looking at the effect of having children by gender. In other words, you're interested in looking at the difference 1) between men with and men without children, and 2) between women with and women without children. In this case, you will swap the variables around. 
+
+```{r}
+
+# First, let's look at a plot
+# Separate Lines: gender, X axis: have_children
+emmip(mod1, gender ~ have_children)
+
+# Next, we conduct the simple effects investigating 1) the effect of having children (difference between having children and not having children) for males, and 2) of having children (difference between having children and not having children) for females.  
+emmeans(mod1, pairwise ~ have_children | gender)  # comparing the pair of conditions in have_children for each level of gender
+
+```
+
+## Correlation
+
+Suppose you want to find out whether people who have higher satisfaction with life scores in 2019 also have higher satisfaction with life scores in 2021. Here is where you will conduct a correlation. 
+
+```{r}
+
+data <- data %>% 
+  mutate(swls2021_avg = rowMeans(across(c(swls2021_1:swls2021_5))))
+
+cor.test(data$swls2019_avg, data$swls2021_avg)
+```
+
+Alternatively, you can do the correlation test this way: 
+
+```{r eval = FALSE}
+
+# Alternative 1
+cor.test(~ swls2019_avg + swls2021_avg, 
+         data = data)
+
+# Alternative 2
+data %>% 
+  cor.test(formula = ~ swls2019_avg + swls2021_avg, .)
+```
+
+All ways would give you the same result. 
+
+## Regression
+
+Suppose you want to predict `swls2021_avg` from `swls2019_avg`. Here, we might want to conduct linear regression. 
+
+The simplest form of linear regression is called simple linear regression. It only has two variables: one predictor and one outcome. 
+
+```{r}
+
+# Conduct regression
+# the model takes the form of Y ~ X (where Y = outcome, X = predictor)
+data %>% 
+  lm(swls2021_avg ~ swls2019_avg, data = .) %>% 
+  summary(.)
+
+```
+
+Unfortunately, the summary doesn't give us the confidence interval. To get that, we need to specify that we want the confidence interval with the `confint()` function. 
+
+```{r}
+# To get the 95% confidence interval
+data %>% 
+  lm(swls2021_avg ~ swls2019_avg, data = .) %>% 
+  confint(.)
+```
+

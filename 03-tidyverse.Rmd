@@ -282,7 +282,7 @@ swls2019_only %>%
 
 At this point, you should realise that it is possible to combine different dplyr functions to achieve specific results. I encourage you to play around!
 
-## Tables and Plots
+## Tables and Plots with ggplot2
 
 Okay, so what else can we do with the data? Well, we can create tables and graphs! Why might we do this? Well... Tables and graphs provide us a way to visualize the data. They show us the distribution of the data and allow us to discover any errors or interesting patterns.
 
