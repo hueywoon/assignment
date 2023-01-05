@@ -7,17 +7,17 @@
 1. Download the data file here: [SWB.csv](SWB.csv).
 1. Open up a new script file in RStudio using `Ctrl/Cmd + Shift + N`. 
 1. Set working directory using `setwd()`.
-1. Load `tidyverse` using `library()`.
-1. Read in the data file `SWB.csv` using `read_csv()` or `read.csv()`.
-1. Examine the dataset with `glimpse()` or `View()` or `str(). Check that you have 343 rows and 23 columns. 
+1. Load `tidyverse` and `psych` packages using `library()`.
+1. Read in the data file `SWB.csv` using `read_csv()` or `read.csv()`. Give this dataset the name `data`.
+1. Examine `data` with `glimpse()` or `View()` or `str()`. Check that you have 343 rows and 23 columns. 
 1. Convert `marital_status` and `have_children` from integer to factor using `factor()`. Add value labels to the factors. See the legend below to see how each variable is coded. 
-1. Use `glimpse()` or `str()` to check that the variables are indeed converted to factors.
-1. Create a subset of the dataset of only married parents (i.e., married people who have children). Further subset the dataset such that only the variables `swls2021_1`, `swls2021_2`, `swls2021_3`, `swls2021_4`, and `swls2021_5` are in the dataset. You should have 68 rows and 5 columns in this subset.
-1. Using this subset, compute the average of `swls2021_1`, `swls2021_2`, `swls2021_3`, `swls2021_4`, and `swls2021_5` for each person. Call this variable `swls2021_avg`. 
-1. Create a histogram for `swls2021_avg`. Just play around with the different functions! Change the bar fill color, change the range of the x-axis, make the background white, etc. (I just want you to explore and have fun!)  
-1. Using this subset, get the following summary statistics for `swls2021_avg`: maximum, minimum, mean, and sd. Check that the maximum is 5.4, the minimum is 2.6, the mean is 4.18, and the sd is 0.707.
-1. Find out the number of married parents who have 'swls2021_avg' greater than or equal to 4.18. (And no, I'm not asking you to count by hand.) Check that the number is 36.
-1. For each step above, put in comments using the # sign so that you know what was done. (e.g., # set working directory, # load packages)
+1. Use `glimpse()` or `str()` to check that the two variables are indeed converted to factors.
+1. Create a subset of the dataset of only married parents (i.e., married people who have children). Further subset the dataset such that only the variables `swls2021_1`, `swls2021_2`, `swls2021_3`, `swls2021_4`, and `swls2021_5` are in the dataset. You should have 68 rows and 5 columns in this subset. Give this subset the name `subset`. 
+1. Using `subset`, compute the average of `swls2021_1`, `swls2021_2`, `swls2021_3`, `swls2021_4`, and `swls2021_5` for each person. Call this variable `swls2021_avg`. 
+1. Create a histogram for `swls2021_avg`. Although I'd be okay with just the basic histogram, I'd like you to play around with the different customisations! Change the bar fill color, change the range of the x-axis, make the background white, etc. (I just want you to explore and have fun here!)
+1. Using `subset`, get the following summary statistics for `swls2021_avg`: maximum, minimum, mean, and sd. Specifically, use the `summarise()` function from `dplyr` package. Then confirm the results using the `describe()` function from the `psych` package. Check that the maximum is 5.4, the minimum is 2.6, the mean is 4.18, and the sd is 0.707. 
+1. Combine different functions from the `dplyr` package to find out the number of married parents who have `swls2021_avg` greater than or equal to 4.18. Check that the number is 36.
+1. For Steps 3 to 13, put in comments using the # sign so that you know what was done. (e.g., # set working directory, # load packages)
 1. When you’re done with the above, copy and paste your R script into a word document. Submit the word document in the eLearn Assignment for 1 point.
 
 _Note._ Answers will be released on eLearn the day after this assignment is due. 

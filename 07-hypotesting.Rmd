@@ -2,25 +2,54 @@
 
 ## Overview
 
-This section guides you through the steps to conduct the various hypothesis tests we cover in class. This only serves as an overview for students who are interested to read ahead. I will go through the hypothesis tests in more detail in class.
+The bulk of what we cover in PSYC208 is hypothesis testing. 
 
-We will use the hypothetical dataset that I introduced in the previous section. Please download the dataset to follow along here: [SWB.csv](SWB.csv).
+This section guides you through the steps of conducting the various hypothesis tests. This only serves as an overview for students who are interested to read ahead. I will demonstrate how to conduct the hypothesis tests in class as well as how to interpret the results.
 
-## Load packages and dataset
+To illustrate the various tests, we will use the same hypothetical dataset, `SWB.csv` as before. To follow along, please download the dataset: [SWB.csv](SWB.csv).
+
+## Load Packages and Dataset
 
 ```{r echo = TRUE, message = FALSE, warning = FALSE, error = FALSE}
 
 # Load packages
 library(tidyverse)
+library(psych)
 
-# Load dataset
+# Read in the dataset
 data <- read_csv("SWB.csv")
 
 ```
 
+## Scientific Notation
+
+In addition to loading the packages and reading in the data file, it might also be helpful to run the code below to turn off scientific notation. 
+
+```{r}
+
+# Set options 
+options(scipen = 999) # Turn off scientific notation 
+options(digits = 9) # Display results to 9 decimal places
+
+```
+
+Scientific notation is a way of expressing numbers that are very large or very small. It usually takes the form of `m × 10^n` for very large numbers and `m × 10^-n` for very small numbers, where `^` stands for "to the power of". So, suppose we have the following number: 0.000000000000000477. In scientific notation, this would be represented as` 4.77 x 10^-16`. Alternatively, it might be represented as `4.77e-16`. They mean the same thing.
+
+By default, R presents very small or very large numbers in scientific notation. However, this can be difficult to understand for people who don't use scientific notation in their daily lives. I confess I have difficulty with scientific notation myself so I usually turn the scientific notation off. It's really a matter of personal choice whether you want to turn it off or not. 
+
+And now, let's begin with the hypothesis tests!
+
 ## One-Sample T Test
 
-We use a one-sample t test when we want to compare the data from one group to some hypothesized mean. So, let's say we're interested to know whether on average, in 2019, people were more satisfied with their lives than the neutral value of 4.  (In this data set, the satisfaction with life items were measured on a 7-point scale, where 4 is the neutral point.)
+### When to Use A One-Sample T Test
+
+We use a one-sample t test when we want to compare the data from one group to some hypothesised mean. You can think of it as taking a set of observations or scores and then comparing it to some value. 
+
+So, suppose we're interested to know whether on average, in 2019, people were more or less satisfied with their lives than the neutral value of 4.  (Why 4? Well, in this data set, the satisfaction with life items were measured on a 7-point scale, where 4 is the neutral point.) To answer this question, we will conduct a one-sample t test. 
+
+### Conducting and Interpreting the One-Sample T Test
+
+Before jumping into any hypothesis testing, though, it is good practice to first get the descriptive statistics for the variable(s) you're investigating. At the minimum, you should get the mean and the standard deviation. (Anyway, you need to report means and standard deviations in APA style write-up!) I often also like to look at the minimum and maximum values to make sure the values are not out of ordinary (e.g., a value of -999 might throw up some red flags if, say, the likert scale only comprises values from 1 to 7).  
 
 ```{r}
 
@@ -28,77 +57,196 @@ We use a one-sample t test when we want to compare the data from one group to so
 data <- data %>% 
   mutate(swls2019_avg = rowMeans(across(c(swls2019_1:swls2019_5))))
 
-# Conduct the one-sample t test to compare the satisfaction with life score in 2019 against the neutral point of 4. 
-# "two-sided" means we're conducting a two-tailed test
-# mu = 4 refers to the hypothesized value we're comparing to
-# paired = FALSE means that each observation comes from different individuals (i.e., they are not "paired")
-# conf.level = 0.95 means we want the 95% confidence level. Usually, if we use alpha = .05, then the confidence level is 0.95. 
-t.test(data$swls2019_avg, alternative = c("two.sided"), mu = 4, paired = FALSE, conf.level = 0.95)
+# Get the descriptives
+describe(data$swls2019_avg)
+
+# Conduct the one-sample t test to compare the satisfaction with life score in 2019 against the neutral point of 4
+# x = data$swls2019_avg tells R the variable we're interested in
+# alternative = c("two-sided") tells R we want to conduct a two-tailed test (in my class, we ALWAYS conduct a two-tailed test)
+# mu = 4 tells R the value we're comparing to
+# paired = FALSE tells R that each observation comes from different individuals (i.e., they are not "paired")
+# conf.level = 0.95 tells R we want the 95% confidence level. If we use alpha = .05, then the confidence level is 0.95. 
+t.test(x = data$swls2019_avg, alternative = c("two.sided"), mu = 4, paired = FALSE, conf.level = 0.95)
 
 ```
 
-The results indicate that the average of swls2019_avg is 4.35. When we compare 4.35 to the neutral point of 4, the resulting t value is 8.53. With degrees of freedom 342, the p value is very small, at 4.77e-16. 4.77e-16 is scientific notation expressing 4.77 x 10^-16. So 4.77e-16 would be 0.000000000000000477. The 95% confidence interval is [4.27, 4.43] which is interpreted as follows: We are 95% confident that the true 2019 satisfaction with life score is between 4.27 and 4.43. 
+The results tell you that the average of `swls2019_avg` is 4.35 (but notice it doesn't tell you any other descriptive statistics like standard deviation or maximum, so it's still important to get the descriptives in other ways). 
+
+When we compare 4.35 to the neutral point of 4, the resulting t value is 8.53. With degrees of freedom 342, the p value is very small, at 0.000000000000000477477. Because p value is smaller than the alpha level of .05, the result is statistically significant. Because 4.35 is statistically significantly greater than 4, we would conclude that there is sufficient evidence that the satisfaction with life scores in 2019 is greater than the neutral value of 4.
+
+In addition, the 95% confidence interval is [4.27, 4.43], which is interpreted as follows: We are 95% confident that the true 2019 satisfaction with life score is between 4.27 and 4.43.
+
+You can code the same thing using `t.test()` in a slightly different way, known as the formula interface: 
+
+```{r eval = FALSE}
+
+t.test(swls2019_avg ~ 1, data = data, alternative = c("two.sided"), mu = 4, paired = FALSE, conf.level = 0.95)
+
+```
+
+You'll get the same result! 
+
+### Effect Size: Cohen's d
+
+In addition to hypothesis testing, we also need to look at (standardised) effect size. Effect sizes tell you how large the effect (or the difference) is. The effect size we usually calculate for t tests is the Cohen's d, where d = 0.2 is a small effect size, d = 0.5 is a medium effect size, and d = 0.8 is a large effect size. 
+
+We can calculate Cohen's d using the `cohens_d()` function from the `effectsize` package. 
+
+```{r message = FALSE}
+
+# Load package
+library(effectsize)
+
+# Cohen's d, with mu = 4
+cohens_d(swls2019_avg ~ 1, data = data, mu = 4)
+
+```
+
+Given the Cohen's d is 0.46, we can consider this a small to medium effect size. 
 
 ## Correlated Groups T Test
 
-Suppose we want to know whether people's satisfaction with life scores changed from 2019 to 2021. To do this, we conduct a correlated groups t test. 
+### When to Use A Correlated Groups T Test
+
+We use a correlated groups t test when we want to compare two sets of data to see if  they are different from each other. Importantly, the two sets of data are paired in some way (e.g., they come from the same person).
+
+Suppose we want to know from our hypothetical dataset whether people's satisfaction with life scores changed from 2019 to 2021. We have (or can calculate) the same individuals' satisfaction with life scores in 2019 and in 2021. Given the same individual provided the 2019 and the 2021 scores, the two sets of scores are considered paired or correlated. 
+
+To find out whether there is a difference between these two sets of (paired) scores, we can therefore conduct a correlated groups t test. 
+
+### Conducting and Interpreting the Correlated Groups T Test
+
+Again, before conducting the correlated groups t test, remember to get the descriptive statistics for each set of scores. 
 
 ```{r}
 
 # Calculate the average satisfaction with life score in 2021 for each participant. 
-# If you did not calculate the average satisfaction with life score in 2019 earlier, you might want to do that here also.
+# If you did not calculate the average satisfaction with life score in 2019 earlier, you will want to do that before continuing.
 data <- data %>% 
-  mutate(swls2021_avg = rowMeans(across(c(swls2021_1:swls2021_5)))) 
+  mutate(swls2021_avg = rowMeans(across(c(swls2021_1:swls2021_5))))
 
-# Conduct the correlated groups t test to compare the satisfaction with life score in 2019  and that in 2021 to see if there is any change over the two years. 
+# Get the descriptives
+describe(data$swls2019_avg)
+describe(data$swls2021_avg)
+
+# Conduct the correlated groups t test to compare the satisfaction with life scores in 2019  and in 2021 to see if there is any change over the two years. 
+# x = data$swls2019_avg tells R what the first set of scores is
+# y = data$swls2021_avg tells R what the second set of scores is
 # "two-sided" means we're conducting a two-tailed test
-# mu = 0 means we're comparing the difference against the value of 0. 
+# mu = 0 means we're comparing the difference between the 2019 and 2021 scores against the value of 0
 # paired = TRUE means that each individual offered pairs of observations (i.e., swls2019_avg and swls2021_avg)
-# conf.level = 0.95 means we want the 95% confidence level. Usually, if we use alpha = .05, then the confidence level is 0.95. 
-t.test(data$swls2019_avg, data$swls2021_avg, alternative = c("two.sided"), mu = 0, paired = TRUE, conf.level = 0.95) 
+# conf.level = 0.95 means we want the 95% confidence level 
+t.test(x = data$swls2019_avg, y = data$swls2021_avg, alternative = c("two.sided"), mu = 0, paired = TRUE, conf.level = 0.95) 
 
 ```
 
-The results indicate that the average of the difference between swls2019_avg and swls2021_avg is 0.50. When we compare this difference against 0, the resulting t value is 27.83. With degrees of freedom 342, the p value is very small, at 2.2e-16. The 95% confidence interval is [0.46, 0.54] which is interpreted as follows: We are 95% confident that the true difference between the 2019 and 2021 satisfaction with life scores is between 0.46 and 0.54. 
+```{r}
+t.test(x = data$swls2019_avg, y = data$swls2021_avg, alternative = c("two.sided"), mu = 0, paired = FALSE, conf.level = 0.95) 
+```
+
+
+The results indicate that the average of the difference between swls2019_avg and swls2021_avg is 0.50. When we compare this difference against 0, the resulting t value is 27.83. With degrees of freedom 342, the p value is very small, at 0.000000000000000222. Because p value is smaller than the alpha level of .05, the result is statistically significant. Because 4.35 (mean for 2019) is statistically significantly greater than 3.85 (mean for 2021), we would conclude that there is sufficient evidence that on average, the satisfaction with life scores in 2019 is greater than the satisfaction with life scores in 2021.
+
+The 95% confidence interval is [0.46, 0.54] is interpreted as follows: We are 95% confident that the true difference between the 2019 and 2021 satisfaction with life scores is between 0.46 and 0.54. 
+
+Similar to the one-sample t test, the correlated groups t test also has a formula interface: 
+
+```{r eval = FALSE}
+
+t.test(Pair(swls2019_avg, swls2021_avg) ~ 1, data = data, alternative = c("two.sided"), mu = 0, conf.level = 0.95)
+
+# Notice that the paired = TRUE argument has been taken out because it's been replaced by Pair(swls2019_avg, swls2021_avg).
+
+```
+
+You'll get the same result! 
+
+### Effect Size: Cohen's d
+
+Finally, we need to get the effect size, Cohen's d, for correlated groups t test using the `cohens_d()` function from the `effectsize` package. 
+
+```{r}
+
+# Cohen's d, with mu = 0 (which is the default, so no need to state)
+cohens_d(Pair(swls2019_avg, swls2021_avg) ~ 1, data = data)
+
+```
+
+Given the Cohen's d is 1.50, we can consider this a large effect size. In other words, there is a large difference between the 2019 and 2021 satisfaction with life scores. 
 
 ## Independent Groups T Test
 
-Suppose we want to know whether men and women differ in satisfaction with life in 2019. To do this, we conduct a independent groups t test. 
+### When to Use An Independent Groups T Test
+
+We use an independent groups t test when we want to compare two sets of data to see if  they are different from each other. Importantly, the two sets of data are independent (i.e., they are NOT paired).
+
+Suppose we want to know whether men and women differ in satisfaction with life in 2019. In other words, we're comparing the satisfaction with life scores for the group of men with that for the group of women. In this case, because the men and women are not paired with each other in any way, we consider the two sets of satisfaction with life scores as independent.
+
+Therefore, to answer our research question, we will conduct an independent groups t test. 
+
+### Conducting and Interpreting the Independent Groups T Test
+
+As usual, before conducting the independent groups t test, we will get the descriptive statistics for each group. 
 
 ```{r}
 
 # First, we need to convert gender into a factor 
 data$gender <- factor(data$gender, levels = c(0, 1), labels = c("male", "female"))
 
-# Next, we conduct the independent groups t test
-# Notice that this t.test code takes the form of DV ~ IV
-# "two-sided" means we're conducting a two-tailed test
-# mu = 0 means we're comparing the difference against the value of 0. 
-# var.equal = TRUE means that we're assuming homogeneity of variance is met (if homogeneity of variance is violated, use var.equal = FALSE and R will conduct Welch corrections)
-# conf.level = 0.95 means we want the 95% confidence level. Usually, if we use alpha = .05, then the confidence level is 0.95. 
+# Next, we get the descriptive statistics for each group, male and female
+describeBy(data$swls2019_avg, group = data$gender)
 
+# Then, we conduct the independent groups t test
+# Notice that this t.test code takes the form of the formula interface: DV ~ IV
+# "two-sided" tells R we're conducting a two-tailed test
+# mu = 0 means we're comparing the difference between males and females against the value of 0
+# var.equal = TRUE means that we're assuming homogeneity of variance is met (if homogeneity of variance is violated, use var.equal = FALSE and R will conduct Welch corrections)
+# conf.level = 0.95 means we want the 95% confidence level
 t.test(data$swls2019_avg ~ data$gender, alternative = c("two.sided"), mu = 0, var.equal = TRUE, conf.level = 0.95)
 
 ```
-The results indicate that the average satisfaction with life score for those who identify as male is 4.08 and 4.62 for those who identify as female. When we compare the difference between the two genders against 0, the resulting t value is -6.90. With degrees of freedom 341, the p value is very small, at 2.564e-11. The 95% confidence interval is [-0.69, -0.38] which is interpreted as follows: We are 95% confident that the true difference in 2019 satisfaction with life score between males and females is between -0.69 and -0.38.
 
-_Note._ In calculating the t statistic, R took male - female (since 0 = male and 1 = female, and R takes the group with the smaller number and subtracts the group with the larger number) . Because males have a smaller 2019 SWLS than females, the t statistic is negative. However, if R had taken female - male, the t statistic would be positive. Whether it is positive or negative doesn't matter so long as you know which group has a higher mean. 
+The results indicate that the average satisfaction with life score for those who identify as male is 4.08 and 4.62 for those who identify as female. When we compare the difference between the two genders against 0, the resulting t value is -6.90. With degrees of freedom 341, the p value is very small, at 0.0000000000256373. Because p value is smaller than the alpha level of .05, the result is statistically significant. Because 4.62 is statistically significantly greater than 4.08, we would conclude that there is sufficient evidence that the satisfaction with life scores in 2019 is greater for females than for males.
+
+The 95% confidence interval is [-0.69, -0.38] which is interpreted as follows: We are 95% confident that the true difference in 2019 satisfaction with life score between males and females is between -0.69 and -0.38.
+
+_Note._ In calculating the t statistic, R took male - female (since 0 = male and 1 = female, and R takes the group with the smaller number and subtracts the group with the larger number) . Because males have a smaller 2019 SWLS than females, the t statistic is negative. However, if R had taken female - male, the t statistic would be positive. Whether it is positive or negative doesn't matter so long as you know which group has a higher mean and therefore can interpret correctly the direction of the effect. 
+
+### Effect Size: Cohen's d
+
+Finally, we need to get the effect size, Cohen's d, for the independent groups t test using the `cohens_d()` function from the `effectsize` package. 
+
+```{r}
+
+# Cohen's d, with mu = 0 (which is the default, so no need to state)
+cohens_d(swls2019_avg ~ gender, data = data)
+
+```
+
+Given the Cohen's d is -0.75, we can consider this a medium-large effect size.
+
+_Note._ There is a negative sign here because R took `male - female`. If R took `female - male`, Cohen's d will be positive.
 
 ## One-Way Between-Subjects ANOVA
 
-Suppose we want to know whether marital status affects subjective wellbeing. In essence, we might want to find out whether there is at least one mean difference between: a) married vs divorced, b) married vs widowed, c) divorced vs widowed.
+The independent groups t test is used when you want to compare the scores between two independent groups. But what if you have more than two independent groups? You would use the one-way between-subjects ANOVA. 
+
+So, suppose we want to know whether people with different marital status report differing levels of satisfaction with life scores. In other words, we might want to find out whether there is at least one mean difference between: a) married vs divorced, b) married vs widowed, c) divorced vs widowed.
 
 ```{r}
 # Convert marital status into factor
 data$marital_status <- factor(data$marital_status, levels = c(1, 2, 3), labels = c("married", "divorced", "widowed"))
 
+# Descriptive statistics
+describeBy(data$swls2019_avg, group = data$marital_status)
+
 # Run the ANOVA
 # ANOVA is strange in that to view the results, you need to save it as an object first. 
-results <- data %>% 
-  aov(data = ., swls2019_avg ~ marital_status)  # you need to specify where the data is coming from. So, when you specify data = ., it's telling R that the data for analysis comes from the object data which is before the pipe operator, %>%.  
+results <- aov(swls2019_avg ~ marital_status, data = data)  
 
 # Look at the summary results
 summary(results)
+
 ```
 
 There are two other ways to run the ANOVA. The results will be exactly the same. 

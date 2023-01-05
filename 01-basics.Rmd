@@ -4,16 +4,17 @@
 
 Before typing commands into the script editor, it might be useful for you to know some of the following basic commands.
 
-1.  To place a comment in the script file, begin the line with #.
-2.  To run (execute) a line in the script file, place the cursor on the line, hit Ctrl + Enter (Windows) or Cmd + Enter (macOS).
-    -   If we typed the command directly into the console, we only need to hit Enter
-3.  To run multiple lines in the script file, select the lines, hit Ctrl + Enter (Windows) or Cmd + Enter (macOS).
-4.  To clear the console when it becomes too messy, hit Ctrl + L (Windows) or Cmd + L (macOS).
-5.  To request help, type a question mark in front of the command or the package name (e.g., ?cor). Information about the command will appear in the Help tab (lower right pane).
+1. To place a comment in the script file, begin the line with `#`.
+1. To run (execute) a line in the script file, place the cursor on the line, hit `Ctrl/Cmd + Enter`.
+   - If we typed the command directly into the console, we only need to hit `Enter`
+1. To run multiple lines in the script file, select the lines, hit `Ctrl/Cmd + Enter`.
+1. To run all lines in the script file, hit `Ctrl + Shift + Enter`
+1. To clear the console when it becomes too messy, hit `Ctrl/Cmd + L`.
+1. To request help, type a question mark in front of the command or the package name (e.g., `?cor`). Information about the command will appear in the Help tab (lower right pane).
 
 ## Typing and Executing Commands
 
-Now, let's actually get R to do stuff for us! Open a script file (Ctrl/CMD + Shift + N). Then copy and paste the following R codes into the script file. Run each line (Ctrl/Cmd + Enter) to see what they do. Note that `#` denotes a comment, and therefore it will run as a line of text. Experiment and have fun!
+Now, let's actually get R to do stuff for us! Open a script file (`Ctrl/CMD + Shift + N`). Then copy and paste the following R codes into the script file. Run each line (`Ctrl/Cmd + Enter`) to see what they do. Note that `#` denotes a comment, and therefore it will run as a line of text. Experiment and have fun!
 
 ```{r eval = FALSE}
 

@@ -36,7 +36,7 @@ tables-and-plots-with-ggplot2
 frequency-tables
 bar-plots-with-ggplot2
 histograms-with-ggplot2
-scatterplot
+scatterplot-with-ggplot2
 last-words-1
 tha2
 due-date-26-01-2023
@@ -45,7 +45,7 @@ legend
 scale
 overview
 dataset
-checking-the-pattern-of-responses-correlation-coefficient
+check-the-pattern-of-responses-correlation-coefficient
 reliability-analysis-cronbachs-alpha
 compute-the-average-score-for-the-scale
 tha3
@@ -55,9 +55,19 @@ legend-1
 hypotest
 overview-1
 load-packages-and-dataset
+scientific-notation
 one-sample-t-test
+when-to-use-a-one-sample-t-test
+conducting-and-interpreting-the-one-sample-t-test
+effect-size-cohens-d
 correlated-groups-t-test
+when-to-use-a-correlated-groups-t-test
+conducting-and-interpreting-the-correlated-groups-t-test
+effect-size-cohens-d-1
 independent-groups-t-test
+when-to-use-an-independent-groups-t-test
+conducting-and-interpreting-the-independent-groups-t-test
+effect-size-cohens-d-2
 one-way-between-subjects-anova
 two-way-between-subjects-anova
 correlation

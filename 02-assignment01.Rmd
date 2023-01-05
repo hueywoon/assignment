@@ -23,6 +23,6 @@ _Note._ Answers will be released on eLearn the day after this assignment is due.
 Man <- c(3530, 4730, 4330, 3560, 4050, 4880, 4190, 3620, 3530, 5070)
 Woman <- c(3790, 2720, 3170, 3320, 3190, 2890, 2920, 3390, 3790, 3680)
 data <- cbind(Man, Woman)
-knitr::kable(data, align = c('c', 'c'))
+knitr::kable(data, align = c('c', 'c')) # arrange data into a table, use centre alignment for both columns
 
 ```
