@@ -27,15 +27,14 @@ In addition to loading the packages and reading in the data file, it might also 
 
 ```{r}
 
-# Set options 
 options(scipen = 999) # Turn off scientific notation 
 options(digits = 9) # Display results to 9 decimal places
 
 ```
 
-Scientific notation is a way of expressing numbers that are very large or very small. It usually takes the form of `m × 10^n` for very large numbers and `m × 10^-n` for very small numbers, where `^` stands for "to the power of". So, suppose we have the following number: 0.000000000000000477. In scientific notation, this would be represented as` 4.77 x 10^-16`. Alternatively, it might be represented as `4.77e-16`. They mean the same thing.
+Scientific notation is a way of expressing numbers that are very large or very small. It usually takes the form of `m × 10^n` for very large numbers and `m × 10^-n` for very small numbers, where `^` stands for "to the power of". So, suppose we have the following number: 0.000000000000000477. In scientific notation, this would be represented as` 4.77 x 10^-16` (i.e., 16 decimal places). Alternatively, it might be represented as `4.77e-16`. They mean the same thing.
 
-By default, R presents very small or very large numbers in scientific notation. However, this can be difficult to understand for people who don't use scientific notation in their daily lives. I confess I have difficulty with scientific notation myself so I usually turn the scientific notation off. It's really a matter of personal choice whether you want to turn it off or not. 
+By default, R presents very small or very large numbers in scientific notation. However, this can be difficult to understand for people who don't use scientific notation in their daily lives. I confess I have difficulty with scientific notation myself so I usually turn the scientific notation off. It's really a matter of personal choice whether you want to turn it off or not, though! Just thought you'd like an option :) 
 
 And now, let's begin with the hypothesis tests!
 
@@ -57,12 +56,18 @@ Before jumping into any hypothesis testing, though, it is good practice to first
 data <- data %>% 
   mutate(swls2019_avg = rowMeans(across(c(swls2019_1:swls2019_5))))
 
-# Get the descriptives
+# Get the descriptive statistics
 describe(data$swls2019_avg)
+
+```
+
+Then, we can conduct the t test. 
+
+```{r}
 
 # Conduct the one-sample t test to compare the satisfaction with life score in 2019 against the neutral point of 4
 # x = data$swls2019_avg tells R the variable we're interested in
-# alternative = c("two-sided") tells R we want to conduct a two-tailed test (in my class, we ALWAYS conduct a two-tailed test)
+# alternative = c("two.sided") tells R we want to conduct a two-tailed test (in my class, we ALWAYS conduct a two-tailed test)
 # mu = 4 tells R the value we're comparing to
 # paired = FALSE tells R that each observation comes from different individuals (i.e., they are not "paired")
 # conf.level = 0.95 tells R we want the 95% confidence level. If we use alpha = .05, then the confidence level is 0.95. 
@@ -74,45 +79,49 @@ The results tell you that the average of `swls2019_avg` is 4.35 (but notice it d
 
 When we compare 4.35 to the neutral point of 4, the resulting t value is 8.53. With degrees of freedom 342, the p value is very small, at 0.000000000000000477477. Because p value is smaller than the alpha level of .05, the result is statistically significant. Because 4.35 is statistically significantly greater than 4, we would conclude that there is sufficient evidence that the satisfaction with life scores in 2019 is greater than the neutral value of 4.
 
-In addition, the 95% confidence interval is [4.27, 4.43], which is interpreted as follows: We are 95% confident that the true 2019 satisfaction with life score is between 4.27 and 4.43.
+In addition, the 95% confidence interval is [4.27, 4.43], which is interpreted as follows: We are 95% confident that the population mean 2019 satisfaction with life score is between 4.27 and 4.43.
 
-You can code the same thing using `t.test()` in a slightly different way, known as the formula interface: 
+The code you used to run the one-sample t test can be expressed differently. This is known as the formula interface version: 
 
 ```{r eval = FALSE}
 
+# the difference is that instead of specifying x = swls2019_avg...
+# it is expressed as swls2019_avg ~ 1 
+# This follows the formula: DV ~ IV. Because there isn't an IV in a one-sample t test, the right hand side is coded as 1. 
 t.test(swls2019_avg ~ 1, data = data, alternative = c("two.sided"), mu = 4, paired = FALSE, conf.level = 0.95)
 
 ```
 
-You'll get the same result! 
+You'll get the same result as before. 
 
 ### Effect Size: Cohen's d
 
-In addition to hypothesis testing, we also need to look at (standardised) effect size. Effect sizes tell you how large the effect (or the difference) is. The effect size we usually calculate for t tests is the Cohen's d, where d = 0.2 is a small effect size, d = 0.5 is a medium effect size, and d = 0.8 is a large effect size. 
+In addition to hypothesis testing, we also need to look at (standardised) effect size. Effect sizes tell you how large the effect (or the difference) is. The effect size we usually calculate for t tests is the Cohen's d. By convention, in psychology, d = 0.2 is considered a small effect size, d = 0.5 is considered a medium effect size, and d = 0.8 is considered a large effect size. 
 
 We can calculate Cohen's d using the `cohens_d()` function from the `effectsize` package. 
 
 ```{r message = FALSE}
 
-# Load package
+# Load package (remember to install package before loading package)
 library(effectsize)
 
-# Cohen's d, with mu = 4
+# Cohen's d, with mu = 4 (i.e., the comparison value is 4)
+# Notice that we enter the arguments the same way as we would in the formula interface version of t.test()
 cohens_d(swls2019_avg ~ 1, data = data, mu = 4)
 
 ```
 
-Given the Cohen's d is 0.46, we can consider this a small to medium effect size. 
+Given the Cohen's d is 0.46, we can consider this a small to medium effect size. Meaning, there is a small to medium difference between the average 2019 satisfaction with life scores and the neutral point of 4. 
 
 ## Correlated Groups T Test
 
 ### When to Use A Correlated Groups T Test
 
-We use a correlated groups t test when we want to compare two sets of data to see if  they are different from each other. Importantly, the two sets of data are paired in some way (e.g., they come from the same person).
+We use a correlated groups t test when we want to compare two sets of data to see if  they are different from each other. Importantly, the two sets of data are paired or correlated in some way (e.g., they come from the same person).
 
 Suppose we want to know from our hypothetical dataset whether people's satisfaction with life scores changed from 2019 to 2021. We have (or can calculate) the same individuals' satisfaction with life scores in 2019 and in 2021. Given the same individual provided the 2019 and the 2021 scores, the two sets of scores are considered paired or correlated. 
 
-To find out whether there is a difference between these two sets of (paired) scores, we can therefore conduct a correlated groups t test. 
+To find out whether there is a difference between these two sets of (paired) scores, we should therefore conduct a correlated groups t test. 
 
 ### Conducting and Interpreting the Correlated Groups T Test
 
@@ -129,37 +138,39 @@ data <- data %>%
 describe(data$swls2019_avg)
 describe(data$swls2021_avg)
 
-# Conduct the correlated groups t test to compare the satisfaction with life scores in 2019  and in 2021 to see if there is any change over the two years. 
+```
+
+From the descriptive statistics results, you'll notice that the 2019 satisfaction with life scores appear to be higher than that for the 2021 satisfaction with life scores. But we need to conduct the correlated groups t test to find out if this difference is statistically significant. 
+
+```{r}
+
+# Conduct the correlated groups t test to compare the satisfaction with life scores in 2019  and in 2021 to see if there is any significant change over the two years. 
 # x = data$swls2019_avg tells R what the first set of scores is
 # y = data$swls2021_avg tells R what the second set of scores is
-# "two-sided" means we're conducting a two-tailed test
-# mu = 0 means we're comparing the difference between the 2019 and 2021 scores against the value of 0
-# paired = TRUE means that each individual offered pairs of observations (i.e., swls2019_avg and swls2021_avg)
-# conf.level = 0.95 means we want the 95% confidence level 
+# alternative = c("two.sided") tells R we want to conduct a two-tailed test
+# mu = 0 tells R that we're comparing the difference between the 2019 and 2021 scores against the value of 0
+# paired = TRUE tells R that the observations are paired, meaning each individual offered pairs of observations (i.e., swls2019_avg and swls2021_avg)
+# conf.level = 0.95 tells R we want the 95% confidence level 
 t.test(x = data$swls2019_avg, y = data$swls2021_avg, alternative = c("two.sided"), mu = 0, paired = TRUE, conf.level = 0.95) 
 
 ```
 
-```{r}
-t.test(x = data$swls2019_avg, y = data$swls2021_avg, alternative = c("two.sided"), mu = 0, paired = FALSE, conf.level = 0.95) 
-```
+The results indicate that the average of the difference between swls2019_avg and swls2021_avg is 0.50. When we compare this difference against 0, the resulting t value is 27.83. With degrees of freedom 342, the p value is very small, at 0.000000000000000222. Because p value is smaller than the alpha level of .05, the result is statistically significant. Because 4.35 (mean for 2019) is statistically significantly greater than 3.85 (mean for 2021), we would conclude that there is sufficient evidence that on average, the satisfaction with life scores in 2019 are higher than the satisfaction with life scores in 2021.
 
+The 95% confidence interval is [0.46, 0.54], which is interpreted as follows: We are 95% confident that the population mean difference between the 2019 and 2021 satisfaction with life scores is between 0.46 and 0.54. 
 
-The results indicate that the average of the difference between swls2019_avg and swls2021_avg is 0.50. When we compare this difference against 0, the resulting t value is 27.83. With degrees of freedom 342, the p value is very small, at 0.000000000000000222. Because p value is smaller than the alpha level of .05, the result is statistically significant. Because 4.35 (mean for 2019) is statistically significantly greater than 3.85 (mean for 2021), we would conclude that there is sufficient evidence that on average, the satisfaction with life scores in 2019 is greater than the satisfaction with life scores in 2021.
-
-The 95% confidence interval is [0.46, 0.54] is interpreted as follows: We are 95% confident that the true difference between the 2019 and 2021 satisfaction with life scores is between 0.46 and 0.54. 
-
-Similar to the one-sample t test, the correlated groups t test also has a formula interface: 
+Similar to the one-sample t test, the correlated groups t test also has a formula interface version: 
 
 ```{r eval = FALSE}
 
 t.test(Pair(swls2019_avg, swls2021_avg) ~ 1, data = data, alternative = c("two.sided"), mu = 0, conf.level = 0.95)
 
-# Notice that the paired = TRUE argument has been taken out because it's been replaced by Pair(swls2019_avg, swls2021_avg).
+# Notice that the paired = TRUE argument has been taken out because the same information has been replaced by the Pair(swls2019_avg, swls2021_avg) argument
+# If you leave the paired = TRUE argument in, R will throw up an error
 
 ```
 
-You'll get the same result! 
+Check that the formula interface gives you the same result as before. 
 
 ### Effect Size: Cohen's d
 
@@ -168,6 +179,7 @@ Finally, we need to get the effect size, Cohen's d, for correlated groups t test
 ```{r}
 
 # Cohen's d, with mu = 0 (which is the default, so no need to state)
+# Again, notice that we enter the arguments the same way as we would in the formula interface version of t.test()
 cohens_d(Pair(swls2019_avg, swls2021_avg) ~ 1, data = data)
 
 ```
@@ -186,7 +198,9 @@ Therefore, to answer our research question, we will conduct an independent group
 
 ### Conducting and Interpreting the Independent Groups T Test
 
-As usual, before conducting the independent groups t test, we will get the descriptive statistics for each group. 
+Before conducting the independent groups t test, we need to convert the grouping variable into a factor. Here, the grouping variable is gender because we're comparing the male group against the female group. 
+
+After converting the grouping variable into a factor, we also want to get the descriptive statistics for each group. 
 
 ```{r}
 
@@ -196,21 +210,27 @@ data$gender <- factor(data$gender, levels = c(0, 1), labels = c("male", "female"
 # Next, we get the descriptive statistics for each group, male and female
 describeBy(data$swls2019_avg, group = data$gender)
 
-# Then, we conduct the independent groups t test
+```
+
+The descriptive statistics tell us that on average, the males have lower satisfaction with life scores than females. To find out whether this result is statistically significant, we need to conduct the independent groups t test. 
+
+```{r}
+
+# We conduct the independent groups t test
 # Notice that this t.test code takes the form of the formula interface: DV ~ IV
-# "two-sided" tells R we're conducting a two-tailed test
-# mu = 0 means we're comparing the difference between males and females against the value of 0
+# alternative = c("two.sided") tells R we want to conduct a two-tailed test
+# mu = 0 tells R we're comparing the difference between males and females against the value of 0
 # var.equal = TRUE means that we're assuming homogeneity of variance is met (if homogeneity of variance is violated, use var.equal = FALSE and R will conduct Welch corrections)
-# conf.level = 0.95 means we want the 95% confidence level
+# conf.level = 0.95 tells R we want the 95% confidence level
 t.test(data$swls2019_avg ~ data$gender, alternative = c("two.sided"), mu = 0, var.equal = TRUE, conf.level = 0.95)
 
 ```
 
-The results indicate that the average satisfaction with life score for those who identify as male is 4.08 and 4.62 for those who identify as female. When we compare the difference between the two genders against 0, the resulting t value is -6.90. With degrees of freedom 341, the p value is very small, at 0.0000000000256373. Because p value is smaller than the alpha level of .05, the result is statistically significant. Because 4.62 is statistically significantly greater than 4.08, we would conclude that there is sufficient evidence that the satisfaction with life scores in 2019 is greater for females than for males.
+The results indicate that the average 2019 satisfaction with life score for those who identify as male is 4.08 and 4.62 for those who identify as female. When we compare the difference between the two genders against 0, the resulting t value is -6.90. With degrees of freedom 341, the p value is very small, at 0.0000000000256373. Because p value is smaller than the alpha level of .05, the result is statistically significant. Because 4.62 is statistically significantly greater than 4.08, we would conclude that there is sufficient evidence that the satisfaction with life scores in 2019 is greater for females than for males.
 
-The 95% confidence interval is [-0.69, -0.38] which is interpreted as follows: We are 95% confident that the true difference in 2019 satisfaction with life score between males and females is between -0.69 and -0.38.
+The 95% confidence interval is [-0.69, -0.38] which is interpreted as follows: We are 95% confident that the population mean difference in 2019 satisfaction with life score between males and females is between -0.69 and -0.38.
 
-_Note._ In calculating the t statistic, R took male - female (since 0 = male and 1 = female, and R takes the group with the smaller number and subtracts the group with the larger number) . Because males have a smaller 2019 SWLS than females, the t statistic is negative. However, if R had taken female - male, the t statistic would be positive. Whether it is positive or negative doesn't matter so long as you know which group has a higher mean and therefore can interpret correctly the direction of the effect. 
+_Note._ In calculating the t statistic, R took male - female (since 0 = male and 1 = female, and R takes the group coded with the smaller number and subtracts the group coded with the larger number). Because males have a smaller 2019 SWLS than females, the t statistic is negative. However, if R had taken female - male (say if it had been 0 = female and 1 = male), the t statistic would be positive. To me, whether the t statistic is positive or negative doesn't matter so long as you know which group has a higher mean and therefore can interpret correctly the direction of the effect. (And this is why descriptive statistics is important--it helps you interpret the results accurately!)
 
 ### Effect Size: Cohen's d
 
@@ -223,63 +243,98 @@ cohens_d(swls2019_avg ~ gender, data = data)
 
 ```
 
-Given the Cohen's d is -0.75, we can consider this a medium-large effect size.
+Given the Cohen's d is -0.75, we can consider this a medium-large effect size. In other words, there is a medium-large difference in the 2019 satisfaction with life scores between males and females. 
 
-_Note._ There is a negative sign here because R took `male - female`. If R took `female - male`, Cohen's d will be positive.
+_Note._ Again, note that there is a negative sign here because R took `male - female`. If R took `female - male`, Cohen's d will be a positive number. 
 
 ## One-Way Between-Subjects ANOVA
 
+### When to Use A One-Way Between-Subjects ANOVA
+
 The independent groups t test is used when you want to compare the scores between two independent groups. But what if you have more than two independent groups? You would use the one-way between-subjects ANOVA. 
 
-So, suppose we want to know whether people with different marital status report differing levels of satisfaction with life scores. In other words, we might want to find out whether there is at least one mean difference between: a) married vs divorced, b) married vs widowed, c) divorced vs widowed.
+So, suppose we want to know whether people with different marital status report differing levels of satisfaction with life scores. In other words, we might want to find out whether there is at least one mean difference between: a) married vs divorced, b) married vs widowed, c) divorced vs widowed. To find out, we will conduct the one-way between-subjects ANOVA. 
+
+### Conducting and Interpreting the One-Way Between-Subjects ANOVA
+
+Before conducting the ANOVA, we need to convert the grouping variable into a factor. Here, the grouping variable is marital status because we grouped the individuals into the three groups: married, widowed, and divorced. 
+
+After converting the grouping variable into a factor, we also want to get the descriptive statistics for each group. 
 
 ```{r}
+
 # Convert marital status into factor
 data$marital_status <- factor(data$marital_status, levels = c(1, 2, 3), labels = c("married", "divorced", "widowed"))
 
-# Descriptive statistics
+# Get the descriptive statistics by marital status
 describeBy(data$swls2019_avg, group = data$marital_status)
 
+```
+
+From the means, we can see that married people have the highest satisfaction with life scores, followed by widowers and then divorcees. To find out whether the result is statistically significant, we conduct the ANOVA. 
+
+```{r}
+
 # Run the ANOVA
-# ANOVA is strange in that to view the results, you need to save it as an object first. 
-results <- aov(swls2019_avg ~ marital_status, data = data)  
+# Set up the model being tested and store the model to [mod1]
+# The model has the following format: DV ~ IV
+mod1 <- aov(swls2019_avg ~ marital_status, data = data)  
 
-# Look at the summary results
-summary(results)
-
-```
-
-There are two other ways to run the ANOVA. The results will be exactly the same. 
-
-```{r eval = FALSE}
-
-# Alternative 1
-results <- aov(data$swls2019_avg ~ data$marital_status)
-
-#Alternative 2
-results <- aov(data = data, swls2019_avg ~ marital_status)
+# Look at the summary of the results in mod1
+summary(mod1)
 
 ```
 
-Because the ANOVA results are statistically significant, we might want to follow up with pairwise comparisons (Tukey's HSD). To run this, we need the `DescTools` package. (Remember to install the package Before continuing.)
+The F ratio is 9.62. With the degrees of freedom 2 and 340, the p value is 0.000085953, which is smaller than our alpha level of .05. Therefore, we conclude that there is sufficient evidence indicating that there is at least one mean difference in 2019 satisfaction with life scores between the three marital statuses. 
 
-```{r message = FALSE}
+### Posthoc Analysis: Tukey's HSD
 
-# Load package
-library(DescTools)
+Because the ANOVA results are statistically significant, we want to follow up with a posthoc analysis such as the Tukey's HSD to investigate which group(s) differ from which group(s). 
 
-# Perform a posthoc test on the results using Tukey's HSD. Oh, and give me the 95% CI.
-PostHocTest(results, method = "hsd", conf.level = .95)
+The Tukey's HSD conducts all possible pairwise comparisons, while adjusting the p value to control inflation of family-wise error rate. In this example, we would have three pairwise comparisons: a) married vs widowed, b) married vs divorced, and c) widowed vs divorced. 
+
+```{r}
+
+# Perform a posthoc test on the results using Tukey's HSD and get the 95% CI 
+TukeyHSD(mod1, conf.level = .95)
 
 ```
 
-If you want other posthoc tests, you can change the `method` portion. Type `?PostHocTest` into the console to find out more about the different post hoc tests available to you. 
+The results indicate that married people were significantly more satisfied with their lives than divorced and widowed people. However, divorced and widowed people did not differ significantly in their satisfaction with life scores.
 
-## Two-Way Between-Subjects ANOVA
+_Note._ Tukey's HSD is one of the most common posthoc tests. But there are others. If you need other posthoc tests, you might want to check out the `DescTools` package.
 
-Suppose you want to know whether the difference in satisfaction with life scores between male and female depends on whether they have children. To find out, you will need to conduct a two-way between-subjects ANOVA. 
+### Effect Size: Eta-Squared
 
-You'll need the `car` package to run the ANOVA.
+Just like the t tests, we need to calculate the effect size for ANOVA to see how large the effect is. One of the most commonly reported effect sizes for ANOVA is eta-squared (η2). By convention, η2 = 0.01 indicates a small effect, η2 = 0.06 indicates a medium effect, and η2 = 0.14 indicates a large effect. 
+
+We can get eta-squared using the `eta_squared()` function from `effectsize` package. 
+
+```{r}
+
+eta_squared(mod1, ci = 0.95, alternative = "two.sided")
+
+```
+
+The eta-squared value here is .05, suggesting a small to medium effect. In other words, there is a small to medium effect of marital status on satisfaction with life scores. 
+
+_Note._ Eta-squared tends to overestimate the effect size. This means it will tell you that the differences between the groups are larger than they actually are. Therefore, non-biased alternatives have been developed in place of eta-squared. This would include omega-squared (ω2) and epsilon-squared (ε2), which you can find in the `effectsizes` package as well (look for `omega_squared()` and `epsilon_squared()`). Omega-squared is more frequently used than epsilon-squared, so if you want to report an unbiased effect size, choose omega-squared. 
+
+## Two-Way Between-Subjects Factorial ANOVA
+
+### When to Use A Two-Way Between-Subjects Factorial ANOVA
+
+A two-way between-subjects ANOVA is used when we want to examine an interaction. In other words, it is used when we're trying to investigate whether the effect of one variable depends on a second variable (which is usually called a moderator). 
+
+Let's say we're investigating the effect of alcohol on aggression levels. We think that for men, ingesting alcohol makes them more aggressive (compared to not ingesting alcohol). However, for women, ingesting alcohol does not lead to any change in aggression levels (compared to not ingesting alcohol). In such a case, we're interested in an interaction: We want to know whether the effect of alcohol on aggression (the difference between ingesting and not ingesting alcohol) depends on biological sex. 
+
+There are many kinds of factorial ANOVAs. A between-subjects ANOVA is used when the observations are all independent of each other (i.e., they are not paired or correlated). (If the observations are paired or related, we would use either repeated measures or mixed ANOVA. These would follow different procedures than shown below.) 
+
+So, suppose we want to know whether the difference in satisfaction with life scores between male and female depends on whether they have children. To find out, we will need to conduct a two-way between-subjects ANOVA.
+
+### Conducting and Interpreting the Two-Way Between-Subjects ANOVA
+
+We need the `Anova()` function from the `car` package to run this type of ANOVA. So, we need to load the package, change the grouping variables into factors, and get the descriptives for each group. 
 
 ```{r message = FALSE}
 
@@ -287,65 +342,122 @@ You'll need the `car` package to run the ANOVA.
 library(car)
 
 # Change have_children into a factor
+# If you've not already done so, you'll also need to change marital status to a factor
 data$have_children <- factor(data$have_children, levels = c(0, 1), labels = c("no children", "have children"))
+
+# Get descriptive statistics for each group
+describeBy(data$swls2019_avg, group = data$gender)
+describeBy(data$swls2019_avg, group = data$have_children)
+describeBy(data$swls2019_avg, group = list(data$gender, data$have_children))
+
+```
+
+Now that we have the descriptives (which will help us interpret the results later on), we can move on to conduct the ANOVA. 
+
+```{r}
 
 # Change contrasts settings when estimating Type-3 sum of squares
 options(contrasts = c('contr.sum', 'contr.poly'))
 
-# Set up the model being tested and store the model to [mod1]
+# Set up the model being tested and store the model to [mod2]
 # The model has the following format: DV ~ IV1 + IV2 + IV1*IV2
-mod1 <- lm(swls2019_avg ~ gender + have_children + gender*have_children, data = data)  
+# You can actually omit IV1 and IV2 and it would still run the factorial ANOVA
+mod2 <- aov(swls2019_avg ~ gender + have_children + gender*have_children, data = data) 
 
 # Conduct Two-Way ANOVA and get the ANOVA summary table
-# type = "3" refers to Type 3 sum of squares. For this class, we will use Type 3 sum of squares.
-Anova(mod1, type = "3")   
+# type = "3" refers to Type 3 sum of squares. There are different types of sum of squares depending on how the sum of squares is partitioned.  
+# We will use Type 3 sum of squares as we want to test for an interaction.
+Anova(mod2, type = "3")
 
 ```
 
-Because the interaction is statistically significant, we will conduct the simple effects analysis. This is essentially like conducting independent groups t tests (with some corrections). Since we want to find out whether the difference between male and female's satisfaction with life scores depends on having children, the two tests we will conduct would be: 1) difference in the satisfaction with life scores of males and females who have children; 2) difference in the satisfaction with life scores of males and females who do not have children. 
+_Note._ Read up more on the three types of sum of squares here: https://towardsdatascience.com/anovas-three-types-of-estimating-sums-of-squares-don-t-make-the-wrong-choice-91107c77a27a. tldr: if we are trying to test an interaction, we should use Type 3 sum of squares. 
+
+From the results, we can see that the main effects as well as the interaction effect are statistically significant. To interpret the results, we need to look at the descriptive statistics. The main effect of gender tells us that overall, females reported being significantly more satisfied than males (first set of descriptives). The main effect of presence of children tells us that overall, those with children reported being significantly more satisfied than those without children (second set of descriptives). The interaction effect tells us that the effect of gender on satisfaction with life scores depends on the presence of children. 
+
+### Conducting and Interpreting the Simple Effects Analysis
+
+Because the interaction is statistically significant, we will follow up with the simple effects analysis. This is essentially like conducting independent groups t tests (with some corrections). Since we want to find out whether the difference in satisfaction with life scores between males and females depends on having children, we will test the: 1) difference in the satisfaction with life scores of males and females who have children; 2) difference in the satisfaction with life scores of males and females who do not have children. 
 
 To do the simple effects analyses, we need the `emmeans` package. 
 
-```{r}
+```{r message = FALSE}
 
 # Load package
 library(emmeans)
 
-# first, let's look at a plot
-# Separate Lines: have_children, X axis: gender
-emmip(mod1, have_children ~ gender)
-
-# Next, we conduct the simple effects investigating 1) the effect of gender (difference between males and females) for those who have children, and 2) the effect of gender for those who do not have children.  
-emmeans(mod1, pairwise ~ gender | have_children)  # comparing the pair of conditions in gender for each level of have_children
+# First, let's look at a plot of the means for the four groups
+# The four groups being: males with children, males without children, females with children, and females without children
+emmip(mod2, have_children ~ gender) # Separate Lines: have_children, X axis: gender
 
 ```
 
-Suppose, though, you were interested in looking at the effect of having children by gender. In other words, you're interested in looking at the difference 1) between men with and men without children, and 2) between women with and women without children. In this case, you will swap the variables around. 
+In the plot, the x axis is gender and the four points represent the means for each condition (i.e., male without children, male with children, female without children, and female with children). The red line represents the difference between male and female who have no children whereas the blue line represents the difference between male and female who have children. Here, we can see that the blue line is steeper than the red line, indicating that the effect of gender (difference between males and females) is bigger for those who have children than for those who don't have children. This is what the significant interaction effect in the ANOVA is telling us--that the effect of gender is different for those who have children and those who don't. 
+
+Now, we conduct the simple effects analysis to find out if there is a difference a) between males and females with children and b) between males and females without children. This is because even though it looks like there are differences on the graph (e.g., the red line is not flat), we don't know whether the differences are statistically significant. 
+
+We conduct the simple effects analysis using the `emmeans()` function from the `emmeans` package. 
+
+```{r}
+
+# We conduct the simple effects investigating 1) the effect of gender (difference between males and females) for those who have children, and 2) the effect of gender for those who do not have children.  
+emmeans(mod2, pairwise ~ gender | have_children)  # comparing the pair of conditions in gender for each level of have_children
+
+```
+
+The results under `$contrasts` indicate that females with children have significantly higher satisfaction with life scores than males with children. Similarly, females without children have significantly higher satisfaction with life scores than males without children. (Although, remember, as the interaction effect tells us, the effect of gender for those with children is significantly stronger/larger than that for those without children.)
+
+Suppose, though, you were interested in looking at the effect of having children by gender. (This means your moderator is now gender instead of presence of children.) In other words, you're interested in looking at the difference 1) between males with and males without children, and 2) between females with and females without children. In this case, you will swap the variables around. 
 
 ```{r}
 
 # First, let's look at a plot
 # Separate Lines: gender, X axis: have_children
-emmip(mod1, gender ~ have_children)
+emmip(mod2, gender ~ have_children)
 
-# Next, we conduct the simple effects investigating 1) the effect of having children (difference between having children and not having children) for males, and 2) of having children (difference between having children and not having children) for females.  
-emmeans(mod1, pairwise ~ have_children | gender)  # comparing the pair of conditions in have_children for each level of gender
+# Next, we conduct the simple effects investigating 1) the effect of having children (difference between having children and not having children) for males, and 2) the effect of having children (difference between having children and not having children) for females.  
+emmeans(mod2, pairwise ~ have_children | gender)  # comparing the pair of conditions in have_children for each level of gender
 
 ```
 
-## Correlation
+The results under `$contrasts` now indicate that females with children have significantly higher satisfaction with life scores than females without children. Similarly, males with children have significantly higher satisfaction with life scores than males without children. (Note that the interaction effect tells us, the effect of having children for women is significantly stronger/larger than the effect of having children for men.)
 
-Suppose you want to find out whether people who have higher satisfaction with life scores in 2019 also have higher satisfaction with life scores in 2021. Here is where you will conduct a correlation. 
+### Effect Size: Eta-Squared
+
+We can get the effect size, eta-squared (η2), for each of the main effects as well as the interaction effect using the `eta_squared()` function from `effectsize` package. 
 
 ```{r}
 
-data <- data %>% 
-  mutate(swls2021_avg = rowMeans(across(c(swls2021_1:swls2021_5))))
+eta_squared(mod2, ci = 0.95, alternative = "two.sided")
 
+```
+
+The results indicate that we have a large effect for gender, a medium-large effect for having children, and a small effect for the interaction. 
+
+## Correlation
+
+### When to Use A Correlation
+
+A correlation is used when we want to examine whether two continuous variables are related to each other. Suppose we want to find out whether people who have higher satisfaction with life scores in 2019 also have higher satisfaction with life scores in 2021. Here is where you will conduct a correlation. 
+
+### Conducting and Interpreting the Correlation
+
+As usual, we get the descriptive statistics before conducting the hypothesis test. 
+
+```{r}
+
+# Get the descriptive statistics
+describe(data$swls2019_avg)
+describe(data$swls2021_avg)
+
+# Conduct the correlation with cor.test
+# Unlike cor(), cor.test() gives you the significance level
 cor.test(data$swls2019_avg, data$swls2021_avg)
 ```
 
-Alternatively, you can do the correlation test this way: 
+The correlation is r = 0.90, with a 95% confidence interval [0.88, 0.92]. The p value is very small, smaller than .05, and so we will conclude that the relationship is positive. In other words, people who have higher satisfaction with life scores in 2019 also have higher satisfaction with life scores in 2021. 
+
+There are other ways we can write the R code. Here are two alternatives. 
 
 ```{r eval = FALSE}
 
@@ -358,30 +470,89 @@ data %>%
   cor.test(formula = ~ swls2019_avg + swls2021_avg, .)
 ```
 
-All ways would give you the same result. 
+Both ways would give us the same result as the earlier one. 
+
+### Difference Between Correlated Groups T Test and Correlation
+
+Students sometimes get confused between correlated groups t test and correlation. I'll attempt to explain the difference below. 
+
+Correlated groups t test and correlation have different purposes. Correlated groups t test is used when we are trying to find the _difference_ between two paired scores. For example, whether there is a difference between satisfaction with life scores in 2019 and in 2021. Correlation is used when we are trying to find the _relationship_ between two variables. This would be applied when we're trying to see whether the higher one variable is, the higher/lower another variable is. It is possible for us to have a correlated groups t test that is not statistically significant and a correlation that is significant when we run both on the same data.  
+
+Below is a worked example to illustrate the difference. 
+
+```{r}
+
+# Two Variables X and Y
+x <- c(1, 2, 3, 4, 5)
+y <- c(1, 2, 3, 4, 5)
+
+# Conduct Correlated Groups T Test
+# To see if there is a difference between x and y scores
+t.test(x = x, y = y, alternative = "two.sided", mu = 0, paired = TRUE, conf.level = 0.95)
+
+# Conduct the Correlation
+cor.test(x, y)
+
+```
+
+From the output, you will see that the correlated groups t test is not statistically significant, whereas the correlation is. This is because they're testing different things. 
+
+The correlated groups t test is telling us that on average, there is no difference between x scores and y scores. The correlation is telling us there is a perfect positive relationship between x and y. The two variables increase with a fixed proportion: As x increases, y increases proportionately by 1. 
 
 ## Regression
 
-Suppose you want to predict `swls2021_avg` from `swls2019_avg`. Here, we might want to conduct linear regression. 
+### When to Use A Regression
 
-The simplest form of linear regression is called simple linear regression. It only has two variables: one predictor and one outcome. 
+A regression is used when we want to use one variable to predict another. The simplest form of linear regression is called simple linear regression. It only has two variables: one predictor and one outcome. If you have multiple predictors, then we would use a multiple linear regression instead. We will stick with simple linear regression here. 
+
+Suppose we want to predict `swls2021_avg` from `swls2019_avg`. Here, we want to conduct a simple linear regression as we have one predictor and one outcome. 
+
+### Conducting and Interpreting the Regression
+
+As the descriptives have been calculated previously, we will go straight to the regression here. 
 
 ```{r}
 
 # Conduct regression
 # the model takes the form of Y ~ X (where Y = outcome, X = predictor)
-data %>% 
-  lm(swls2021_avg ~ swls2019_avg, data = .) %>% 
-  summary(.)
+mod3 <- lm(data$swls2021_avg ~ data$swls2019_avg)
+summary(mod3)
 
 ```
+
+The results indicate that `swls2021_avg` significantly predicted `swls2019_avg` (p value is < 0.000000000000000222). 
 
 Unfortunately, the summary doesn't give us the confidence interval. To get that, we need to specify that we want the confidence interval with the `confint()` function. 
 
 ```{r}
+
 # To get the 95% confidence interval
+confint(mod3)
+
+```
+
+We interpret the 95% confidence interval as, "We are 95% confident that the population slope is between 0.75 and 0.83."
+
+There are other ways to code a linear regression. One of those alternatives is shown below. 
+
+```{r eval = FALSE}
+
+# Alternative
+
+# Linear regression
+data %>% 
+  lm(swls2021_avg ~ swls2019_avg, data = .) %>% 
+  summary(.)
+
+# 95% confidence interval
 data %>% 
   lm(swls2021_avg ~ swls2019_avg, data = .) %>% 
   confint(.)
+
 ```
 
+You should get the same result as earlier. 
+
+Congratulations!!! You've come to the end of the hypothesis testing. 
+
+With this, you will be able to complete the remaining assignments!
