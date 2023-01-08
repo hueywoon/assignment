@@ -4,6 +4,8 @@
 
 ## Instructions
 
+Please read through the Using tidyverse section before working on this assignment, especially if you have never used tidyverse before.
+
 1. Download the data file here: [SWB.csv](SWB.csv).
 1. Open up a new script file in RStudio using `Ctrl/Cmd + Shift + N`. 
 1. Set working directory using `setwd()`.

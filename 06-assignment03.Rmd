@@ -4,6 +4,8 @@
 
 ## Instructions
 
+Please read through the Multi-Item Measures section before working on this assignment.
+
 1. Download the data file here: [WVS2012 Singapore BFI10 Data.csv](WVS2012 Singapore BFI10 Data.csv).This dataset contains the responses of 1972 Singaporean participants to the 10-item Big Five Inventory (BFI10) in the 2012 World Values Survey. The BFI10 uses 2 items to measure each personality trait: extraversion, agreeableness, conscientiousness, openness to experience, and neuroticism. One item is positively-keyed and the other is reverse-keyed (R). See the legend below for more information. 
 1. Open up a new script file in RStudio. 
 1. Set working directory using `setwd()`.

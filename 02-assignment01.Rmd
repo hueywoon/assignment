@@ -4,7 +4,7 @@
 
 ## Instructions
 
-Please read through the Getting Started and the Basics pages before working on this assignment, especially if you have no background in R.
+Please read through the Getting Started and the Basics sections before working on this assignment, especially if you have no background in R.
 
 1. Download R.
 1. Download RStudio.
