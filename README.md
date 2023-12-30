@@ -1,3 +1,3 @@
-# Materials for PSYC208 Take Home Assignment
+# PSYC208 R Companion Website
 
-This website contains materials related to the take home assignments used in my PSYC208 class.
+This is my R companion website for students taking PSYC208 under me.

@@ -1,6 +1,6 @@
 fig:001-threepane
 fig:002-fourpane
-getting-started
+start
 install-r-and-rstudio
 the-rstudio-interface
 r-script
@@ -17,9 +17,9 @@ some-basic-commands
 typing-and-executing-commands
 entering-data-directly-into-r
 tha1
-due-date-19-01-2023
 instructions
 data
+suggested-answers
 tidyverse
 installing-and-loading-tidyverse
 import-data
@@ -39,9 +39,9 @@ histograms-with-ggplot2
 scatterplot-with-ggplot2
 last-words-1
 tha2
-due-date-26-01-2023
 instructions-1
 legend
+suggested-answers-1
 scale
 overview
 dataset
@@ -49,9 +49,9 @@ check-the-pattern-of-responses-correlation-coefficient
 reliability-analysis-cronbachs-alpha
 compute-the-average-score-for-the-scale
 tha3
-due-date-02-02-2023
 instructions-2
 legend-1
+suggested-answers-2
 hypotest
 overview-1
 load-packages-and-dataset

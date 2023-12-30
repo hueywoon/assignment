@@ -1,6 +1,6 @@
 # Using tidyverse {#tidyverse} 
 
-_Warning:_ This is a pretty long tutorial. Please set aside more time to go through this before attempting the next assignment!
+_Warning:_ This is a pretty long tutorial. However, it covers commands that are useful for data cleaning / wrangling, which I like to include in my midterms and exams (*hint hint*). I am unlikely to cover this extensively in class, so please do set aside the time to go through this on your own!
 
 Now that you have some basics under your belt, let's move on to installing and using packages from `tidyverse`!
 
@@ -26,7 +26,7 @@ library(tidyverse)
 
 _Note._ You can temporarily load a package without using the `library()` function using the notation `package::function`. This tells R to load the package for a specific chunk of code and not for the entire session. This allows anyone who reads the code to know which package the function comes from. I typically don't do this because it can be quite tiresome to keep typing the name of the package over and over.
 
-However, `package::function` comes in especially handy when we want to help R distinguish between two packages with the same function names. For example, the packages `ggplot2` and `psych` both have a function `alpha()`. R doesn't know which package to choose if you have both packages loaded. So, to specify that you want to use the function from the `psych` package, you should type  `psych::alpha()`. Similarly, if you want to specify that the function comes from the `ggplot2` package, type `ggplot2::alpha()`. 
+However, `package::function` comes in especially handy when we want to help R distinguish between two packages with the same function names. For example, the packages `ggplot2` and `psych` both have a function called `alpha()`. If you load both together, R will "mask" the function from one of the packages (it will tell you which package is masked when loading the packages). What this means is that R will use the function from the package that is not masked. As you can imagine, this can be quite confusing. So, to specify that you want to use the function from the `psych` package, you should type  `psych::alpha()`. Similarly, if you want to specify that the function comes from the `ggplot2` package, type `ggplot2::alpha()`. 
 
 Now that we have `tidyverse` loaded, let's do stuff with it. Let's start with importing data. 
 
@@ -123,7 +123,9 @@ When you look at the output from `str(data)` or `glimpse(data)`, you can see tha
 
 ```{r}
 
-data$gender <- factor(data$gender, levels = c(0, 1), labels = c("male", "female"))
+data$gender <- factor(data$gender, 
+                      levels = c(0, 1), 
+                      labels = c("male", "female"))
 # this code is saying...
 # we want to convert the variable gender into a factor
 # this variable has two values / levels, 0 and 1 
@@ -152,7 +154,7 @@ Some of the functions I've found useful in the `dplyr` package are:
 
 There are more functions in the dplyr package! Check out the dplyr cheat sheet here: <https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf>.
 
-When you go through the code below, you'll notice that in `dplyr` (and also `tidyverse` in general), the pipe operator `%>%` is used a lot. You can think of it as a symbol for "then". For example `X %>% Y` would be read as: Do X then take the result from that to do Y. Because it gets tiring to type the pipe operator so frequently, there's a shortcut for it: Ctrl/Cmd + Shift + M. 
+When you go through the code below, you'll notice that in `dplyr` (and also `tidyverse` in general), the pipe operator `%>%` is used a lot. You can think of it as a symbol for "then". For example `X %>% Y` would be read as: Do X then take the result from that to do Y. Because it gets tiring to type the pipe operator so frequently, there's a shortcut for it: Ctrl/Cmd + Shift + M. (You may see the pipe operator written as `|>` but this is a new development as of 2023 and most users still use `%>%` as their default pipe operator.)
 
 With that out of the way... Let's go through the five functions!
 
@@ -164,12 +166,12 @@ Let's say we only want to select `gender` and the `swls2019_1` to `swls2019_5` c
 
 ```{r}
 
-swls2019_only <- data %>%   # create the subset called "swls2019_only" from "data"
+swls2019_only <- data %>%   # create the subset called "swls2019_only" from "data", and then
   select(gender, swls2019_1:swls2019_5)  # select gender and the columns swls2019_1 to swls2019_5
 
 ```
 
-This is what the first six rows of `swls2019_only` should look like: 
+This is what the first six rows of `swls2019_only` look like: 
 
 ```{r echo = FALSE}
 
@@ -188,7 +190,7 @@ swls2019_genderlast <- data %>%
 
 ```
 
-This is what the first six rows of `swls2019_genderlast` should look like: 
+This is what the first six rows of `swls2019_genderlast` look like: 
 
 ```{r echo = FALSE}
 
@@ -198,7 +200,7 @@ head(swls2019_genderlast)
 
 ### Filter()
 
-Maybe we don't want to select specific columns. Instead, we want to select specific kinds of participants to conduct our analyses on (e.g., say from specific treatment groups or maybe only male participants). We use `filter()` to do that. 
+Maybe we don't want to select specific columns. Instead, we want to select specific kinds of participants to conduct our analyses on (e.g., say from specific treatment groups or maybe only male participants). In other words, we want to select specific rows. We use `filter()` to do that. 
 
 New R users sometimes confuse `select()` with `filter()`. Here's how to differentiate the two: `select()` is used to select columns (i.e., variables) whereas `filter()` is used to select rows (i.e., participants). 
 
@@ -206,13 +208,14 @@ So, let's say we want to select only male participants.
 
 ``` {r}
 
-male_only <- data %>%	 # create "male_only" subset from "data", 
-  filter(gender == "male")  # then filter (keep) only male participants
+male_only <- data %>%	 # create "male_only" subset from "data", and then 
+  filter(gender == "male")  # filter (keep) only male participants
 
 ```
-Notice that the double equal sign `==` is used here. In programming languages, the `==` sign is used when we are comparing the left and the right hand side. Here, we're comparing each row of the column `gender` to the word "male". If  that row matches the word "male", we will filter (keep) that row. Otherwise, we will toss it out. 
 
-This is what the first six rows of male_only should look like: 
+Notice that the double equal sign `==` is used here. In programming languages, the `==` sign is used when we are comparing the left and the right hand side. Here, we're comparing each row of the column `gender` to the word "male". If that row matches the word "male", we will filter (keep) that row. Otherwise, we will toss it out. 
+
+This is what the first six rows of `male_only` look like: 
 
 ```{r echo = FALSE}
 
@@ -232,7 +235,7 @@ swls2019_only <- swls2019_only %>%
   mutate(swls2019_avg = (swls2019_1 + swls2019_2 + swls2019_3 + swls2019_4 + swls2019_5) / 5)
 # this code is saying... 
 # create a variable called `swls2019_avg` by adding up swls2019_1 to swls2019_5 and then dividing the total by 5
-# add this variable to swls2019_only
+# add this variable to the data frame swls2019_only
 
 ```
 
@@ -252,7 +255,7 @@ You can achieve the same results using `rowMeans()`.
 
 swls2019_only <- swls2019_only %>% 
   mutate(swls2019_avg_rowmeans = rowMeans(across(c(swls2019_1:swls2019_5))))
-# rowMeans(across(c(swls2019_1:swls2019_5))) tells R that we want to find the mean (average) for each row (hence rowMeans) across the five variables, swls2019_1 to swls2019_5. 
+# rowMeans(across(c(swls2019_1:swls2019_5))) tells R that we want to find the mean (average) for each row (hence rowMeans) across the set of five variables, swls2019_1 to swls2019_5. 
 
 ```
 
@@ -323,7 +326,8 @@ Again, I think that the `describeBy()` function from the `psych` package would b
 
 ```{r}
 
-describeBy(swls2019_only$swls2019_avg, group = swls2019_only$gender)
+describeBy(swls2019_only$swls2019_avg, 
+           group = swls2019_only$gender)
 
 ```
 
@@ -414,9 +418,10 @@ swls2019_only %>%  # dataset used is swls2019_only
   geom_bar(aes(x = gender), stat="count")  # we want a bar plot where x (horizontal axis) is gender and the statistic is the count of values in x
 
 ```
-Notice that the `aes()` command can be either in the ggplot line or the geom function line. Where you type it doesn't affect the results at all. (Try this out yourself to confirm!) 
 
-I personally prefer the alternative because it's easier for me to read, but it doesn't matter to me which you use!
+Notice that the `aes()` command can be either in the ggplot line or the geom function line. In this case, where you type it doesn't affect the results at all. (Try this out yourself to confirm!) 
+
+I personally prefer the alternative because it's easier for me to read, but it doesn't matter to me which you use so long as it works!
 
 ### Histograms with ggplot2
 
@@ -448,7 +453,7 @@ Now, the histogram that you got is okay, but kinda basic... Maybe you want to cu
 
 ``` {r}
 
-# Assign color “grey” to the object barfill (which we will use below to change the colour of the bars).
+# Assign color “red” to the object barfill (which we will use below to change the colour of the bars).
 barfill <- "red" 
 
 # Assign color “black” to the object barlines (which we will use below to change the colour of the barlines).
@@ -509,4 +514,4 @@ Like the histogram, there are many different customisations beyond the basics I'
 
 I've only just scratched the surface of plots in this tutorial. For more, visit here: https://t-redactyl.io/tag/r-graphing-tutorials.html. Or here: https://r4ds.had.co.nz/data-visualisation.html. And here's a link to the ggplot2 cheatsheet: https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf. 
 
-Now that you've gotten to this point, I think you're ready to do the next assignment! Proceed to the [next section](#tha2)!```````````
+Now that you've gotten to this point, I think you're ready to do the next exercise! Proceed to the [next section](#tha2)!

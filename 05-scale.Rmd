@@ -115,7 +115,9 @@ cor(MVS)
 
 ```
 
-Now that we recoded `mvs_9` into `mvs_9r`, you can see, all correlation coefficients here are positive. So, all is good! Let's move on to the next bit. 
+Now that we recoded `mvs_9` into `mvs_9r`, you can see, all correlation coefficients here are positive. So, all is good! 
+
+Before we move on to the next bit, I should mention that `cor()` doesn't provide the *p* values for the correlations. If you would like the *p* values, then you should consider using `corr.test()` from the `psych` package instead. 
 
 ## Reliability Analysis: Cronbach’s Alpha
 
@@ -169,10 +171,10 @@ Now that we're sufficiently satisfied with the reliability of the scale, let’s
 ``` {r}
 
 MVS <- MVS %>%
-  mutate(MVS_avg = rowMeans(across(c(mvs_1:mvs_8, mvs_9r)))) # calculate the average MVS score across the 9 items and call the average MVS_avg
+  mutate(MVS_avg = rowMeans(across(c(mvs_1:mvs_8, mvs_9r)))) # calculate the average MVS score across the set of 9 items and call the average MVS_avg
 
 ```
 
 You might want to check if `MVS_avg` is correctly calculated. Go to `View(MVS)` and manually calculate the average of `mvs_1` to `mvs_9r` for the first row. You should get 3.44 (to 2 d.p.) which should match the value in the `MVS_avg` column. 
 
-Congratulations on completing this tutorial! You're now ready to do the next assignment! Proceed to the [next section](#tha3)!
+Congratulations on completing this section! You're now ready to try the next exercise! Proceed to the [next section](#tha3)!

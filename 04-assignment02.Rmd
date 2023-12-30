@@ -1,28 +1,24 @@
-# Assignment 2 {#tha2}
+# Test Yourselves 2 {#tha2}
 
-## Due Date: 26-01-2023
+Please read the [Using tidyverse](#tidyverse) section before working on this exercise, especially if you have never used tidyverse before.
+
+As before, suggested answers are at the bottom of this page, but please do try the exercise before looking at them. :)  
 
 ## Instructions
 
-Please read through the Using tidyverse section before working on this assignment, especially if you have never used tidyverse before.
-
 1. Download the data file here: [SWB.csv](SWB.csv).
-1. Open up a new script file in RStudio using `Ctrl/Cmd + Shift + N`. 
-1. Set working directory using `setwd()`.
-1. Load `tidyverse` and `psych` packages using `library()`.
-1. Read in the data file `SWB.csv` using `read_csv()` or `read.csv()`. Give this dataset the name `data`.
-1. Examine `data` with `glimpse()` or `View()` or `str()`. Check that you have 343 rows and 23 columns. 
-1. Convert `marital_status` and `have_children` from integer to factor using `factor()`. Add value labels to the factors. See the legend below to see how each variable is coded. 
-1. Use `glimpse()` or `str()` to check that the two variables are indeed converted to factors.
+1. Start an R Project in the folder where you saved the data file.
+1. Open up a new script file in RStudio. 
+1. Load `tidyverse` and `psych` packages.
+1. Read in the data file `SWB.csv`. Give this dataset the name `data`.
+1. Examine `data`. Minimally you should be able to tell there are 343 rows and 23 columns. You should also be able to tell the variable names and the data type for each variable. 
+1. Convert `marital_status` and `have_children` from integer to factor. Add value labels to the factors. See the legend below to see how each variable is coded. 
+1. Check that the two variables are indeed converted to factors.
 1. Create a subset of the dataset of only married parents (i.e., married people who have children). Further subset the dataset such that only the variables `swls2021_1`, `swls2021_2`, `swls2021_3`, `swls2021_4`, and `swls2021_5` are in the dataset. You should have 68 rows and 5 columns in this subset. Give this subset the name `subset`. 
 1. Using `subset`, compute the average of `swls2021_1`, `swls2021_2`, `swls2021_3`, `swls2021_4`, and `swls2021_5` for each person. Call this variable `swls2021_avg`. 
 1. Create a histogram for `swls2021_avg`. Although I'd be okay with just the basic histogram, I'd like you to play around with the different customisations! Change the bar fill color, change the range of the x-axis, make the background white, etc. (I just want you to explore and have fun here!)
 1. Using `subset`, get the following summary statistics for `swls2021_avg`: maximum, minimum, mean, and sd. Specifically, use the `summarise()` function from `dplyr` package. Then confirm the results using the `describe()` function from the `psych` package. Check that the maximum is 5.4, the minimum is 2.6, the mean is 4.18, and the sd is 0.707. 
 1. Combine different functions from the `dplyr` package to find out the number of married parents who have `swls2021_avg` greater than or equal to 4.18. Check that the number is 36.
-1. For Steps 3 to 13, put in comments using the # sign so that you know what was done. (e.g., # set working directory, # load packages)
-1. When you’re done with the above, copy and paste your R script into a word document. Submit the word document in the eLearn Assignment for 1 point.
-
-_Note._ Answers will be released on eLearn the day after this assignment is due. 
 
 ## Legend
 
@@ -51,3 +47,78 @@ _Note._ Answers will be released on eLearn the day after this assignment is due.
 |swls2021_3|I am satisfied with my life. (2021)|1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree|
 |swls2021_4|So far I have gotten the important things I want in life. (2021) |1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree|
 |swls2021_5|In most ways my life is close to my ideal. (2021)|1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree|
+
+## Suggested Answers
+
+```{r eval = FALSE}
+
+# Skipped Steps 1 to 3. 
+
+# 4. Load packages
+library(tidyverse)
+library(psych)
+
+# 5. Read .csv file
+data <- read_csv("SWB.csv") 
+# read.csv("SWB.csv") also okay
+
+# 6. Examine the data
+# Take a look at the variable names and data types
+glimpse(data)  # str(data) or View(data) also okay
+
+# 7. Convert integer to factor and add value labels to the factor.
+data$marital_status <- factor(data$marital_status, 
+                              levels = c(1, 2, 3), 
+                              labels = c("married", "divorced", "widowed"))
+
+data$have_children <- factor(data$have_children, 
+                             levels = c(0, 1), 
+                             labels = c("no children", "have children"))
+
+# 8. Check variables are now factors
+glimpse(data$marital_status)  # str(data$marital_status) also okay
+glimpse(data$have_children) # str(data$have_children) also okay
+
+# 9. Create subset 
+subset <- data %>% 
+  filter(marital_status == "married" & have_children == "have children") %>% 
+  select(swls2021_1:swls2021_5)
+
+# 10. Compute swls2021_avg
+subset <- subset %>% 
+  mutate(swls2021_avg = rowMeans(across(c(swls2021_1:swls2021_5)))) 
+
+# 11. Create a histogram for swls2021_avg
+ggplot(data = subset) + 
+  geom_histogram(aes(x = swls2021_avg)) + 
+  scale_x_continuous(expand = c(0, 0),
+                     limits = c(0, 8),
+                     # Every 0.5 units, a tick will appear on x-axis
+                     breaks = seq(0, 8, 0.5)) + 
+  scale_y_continuous(expand = c(0, 0), 
+                     # Every 1 unit, a tick will appear on y-axis
+                     breaks = seq(0, 20, 1)) + 
+  labs(x = "Average 2021 Satisfaction With Life Scores",
+       y = "Frequency", 
+       title = "Histogram of Average 2021 Satisfaction With Life Scores") + 
+  # Choose the theme (there are different themes to choose, just type theme and some suggestions will pop up)
+  theme_classic()
+
+# 12A. Get summary statistics using the summarise() function
+# Maximum is 5.4, minimum is 2.6, mean is 4.18, and sd is 0.707.
+subset %>% 
+  summarise(avg_swls = mean(swls2021_avg), 
+            min_swls = min(swls2021_avg), 
+            max_swls = max(swls2021_avg), 
+            sd_swls = sd(swls2021_avg))
+
+# 12B. Get summary statistics using the describe() function
+# Maximum is 5.4, minimum is 2.6, mean is 4.18, and sd is 0.707.
+describe(subset$swls2021_avg)
+
+# 13. Create a subset that only contains people with an average SWLS of 4.18 and above
+# Then, count the number of people remaining 
+subset %>% 
+  filter(swls2021_avg >= 4.18) %>% 
+  summarise (total = n())
+```

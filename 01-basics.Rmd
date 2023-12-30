@@ -73,12 +73,12 @@ a / y
 a ^ (1/y)
 
 # You cannot perform mathematical operations with non-numerical objects. 
-b <- "1"  # recall, putting things in between quotation marks makes it non-numerical, even if 1 is a number.
+b <- "1"   # recall, putting things in between quotation marks makes it non-numerical, even if 1 is a number.
 a + b  # you get an error here because you cannot perform mathematical operations with non-numerical objects.
 
 # An object can store more than one value, such as a set of numbers or a set of characters. This is known as a vector and can be created using c(). 
-num_vector <- c(1, 2, 3, 4, 5)  # numeric vector
-fruits <- c("apple", "banana", "orange")  # non-numeric vector
+num_vector <- c(1, 2, 3, 4, 5)   # numeric vector
+fruits <- c("apple", "banana", "orange")   # non-numeric vector
 
 # Get the values stored in the vectors 
 num_vector
@@ -109,6 +109,8 @@ First, we create an object `name`, and assign the three people's names to it.
 ```{r}
 
 name <- c("Bob", "Andrea", "Calvin")  
+# the c in c() stands for combine 
+# here, we're telling R to combine the three names into a list of names
 # notice the names are between quotation marks
 # this tells R that name is a string (non-numerical) variable
 
@@ -127,6 +129,7 @@ Next, we create the object `age`, with the three people’s ages.
 ```{r}
 
 age <- c(48, 47, 49)  
+# here, we're creating a list of ages
 # the order of age should match the order of the names
 
 ```
@@ -139,7 +142,7 @@ age
 
 ```
 
-Now, let's combine the two variables into a data frame such that each row represents the information for one person, and `name` and `age` are in side-by-side columns. 
+Now, let's combine the two variables into a data frame. You can think of a data frame as a spreadsheet or as a table, where each row represents the information for one person, and `name` and `age` are in side-by-side columns. 
 
 We will use  the `data.frame()` function and call this data frame `data`. 
 
@@ -202,6 +205,7 @@ For example, if we want to know the ages of the three participants. We should ty
 ```{r}
 
 data$Age
+# this tells R to go to the object called data, locate the column Age and then produce the values in that column
 # remember that R is case-sensitive. So if you'd typed data$age, you'll get an error.
 # typing age or Age won't work either because there isn't an object called age or Age.
 
@@ -211,9 +215,13 @@ From the original table, we know that there are more variables (columns) we need
 
 ```{r}
 
-data$Children <- c(1, 3, 2)  # Create a column in data called Children and assign it the values 1, 3, and 2
-data$Gender <- c("male", "female", "male")   # Create a column in data called Gender and assign it the values "male", "female", and "male"
-# again, notice the order of Children and Gender match the order of the names
+data$Children <- c(1, 3, 2)  
+# this tells R to go to the object data and create a column called Children. Then, assign the column the values 1, 3, and 2.
+
+data$Gender <- c("male", "female", "male")   
+# this tells R to go to the object data and create a column called Gender. Then, assign the column the values "male", "female", and "male"
+
+# again, notice the order of data$Children and data$Gender match the order of the names
 
 ```
 
@@ -225,13 +233,16 @@ data
 
 ```
 
-Note that we created `Children` and `Gender` within the data frame. So if you type `Children` and `Gender` without `data$`, you will get an error message in the console telling you that the object cannot be found because there isn't an object (independent of the data frame) that is called `Children` or `Gender`.
+Note that we created `Children` and `Gender` within the data frame `data`. So if you type `Children` and `Gender` without `data$`, you will get an error message in the console telling you that the object cannot be found because there isn't an object (independent of the data frame) that is called `Children` or `Gender`.
 
 Now, let’s say we made a mistake and need to remove `Children` from the data frame, `data`. We can type: 
 
 ```{r}
 
-data$Children <- NULL  # assign the value of NULL to data$Children
+data$Children <- NULL  
+# this tells R to assign the value of NULL to data$Children
+# NULL basically represents non-existence. So, when we assign NULL to data$Children, it means we want that column to be non-existent / removed.
+
 data 
 # notice that the Children column is now gone
 
@@ -242,7 +253,8 @@ Finally, if we want to save the data frame into a .csv file, we use `write.csv()
 ```{r}
 
 write.csv(data, "bobandreacalvin.csv")  
-# specify the name and extension of the file (e.g., bobandreacalvin.csv). 
+# this tells R to save the object, data, as a .csv file, and to name the .csv file as bobandreacalvin.csv.
+# remember to specify both the name and the extension of the file (e.g., bobandreacalvin.csv). 
 
 ```
 
@@ -250,4 +262,4 @@ The .csv file will now be saved as `bobandreacalvin.csv` within your current dir
 
 As an aside, some students might wonder why we don't use `write.csv2` instead. `write.csv2` uses a comma for the decimal point whereas `write.csv` uses a full stop / period for the decimal point. Since it's more usual to use the full stop / period for the decimal point, we'll stick to `write.csv`.
 
-Now that you've gotten to this point, I think you're ready to do your first assignment! Proceed to the [next section](#tha1)!
+*Phew!* That was a lot of information. Now... Try to apply what you learnt in this section to the exercise in the [following section](#tha1)!

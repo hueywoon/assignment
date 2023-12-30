@@ -1,25 +1,21 @@
-# Assignment 3 {#tha3}
+# Test Yourselves 3 {#tha3}
 
-## Due Date: 02-02-2023
+Please read through the [Multi-Item Measures](#scale) section before working on this exercise.
+
+As before, suggested answers are at the bottom of this page, but please do try the exercise before looking at them. :)  
 
 ## Instructions
 
-Please read through the Multi-Item Measures section before working on this assignment.
-
 1. Download the data file here: [WVS2012 Singapore BFI10 Data.csv](WVS2012 Singapore BFI10 Data.csv).This dataset contains the responses of 1972 Singaporean participants to the 10-item Big Five Inventory (BFI10) in the 2012 World Values Survey. The BFI10 uses 2 items to measure each personality trait: extraversion, agreeableness, conscientiousness, openness to experience, and neuroticism. One item is positively-keyed and the other is reverse-keyed (R). See the legend below for more information. 
+1. Start an R Project in the folder where you saved the data file.
 1. Open up a new script file in RStudio. 
-1. Set working directory using `setwd()`.
-1. Load the `tidyverse` and `psych` packages using `library()`.
-1. Read in the data file `WVS2012 Singapore BFI10 Data.csv` using `read_csv()` or `read.csv()`. Name this data frame `data`.
-1. Examine `data` with `glimpse()` or `View()` or `str()`. Check that you have 1972 rows and 10 columns. 
-1. Create a subset of the data by removing all participants who had negative values for ANY of the BFI10 items (e.g., -5, -2). Name this subset `subset`. (Hint: Use the `filter_all()` and `all_vars()` functions from the `dplyr` package. Or, use the `filter()` in combination with the `if_all()` functions. You'll need to read up a bit on the internet to figure out how they work and then experiment.) This is probably the hardest part of this assignment. But if all goes well, you should have 1963 rows (participants) in your subset.
+1. Load `tidyverse` and `psych` packages.
+1. Read in the data file `WVS2012 Singapore BFI10 Data.csv`. Name this data frame `data`.
+1. Examine `data`. Minimally you should be able to tell there are 1972 rows and 10 columns. You should also be able to tell the variable names and the data type for each variable. 
+1. Create a subset of the data by removing all participants who had values below 1 for ANY of the BFI10 items (e.g., -5, -2). Name this subset `subset`. (Hint: Use the `filter()` function in combination with the `if_all()` function. You'll need to read up a bit on the internet to figure out how they work and then experiment.) This is probably the hardest part of this exercise. But if all goes well, you should have 1963 rows (participants) in your subset.
 1. Using `subset`, reverse-code all the reverse-keyed items (i.e., V160A, V160C, V160D, V160E, V160G). 
 1. Get the correlation coefficient for each pair of items for the same personality trait. Check that your answer matches mine: _r_ = 0.1177 (extraversion), _r_ = 0.0636 (agreeableness), _r_ = 0.0921 (conscientiousness), _r_ = 0.0478 (neuroticism), and _r_ = -0.2959 (openness to experience). At this point, you should be surprised that openness to experience is negatively related, especially because we had already re-coded the reverse-keyed items!
 1. Get the Cronbach’s alpha for each pair of items for the same personality trait. Check that your answer matches mine: _α_ = 0.21 (extraversion), _α_ = 0.12 (agreeableness), _α_ = 0.17 (conscientiousness), _α_ = 0.09 (neuroticism), and _α_ = ERROR because items were negatively correlated (openness to experience). This suggests that the BFI10 has low reliability for the Singapore data. This finding mirrors findings elsewhere which suggest that the BFI10 has low reliability for non WEIRD (Western, Educated, Industrial, Rich, and Democratic) countries (see: https://renebekkers.wordpress.com/2017/03/21/hunting-game-targeting-the-big-five/).
-1. For each step above, put in comments using the # sign so that you know what was done. (e.g., # set working directory, # load packages)
-1. When you’re done with the above, copy and paste your R script into a word document. Submit the word document in the eLearn Assignment for 1 point.
-
-_Note._ Answers will be released on eLearn the day after this assignment is due. 
 
 ## Legend
 
@@ -35,3 +31,100 @@ _Note._ Answers will be released on eLearn the day after this assignment is due.
 |V160H|I see myself as someone who: does a thorough job|Conscientiousness|-5 = Missing, Unknown; -4 = Not asked in survey; -3 = Not applicable; -2 = No answer; -1 = Don’t know; 1 = Disagree strongly; 2 = Disagree a little; 3 = Neither agree nor disagree; 4 = Agree a little; 5 = Agree strongly
 |V160I|I see myself as someone who: gets nervous easily|Neuroticism|-5 = Missing, Unknown; -4 = Not asked in survey; -3 = Not applicable; -2 = No answer; -1 = Don’t know; 1 = Disagree strongly; 2 = Disagree a little; 3 = Neither agree nor disagree; 4 = Agree a little; 5 = Agree strongly
 |V160J|I see myself as someone who: has an active imagination|Openness to experience|-5 = Missing, Unknown; -4 = Not asked in survey; -3 = Not applicable; -2 = No answer; -1 = Don’t know; 1 = Disagree strongly; 2 = Disagree a little; 3 = Neither agree nor disagree; 4 = Agree a little; 5 = Agree strongly
+
+## Suggested Answers
+
+```{r eval = FALSE}
+
+# Skipped Steps 1 to 3
+
+# 4. Load packages
+library(tidyverse)
+library(psych)
+
+# 5. Read .csv file
+data <- read_csv("WVS2012 Singapore BFI10 Data.csv")
+
+# 6. Take a look at the variable names and types
+glimpse(data)  #str(data) also okay
+
+# Extra. Run descriptives to get min and max values for each column 
+# I didn't get you guys to do this, but in actual analysis, you should run descriptives to check what the minimum and maximum values are for this dataset. 
+# Values below 1 are invalid numbers (see legend) so we need to remove them
+# Notice that the minimum value is -5 (because there are negative values)
+data %>% 
+  describe(.)
+
+# 7. Remove all participants who have values below 1 for the BFI10 items.
+subset <- data %>%
+  filter(if_all(c("V160A":"V160J"), ~ .x > 0))
+# The code above is saying... 
+# KEEP (filter) the row 
+# IF ALL (if_all) of the 
+# COLUMNS from V160A to V160J (c("V160A":V160J") have 
+# VALUES GREATER THAN 0 (.x > 0).
+# Note. If you have multiple conditions, you can just add them on... For example greater than 0 and less than 6 would be ~.x > 0 & .x < 6
+
+# Extra. Run descriptives to get min and max values for each column
+# I didn't get you to do this, but you should run descriptives again to check what the minimum and maximum values are now
+# If you did this correctly, the minimum value should be 1 now, which is the lowest value on the likert scale used
+subset %>% 
+  describe(.)
+
+# 8. Reverse-Code all the Reverse-Keyed Items
+# Then, select only the variables that you are interested in analyzing in the subset
+subset <- subset %>%   
+  mutate(5 + 1 - across(c(V160A, V160C, V160D, V160E, V160G), 
+                        .names = "{col}r")) %>% 
+  select(V160Ar, V160F, V160B, V160Gr, V160Cr, V160H, V160Dr, V160I, V160Er, V160J)
+
+# The above code is saying... 
+# Mutate (i.e., create new variables) by taking 5 (max) + 1 (min) - observation, and do this across this set of columns: V160A, V160C, V160D, V160E, V160G. Name those columns by adding an r after the original column name (represented by {col}r)
+# Then, select the columns you'd like to keep
+
+# 9. Get the correlation coefficients
+# I present two alternatives below. 
+
+# Alternative 1: Correlation Matrix
+# This is an acceptable method, although I find it difficult to pick out the important correlations from here because the matrix is a bit large.
+cor.output <- as.data.frame(cor(subset))  
+
+# Alternative 2: Individual correlations
+# This takes a bit more effort, but clearly indicates which variable we're analyzing. 
+cor(subset$V160Ar, subset$V160F) # extraversion
+cor(subset$V160B, subset$V160Gr) # agreeableness
+cor(subset$V160Cr, subset$V160H) # conscientiousness
+cor(subset$V160Dr, subset$V160I) # neuroticism
+cor(subset$V160Er, subset$V160J) # openness to experience
+
+# 10. Cronbach's alpha for each pair of items
+# Here's a general explanation of the code below. 
+# We take the data frame, subset. Then we keep only the variables we're interested in (e.g., V160Ar, V160F). This results in a data frame with two variables. This two-variable data frame is then passed into the alpha function. When we're passing the data frame into the alpha function, we use the full stop.
+# Note that alpha() can only be used with data frames or matrices and not with vectors. So alpha(subset$V160Ar, subset$V160F) won't work since each column (e.g., subset$V160F) is a vector (think of vector as a list of values of the same type) and not a data frame.
+
+# Extraversion
+subset %>% 
+  select(V160Ar, V160F) %>% 
+  alpha(.)
+
+# Agreeableness
+subset %>% 
+  select(V160Gr, V160B) %>% 
+  alpha(.)
+
+# Conscientousness
+subset %>% 
+  select(V160Cr, V160H) %>% 
+  alpha(.)
+
+# Neuroticism
+subset %>% 
+  select(V160Dr, V160I) %>% 
+  alpha(.)
+
+# Openness to Experience
+subset %>% 
+  select(V160Er, V160J) %>% 
+  alpha(.)
+
+```
