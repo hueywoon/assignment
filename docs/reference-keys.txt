@@ -85,4 +85,4 @@ difference-between-correlated-groups-t-test-and-correlation
 regression
 when-to-use-a-regression
 conducting-and-interpreting-the-regression
-tha4
+next-steps

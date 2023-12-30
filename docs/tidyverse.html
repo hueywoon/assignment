@@ -228,7 +228,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.4.2" data-path="hypotest.html"><a href="hypotest.html#conducting-and-interpreting-the-one-sample-t-test"><i class="fa fa-check"></i><b>8.4.2</b> Conducting and Interpreting the One-Sample T Test</a></li>
 <li class="chapter" data-level="8.4.3" data-path="hypotest.html"><a href="hypotest.html#effect-size-cohens-d"><i class="fa fa-check"></i><b>8.4.3</b> Effect Size: Cohen’s d</a></li>
 </ul></li>
-<li class="chapter" data-level="8.5" data-path="hypotest.html"><a href="hypotest.html#correlated-groups-t-test"><i class="fa fa-check"></i><b>8.5</b> Correlated Groups T Test</a>
+<li class="chapter" data-level="8.5" data-path="hypotest.html"><a href="hypotest.html#correlated-groups-t-test"><i class="fa fa-check"></i><b>8.5</b> Correlated Groups T test</a>
 <ul>
 <li class="chapter" data-level="8.5.1" data-path="hypotest.html"><a href="hypotest.html#when-to-use-a-correlated-groups-t-test"><i class="fa fa-check"></i><b>8.5.1</b> When to Use A Correlated Groups T Test</a></li>
 <li class="chapter" data-level="8.5.2" data-path="hypotest.html"><a href="hypotest.html#conducting-and-interpreting-the-correlated-groups-t-test"><i class="fa fa-check"></i><b>8.5.2</b> Conducting and Interpreting the Correlated Groups T Test</a></li>
@@ -265,8 +265,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.10.1" data-path="hypotest.html"><a href="hypotest.html#when-to-use-a-regression"><i class="fa fa-check"></i><b>8.10.1</b> When to Use A Regression</a></li>
 <li class="chapter" data-level="8.10.2" data-path="hypotest.html"><a href="hypotest.html#conducting-and-interpreting-the-regression"><i class="fa fa-check"></i><b>8.10.2</b> Conducting and Interpreting the Regression</a></li>
 </ul></li>
+<li class="chapter" data-level="8.11" data-path="hypotest.html"><a href="hypotest.html#next-steps"><i class="fa fa-check"></i><b>8.11</b> Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="tha4.html"><a href="tha4.html"><i class="fa fa-check"></i><b>9</b> Remaining Assignments</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
 
@@ -814,8 +814,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Let’s use <code>ggplot2</code> to make a histogram for <code>swls2019_avg</code> with a very basic code.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="tidyverse.html#cb60-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> swls2019_only, <span class="fu">aes</span>(<span class="at">x =</span> swls2019_avg)) <span class="sc">+</span> </span>
 <span id="cb60-2"><a href="tidyverse.html#cb60-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()  <span class="co"># we want a histogram, so geom_histogram() is used</span></span></code></pre></div>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better
-## value with `binwidth`.</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick
+## better value with `binwidth`.</code></pre>
 <p><img src="PSYC208_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
 <p>As with the bar chart, you could do this instead and the results would be the same:</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="tidyverse.html#cb62-1" tabindex="-1"></a><span class="co"># Alternative</span></span>
@@ -851,8 +851,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb63-26"><a href="tidyverse.html#cb63-26" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>)) <span class="sc">+</span> </span>
 <span id="cb63-27"><a href="tidyverse.html#cb63-27" tabindex="-1"></a><span class="co"># Give the histogram a title.</span></span>
 <span id="cb63-28"><a href="tidyverse.html#cb63-28" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">&quot;Histogram of SWLS2019&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning: Removed 2 rows containing missing values
-## (`geom_bar()`).</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing
+## values (`geom_bar()`).</code></pre>
 <p><img src="PSYC208_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <p>Note that when you set limits on the graph, it throws up a warning: <em>Warning: Removed 2 rows containing missing values (<code>geom_bar()</code>).</em> This is a known issue, but is apparently too complex to resolve (see: <a href="https://github.com/tidyverse/ggplot2/issues/4083" class="uri">https://github.com/tidyverse/ggplot2/issues/4083</a>). You may safely ignore it if your limits are beyond the minimum and maximum values of your axes. For example, suppose your minimum value for the x-axis is 1 and your maximum value is 7. If you set the limits to 0 and 8, it should comprise all values in your dataset. You can find the minimum and maximum values using the <code>summarise()</code> function, or simply use <code>max()</code> or <code>min()</code>.</p>
 </div>

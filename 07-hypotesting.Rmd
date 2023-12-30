@@ -3,7 +3,6 @@
 ## Overview
 
 The bulk of what we cover in PSYC208 is hypothesis testing. 
-
 This section guides you through the steps of conducting the various hypothesis tests. This only serves as an overview for students who are interested to read ahead. I will demonstrate how to conduct the hypothesis tests in class as well as how to interpret the results.
 
 To illustrate the various tests, we will use the same hypothetical dataset, `SWB.csv` as before. To follow along, please download the dataset: [SWB.csv](SWB.csv).
@@ -17,7 +16,7 @@ library(tidyverse)
 library(psych)
 
 # Read in the dataset
-data <- read_csv("SWB.csv")
+df <- read_csv("SWB.csv")
 
 ```
 
@@ -27,14 +26,29 @@ In addition to loading the packages and reading in the data file, it might also 
 
 ```{r}
 
-options(scipen = 999) # Turn off scientific notation 
-options(digits = 9) # Display results to 9 decimal places
+options(scipen = 999)  # Turn off scientific notation 
+options(digits = 9)  # Display results to 9 decimal places
 
 ```
 
 Scientific notation is a way of expressing numbers that are very large or very small. It usually takes the form of `m × 10^n` for very large numbers and `m × 10^-n` for very small numbers, where `^` stands for "to the power of". So, suppose we have the following number: 0.000000000000000477. In scientific notation, this would be represented as` 4.77 x 10^-16` (i.e., 16 decimal places). Alternatively, it might be represented as `4.77e-16`. They mean the same thing.
 
+Here's a quick question to see if you understood scientific notation. Which of the following is the scientific notation for 0.0123?
+
+A) 1.23e-1 / 1.23 x 10^-1
+A) 1.23e-2 / 1.23 x 10^-2
+A) 1.23e-3 / 1.23 x 10^-3
+A) 1.23e-4 / 1.23 x 10^-4
+
+(Answer after the next paragraph because I couldn't find a better way to hide the answer!)
+
 By default, R presents very small or very large numbers in scientific notation. However, this can be difficult to understand for people who don't use scientific notation in their daily lives. I confess I have difficulty with scientific notation myself so I usually turn the scientific notation off. It's really a matter of personal choice whether you want to turn it off or not, though! Just thought you'd like an option :) 
+
+```{r}
+
+# Answer to the quiz above is Option B: 1.23e-2 / 1.23 x 10^-2.
+
+```
 
 And now, let's begin with the hypothesis tests!
 
@@ -53,11 +67,11 @@ Before jumping into any hypothesis testing, though, it is good practice to first
 ```{r}
 
 # Calculate the average satisfaction with life score in 2019 for each participant
-data <- data %>% 
+df <- df %>% 
   mutate(swls2019_avg = rowMeans(across(c(swls2019_1:swls2019_5))))
 
 # Get the descriptive statistics
-describe(data$swls2019_avg)
+describe(df$swls2019_avg)
 
 ```
 
@@ -65,38 +79,27 @@ Then, we can conduct the t test.
 
 ```{r}
 
-# Conduct the one-sample t test to compare the satisfaction with life score in 2019 against the neutral point of 4
-# x = data$swls2019_avg tells R the variable we're interested in
-# alternative = c("two.sided") tells R we want to conduct a two-tailed test (in my class, we ALWAYS conduct a two-tailed test)
-# mu = 4 tells R the value we're comparing to
-# paired = FALSE tells R that each observation comes from different individuals (i.e., they are not "paired")
-# conf.level = 0.95 tells R we want the 95% confidence level. If we use alpha = .05, then the confidence level is 0.95. 
-t.test(x = data$swls2019_avg, alternative = c("two.sided"), mu = 4, paired = FALSE, conf.level = 0.95)
+# Conduct the one-sample t test to 
+# compare the satisfaction with life score in 2019 against 
+# the neutral point of 4
+t.test(x = df$swls2019_avg,  # variable we're analysing
+       mu = 4)  # value we're comparing against
+
+# By default, R assumes a two-tailed test, 
+# that each observation comes from different individuals (i.e., they are not "paired"), 
+# and that the alpha level is .05, therefore confidence interval is 95%
 
 ```
 
 The results tell you that the average of `swls2019_avg` is 4.35 (but notice it doesn't tell you any other descriptive statistics like standard deviation or maximum, so it's still important to get the descriptives in other ways). 
 
-When we compare 4.35 to the neutral point of 4, the resulting t value is 8.53. With degrees of freedom 342, the p value is very small, at 0.000000000000000477477. Because p value is smaller than the alpha level of .05, the result is statistically significant. Because 4.35 is statistically significantly greater than 4, we would conclude that there is sufficient evidence that the satisfaction with life scores in 2019 is greater than the neutral value of 4.
+When we compare 4.35 to the neutral point of 4, the resulting t value is 8.53. With degrees of freedom 342, the *p* value is very small, at 0.000000000000000477477. Because *p* value is smaller than the alpha level of .05, the result is statistically significant. Because 4.35 is statistically significantly greater than 4, we would conclude that there is sufficient evidence that the satisfaction with life scores in 2019 is greater than the neutral value of 4.
 
 In addition, the 95% confidence interval is [4.27, 4.43], which is interpreted as follows: We are 95% confident that the population mean 2019 satisfaction with life score is between 4.27 and 4.43.
 
-The code you used to run the one-sample t test can be expressed differently. This is known as the formula interface version: 
-
-```{r eval = FALSE}
-
-# the difference is that instead of specifying x = swls2019_avg...
-# it is expressed as swls2019_avg ~ 1 
-# This follows the formula: DV ~ IV. Because there isn't an IV in a one-sample t test, the right hand side is coded as 1. 
-t.test(swls2019_avg ~ 1, data = data, alternative = c("two.sided"), mu = 4, paired = FALSE, conf.level = 0.95)
-
-```
-
-You'll get the same result as before. 
-
 ### Effect Size: Cohen's d
 
-In addition to hypothesis testing, we also need to look at (standardised) effect size. Effect sizes tell you how large the effect (or the difference) is. The effect size we usually calculate for t tests is the Cohen's d. By convention, in psychology, d = 0.2 is considered a small effect size, d = 0.5 is considered a medium effect size, and d = 0.8 is considered a large effect size. 
+In addition to hypothesis testing, we also need to look at (standardised) effect size. Effect sizes tell you how large the effect (or the difference) is. The effect size we usually calculate for t tests is the Cohen's d. By convention, in psychology, *d* = 0.2 is considered a small effect size, *d* = 0.5 is considered a medium effect size, and *d* = 0.8 is considered a large effect size. 
 
 We can calculate Cohen's d using the `cohens_d()` function from the `effectsize` package. 
 
@@ -106,18 +109,18 @@ We can calculate Cohen's d using the `cohens_d()` function from the `effectsize`
 library(effectsize)
 
 # Cohen's d, with mu = 4 (i.e., the comparison value is 4)
-# Notice that we enter the arguments the same way as we would in the formula interface version of t.test()
-cohens_d(swls2019_avg ~ 1, data = data, mu = 4)
+cohens_d(df$swls2019_avg, 
+         mu = 4)
 
 ```
 
 Given the Cohen's d is 0.46, we can consider this a small to medium effect size. Meaning, there is a small to medium difference between the average 2019 satisfaction with life scores and the neutral point of 4. 
 
-## Correlated Groups T Test
+## Correlated Groups T test
 
 ### When to Use A Correlated Groups T Test
 
-We use a correlated groups t test when we want to compare two sets of data to see if  they are different from each other. Importantly, the two sets of data are paired or correlated in some way (e.g., they come from the same person).
+We use a correlated groups t test when we want to compare two sets of data to see if they are different from each other. Importantly, the two sets of data are paired or correlated in some way (e.g., they come from the same person).
 
 Suppose we want to know from our hypothetical dataset whether people's satisfaction with life scores changed from 2019 to 2021. We have (or can calculate) the same individuals' satisfaction with life scores in 2019 and in 2021. Given the same individual provided the 2019 and the 2021 scores, the two sets of scores are considered paired or correlated. 
 
@@ -131,12 +134,12 @@ Again, before conducting the correlated groups t test, remember to get the descr
 
 # Calculate the average satisfaction with life score in 2021 for each participant. 
 # If you did not calculate the average satisfaction with life score in 2019 earlier, you will want to do that before continuing.
-data <- data %>% 
+df <- df %>% 
   mutate(swls2021_avg = rowMeans(across(c(swls2021_1:swls2021_5))))
 
 # Get the descriptives
-describe(data$swls2019_avg)
-describe(data$swls2021_avg)
+describe(df$swls2019_avg)
+describe(df$swls2021_avg)
 
 ```
 
@@ -144,33 +147,25 @@ From the descriptive statistics results, you'll notice that the 2019 satisfactio
 
 ```{r}
 
-# Conduct the correlated groups t test to compare the satisfaction with life scores in 2019  and in 2021 to see if there is any significant change over the two years. 
-# x = data$swls2019_avg tells R what the first set of scores is
-# y = data$swls2021_avg tells R what the second set of scores is
-# alternative = c("two.sided") tells R we want to conduct a two-tailed test
-# mu = 0 tells R that we're comparing the difference between the 2019 and 2021 scores against the value of 0
-# paired = TRUE tells R that the observations are paired, meaning each individual offered pairs of observations (i.e., swls2019_avg and swls2021_avg)
-# conf.level = 0.95 tells R we want the 95% confidence level 
-t.test(x = data$swls2019_avg, y = data$swls2021_avg, alternative = c("two.sided"), mu = 0, paired = TRUE, conf.level = 0.95) 
+# Conduct the correlated groups t test to 
+# see if there is any significant difference between 
+# the satisfaction with life scores in 2019 and in 2021. 
+
+t.test(x = df$swls2019_avg,  # scores in 2019 
+       y = df$swls2021_avg,  # scores in 2021
+       mu = 0,  # value we expect if null hypothesis of no difference is true
+       paired = TRUE)  # observations are paired, meaning each individual offered pairs of observations (i.e., swls2019_avg and swls2021_avg)
+
+# By default, R assumes a two-tailed test, 
+# and that the alpha level is .05, therefore confidence interval is 95%.
+# Since observations are paired, we need to specify that using paired = TRUE.
+
 
 ```
 
-The results indicate that the average of the difference between swls2019_avg and swls2021_avg is 0.50. When we compare this difference against 0, the resulting t value is 27.83. With degrees of freedom 342, the p value is very small, at 0.000000000000000222. Because p value is smaller than the alpha level of .05, the result is statistically significant. Because 4.35 (mean for 2019) is statistically significantly greater than 3.85 (mean for 2021), we would conclude that there is sufficient evidence that on average, the satisfaction with life scores in 2019 are higher than the satisfaction with life scores in 2021.
+The results indicate that the average of the difference between swls2019_avg and swls2021_avg is 0.50. When we compare this difference against 0, the resulting t value is 27.83. With degrees of freedom 342, the *p* value is very small, at 0.000000000000000222. Because *p* value is smaller than the alpha level of .05, the result is statistically significant. Because 4.35 (mean for 2019) is statistically significantly greater than 3.85 (mean for 2021), we would conclude that there is sufficient evidence that on average, the satisfaction with life scores in 2019 are higher than the satisfaction with life scores in 2021.
 
 The 95% confidence interval is [0.46, 0.54], which is interpreted as follows: We are 95% confident that the population mean difference between the 2019 and 2021 satisfaction with life scores is between 0.46 and 0.54. 
-
-Similar to the one-sample t test, the correlated groups t test also has a formula interface version: 
-
-```{r eval = FALSE}
-
-t.test(Pair(swls2019_avg, swls2021_avg) ~ 1, data = data, alternative = c("two.sided"), mu = 0, conf.level = 0.95)
-
-# Notice that the paired = TRUE argument has been taken out because the same information has been replaced by the Pair(swls2019_avg, swls2021_avg) argument
-# If you leave the paired = TRUE argument in, R will throw up an error
-
-```
-
-Check that the formula interface gives you the same result as before. 
 
 ### Effect Size: Cohen's d
 
@@ -178,9 +173,11 @@ Finally, we need to get the effect size, Cohen's d, for correlated groups t test
 
 ```{r}
 
-# Cohen's d, with mu = 0 (which is the default, so no need to state)
-# Again, notice that we enter the arguments the same way as we would in the formula interface version of t.test()
-cohens_d(Pair(swls2019_avg, swls2021_avg) ~ 1, data = data)
+# Cohen's d with mu = 0
+cohens_d(x = df$swls2019_avg,
+         y = df$swls2021_avg,
+         mu = 0,
+         paired = TRUE)
 
 ```
 
@@ -204,29 +201,34 @@ After converting the grouping variable into a factor, we also want to get the de
 
 ```{r}
 
-# First, we need to convert gender into a factor 
-data$gender <- factor(data$gender, levels = c(0, 1), labels = c("male", "female"))
+# First, we need to convert gender into a factor and add the labels accordingly 
+df$gender <- factor(df$gender, 
+                      levels = c(0, 1), 
+                      labels = c("male", "female"))
 
 # Next, we get the descriptive statistics for each group, male and female
-describeBy(data$swls2019_avg, group = data$gender)
+describeBy(df$swls2019_avg, group = df$gender)
 
 ```
 
-The descriptive statistics tell us that on average, the males have lower satisfaction with life scores than females. To find out whether this result is statistically significant, we need to conduct the independent groups t test. 
+The descriptive statistics tell us that on average, the males have lower satisfaction with life scores than females. To find out whether this difference is statistically significant, we need to conduct the independent groups t test. 
 
 ```{r}
 
-# We conduct the independent groups t test
-# Notice that this t.test code takes the form of the formula interface: DV ~ IV
-# alternative = c("two.sided") tells R we want to conduct a two-tailed test
-# mu = 0 tells R we're comparing the difference between males and females against the value of 0
-# var.equal = TRUE means that we're assuming homogeneity of variance is met (if homogeneity of variance is violated, use var.equal = FALSE and R will conduct Welch corrections)
-# conf.level = 0.95 tells R we want the 95% confidence level
-t.test(data$swls2019_avg ~ data$gender, alternative = c("two.sided"), mu = 0, var.equal = TRUE, conf.level = 0.95)
+# We conduct the independent groups t test to 
+# determine if men and women differ in 
+# satisfaction with life in 2019
+t.test(df$swls2019_avg ~ df$gender,  # DV (outcome) ~ IV (group)
+       mu = 0,   # value we expect if null hypothesis of no difference is true 
+       var.equal = TRUE)  # homogeneity of variance assumption is assumed to be met (if homogeneity of variance is violated, use var.equal = FALSE and R will conduct Welch corrections)
+
+# Again... By default, R assumes a two-tailed test, 
+# that each observation comes from different individuals (i.e., they are not "paired"), 
+# and that the alpha level is .05, therefore confidence interval is 95%
 
 ```
 
-The results indicate that the average 2019 satisfaction with life score for those who identify as male is 4.08 and 4.62 for those who identify as female. When we compare the difference between the two genders against 0, the resulting t value is -6.90. With degrees of freedom 341, the p value is very small, at 0.0000000000256373. Because p value is smaller than the alpha level of .05, the result is statistically significant. Because 4.62 is statistically significantly greater than 4.08, we would conclude that there is sufficient evidence that the satisfaction with life scores in 2019 is greater for females than for males.
+The results indicate that the average 2019 satisfaction with life score for those who identify as male is 4.08 and 4.62 for those who identify as female. When we compare the difference between the two genders against 0, the resulting t value is -6.90. With degrees of freedom 341, the *p* value is very small, at 0.0000000000256373. Because *p* value is smaller than the alpha level of .05, the result is statistically significant. Because 4.62 is statistically significantly greater than 4.08, we would conclude that there is sufficient evidence that the satisfaction with life scores in 2019 is greater for females than for males.
 
 The 95% confidence interval is [-0.69, -0.38] which is interpreted as follows: We are 95% confident that the population mean difference in 2019 satisfaction with life score between males and females is between -0.69 and -0.38.
 
@@ -238,14 +240,16 @@ Finally, we need to get the effect size, Cohen's d, for the independent groups t
 
 ```{r}
 
-# Cohen's d, with mu = 0 (which is the default, so no need to state)
-cohens_d(swls2019_avg ~ gender, data = data)
+# Cohen's d, with mu = 0
+cohens_d(swls2019_avg ~ gender, 
+         data = df, 
+         mu = 0)
 
 ```
 
 Given the Cohen's d is -0.75, we can consider this a medium-large effect size. In other words, there is a medium-large difference in the 2019 satisfaction with life scores between males and females. 
 
-_Note._ Again, note that there is a negative sign here because R took `male - female`. If R took `female - male`, Cohen's d will be a positive number. 
+_Note._ Again, note that there is a negative sign here because R took `male - female`. If R took `female - male`, Cohen's d will be a positive number. This is not an issue so long as you know which group had a higher mean and can interpret correctly. 
 
 ## One-Way Between-Subjects ANOVA
 
@@ -264,10 +268,12 @@ After converting the grouping variable into a factor, we also want to get the de
 ```{r}
 
 # Convert marital status into factor
-data$marital_status <- factor(data$marital_status, levels = c(1, 2, 3), labels = c("married", "divorced", "widowed"))
+df$marital_status <- factor(df$marital_status,
+                            levels = c(1, 2, 3),
+                            labels = c("married", "divorced", "widowed"))
 
 # Get the descriptive statistics by marital status
-describeBy(data$swls2019_avg, group = data$marital_status)
+describeBy(df$swls2019_avg, group = df$marital_status)
 
 ```
 
@@ -278,20 +284,21 @@ From the means, we can see that married people have the highest satisfaction wit
 # Run the ANOVA
 # Set up the model being tested and store the model to [mod1]
 # The model has the following format: DV ~ IV
-mod1 <- aov(swls2019_avg ~ marital_status, data = data)  
+mod1 <- aov(swls2019_avg ~ marital_status, 
+            data = df)  
 
 # Look at the summary of the results in mod1
 summary(mod1)
 
 ```
 
-The F ratio is 9.62. With the degrees of freedom 2 and 340, the p value is 0.000085953, which is smaller than our alpha level of .05. Therefore, we conclude that there is sufficient evidence indicating that there is at least one mean difference in 2019 satisfaction with life scores between the three marital statuses. 
+The F ratio is 9.62. With the degrees of freedom 2 and 340, the *p* value is 0.000085953, which is smaller than our alpha level of .05. Therefore, we conclude that there is sufficient evidence indicating that there is at least one mean difference in 2019 satisfaction with life scores between the three marital statuses. 
 
 ### Posthoc Analysis: Tukey's HSD
 
 Because the ANOVA results are statistically significant, we want to follow up with a posthoc analysis such as the Tukey's HSD to investigate which group(s) differ from which group(s). 
 
-The Tukey's HSD conducts all possible pairwise comparisons, while adjusting the p value to control inflation of family-wise error rate. In this example, we would have three pairwise comparisons: a) married vs widowed, b) married vs divorced, and c) widowed vs divorced. 
+The Tukey's HSD conducts all possible pairwise comparisons, while adjusting the *p* value to control inflation of family-wise error rate. In this example, we would have three pairwise comparisons: a) married vs widowed, b) married vs divorced, and c) widowed vs divorced. 
 
 ```{r}
 
@@ -306,13 +313,16 @@ _Note._ Tukey's HSD is one of the most common posthoc tests. But there are other
 
 ### Effect Size: Eta-Squared
 
-Just like the t tests, we need to calculate the effect size for ANOVA to see how large the effect is. One of the most commonly reported effect sizes for ANOVA is eta-squared (η2). By convention, η2 = 0.01 indicates a small effect, η2 = 0.06 indicates a medium effect, and η2 = 0.14 indicates a large effect. 
+Just like the t tests, we need to calculate the effect size for ANOVA to see how large the effect is. One of the most commonly reported effect sizes for ANOVA is eta-squared (η2). By convention, *η2* = 0.01 indicates a small effect, *η2* = 0.06 indicates a medium effect, and *η2* = 0.14 indicates a large effect. 
 
 We can get eta-squared using the `eta_squared()` function from `effectsize` package. 
 
 ```{r}
 
-eta_squared(mod1, ci = 0.95, alternative = "two.sided")
+eta_squared(mod1, partial = FALSE)  
+
+# partial = FALSE means we do NOT want partial eta-squared. 
+# This actually doesn't matter here, since for a one-way between-subjects ANOVA, eta-squared and partial eta-squared will be exactly the same value.
 
 ```
 
@@ -338,17 +348,19 @@ We need the `Anova()` function from the `car` package to run this type of ANOVA.
 
 ```{r message = FALSE}
 
-# Load package
+# Load package (remember to install if you've not done so!)
 library(car)
 
 # Change have_children into a factor
 # If you've not already done so, you'll also need to change marital status to a factor
-data$have_children <- factor(data$have_children, levels = c(0, 1), labels = c("no children", "have children"))
+df$have_children <- factor(df$have_children,
+                           levels = c(0, 1), 
+                           labels = c("no children", "have children"))
 
 # Get descriptive statistics for each group
-describeBy(data$swls2019_avg, group = data$gender)
-describeBy(data$swls2019_avg, group = data$have_children)
-describeBy(data$swls2019_avg, group = list(data$gender, data$have_children))
+describeBy(df$swls2019_avg, group = df$gender)
+describeBy(df$swls2019_avg, group = df$have_children)
+describeBy(df$swls2019_avg, group = list(df$gender, df$have_children))
 
 ```
 
@@ -362,7 +374,8 @@ options(contrasts = c('contr.sum', 'contr.poly'))
 # Set up the model being tested and store the model to [mod2]
 # The model has the following format: DV ~ IV1 + IV2 + IV1*IV2
 # You can actually omit IV1 and IV2 and it would still run the factorial ANOVA
-mod2 <- aov(swls2019_avg ~ gender + have_children + gender*have_children, data = data) 
+mod2 <- aov(swls2019_avg ~ gender + have_children + gender*have_children, 
+            data = df) 
 
 # Conduct Two-Way ANOVA and get the ANOVA summary table
 # type = "3" refers to Type 3 sum of squares. There are different types of sum of squares depending on how the sum of squares is partitioned.  
@@ -383,7 +396,7 @@ To do the simple effects analyses, we need the `emmeans` package.
 
 ```{r message = FALSE}
 
-# Load package
+# Load package (install package if you've not already done so)
 library(emmeans)
 
 # First, let's look at a plot of the means for the four groups
@@ -424,11 +437,11 @@ The results under `$contrasts` now indicate that females with children have sign
 
 ### Effect Size: Eta-Squared
 
-We can get the effect size, eta-squared (η2), for each of the main effects as well as the interaction effect using the `eta_squared()` function from `effectsize` package. 
+We can get the effect size, partial eta-squared (η2p), for each of the main effects as well as the interaction effect using the `eta_squared()` function from `effectsize` package. 
 
 ```{r}
 
-eta_squared(mod2, ci = 0.95, alternative = "two.sided")
+eta_squared(Anova(mod2, type = "3"), partial = TRUE)
 
 ```
 
@@ -447,15 +460,15 @@ As usual, we get the descriptive statistics before conducting the hypothesis tes
 ```{r}
 
 # Get the descriptive statistics
-describe(data$swls2019_avg)
-describe(data$swls2021_avg)
+describe(df$swls2019_avg)
+describe(df$swls2021_avg)
 
 # Conduct the correlation with cor.test
-# Unlike cor(), cor.test() gives you the significance level
-cor.test(data$swls2019_avg, data$swls2021_avg)
+# Unlike cor(), cor.test() gives you the p value
+cor.test(df$swls2019_avg, df$swls2021_avg)
 ```
 
-The correlation is r = 0.90, with a 95% confidence interval [0.88, 0.92]. The p value is very small, smaller than .05, and so we will conclude that the relationship is positive. In other words, people who have higher satisfaction with life scores in 2019 also have higher satisfaction with life scores in 2021. 
+The correlation is r = 0.90, with a 95% confidence interval [0.88, 0.92]. The *p* value is very small, smaller than .05, and so we will conclude that the relationship is positive. In other words, people who have higher satisfaction with life scores in 2019 also have higher satisfaction with life scores in 2021. 
 
 There are other ways we can write the R code. Here are two alternatives. 
 
@@ -463,14 +476,14 @@ There are other ways we can write the R code. Here are two alternatives.
 
 # Alternative 1
 cor.test(~ swls2019_avg + swls2021_avg, 
-         data = data)
+         data = df)
 
 # Alternative 2
-data %>% 
+df %>% 
   cor.test(formula = ~ swls2019_avg + swls2021_avg, .)
 ```
 
-Both ways would give us the same result as the earlier one. 
+Both ways would give us the same result as the earlier one but neither are intuitive. I personally prefer the much simpler `cor.test(df$swls2019_avg, df$swls2021_avg)`.
 
 ### Difference Between Correlated Groups T Test and Correlation
 
@@ -488,7 +501,9 @@ y <- c(1, 2, 3, 4, 5)
 
 # Conduct Correlated Groups T Test
 # To see if there is a difference between x and y scores
-t.test(x = x, y = y, alternative = "two.sided", mu = 0, paired = TRUE, conf.level = 0.95)
+t.test(x = x, y = y, 
+       mu = 0, 
+       paired = TRUE)
 
 # Conduct the Correlation
 cor.test(x, y)
@@ -515,12 +530,12 @@ As the descriptives have been calculated previously, we will go straight to the 
 
 # Conduct regression
 # the model takes the form of Y ~ X (where Y = outcome, X = predictor)
-mod3 <- lm(data$swls2021_avg ~ data$swls2019_avg)
+mod3 <- lm(df$swls2021_avg ~ df$swls2019_avg)
 summary(mod3)
 
 ```
 
-The results indicate that `swls2021_avg` significantly predicted `swls2019_avg` (p value is < 0.000000000000000222). 
+The results indicate that `swls2021_avg` significantly predicted `swls2019_avg` (*p* value is < 0.000000000000000222). 
 
 Unfortunately, the summary doesn't give us the confidence interval. To get that, we need to specify that we want the confidence interval with the `confint()` function. 
 
@@ -553,6 +568,10 @@ data %>%
 
 You should get the same result as earlier. 
 
-Congratulations!!! You've come to the end of the hypothesis testing. 
+## Next steps
 
-With this, you will be able to complete the remaining assignments!
+Congratulations!!! You've come to the end of the hypothesis testing section and the end of this companion website! I really hope this has convinced you that R is manageable and not as scary as you thought! :) 
+
+What remains is... practice, practice, practice! "But where am I gonna find the datasets to practice on?", I hear you wail. Well, here's a start: [https://www.openintro.org/data/](https://www.openintro.org/data/)! 
+
+Enjoy~! :)
