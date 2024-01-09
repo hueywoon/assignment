@@ -435,7 +435,7 @@ emmeans(mod2, pairwise ~ have_children | gender)  # comparing the pair of condit
 
 The results under `$contrasts` now indicate that females with children have significantly higher satisfaction with life scores than females without children. Similarly, males with children have significantly higher satisfaction with life scores than males without children. (Note that the interaction effect tells us, the effect of having children for women is significantly stronger/larger than the effect of having children for men.)
 
-### Effect Size: Eta-Squared
+### Effect Size: Partial Eta-Squared
 
 We can get the effect size, partial eta-squared (η2p), for each of the main effects as well as the interaction effect using the `eta_squared()` function from `effectsize` package. 
 
@@ -567,6 +567,134 @@ data %>%
 ```
 
 You should get the same result as earlier. 
+
+## Chi-square Test of Goodness of Fit
+
+### When to Use Chi-square Test of Goodness of Fit
+
+We use the chi-square test of goodness of fit when we want to compare the the observed frequency distribution of a categorical variable to an expected frequency distribution.
+
+Suppose we know that we have the same proportion of men and women in the Singapore population (i.e., 50% of the population are men, 50% are women). We want to know whether the proportion of men and women in our study (observed frequency distribution) is the same as or different from that of the Singapore population (expected frequency distribution). To answer this question, we will conduct a chi-square test of goodness of fit. 
+
+### Conducting and Interpreting the Chi-Square Test of Goodness of Fit
+
+First, we need the observed frequencies for men and women separately.   
+
+```{r}
+
+# Observed frequencies for men and women (i.e., number of men and women in our study) 
+df %>% 
+  group_by(gender) %>% 
+  count()
+
+```
+
+The descriptives above indicate that there are 168 males and 175 females. We want to know whether the observed frequencies are  significantly different from the frequencies we expect if we have an equal proportion of men and women (expected frequencies).
+
+```{r message = FALSE, warning = FALSE}
+
+# Load package (remember to install package if you've not done so)
+# Note that both MASS and dplyr have the select function
+# If you wish to use the select function, specify the package the function comes from (e.g., dplyr::select())
+library(MASS)  
+
+# Set up the values for chisq.test()
+observedfreq <- c(168, 175)  # observed frequencies for males and females
+expectedprop <- c(0.5, 0.5)  # expected proportions would be 0.5 for males, 0.5 for females
+chisq.test(x = observedfreq, p = expectedprop)
+# NOTE. The order in which you enter the values for observedfreq and expectedprop should be the same. 
+# If the first value for observedfreq is for males, then the first value for expectedprop should be for males also. 
+# (And vice versa, of course.)
+
+```
+
+Because *p* value is .705457 (greater than alpha level of .05), the results tell us that the proportion of men and women in our study is not significantly different from that in the Singapore population.
+
+### Effect Size: Cohen's w
+
+The effect size usually calculated for chi-square test of goodness of fit is the Cohen's w (omega). By convention, in psychology, *w* = 0.1 is considered a small effect size, *w* = 0.3 is considered a medium effect size, and *w* = 0.5 is considered a large effect size. 
+
+We can calculate Cohen's w using the `cohens_w()` function from the `effectsize` package. 
+
+```{r}
+
+# Cohen's w
+cohens_w(x = observedfreq, p = expectedprop)
+
+```
+
+The Cohen's w is 0.02, which is a very, very small effect size (almost negligible!). 
+
+As an aside, Cohen's w has no upper bound when there are more than two categories or when the expected distribution is non-uniform. What this means is that it can be arbitrarily large. Ben-Shachar et al. (2023) proposed an adjustment to Cohen's w, which they call fei. Unlike Cohen's w, fei is bounded between 0 and 1. 
+
+To calculate fei, use the function `fei(x = observedfreq, p = expectedprop)` instead.
+
+## Chi-square Test of Independence
+
+### When to Use Chi-square Test of Independence
+
+We use the chi-square test of independence to determine if there is a relationship between two categorical variables. (I think of this as the non-parametric version of a factorial ANOVA.)
+
+Let's say we believe that people who have children are more likely to stay married (instead of divorcing) than people who don't have children. Put it differently, we think that whether someone is married or divorced depends on whether they have children. To test whether the relationship between the two categorical variables--marital status and whether someone has children--exists, we will conduct a chi-square test of independence.
+
+### Conducting and Interpreting the Chi-square Test of Independence
+
+First, we need to filter the data such that we only have married and divorced participants.
+
+```{r}
+
+# Filter (keep) only divorced and married participants 
+div_and_mar_only <- df %>% 
+  filter(marital_status == "married" | marital_status == "divorced") 
+
+# Drop the "widowed" level for marital status since it is now redundant
+div_and_mar_only$marital_status <- droplevels(div_and_mar_only$marital_status)
+
+```
+
+Then, we perform the chi-square test of independence. 
+
+```{r}
+
+# Get the observed frequencies for each cell and save it as observedfreq
+observedfreq1 <- div_and_mar_only %>% 
+  dplyr::select(marital_status, have_children) %>% 
+  table()
+
+# Perform the chi-square test of independence
+chisq.test(observedfreq1)
+
+# chisq.test cannot be conducted on a list
+# So the following wouldn't work since it gives you a list and not a matrix. 
+
+observedfreq2 <- div_and_mar_only %>% 
+  group_by(marital_status, have_children) %>% 
+  count() 
+
+# Check type for observedfreq2
+typeof(observedfreq2)
+
+```
+
+The chi-square test of independence results indicate that there is no significant difference in marital status for people who have children and those who don't (*p* = .19). This means that whether a person is married or divorced does not depend on whether they have children. In other words, marital status is INDEPENDENT of having children.
+
+### Effect Size: Phi
+
+The effect size usually calculated for a 2 x 2 table is phi. (A 2 x 2 table is one in which each of the two variables has two categories.) By convention, in psychology, phi = 0.1 is considered a small effect size, phi = 0.3 is considered a medium effect size, and phi = 0.5 is considered a large effect size. 
+
+We can calculate phi using the `phi()` function from the `effectsize` package. 
+
+```{r}
+
+# phi
+phi(x = observedfreq1)
+
+```
+
+Phi is 0.07, which is a small effect size. 
+
+As an aside, `phi` is used for a 2 x 2 table. If you have a larger table (e.g., 2 x 3 or 3 x 4), then use Cramer's V. To calculate Cramer's V, use the function `cramers_v(x = observedfreq1)` instead.
+
 
 ## Next steps
 

@@ -77,7 +77,7 @@ two-way-between-subjects-factorial-anova
 when-to-use-a-two-way-between-subjects-factorial-anova
 conducting-and-interpreting-the-two-way-between-subjects-anova
 conducting-and-interpreting-the-simple-effects-analysis
-effect-size-eta-squared-1
+effect-size-partial-eta-squared
 correlation
 when-to-use-a-correlation
 conducting-and-interpreting-the-correlation
@@ -85,4 +85,12 @@ difference-between-correlated-groups-t-test-and-correlation
 regression
 when-to-use-a-regression
 conducting-and-interpreting-the-regression
+chi-square-test-of-goodness-of-fit
+when-to-use-chi-square-test-of-goodness-of-fit
+conducting-and-interpreting-the-chi-square-test-of-goodness-of-fit
+effect-size-cohens-w
+chi-square-test-of-independence
+when-to-use-chi-square-test-of-independence
+conducting-and-interpreting-the-chi-square-test-of-independence
+effect-size-phi
 next-steps
