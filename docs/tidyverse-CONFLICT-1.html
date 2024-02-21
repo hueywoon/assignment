@@ -23,7 +23,7 @@
 <meta name="author" content="Huey Woon LEE" />
 
 
-<meta name="date" content="2024-02-21" />
+<meta name="date" content="2023-12-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -252,7 +252,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.8.1" data-path="hypotest.html"><a href="hypotest.html#when-to-use-a-two-way-between-subjects-factorial-anova"><i class="fa fa-check"></i><b>8.8.1</b> When to Use A Two-Way Between-Subjects Factorial ANOVA</a></li>
 <li class="chapter" data-level="8.8.2" data-path="hypotest.html"><a href="hypotest.html#conducting-and-interpreting-the-two-way-between-subjects-anova"><i class="fa fa-check"></i><b>8.8.2</b> Conducting and Interpreting the Two-Way Between-Subjects ANOVA</a></li>
 <li class="chapter" data-level="8.8.3" data-path="hypotest.html"><a href="hypotest.html#conducting-and-interpreting-the-simple-effects-analysis"><i class="fa fa-check"></i><b>8.8.3</b> Conducting and Interpreting the Simple Effects Analysis</a></li>
-<li class="chapter" data-level="8.8.4" data-path="hypotest.html"><a href="hypotest.html#effect-size-partial-eta-squared"><i class="fa fa-check"></i><b>8.8.4</b> Effect Size: Partial Eta-Squared</a></li>
+<li class="chapter" data-level="8.8.4" data-path="hypotest.html"><a href="hypotest.html#effect-size-eta-squared-1"><i class="fa fa-check"></i><b>8.8.4</b> Effect Size: Eta-Squared</a></li>
 </ul></li>
 <li class="chapter" data-level="8.9" data-path="hypotest.html"><a href="hypotest.html#correlation"><i class="fa fa-check"></i><b>8.9</b> Correlation</a>
 <ul>
@@ -265,19 +265,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.10.1" data-path="hypotest.html"><a href="hypotest.html#when-to-use-a-regression"><i class="fa fa-check"></i><b>8.10.1</b> When to Use A Regression</a></li>
 <li class="chapter" data-level="8.10.2" data-path="hypotest.html"><a href="hypotest.html#conducting-and-interpreting-the-regression"><i class="fa fa-check"></i><b>8.10.2</b> Conducting and Interpreting the Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="8.11" data-path="hypotest.html"><a href="hypotest.html#chi-square-test-of-goodness-of-fit"><i class="fa fa-check"></i><b>8.11</b> Chi-square Test of Goodness of Fit</a>
-<ul>
-<li class="chapter" data-level="8.11.1" data-path="hypotest.html"><a href="hypotest.html#when-to-use-chi-square-test-of-goodness-of-fit"><i class="fa fa-check"></i><b>8.11.1</b> When to Use Chi-square Test of Goodness of Fit</a></li>
-<li class="chapter" data-level="8.11.2" data-path="hypotest.html"><a href="hypotest.html#conducting-and-interpreting-the-chi-square-test-of-goodness-of-fit"><i class="fa fa-check"></i><b>8.11.2</b> Conducting and Interpreting the Chi-Square Test of Goodness of Fit</a></li>
-<li class="chapter" data-level="8.11.3" data-path="hypotest.html"><a href="hypotest.html#effect-size-cohens-w"><i class="fa fa-check"></i><b>8.11.3</b> Effect Size: Cohen’s w</a></li>
-</ul></li>
-<li class="chapter" data-level="8.12" data-path="hypotest.html"><a href="hypotest.html#chi-square-test-of-independence"><i class="fa fa-check"></i><b>8.12</b> Chi-square Test of Independence</a>
-<ul>
-<li class="chapter" data-level="8.12.1" data-path="hypotest.html"><a href="hypotest.html#when-to-use-chi-square-test-of-independence"><i class="fa fa-check"></i><b>8.12.1</b> When to Use Chi-square Test of Independence</a></li>
-<li class="chapter" data-level="8.12.2" data-path="hypotest.html"><a href="hypotest.html#conducting-and-interpreting-the-chi-square-test-of-independence"><i class="fa fa-check"></i><b>8.12.2</b> Conducting and Interpreting the Chi-square Test of Independence</a></li>
-<li class="chapter" data-level="8.12.3" data-path="hypotest.html"><a href="hypotest.html#effect-size-phi"><i class="fa fa-check"></i><b>8.12.3</b> Effect Size: Phi</a></li>
-</ul></li>
-<li class="chapter" data-level="8.13" data-path="hypotest.html"><a href="hypotest.html#next-steps"><i class="fa fa-check"></i><b>8.13</b> Next steps</a></li>
+<li class="chapter" data-level="8.11" data-path="hypotest.html"><a href="hypotest.html#next-steps"><i class="fa fa-check"></i><b>8.11</b> Next steps</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
@@ -714,10 +702,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 1     4.35        2        6    0.588   0.767   343</code></pre>
 <p>To be honest, though, I think it might be more convenient to get these summary statistics using the <code>describe()</code> function from the <code>psych()</code> package.</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="tidyverse.html#cb46-1" tabindex="-1"></a><span class="co"># Load package (install the package before loading!)</span></span>
-<span id="cb46-2"><a href="tidyverse.html#cb46-2" tabindex="-1"></a><span class="fu">library</span>(psych)</span></code></pre></div>
-<pre><code>## Warning: package &#39;psych&#39; was built under R version 4.3.1</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="tidyverse.html#cb48-1" tabindex="-1"></a><span class="co"># Get the most common descriptive statistics</span></span>
-<span id="cb48-2"><a href="tidyverse.html#cb48-2" tabindex="-1"></a><span class="fu">describe</span>(swls2019_only<span class="sc">$</span>swls2019_avg)</span></code></pre></div>
+<span id="cb46-2"><a href="tidyverse.html#cb46-2" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
+<span id="cb46-3"><a href="tidyverse.html#cb46-3" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="tidyverse.html#cb46-4" tabindex="-1"></a><span class="co"># Get the most common descriptive statistics</span></span>
+<span id="cb46-5"><a href="tidyverse.html#cb46-5" tabindex="-1"></a><span class="fu">describe</span>(swls2019_only<span class="sc">$</span>swls2019_avg)</span></code></pre></div>
 <pre><code>##    vars   n mean   sd median trimmed  mad min max range skew kurtosis   se
 ## X1    1 343 4.35 0.77    4.4    4.33 0.89   2   6     4  0.1    -0.48 0.04</code></pre>
 </div>
@@ -725,22 +713,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">4.4.5</span> Group_by()<a href="tidyverse.html#group_by" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Sometimes, we might want to apply the same function to different groups of people. For example, we might want to know what the maximum swls score is for males and for females separately. We can use the <code>group_by()</code> function to do this.</p>
 <p>Let’s say we’re interested to know the mean (<code>avg_swls</code>), minimum (<code>min_swls</code>), maximum (<code>max_swls</code>), variance (<code>var_swls</code>), standard deviation (<code>sd_swls</code>), total number of participants (<code>total</code>) for <code>swls2019_avg</code> for males and females separately.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="tidyverse.html#cb50-1" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
-<span id="cb50-2"><a href="tidyverse.html#cb50-2" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span> </span>
-<span id="cb50-3"><a href="tidyverse.html#cb50-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_swls =</span> <span class="fu">mean</span>(swls2019_avg), </span>
-<span id="cb50-4"><a href="tidyverse.html#cb50-4" tabindex="-1"></a>            <span class="at">min_swls =</span> <span class="fu">min</span>(swls2019_avg), </span>
-<span id="cb50-5"><a href="tidyverse.html#cb50-5" tabindex="-1"></a>            <span class="at">max_swls =</span> <span class="fu">max</span>(swls2019_avg), </span>
-<span id="cb50-6"><a href="tidyverse.html#cb50-6" tabindex="-1"></a>            <span class="at">var_swls =</span> <span class="fu">var</span>(swls2019_avg), </span>
-<span id="cb50-7"><a href="tidyverse.html#cb50-7" tabindex="-1"></a>            <span class="at">sd_swls =</span> <span class="fu">sd</span>(swls2019_avg), </span>
-<span id="cb50-8"><a href="tidyverse.html#cb50-8" tabindex="-1"></a>            <span class="at">total =</span> <span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="tidyverse.html#cb48-1" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
+<span id="cb48-2"><a href="tidyverse.html#cb48-2" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span> </span>
+<span id="cb48-3"><a href="tidyverse.html#cb48-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_swls =</span> <span class="fu">mean</span>(swls2019_avg), </span>
+<span id="cb48-4"><a href="tidyverse.html#cb48-4" tabindex="-1"></a>            <span class="at">min_swls =</span> <span class="fu">min</span>(swls2019_avg), </span>
+<span id="cb48-5"><a href="tidyverse.html#cb48-5" tabindex="-1"></a>            <span class="at">max_swls =</span> <span class="fu">max</span>(swls2019_avg), </span>
+<span id="cb48-6"><a href="tidyverse.html#cb48-6" tabindex="-1"></a>            <span class="at">var_swls =</span> <span class="fu">var</span>(swls2019_avg), </span>
+<span id="cb48-7"><a href="tidyverse.html#cb48-7" tabindex="-1"></a>            <span class="at">sd_swls =</span> <span class="fu">sd</span>(swls2019_avg), </span>
+<span id="cb48-8"><a href="tidyverse.html#cb48-8" tabindex="-1"></a>            <span class="at">total =</span> <span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 7
 ##   gender avg_swls min_swls max_swls var_swls sd_swls total
 ##   &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;
 ## 1 male       4.08        3      5.8    0.373   0.611   168
 ## 2 female     4.62        2      6      0.657   0.810   175</code></pre>
 <p>Again, I think that the <code>describeBy()</code> function from the <code>psych</code> package would be much more convenient here.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="tidyverse.html#cb52-1" tabindex="-1"></a><span class="fu">describeBy</span>(swls2019_only<span class="sc">$</span>swls2019_avg, </span>
-<span id="cb52-2"><a href="tidyverse.html#cb52-2" tabindex="-1"></a>           <span class="at">group =</span> swls2019_only<span class="sc">$</span>gender)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="tidyverse.html#cb50-1" tabindex="-1"></a><span class="fu">describeBy</span>(swls2019_only<span class="sc">$</span>swls2019_avg, </span>
+<span id="cb50-2"><a href="tidyverse.html#cb50-2" tabindex="-1"></a>           <span class="at">group =</span> swls2019_only<span class="sc">$</span>gender)</span></code></pre></div>
 <pre><code>## 
 ##  Descriptive statistics by group 
 ## group: male
@@ -762,9 +750,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A frequency (distribution) table tells us the number of times each data value occurs for a given variable.</p>
 <p>Let’s say we want to know how many males and how many females participated in the study using the <code>swls2019_only</code> subset. The variable is <code>gender</code> and the data values we are interested in are <code>male</code> and <code>female</code>. Let’s find out!</p>
 <p>Before looking at my code below, try coming up with your own! (HINT: Use the <code>summarise()</code> function!)</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="tidyverse.html#cb54-1" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
-<span id="cb54-2"><a href="tidyverse.html#cb54-2" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span>  <span class="co"># Group the result by gender</span></span>
-<span id="cb54-3"><a href="tidyverse.html#cb54-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">freq =</span> <span class="fu">n</span>())  <span class="co"># Count how many of each value in the data</span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="tidyverse.html#cb52-1" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
+<span id="cb52-2"><a href="tidyverse.html#cb52-2" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span>  <span class="co"># Group the result by gender</span></span>
+<span id="cb52-3"><a href="tidyverse.html#cb52-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">freq =</span> <span class="fu">n</span>())  <span class="co"># Count how many of each value in the data</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   gender  freq
 ##   &lt;fct&gt;  &lt;int&gt;
@@ -773,11 +761,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The output tells us 168 males and 175 females participated in the study.</p>
 <p>The number of times a data value occurs for a given variable is called the absolute frequency. If we want the relative frequency (i.e., the number of times a data value occurs relative to the total number of observations for a given variable), then we divide the absolute frequency by the total number of values.</p>
 <p>Again, try this on your own before looking at my code. (HINT: Use the <code>summarise()</code> function and then the <code>mutate()</code> function!)</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="tidyverse.html#cb56-1" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
-<span id="cb56-2"><a href="tidyverse.html#cb56-2" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span>   <span class="co"># Group the result by gender</span></span>
-<span id="cb56-3"><a href="tidyverse.html#cb56-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">freq =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span>  <span class="co"># Count how many of each value in the data </span></span>
-<span id="cb56-4"><a href="tidyverse.html#cb56-4" tabindex="-1"></a>  <span class="fu">mutate</span> (<span class="at">total =</span> <span class="fu">sum</span>(freq),  <span class="co"># Count the total number of observations </span></span>
-<span id="cb56-5"><a href="tidyverse.html#cb56-5" tabindex="-1"></a>          <span class="at">rel_freq =</span> freq <span class="sc">/</span> total)  <span class="co"># Take the frequency of each value / total number of observations</span></span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="tidyverse.html#cb54-1" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
+<span id="cb54-2"><a href="tidyverse.html#cb54-2" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span>   <span class="co"># Group the result by gender</span></span>
+<span id="cb54-3"><a href="tidyverse.html#cb54-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">freq =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span>  <span class="co"># Count how many of each value in the data </span></span>
+<span id="cb54-4"><a href="tidyverse.html#cb54-4" tabindex="-1"></a>  <span class="fu">mutate</span> (<span class="at">total =</span> <span class="fu">sum</span>(freq),  <span class="co"># Count the total number of observations </span></span>
+<span id="cb54-5"><a href="tidyverse.html#cb54-5" tabindex="-1"></a>          <span class="at">rel_freq =</span> freq <span class="sc">/</span> total)  <span class="co"># Take the frequency of each value / total number of observations</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 × 4
 ##   gender  freq total rel_freq
 ##   &lt;fct&gt;  &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;
@@ -786,12 +774,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The output (rel_freq) tells us that slightly less than half the sample are males (0.49) and slightly more than half are females (0.51).</p>
 <p>Relative frequency is a proportion and may be difficult for some people to interpret. For easier interpretation, we can convert the proportions into percentages by taking 100%.</p>
 <p>Try converting the proportions into percentages on your own before looking at my code below!</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="tidyverse.html#cb58-1" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
-<span id="cb58-2"><a href="tidyverse.html#cb58-2" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span>   </span>
-<span id="cb58-3"><a href="tidyverse.html#cb58-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">freq =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span>   </span>
-<span id="cb58-4"><a href="tidyverse.html#cb58-4" tabindex="-1"></a>  <span class="fu">mutate</span> (<span class="at">total =</span> <span class="fu">sum</span>(freq), </span>
-<span id="cb58-5"><a href="tidyverse.html#cb58-5" tabindex="-1"></a>          <span class="at">rel_freq =</span> freq <span class="sc">/</span> total, </span>
-<span id="cb58-6"><a href="tidyverse.html#cb58-6" tabindex="-1"></a>          <span class="at">percentage =</span> rel_freq <span class="sc">*</span> <span class="dv">100</span>)  </span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="tidyverse.html#cb56-1" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
+<span id="cb56-2"><a href="tidyverse.html#cb56-2" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span>   </span>
+<span id="cb56-3"><a href="tidyverse.html#cb56-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">freq =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span>   </span>
+<span id="cb56-4"><a href="tidyverse.html#cb56-4" tabindex="-1"></a>  <span class="fu">mutate</span> (<span class="at">total =</span> <span class="fu">sum</span>(freq), </span>
+<span id="cb56-5"><a href="tidyverse.html#cb56-5" tabindex="-1"></a>          <span class="at">rel_freq =</span> freq <span class="sc">/</span> total, </span>
+<span id="cb56-6"><a href="tidyverse.html#cb56-6" tabindex="-1"></a>          <span class="at">percentage =</span> rel_freq <span class="sc">*</span> <span class="dv">100</span>)  </span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
 ##   gender  freq total rel_freq percentage
 ##   &lt;fct&gt;  &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;
@@ -808,14 +796,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Geometry: specifies the type of plot &amp; other modifications</li>
 </ul>
 <p>These three components apply when we make any plot in ggplot2. Let’s make a bar chart with <code>ggplot2</code> with the code below.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="tidyverse.html#cb60-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> swls2019_only, <span class="fu">aes</span>(<span class="at">x =</span> gender)) <span class="sc">+</span>  <span class="co"># dataset used is swls2019_only, x (horizontal axis) is gender</span></span>
-<span id="cb60-2"><a href="tidyverse.html#cb60-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;count&quot;</span>)  <span class="co"># we want a bar plot where the statistic is the count of the values in x </span></span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="tidyverse.html#cb58-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> swls2019_only, <span class="fu">aes</span>(<span class="at">x =</span> gender)) <span class="sc">+</span>  <span class="co"># dataset used is swls2019_only, x (horizontal axis) is gender</span></span>
+<span id="cb58-2"><a href="tidyverse.html#cb58-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;count&quot;</span>)  <span class="co"># we want a bar plot where the statistic is the count of the values in x </span></span></code></pre></div>
 <p><img src="PSYC208_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
 <p>Here’s an alternative that will give you the exact same output.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="tidyverse.html#cb61-1" tabindex="-1"></a><span class="co"># Alternative</span></span>
-<span id="cb61-2"><a href="tidyverse.html#cb61-2" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span>  <span class="co"># dataset used is swls2019_only</span></span>
-<span id="cb61-3"><a href="tidyverse.html#cb61-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(.) <span class="sc">+</span>  <span class="co"># R takes swls2019_only in the previous line and places it in the . on this line to tell ggplot that dataset used is swls2019_only</span></span>
-<span id="cb61-4"><a href="tidyverse.html#cb61-4" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> gender), <span class="at">stat=</span><span class="st">&quot;count&quot;</span>)  <span class="co"># we want a bar plot where x (horizontal axis) is gender and the statistic is the count of values in x</span></span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="tidyverse.html#cb59-1" tabindex="-1"></a><span class="co"># Alternative</span></span>
+<span id="cb59-2"><a href="tidyverse.html#cb59-2" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span>  <span class="co"># dataset used is swls2019_only</span></span>
+<span id="cb59-3"><a href="tidyverse.html#cb59-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(.) <span class="sc">+</span>  <span class="co"># R takes swls2019_only in the previous line and places it in the . on this line to tell ggplot that dataset used is swls2019_only</span></span>
+<span id="cb59-4"><a href="tidyverse.html#cb59-4" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> gender), <span class="at">stat=</span><span class="st">&quot;count&quot;</span>)  <span class="co"># we want a bar plot where x (horizontal axis) is gender and the statistic is the count of values in x</span></span></code></pre></div>
 <p>Notice that the <code>aes()</code> command can be either in the ggplot line or the geom function line. In this case, where you type it doesn’t affect the results at all. (Try this out yourself to confirm!)</p>
 <p>I personally prefer the alternative because it’s easier for me to read, but it doesn’t matter to me which you use so long as it works!</p>
 </div>
@@ -824,45 +812,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We create bar plots for categorical variables (such as gender). For continuous variables which can take on infinite values (such as time), we create histograms.</p>
 <p>A histogram is a visual representation of the frequency table for a given continuous variable (i.e., it shows us the frequency distribution, or the frequency of scores for a given continuous variable).</p>
 <p>Let’s use <code>ggplot2</code> to make a histogram for <code>swls2019_avg</code> with a very basic code.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="tidyverse.html#cb62-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> swls2019_only, <span class="fu">aes</span>(<span class="at">x =</span> swls2019_avg)) <span class="sc">+</span> </span>
-<span id="cb62-2"><a href="tidyverse.html#cb62-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()  <span class="co"># we want a histogram, so geom_histogram() is used</span></span></code></pre></div>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="tidyverse.html#cb60-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> swls2019_only, <span class="fu">aes</span>(<span class="at">x =</span> swls2019_avg)) <span class="sc">+</span> </span>
+<span id="cb60-2"><a href="tidyverse.html#cb60-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()  <span class="co"># we want a histogram, so geom_histogram() is used</span></span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick
+## better value with `binwidth`.</code></pre>
 <p><img src="PSYC208_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
 <p>As with the bar chart, you could do this instead and the results would be the same:</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="tidyverse.html#cb64-1" tabindex="-1"></a><span class="co"># Alternative</span></span>
-<span id="cb64-2"><a href="tidyverse.html#cb64-2" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
-<span id="cb64-3"><a href="tidyverse.html#cb64-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(.) <span class="sc">+</span> </span>
-<span id="cb64-4"><a href="tidyverse.html#cb64-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> swls2019_avg))</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="tidyverse.html#cb62-1" tabindex="-1"></a><span class="co"># Alternative</span></span>
+<span id="cb62-2"><a href="tidyverse.html#cb62-2" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
+<span id="cb62-3"><a href="tidyverse.html#cb62-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(.) <span class="sc">+</span> </span>
+<span id="cb62-4"><a href="tidyverse.html#cb62-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> swls2019_avg))</span></code></pre></div>
 <p>Now, the histogram that you got is okay, but kinda basic… Maybe you want to customise it. For example, you might want to add a specific label for the y-axis or the x-axis… Or maybe you want to change the colour of the graph! You can customise all of that! Here are some ideas.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="tidyverse.html#cb65-1" tabindex="-1"></a><span class="co"># Assign color “red” to the object barfill (which we will use below to change the colour of the bars).</span></span>
-<span id="cb65-2"><a href="tidyverse.html#cb65-2" tabindex="-1"></a>barfill <span class="ot">&lt;-</span> <span class="st">&quot;red&quot;</span> </span>
-<span id="cb65-3"><a href="tidyverse.html#cb65-3" tabindex="-1"></a></span>
-<span id="cb65-4"><a href="tidyverse.html#cb65-4" tabindex="-1"></a><span class="co"># Assign color “black” to the object barlines (which we will use below to change the colour of the barlines).</span></span>
-<span id="cb65-5"><a href="tidyverse.html#cb65-5" tabindex="-1"></a>barlines <span class="ot">&lt;-</span> <span class="st">&quot;black&quot;</span> </span>
-<span id="cb65-6"><a href="tidyverse.html#cb65-6" tabindex="-1"></a></span>
-<span id="cb65-7"><a href="tidyverse.html#cb65-7" tabindex="-1"></a><span class="co"># Specify the data frame and the variables to plot</span></span>
-<span id="cb65-8"><a href="tidyverse.html#cb65-8" tabindex="-1"></a><span class="fu">ggplot</span>(swls2019_only, <span class="fu">aes</span>(<span class="at">x =</span> swls2019_avg)) <span class="sc">+</span> </span>
-<span id="cb65-9"><a href="tidyverse.html#cb65-9" tabindex="-1"></a><span class="co"># Specify the type of plot and binwidth</span></span>
-<span id="cb65-10"><a href="tidyverse.html#cb65-10" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>, </span>
-<span id="cb65-11"><a href="tidyverse.html#cb65-11" tabindex="-1"></a><span class="co"># Specify the border of the bars</span></span>
-<span id="cb65-12"><a href="tidyverse.html#cb65-12" tabindex="-1"></a>                   <span class="at">color =</span> barlines, </span>
-<span id="cb65-13"><a href="tidyverse.html#cb65-13" tabindex="-1"></a><span class="co"># Specify the color of the bar</span></span>
-<span id="cb65-14"><a href="tidyverse.html#cb65-14" tabindex="-1"></a>                   <span class="at">fill =</span> barfill) <span class="sc">+</span> </span>
-<span id="cb65-15"><a href="tidyverse.html#cb65-15" tabindex="-1"></a><span class="co"># Label the x-axis</span></span>
-<span id="cb65-16"><a href="tidyverse.html#cb65-16" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">&quot;2019 Satisfaction With Life Scores&quot;</span>, </span>
-<span id="cb65-17"><a href="tidyverse.html#cb65-17" tabindex="-1"></a><span class="co"># Force the graph to start at x = 0</span></span>
-<span id="cb65-18"><a href="tidyverse.html#cb65-18" tabindex="-1"></a>                     <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), </span>
-<span id="cb65-19"><a href="tidyverse.html#cb65-19" tabindex="-1"></a><span class="co"># Force the graph to end at x = 7</span></span>
-<span id="cb65-20"><a href="tidyverse.html#cb65-20" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">7</span>)) <span class="sc">+</span> </span>
-<span id="cb65-21"><a href="tidyverse.html#cb65-21" tabindex="-1"></a><span class="co"># Label the y-axis</span></span>
-<span id="cb65-22"><a href="tidyverse.html#cb65-22" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Frequency&quot;</span>, </span>
-<span id="cb65-23"><a href="tidyverse.html#cb65-23" tabindex="-1"></a><span class="co"># Force the graph to start at y = 0</span></span>
-<span id="cb65-24"><a href="tidyverse.html#cb65-24" tabindex="-1"></a>                     <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), </span>
-<span id="cb65-25"><a href="tidyverse.html#cb65-25" tabindex="-1"></a><span class="co"># No maximum limit to y (hence, NA)</span></span>
-<span id="cb65-26"><a href="tidyverse.html#cb65-26" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>)) <span class="sc">+</span> </span>
-<span id="cb65-27"><a href="tidyverse.html#cb65-27" tabindex="-1"></a><span class="co"># Give the histogram a title.</span></span>
-<span id="cb65-28"><a href="tidyverse.html#cb65-28" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">&quot;Histogram of SWLS2019&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning: Removed 2 rows containing missing values (`geom_bar()`).</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="tidyverse.html#cb63-1" tabindex="-1"></a><span class="co"># Assign color “red” to the object barfill (which we will use below to change the colour of the bars).</span></span>
+<span id="cb63-2"><a href="tidyverse.html#cb63-2" tabindex="-1"></a>barfill <span class="ot">&lt;-</span> <span class="st">&quot;red&quot;</span> </span>
+<span id="cb63-3"><a href="tidyverse.html#cb63-3" tabindex="-1"></a></span>
+<span id="cb63-4"><a href="tidyverse.html#cb63-4" tabindex="-1"></a><span class="co"># Assign color “black” to the object barlines (which we will use below to change the colour of the barlines).</span></span>
+<span id="cb63-5"><a href="tidyverse.html#cb63-5" tabindex="-1"></a>barlines <span class="ot">&lt;-</span> <span class="st">&quot;black&quot;</span> </span>
+<span id="cb63-6"><a href="tidyverse.html#cb63-6" tabindex="-1"></a></span>
+<span id="cb63-7"><a href="tidyverse.html#cb63-7" tabindex="-1"></a><span class="co"># Specify the data frame and the variables to plot</span></span>
+<span id="cb63-8"><a href="tidyverse.html#cb63-8" tabindex="-1"></a><span class="fu">ggplot</span>(swls2019_only, <span class="fu">aes</span>(<span class="at">x =</span> swls2019_avg)) <span class="sc">+</span> </span>
+<span id="cb63-9"><a href="tidyverse.html#cb63-9" tabindex="-1"></a><span class="co"># Specify the type of plot and binwidth</span></span>
+<span id="cb63-10"><a href="tidyverse.html#cb63-10" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>, </span>
+<span id="cb63-11"><a href="tidyverse.html#cb63-11" tabindex="-1"></a><span class="co"># Specify the border of the bars</span></span>
+<span id="cb63-12"><a href="tidyverse.html#cb63-12" tabindex="-1"></a>                   <span class="at">color =</span> barlines, </span>
+<span id="cb63-13"><a href="tidyverse.html#cb63-13" tabindex="-1"></a><span class="co"># Specify the color of the bar</span></span>
+<span id="cb63-14"><a href="tidyverse.html#cb63-14" tabindex="-1"></a>                   <span class="at">fill =</span> barfill) <span class="sc">+</span> </span>
+<span id="cb63-15"><a href="tidyverse.html#cb63-15" tabindex="-1"></a><span class="co"># Label the x-axis</span></span>
+<span id="cb63-16"><a href="tidyverse.html#cb63-16" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">&quot;2019 Satisfaction With Life Scores&quot;</span>, </span>
+<span id="cb63-17"><a href="tidyverse.html#cb63-17" tabindex="-1"></a><span class="co"># Force the graph to start at x = 0</span></span>
+<span id="cb63-18"><a href="tidyverse.html#cb63-18" tabindex="-1"></a>                     <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), </span>
+<span id="cb63-19"><a href="tidyverse.html#cb63-19" tabindex="-1"></a><span class="co"># Force the graph to end at x = 7</span></span>
+<span id="cb63-20"><a href="tidyverse.html#cb63-20" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">7</span>)) <span class="sc">+</span> </span>
+<span id="cb63-21"><a href="tidyverse.html#cb63-21" tabindex="-1"></a><span class="co"># Label the y-axis</span></span>
+<span id="cb63-22"><a href="tidyverse.html#cb63-22" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Frequency&quot;</span>, </span>
+<span id="cb63-23"><a href="tidyverse.html#cb63-23" tabindex="-1"></a><span class="co"># Force the graph to start at y = 0</span></span>
+<span id="cb63-24"><a href="tidyverse.html#cb63-24" tabindex="-1"></a>                     <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), </span>
+<span id="cb63-25"><a href="tidyverse.html#cb63-25" tabindex="-1"></a><span class="co"># No maximum limit to y (hence, NA)</span></span>
+<span id="cb63-26"><a href="tidyverse.html#cb63-26" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>)) <span class="sc">+</span> </span>
+<span id="cb63-27"><a href="tidyverse.html#cb63-27" tabindex="-1"></a><span class="co"># Give the histogram a title.</span></span>
+<span id="cb63-28"><a href="tidyverse.html#cb63-28" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">&quot;Histogram of SWLS2019&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 2 rows containing missing
+## values (`geom_bar()`).</code></pre>
 <p><img src="PSYC208_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <p>Note that when you set limits on the graph, it throws up a warning: <em>Warning: Removed 2 rows containing missing values (<code>geom_bar()</code>).</em> This is a known issue, but is apparently too complex to resolve (see: <a href="https://github.com/tidyverse/ggplot2/issues/4083" class="uri">https://github.com/tidyverse/ggplot2/issues/4083</a>). You may safely ignore it if your limits are beyond the minimum and maximum values of your axes. For example, suppose your minimum value for the x-axis is 1 and your maximum value is 7. If you set the limits to 0 and 8, it should comprise all values in your dataset. You can find the minimum and maximum values using the <code>summarise()</code> function, or simply use <code>max()</code> or <code>min()</code>.</p>
 </div>
@@ -872,12 +862,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A scatterplot is a graph of pairs of values for each subject or individual. Specifically, each individual provides two observations, one for each variable. One of the variables will be plotted along the x-axis and the other along the y-axis.</p>
 <p>So, suppose we’re interested in plotting the relationship between two items from the SWLS2019 dataset: <code>swls2019_1</code> and <code>swls2019_2</code>. Why might we be interested in this? Well, the reasoning goes something like this: Both items supposedly measure satisfaction with life. So, if a participant scores higher on one item than another participant, they should also score higher on the other item. To confirm this, we can plot a scatterplot.</p>
 <p>Here’s the basic code for a scatterplot in <code>ggplot2</code>:</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="tidyverse.html#cb67-1" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
-<span id="cb67-2"><a href="tidyverse.html#cb67-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(.) <span class="sc">+</span> </span>
-<span id="cb67-3"><a href="tidyverse.html#cb67-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> swls2019_1, <span class="at">y =</span> swls2019_2)) <span class="sc">+</span>  <span class="co"># A scatterplot is a plot of points on a graph. So we use geom_point.</span></span>
-<span id="cb67-4"><a href="tidyverse.html#cb67-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;swls2019_1: In most ways my life is close to my ideal&quot;</span>,</span>
-<span id="cb67-5"><a href="tidyverse.html#cb67-5" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;swls2019_2: The conditions of my life are excellent&quot;</span>, </span>
-<span id="cb67-6"><a href="tidyverse.html#cb67-6" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;As swls2019_1 increases, swls2019_2 also increases&quot;</span>)  <span class="co"># labs() is another way to add labels. You can also add a title using the labs() function, which by default is left-aligned. </span></span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="tidyverse.html#cb65-1" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
+<span id="cb65-2"><a href="tidyverse.html#cb65-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(.) <span class="sc">+</span> </span>
+<span id="cb65-3"><a href="tidyverse.html#cb65-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> swls2019_1, <span class="at">y =</span> swls2019_2)) <span class="sc">+</span>  <span class="co"># A scatterplot is a plot of points on a graph. So we use geom_point.</span></span>
+<span id="cb65-4"><a href="tidyverse.html#cb65-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;swls2019_1: In most ways my life is close to my ideal&quot;</span>,</span>
+<span id="cb65-5"><a href="tidyverse.html#cb65-5" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;swls2019_2: The conditions of my life are excellent&quot;</span>, </span>
+<span id="cb65-6"><a href="tidyverse.html#cb65-6" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;As swls2019_1 increases, swls2019_2 also increases&quot;</span>)  <span class="co"># labs() is another way to add labels. You can also add a title using the labs() function, which by default is left-aligned. </span></span></code></pre></div>
 <p><img src="PSYC208_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 <p>From the scatterplot, we see that indeed, as <code>swls2019_1</code> increases, <code>swls2019_2</code> increases.</p>
 <p>Like the histogram, there are many different customisations beyond the basics I’ve shown you here. You can refer to this website for more: <a href="https://t-redactyl.io/blog/2016/02/creating-plots-in-r-using-ggplot2-part-5-scatterplots.html" class="uri">https://t-redactyl.io/blog/2016/02/creating-plots-in-r-using-ggplot2-part-5-scatterplots.html</a>.</p>

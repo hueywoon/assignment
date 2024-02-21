@@ -23,7 +23,7 @@
 <meta name="author" content="Huey Woon LEE" />
 
 
-<meta name="date" content="2024-02-21" />
+<meta name="date" content="2023-12-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -252,7 +252,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.8.1" data-path="hypotest.html"><a href="hypotest.html#when-to-use-a-two-way-between-subjects-factorial-anova"><i class="fa fa-check"></i><b>8.8.1</b> When to Use A Two-Way Between-Subjects Factorial ANOVA</a></li>
 <li class="chapter" data-level="8.8.2" data-path="hypotest.html"><a href="hypotest.html#conducting-and-interpreting-the-two-way-between-subjects-anova"><i class="fa fa-check"></i><b>8.8.2</b> Conducting and Interpreting the Two-Way Between-Subjects ANOVA</a></li>
 <li class="chapter" data-level="8.8.3" data-path="hypotest.html"><a href="hypotest.html#conducting-and-interpreting-the-simple-effects-analysis"><i class="fa fa-check"></i><b>8.8.3</b> Conducting and Interpreting the Simple Effects Analysis</a></li>
-<li class="chapter" data-level="8.8.4" data-path="hypotest.html"><a href="hypotest.html#effect-size-partial-eta-squared"><i class="fa fa-check"></i><b>8.8.4</b> Effect Size: Partial Eta-Squared</a></li>
+<li class="chapter" data-level="8.8.4" data-path="hypotest.html"><a href="hypotest.html#effect-size-eta-squared-1"><i class="fa fa-check"></i><b>8.8.4</b> Effect Size: Eta-Squared</a></li>
 </ul></li>
 <li class="chapter" data-level="8.9" data-path="hypotest.html"><a href="hypotest.html#correlation"><i class="fa fa-check"></i><b>8.9</b> Correlation</a>
 <ul>
@@ -265,19 +265,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.10.1" data-path="hypotest.html"><a href="hypotest.html#when-to-use-a-regression"><i class="fa fa-check"></i><b>8.10.1</b> When to Use A Regression</a></li>
 <li class="chapter" data-level="8.10.2" data-path="hypotest.html"><a href="hypotest.html#conducting-and-interpreting-the-regression"><i class="fa fa-check"></i><b>8.10.2</b> Conducting and Interpreting the Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="8.11" data-path="hypotest.html"><a href="hypotest.html#chi-square-test-of-goodness-of-fit"><i class="fa fa-check"></i><b>8.11</b> Chi-square Test of Goodness of Fit</a>
-<ul>
-<li class="chapter" data-level="8.11.1" data-path="hypotest.html"><a href="hypotest.html#when-to-use-chi-square-test-of-goodness-of-fit"><i class="fa fa-check"></i><b>8.11.1</b> When to Use Chi-square Test of Goodness of Fit</a></li>
-<li class="chapter" data-level="8.11.2" data-path="hypotest.html"><a href="hypotest.html#conducting-and-interpreting-the-chi-square-test-of-goodness-of-fit"><i class="fa fa-check"></i><b>8.11.2</b> Conducting and Interpreting the Chi-Square Test of Goodness of Fit</a></li>
-<li class="chapter" data-level="8.11.3" data-path="hypotest.html"><a href="hypotest.html#effect-size-cohens-w"><i class="fa fa-check"></i><b>8.11.3</b> Effect Size: Cohen’s w</a></li>
-</ul></li>
-<li class="chapter" data-level="8.12" data-path="hypotest.html"><a href="hypotest.html#chi-square-test-of-independence"><i class="fa fa-check"></i><b>8.12</b> Chi-square Test of Independence</a>
-<ul>
-<li class="chapter" data-level="8.12.1" data-path="hypotest.html"><a href="hypotest.html#when-to-use-chi-square-test-of-independence"><i class="fa fa-check"></i><b>8.12.1</b> When to Use Chi-square Test of Independence</a></li>
-<li class="chapter" data-level="8.12.2" data-path="hypotest.html"><a href="hypotest.html#conducting-and-interpreting-the-chi-square-test-of-independence"><i class="fa fa-check"></i><b>8.12.2</b> Conducting and Interpreting the Chi-square Test of Independence</a></li>
-<li class="chapter" data-level="8.12.3" data-path="hypotest.html"><a href="hypotest.html#effect-size-phi"><i class="fa fa-check"></i><b>8.12.3</b> Effect Size: Phi</a></li>
-</ul></li>
-<li class="chapter" data-level="8.13" data-path="hypotest.html"><a href="hypotest.html#next-steps"><i class="fa fa-check"></i><b>8.13</b> Next steps</a></li>
+<li class="chapter" data-level="8.11" data-path="hypotest.html"><a href="hypotest.html#next-steps"><i class="fa fa-check"></i><b>8.11</b> Next steps</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
@@ -404,15 +392,14 @@ Figure 1.2: R Studio With Four Panes
 <ol style="list-style-type: decimal">
 <li>Misspelled object or function
 <ul>
-<li>Misspelled object (e.g., condition vs condtion) will throw this error message: <em>Error: object not found</em></li>
-<li>Misspelled function (e.g., <code>t.test</code> vs <code>ttest</code>) or trying to use functions in packages that have not been loaded yet will throw this error message: <em>Error: could not find function</em></li>
-<li>R is case-sensitive. So if your object is called <em>Dataset</em>, you need to type <em>Dataset</em> and not <em>dataset</em>, else it will throw an error message.</li>
-<li>If you’re referring to a variable in the dataset, you must attach the <code>$</code> sign (e.g., dataset$variable). Otherwise, R will tell you it cannot find the object.</li>
+<li>Misspelled object will throw this error message: <em>Error: object not found</em></li>
+<li>Misspelled function will throw this error message: <em>Error: could not find function</em></li>
+<li>R is case-sensitive. So if your object is called <em>Data</em>, you need to type <em>Data</em> and not <em>data</em>, else it will throw an error message.</li>
 </ul></li>
 <li>Punctuation mistake
 <ul>
 <li>Remember to close the parenthesis ()</li>
-<li>Don’t add a space where there shouldn’t be. For example, if your object is called <em>dataset</em>, don’t type <em>data set</em>.</li>
+<li>Don’t add a space where there shouldn’t be. For example, if your object is called <em>datafile</em>, don’t type <em>data file</em>.</li>
 <li>Use the correct punctuation for the function. For example, if the function requires a comma, don’t put in full stops. If it requires a double equal sign, don’t put in a single equal sign.</li>
 </ul></li>
 </ol>

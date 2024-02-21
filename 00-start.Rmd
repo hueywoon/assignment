@@ -122,12 +122,13 @@ While it is not absolutely necessary to use RStudio projects in this course, I r
 When you are programming, you will make errors ("bugs") in your code. Trying to figure out where you made the error ("debugging") can be extremely time-consuming and frustrating. To help you along, here are some of the most common bugs that you'll run into. 
 
 1. Misspelled object or function
-    - Misspelled object will throw this error message: _Error: object not found_
-    - Misspelled function will throw this error message: _Error: could not find function_
-    - R is case-sensitive. So if your object is called _Data_, you need to type _Data_ and not _data_, else it will throw an error message. 
+    - Misspelled object (e.g., condition vs condtion) will throw this error message: _Error: object not found_
+    - Misspelled function (e.g., `t.test` vs `ttest`) or trying to use functions in packages that have not been loaded yet will throw this error message: _Error: could not find function_
+    - R is case-sensitive. So if your object is called _Dataset_, you need to type _Dataset_ and not _dataset_, else it will throw an error message. 
+    - If you're referring to a variable in the dataset, you must attach the `$` sign (e.g., dataset$variable). Otherwise, R will tell you it cannot find the object.
 1. Punctuation mistake
     - Remember to close the parenthesis ()
-    - Don't add a space where there shouldn't be. For example, if your object is called _datafile_, don't type _data file_.
+    - Don't add a space where there shouldn't be. For example, if your object is called _dataset_, don't type _data set_.
     - Use the correct punctuation for the function. For example, if the function requires a comma, don't put in full stops. If it requires a double equal sign, don't put in a single equal sign. 
 
 If you've tried all the above and still can't figure out what's going on, just copy and paste the warning into the search engine. 99% of the time, you'll be able to figure out what happened by reading responses on forums or other websites. (Programmers are super helpful!)
