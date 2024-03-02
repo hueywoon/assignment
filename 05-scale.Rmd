@@ -91,7 +91,7 @@ The simple formula to use to reverse code data is this:
 
 # Recode mvs_9 by creating a new variable called mvs_9r
 MVS <- MVS %>%              		 
-  mutate(mvs_9r = 5+1-mvs_9)
+  mutate(mvs_9r = 5 + 1 - mvs_9)
 
 # Check mvs_9 is correctly recoded for the first 6 rows
 # A 1 on mvs_9 should be a 5 on mvs_9r, 2 should be a 4, and so on

@@ -18,6 +18,8 @@ install.packages("tidyverse")
 
 Even after we have installed tidyverse, we cannot use it unless we load it. To load it, we need the `library()` function. 
 
+Note that we only need to install each package once. But we need to load the package each session (i.e., each time we re-start RStudio). I like to think of the package like a genie that goes to sleep each time you close RStudio. If you need the genie to do stuff for you the next time around, you need to awaken it again!
+
 ```{r echo = TRUE, message = FALSE, warning = FALSE, error = FALSE}
 
 library(tidyverse)
@@ -67,7 +69,11 @@ In this hypothetical dataset, 343 participants provided demographic information 
 |swls2021_5|In most ways my life is close to my ideal. (2021)|1 = strongly disagree, 2 = disagree, 3 = slightly disagree, 4 = neither disagree nor agree, 5 = slightly agree, 6 = agree, 7 = strongly agree|
 
 
-Now that you have some idea of what the dataset comprises, let's read in the .csv file.
+Now that we have some idea of what the dataset comprises, let's read in the .csv file.
+
+Before doing that, though we need to set the working directory. The reason we need to set the working directory is that we need to tell R where to find the .csv file that we saved. To do that, in RStudio, go to **Session > Set Working Directory > Choose Directory**. Select the folder where you saved the RData file. 
+
+Now that we've set the working directory, we will read in the .csv file.
 
 
 ```{r echo = TRUE, message = FALSE, warning = FALSE, error = FALSE}

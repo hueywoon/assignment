@@ -84,11 +84,25 @@ In R (and most programming languages), you can write notes or comments in the sc
 
 Please make _liberal_ use of comments. I cannot tell you how many times comments have helped me understand what I'm doing and why. Your future self will thank you. Trust me.
 
+### Multi-Line Comments
+
+To make your super long comments readable, you may break them into several lines, starting each line with `#>`.
+
+```{r eval = FALSE}
+
+#> This is a comment
+#> that has been broken
+#> into multiple 
+#> lines.
+#> :) 
+
+```
+
 ### Style Guide
 
 I strongly believe that people should be able to reproduce each others' analyses. This provides the checks and balances that is important for science to advance. Therefore, you should be willing and able to share your code. But even if you do share your code, if it is unintelligible, it will not be of much help. Therefore, to make your code understandable, in addition to writing comments in the script, you should also try to follow certain conventions when writing code. These conventions are laid out in the tidyverse Style Guide. You can read the Style Guide here: <https://style.tidyverse.org/syntax.html>.
 
-### Setting working directory
+### Setting Working Directory
 
 Typically when we analyse data, we need to reference external files (e.g., our data files). To tell R where to look for those data files, we need to specify the full file path (i.e., the file location). While this is fine if you only have one or two things to reference, it can be kind of tedious to keep typing the file path if you have many things to reference. Furthermore, if you choose to change your file location, it would be quite a hassle (and also error-prone) to have to update all those file paths in the script. 
 
@@ -106,6 +120,10 @@ After getting the file path, you can then set the working directory as follows, 
 setwd("C:/Users/Win10/Desktop/R")
 
 ```
+
+Another (perhaps easier) way to set working directory is to go to **Session > Set Working Directory > Choose Directory**. Then, select the folder you want to set as your working directory. This process needs to be repeated for each session (i.e., each time you start up RStudio). 
+
+If you want to set a default working directory, go to **Tools > Global Options > General > Default working directory (when not in a project) > Browse**. Then, select the folder you want to set as your default working directory. 
 
 ### Using R Projects
 

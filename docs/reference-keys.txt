@@ -7,6 +7,7 @@ r-script
 some-tips-and-tricks
 softwrap-long-lines
 make-notes-or-comments
+multi-line-comments
 style-guide
 setting-working-directory
 using-r-projects
