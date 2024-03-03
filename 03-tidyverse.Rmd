@@ -71,7 +71,7 @@ In this hypothetical dataset, 343 participants provided demographic information 
 
 Now that we have some idea of what the dataset comprises, let's read in the .csv file.
 
-Before doing that, though we need to set the working directory. The reason we need to set the working directory is that we need to tell R where to find the .csv file that we saved. To do that, in RStudio, go to **Session > Set Working Directory > Choose Directory**. Select the folder where you saved the RData file. 
+Before doing that though, we need to set the working directory. The reason is that we need to tell R where to find the .csv file that we saved. To do that, in RStudio, go to **Session > Set Working Directory > Choose Directory**. Select the folder where you saved the .csv file. 
 
 Now that we've set the working directory, we will read in the .csv file.
 
