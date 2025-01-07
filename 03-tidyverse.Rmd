@@ -78,11 +78,11 @@ Now that we've set the working directory, we will read in the .csv file.
 
 ```{r echo = TRUE, message = FALSE, warning = FALSE, error = FALSE}
 
-data <- read_csv("SWB.csv")
+dataset <- read_csv("SWB.csv")
 
 # this code is saying...
-# read in the .csv file, "SWB.csv" and assign it to the object "data"
-# from now on, "data" will refer to the data in this csv file
+# read in the .csv file, "SWB.csv" and assign it to the object "dataset"
+# from now on, "dataset" will refer to the data in this csv file
 
 ```
 
@@ -90,19 +90,19 @@ data <- read_csv("SWB.csv")
 
 ```{r eval = FALSE}
 
-data <- read.csv("SWB.csv")
+dataset <- read.csv("SWB.csv")
 
 ```
 
 If you use `read.csv()`, you don't have to load `tidyverse`. This is because `read_csv()` comes from the `readr` package (and therefore the `tidyverse` collection) whereas `read.csv()` comes pre-installed with R. 
 
-`read.csv()` is supposedly slower than `read_csv()`, which in turn is slower than `data.table`'s `fread()`. For our purposes, though, it really doesn't matter which you use, so long as you can successfully read the .csv file. 
+`read.csv()` is supposedly slower than `read_csv()`, which in turn is slower than `data.table`'s `fread()`. For our purposes, though, it really doesn't matter which you use, so long as you can successfully read the .csv file. Another thing about `read.csv()` is that it tries to identify categorical variables and then automatically import them as factors (see the Factors section below). I don't quite like that because I like to control the variable type myself. But, that's my personal preference. You're free to use whatever function that you want.
 
 If you have other file types, such as .txt, .sav, .xlsx, you might need different packages. For example, for excel files (.xlsx), you will need the `readxl` package. For SPSS (.sav), you will need the `haven` package or the `foreign` package. For this class, I am very unlikely to use file types aside from .csv, but it is good to be aware of the packages to use if you want to import other file types. 
 
 ### Check Imported Dataset
 
-Before conducting any analyses, check that the dataset has been imported correctly. Go to the `Environment` pane (top right pane of RStudio). Click on `data`. The top left pane should now show the imported data in what looks like a spreadsheet. Alternatively, you may type `View(data)` into the console. 
+Before conducting any analyses, check that the dataset has been imported correctly. Go to the `Environment` pane (top right pane of RStudio). Click on `dataset`. The top left pane should now show the imported data in what looks like a spreadsheet. Alternatively, you may type `View(dataset)` into the console. 
 
 1. **Rows**: The data for each participant is recorded in a single row (e.g., data for Participant 1 is in Row 1)
 1. **Columns**: The data for each variable is recorded in a single column. Names of the variables are in the headers for each column
@@ -125,22 +125,22 @@ glimpse(data)
 
 ## Factors
 
-When you look at the output from `str(data)` or `glimpse(data)`, you can see that some values don't seem to make sense on their own. For example, what do 0 and 1 in gender mean? From the legend table earlier, we can see that 0 stands for male and 1 stands for female. But having to consult the table every time we do an analysis is tiresome and also error-prone. So, we use the `factor()` command to tell R what those values mean for categorical variables. 
+When you look at the output from `str(data)` or `glimpse(data)`, you can see that some values don't seem to make sense on their own. For example, what do 0 and 1 in gender mean? From the legend table earlier, we can see that 0 stands for male and 1 stands for female. But having to consult the table every time we do an analysis is tiresome and also error-prone. So, we use the `factor()` command to tell R what those values mean for  categorical variables. 
 
 ```{r}
 
-data$gender <- factor(data$gender, 
-                      levels = c(0, 1), 
-                      labels = c("male", "female"))
+dataset$gender <- factor(dataset$gender, 
+                         levels = c(0, 1), 
+                         labels = c("male", "female"))
 # this code is saying...
-# we want to convert the variable gender into a factor
-# this variable has two values / levels, 0 and 1 
+# we want to convert the variable gender in the dataset into a factor
+# this variable has two values (levels), 0 and 1 
 # label 0 as “male” and 1 as “female”
 # notice that male and female are enclosed in quotation marks (because they are non-numerical or string variables).
 
 # Check that gender is now a factor with either glimpse() or str()
 # They'll give you the same output
-glimpse(data$gender)
+glimpse(dataset$gender)
 
 ```
 
@@ -160,19 +160,19 @@ Some of the functions I've found useful in the `dplyr` package are:
 
 There are more functions in the dplyr package! Check out the dplyr cheat sheet here: <https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf>.
 
-When you go through the code below, you'll notice that in `dplyr` (and also `tidyverse` in general), the pipe operator `%>%` is used a lot. You can think of it as a symbol for "then". For example `X %>% Y` would be read as: Do X then take the result from that to do Y. Because it gets tiring to type the pipe operator so frequently, there's a shortcut for it: Ctrl/Cmd + Shift + M. (You may see the pipe operator written as `|>` but this is a new development as of 2023 and most users still use `%>%` as their default pipe operator.)
+When you go through the code below, you'll notice that in `dplyr` (and also `tidyverse` in general), the pipe operator `%>%` is used a lot. You can think of it as a symbol for "then". For example `X %>% Y` would be read as: Do X then take the result from that to do Y. Because it gets tiring to type the pipe operator so frequently, there's a shortcut for it: `Ctrl/Cmd + Shift + M`. (You may see the pipe operator written as `|>` but this is a new development as of 2023 and most users still use `%>%` as their default pipe operator.)
 
 With that out of the way... Let's go through the five functions!
 
 ### Select() 
 
-The `select()` function allows us to select specific columns. This is especially useful if we have many columns to work with and we only want to focus on a few. 
+The `select()` function allows us to select specific _columns_. This is especially useful if we have many columns to work with and we only want to focus on a few. 
 
 Let's say we only want to select `gender` and the `swls2019_1` to `swls2019_5` columns in the `SWB` dataset. Here's how we would do it: 
 
 ```{r}
 
-swls2019_only <- data %>%   # create the subset called "swls2019_only" from "data", and then
+swls2019_only <- dataset %>%   # create the subset called "swls2019_only" from "dataset", and then
   select(gender, swls2019_1:swls2019_5)  # select gender and the columns swls2019_1 to swls2019_5
 
 ```
@@ -191,7 +191,7 @@ So, let's say we want the `swls2019_1` to `swls2019_5` columns to come _before_ 
 
 ```{r}
 
-swls2019_genderlast <- data %>%   
+swls2019_genderlast <- dataset %>%   
   select(swls2019_1:swls2019_5, gender)  
 
 ```
@@ -206,20 +206,20 @@ head(swls2019_genderlast)
 
 ### Filter()
 
-Maybe we don't want to select specific columns. Instead, we want to select specific kinds of participants to conduct our analyses on (e.g., say from specific treatment groups or maybe only male participants). In other words, we want to select specific rows. We use `filter()` to do that. 
+Maybe we don't want to select specific columns. Instead, we want to select specific kinds of participants to conduct our analyses on (e.g., say from specific treatment groups or maybe only male participants). In other words, we want to select specific _rows_. We use `filter()` to do that. 
 
-New R users sometimes confuse `select()` with `filter()`. Here's how to differentiate the two: `select()` is used to select columns (i.e., variables) whereas `filter()` is used to select rows (i.e., participants). 
+New R users sometimes confuse `select()` with `filter()` so it bears repeating: `select()` is used to select columns (i.e., variables) whereas `filter()` is used to select rows (i.e., participants). 
 
-So, let's say we want to select only male participants.
+So, let's say we want to select only male participants. In other words, we only want to keep the rows that come from male participants. 
 
 ``` {r}
 
-male_only <- data %>%	 # create "male_only" subset from "data", and then 
+male_only <- dataset %>%	 # create "male_only" subset from "dataset", and then 
   filter(gender == "male")  # filter (keep) only male participants
 
 ```
 
-Notice that the double equal sign `==` is used here. In programming languages, the `==` sign is used when we are comparing the left and the right hand side. Here, we're comparing each row of the column `gender` to the word "male". If that row matches the word "male", we will filter (keep) that row. Otherwise, we will toss it out. 
+Notice that the double equal sign `==` is used here. In programming languages, the `==` sign is used when we are comparing the left and the right hand side to see if they match. Here, we're comparing each row of the column `gender` to the word "male". If that row matches the word "male", we will filter (keep) that row. Otherwise, we will toss it out. 
 
 This is what the first six rows of `male_only` look like: 
 
@@ -231,7 +231,7 @@ head(male_only)
 
 ### Mutate()
 
-Sometimes, we might want to create new variables, say averages or totals. We can do this with `mutate()`. 
+Sometimes, we might want to create new variables, say averages or totals. We can do this with `mutate()`.
 
 Let's say we want to find the average of `swls2019_1` to `swls2019_5` for each participant. We will use the subset we created just now, `swls2019_only` to do this.
 
@@ -240,8 +240,9 @@ Let's say we want to find the average of `swls2019_1` to `swls2019_5` for each p
 swls2019_only <- swls2019_only %>% 
   mutate(swls2019_avg = (swls2019_1 + swls2019_2 + swls2019_3 + swls2019_4 + swls2019_5) / 5)
 # this code is saying... 
+# go to swls2019_only, and then
 # create a variable called `swls2019_avg` by adding up swls2019_1 to swls2019_5 and then dividing the total by 5
-# add this variable to the data frame swls2019_only
+# overwrite swls2019_only with this new dataset (that includes `swls2019_avg`)
 
 ```
 
@@ -253,9 +254,9 @@ head(swls2019_only)
 
 ```
 
-Notice that the `swls2019_avg` is now appended as the last column. 
+Notice that the `swls2019_avg` now appears as the last column of `swls2019_only`.
 
-You can achieve the same results using `rowMeans()`. 
+You can achieve the same results using `rowMeans()`. (As an aside, if you want the total instead of the average, use `rowSums()`.)
 
 ```{r}
 
@@ -363,6 +364,16 @@ swls2019_only %>%
 
 The output tells us 168 males and 175 females participated in the study. 
 
+Here's a faster alternative.
+
+```{r}
+
+swls2019_only %>% 
+  select(gender) %>%  # Select the column gender
+  table()   # Count how many of each value in the data and present it in a table
+
+```
+
 The number of times a data value occurs for a given variable is called the absolute frequency. If we want the relative frequency (i.e., the number of times a data value occurs relative to the total number of observations for a given variable), then we divide the absolute frequency by the total number of values.
 
 Again, try this on your own before looking at my code. (HINT: Use the `summarise()` function and then the `mutate()` function!)
@@ -379,7 +390,19 @@ swls2019_only %>%
 
 The output (rel_freq) tells us that slightly less than half the sample are males (0.49) and slightly more than half are females (0.51). 
 
-Relative frequency is a proportion and may be difficult for some people to interpret. For easier interpretation, we can convert the proportions into percentages by taking 100%. 
+Here's a faster alternative, using `table()` and `prop.table()`. 
+
+```{r}
+
+swls2019_only %>% 
+  select(gender) %>%  
+  table() %>% 
+  prop.table()
+
+```
+
+
+Relative frequency is a proportion and may be difficult for some people to interpret. For easier interpretation, we can convert the proportions into percentages by multiplying 100%. 
 
 Try converting the proportions into percentages on your own before looking at my code below!
 
@@ -394,6 +417,19 @@ swls2019_only %>%
 
 ```
 
+Here's a faster alternative, using `table()`, `prop.table()`, and `mutate()`.
+
+```{r}
+
+swls2019_only %>% 
+  select(gender) %>%  
+  table() %>% 
+  prop.table() %>% 
+  data.frame() %>%   # force table into a data frame because mutate is incompatible with tables 
+  mutate(Percentage = Freq * 100, 
+         Rounded = round(Freq * 100, 2))  # you may round the results to 2 d.p. using the round() function
+
+```
 
 ### Bar Plots with ggplot2
 
@@ -439,7 +475,7 @@ Let's use `ggplot2` to make a histogram for `swls2019_avg` with a very basic cod
 
 ``` {r}
 
-ggplot(data = swls2019_only, aes(x = swls2019_avg)) + 
+ggplot(data = swls2019_only, aes(x = swls2019_avg)) +  # tells R what dataset to use and what variable should be on the x axis
   geom_histogram()  # we want a histogram, so geom_histogram() is used
 
 ```  
@@ -486,10 +522,24 @@ ggplot(swls2019_only, aes(x = swls2019_avg)) +
 # No maximum limit to y (hence, NA)
                      limits = c(NA, NA)) + 
 # Give the histogram a title.
-    ggtitle("Histogram of SWLS2019")
+    ggtitle("Histogram of SWLS2019") + 
+# Choose a theme. I like theme_classic() for its clean, white background
+    theme_classic()
+
 ```  
 
-Note that when you set limits on the graph, it throws up a warning: *Warning: Removed 2 rows containing missing values (`geom_bar()`).* This is a known issue, but is apparently too complex to resolve (see: https://github.com/tidyverse/ggplot2/issues/4083). You may safely ignore it if your limits are beyond the minimum and maximum values of your axes. For example, suppose your minimum value for the x-axis is 1 and your maximum value is 7. If you set the limits to 0 and 8, it should comprise all values in your dataset. You can find the minimum and maximum values using the `summarise()` function, or simply use `max()` or `min()`.  
+Note that when you set limits on the graph, it throws up a warning: *Warning: Removed 2 rows containing missing values (`geom_bar()`).* This is a known issue, but is apparently too complex to resolve (see: https://github.com/tidyverse/ggplot2/issues/4083). You may safely ignore it if your limits are beyond the minimum and maximum values of your axes. For example, suppose your minimum value for the x-axis is 1 and your maximum value is 7. If you set the limits to 0 and 8, it should comprise all values in your dataset. You can find the minimum and maximum values using the `summarise()` function, or simply use `max()` or `min()`. As an aside, you may find other themes here: https://ggplot2.tidyverse.org/reference/ggtheme.html. 
+
+Now... I confess that `ggplot2` intimidates me. It's very powerful and can make super fancy graphs. But it has so many moving parts! So here's a simple code in base R that does not require `ggplot2`.
+
+``` {r}
+
+hist(x = swls2019_only$swls2019_avg,  # variable
+     xlab = "2019 Satisfaction With Life Scores",  # label for x-axis 
+     ylab = "Frequency",  # label for y-axis
+     main = "Histogram of SWLS2019")  # title for the histogram
+
+```  
 
 ### Scatterplot with ggplot2
 
@@ -515,6 +565,18 @@ swls2019_only %>%
 From the scatterplot, we see that indeed, as `swls2019_1` increases, `swls2019_2` increases. 
 
 Like the histogram, there are many different customisations beyond the basics I've shown you here. You can refer to this website for more: https://t-redactyl.io/blog/2016/02/creating-plots-in-r-using-ggplot2-part-5-scatterplots.html.
+
+And like the histogram, there's a function in base r for plotting scatterplots. 
+
+``` {r}
+
+plot(x = swls2019_only$swls2019_1,
+     y = swls2019_only$swls2019_2, 
+     xlab = "swls2019_1: In most ways my life is close to my ideal", 
+     ylab = "swls2019_2: The conditions of my life are excellent", 
+     main = "As swls2019_1 increases, swls2019_2 also increases")
+
+```
 
 ### Last Words
 

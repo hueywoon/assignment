@@ -1,5 +1,7 @@
 fig:001-threepane
 fig:002-fourpane
+fig:003-compile1
+fig:003-compile2
 start
 install-r-and-rstudio
 the-rstudio-interface
@@ -8,10 +10,12 @@ some-tips-and-tricks
 softwrap-long-lines
 make-notes-or-comments
 multi-line-comments
-style-guide
+create-code-sections-in-r-script
 setting-working-directory
-using-r-projects
+using-rstudio-projects
+compile-report
 debugging
+style-guide
 last-words
 basics
 some-basic-commands

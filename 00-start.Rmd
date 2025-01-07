@@ -98,9 +98,26 @@ To make your super long comments readable, you may break them into several lines
 
 ```
 
-### Style Guide
+### Create Code Sections in R Script
 
-I strongly believe that people should be able to reproduce each others' analyses. This provides the checks and balances that is important for science to advance. Therefore, you should be willing and able to share your code. But even if you do share your code, if it is unintelligible, it will not be of much help. Therefore, to make your code understandable, in addition to writing comments in the script, you should also try to follow certain conventions when writing code. These conventions are laid out in the tidyverse Style Guide. You can read the Style Guide here: <https://style.tidyverse.org/syntax.html>.
+Often times when we are analysing data, we need to include multiple steps. It can feel incredibly confusing and overwhelming to navigate a long R script. We can use code sections to organise and structure the code, by grouping related tasks together. This way the R script is easier to navigate. 
+
+To insert a new code section, start the line with # and then use any of the following: _at least_ four trailing dashes (-), equal signs (=), or pound signs (#).
+
+```{r eval = FALSE}
+
+# Section One ---------------------------------
+# Section One ----
+
+# Section Two =================================
+# Section Two ====
+
+### Section Three ############################# 
+### Section Three ####
+
+```
+
+To fold all code sections (i.e., hide the content within all sections, leaving only the section header for navigation), go to **Edit > Folding > Collapse All** (The shortcut is `Alt + O`.) To expand all code sections (i.e., show all content), go to **Edit > Folding > Expand All** (The shortcut is `Alt + Shift + O`.)
 
 ### Setting Working Directory
 
@@ -125,15 +142,33 @@ Another (perhaps easier) way to set working directory is to go to **Session > Se
 
 If you want to set a default working directory, go to **Tools > Global Options > General > Default working directory (when not in a project) > Browse**. Then, select the folder you want to set as your default working directory. 
 
-### Using R Projects
+### Using RStudio Projects
 
-While setting the working directory manually is sufficient when we have one or two projects, many of us have multiple projects on-going at the same time. If we have a bunch of different files from different projects all strewn in a single directory (folder), it can get quite messy. To stay organised, it is best that we create an R project for each project we are working on.
+While setting the working directory manually is sufficient when we have only one or two projects, many of us have multiple projects on-going at the same time. If we have a bunch of different files from different projects all strewn in a single directory (folder), it can get quite messy. To stay organised, it is preferable that we create an RStudio project for each project we are working on. This allows us to group the files related to a single project (e.g., data, output) together. 
 
-To do this, go to **File > New Project**. A dialogue window with three options, "New Directory", "Existing Directory" and "Version Control", will appear. From here, you may choose either "New Directory" or "Existing Directory". If you chose "New Directory", R will create a new folder and create an R project within that new folder. If you chose "Existing Directory", R will create an R project within an existing folder that you specify. Either will work, but I usually select "Existing Directory" as I would already have created my own folder to house materials related to a specific project.  
+To do this, go to **File > New Project**. A dialogue window with three options, "New Directory", "Existing Directory" and "Version Control", will appear. From here, you may choose either "New Directory" or "Existing Directory". If you chose "New Directory", R will create a new folder and create an R project within that new folder. If you chose "Existing Directory", R will create an RStudio project within an existing folder that you specify. Either will work, but I usually select "Existing Directory" as I would already have created my own folder to house materials related to a specific project.  
 
-After RStudio has created the project, it will change the working directory to the project directory so that you can access all the files (e.g., data, script) related to this project in this directory. RStudio will also create a file with the extension .Rproj in the project directory. When you open this file, RStudio will automatically start a new session with the project directory as your working directory.
+After RStudio has created the project, it will change the working directory to the project directory so that you can access all the files (e.g., data, script) related to this project in this directory. RStudio will also create a file with the extension .Rproj in the project directory. When you open this file, RStudio will automatically start a new session with the project directory as your working directory. 
 
-While it is not absolutely necessary to use RStudio projects in this course, I recommend it because it will help keep you organized.
+While it is not necessary to use RStudio projects in my classes, I recommend it because it will help keep you organized.
+
+### Compile Report
+
+The "Compile Report" feature in RStudio generates a formatted document from your R script. It integrates code and output into a single document that can be easily shared. To compile a report, go to **File > Compile Report...**.
+
+```{r 003-compile1, echo = FALSE, out.width = "50%", fig.cap = "Compile Report Step 1"}
+
+knitr::include_graphics("img/003-compile1.png")
+
+```
+
+Although there are several different formats you may choose (e.g., PDF, Word, HTML), I find that compiling the report into Word format works best for my classes. So, under **Report output format:**, choose **MS Word**. Then click **Compile**. 
+
+```{r 003-compile2, echo = FALSE, out.width = "50%", fig.cap = "Compile Report Step 2"}
+
+knitr::include_graphics("img/003-compile2.png")
+
+```
 
 ### Debugging
 
@@ -150,6 +185,10 @@ When you are programming, you will make errors ("bugs") in your code. Trying to 
     - Use the correct punctuation for the function. For example, if the function requires a comma, don't put in full stops. If it requires a double equal sign, don't put in a single equal sign. 
 
 If you've tried all the above and still can't figure out what's going on, just copy and paste the warning into the search engine. 99% of the time, you'll be able to figure out what happened by reading responses on forums or other websites. (Programmers are super helpful!)
+
+### Style Guide
+
+I strongly believe that people should be able to reproduce each others' analyses. This provides the checks and balances that is important for science to advance. Therefore, you should be willing and able to share your code. But even if you do share your code, if it is unintelligible, it will not be of much help. Therefore, to make your code understandable, in addition to writing comments in the script, you should also try to follow certain conventions when writing code. These conventions are laid out in the tidyverse Style Guide. You can read the Style Guide here: <https://style.tidyverse.org/syntax.html>.
 
 ### Last Words
 

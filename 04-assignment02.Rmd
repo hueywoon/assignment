@@ -10,8 +10,8 @@ As before, suggested answers are at the bottom of this page, but please do try t
 1. Start an R Project in the folder where you saved the data file.
 1. Open up a new script file in RStudio. 
 1. Load `tidyverse` and `psych` packages.
-1. Read in the data file `SWB.csv`. Give this dataset the name `data`.
-1. Examine `data`. Minimally you should be able to tell there are 343 rows and 23 columns. You should also be able to tell the variable names and the data type for each variable. 
+1. Read in the data file `SWB.csv`. Give this dataset the name `dataset`.
+1. Examine `dataset`. Minimally you should be able to tell there are 343 rows and 23 columns. You should also be able to tell the variable names and the data type for each variable. 
 1. Convert `marital_status` and `have_children` from integer to factor. Add value labels to the factors. See the legend below to see how each variable is coded. 
 1. Check that the two variables are indeed converted to factors.
 1. Create a subset of the dataset of only married parents (i.e., married people who have children). Further subset the dataset such that only the variables `swls2021_1`, `swls2021_2`, `swls2021_3`, `swls2021_4`, and `swls2021_5` are in the dataset. You should have 68 rows and 5 columns in this subset. Give this subset the name `subset`. 
@@ -59,28 +59,28 @@ library(tidyverse)
 library(psych)
 
 # 5. Read .csv file
-data <- read_csv("SWB.csv") 
+dataset <- read_csv("SWB.csv") 
 # read.csv("SWB.csv") also okay
 
 # 6. Examine the data
 # Take a look at the variable names and data types
-glimpse(data)  # str(data) or View(data) also okay
+glimpse(dataset)  # str(dataset) or View(dataset) also okay
 
 # 7. Convert integer to factor and add value labels to the factor.
-data$marital_status <- factor(data$marital_status, 
-                              levels = c(1, 2, 3), 
-                              labels = c("married", "divorced", "widowed"))
+dataset$marital_status <- factor(dataset$marital_status, 
+                                 levels = c(1, 2, 3), 
+                                 labels = c("married", "divorced", "widowed"))
 
-data$have_children <- factor(data$have_children, 
-                             levels = c(0, 1), 
-                             labels = c("no children", "have children"))
+dataset$have_children <- factor(dataset$have_children, 
+                                levels = c(0, 1), 
+                                labels = c("no children", "have children"))
 
 # 8. Check variables are now factors
-glimpse(data$marital_status)  # str(data$marital_status) also okay
-glimpse(data$have_children) # str(data$have_children) also okay
+glimpse(dataset$marital_status)  # str(dataset$marital_status) also okay
+glimpse(dataset$have_children) # str(dataset$have_children) also okay
 
 # 9. Create subset 
-subset <- data %>% 
+subset <- dataset %>% 
   filter(marital_status == "married" & have_children == "have children") %>% 
   select(swls2021_1:swls2021_5)
 
@@ -116,9 +116,16 @@ subset %>%
 # Maximum is 5.4, minimum is 2.6, mean is 4.18, and sd is 0.707.
 describe(subset$swls2021_avg)
 
-# 13. Create a subset that only contains people with an average SWLS of 4.18 and above
+# 13A. Create a subset that only contains people with an average SWLS of 4.18 and above
 # Then, count the number of people remaining 
 subset %>% 
   filter(swls2021_avg >= 4.18) %>% 
   summarise (total = n())
+
+# 13B. Create a subset that only contains people with an average SWLS of 4.18 and above
+# Then, count the number of people remaining 
+subset %>% 
+  filter(swls2021_avg >= 4.18) %>% 
+  nrow  # count the number of rows remaining
+
 ```

@@ -23,7 +23,7 @@
 <meta name="author" content="Huey Woon LEE" />
 
 
-<meta name="date" content="2024-03-03" />
+<meta name="date" content="2025-01-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,11 +153,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.4.1" data-path="start.html"><a href="start.html#softwrap-long-lines"><i class="fa fa-check"></i><b>1.4.1</b> Softwrap Long Lines</a></li>
 <li class="chapter" data-level="1.4.2" data-path="start.html"><a href="start.html#make-notes-or-comments"><i class="fa fa-check"></i><b>1.4.2</b> Make Notes or Comments</a></li>
 <li class="chapter" data-level="1.4.3" data-path="start.html"><a href="start.html#multi-line-comments"><i class="fa fa-check"></i><b>1.4.3</b> Multi-Line Comments</a></li>
-<li class="chapter" data-level="1.4.4" data-path="start.html"><a href="start.html#style-guide"><i class="fa fa-check"></i><b>1.4.4</b> Style Guide</a></li>
+<li class="chapter" data-level="1.4.4" data-path="start.html"><a href="start.html#create-code-sections-in-r-script"><i class="fa fa-check"></i><b>1.4.4</b> Create Code Sections in R Script</a></li>
 <li class="chapter" data-level="1.4.5" data-path="start.html"><a href="start.html#setting-working-directory"><i class="fa fa-check"></i><b>1.4.5</b> Setting Working Directory</a></li>
-<li class="chapter" data-level="1.4.6" data-path="start.html"><a href="start.html#using-r-projects"><i class="fa fa-check"></i><b>1.4.6</b> Using R Projects</a></li>
-<li class="chapter" data-level="1.4.7" data-path="start.html"><a href="start.html#debugging"><i class="fa fa-check"></i><b>1.4.7</b> Debugging</a></li>
-<li class="chapter" data-level="1.4.8" data-path="start.html"><a href="start.html#last-words"><i class="fa fa-check"></i><b>1.4.8</b> Last Words</a></li>
+<li class="chapter" data-level="1.4.6" data-path="start.html"><a href="start.html#using-rstudio-projects"><i class="fa fa-check"></i><b>1.4.6</b> Using RStudio Projects</a></li>
+<li class="chapter" data-level="1.4.7" data-path="start.html"><a href="start.html#compile-report"><i class="fa fa-check"></i><b>1.4.7</b> Compile Report</a></li>
+<li class="chapter" data-level="1.4.8" data-path="start.html"><a href="start.html#debugging"><i class="fa fa-check"></i><b>1.4.8</b> Debugging</a></li>
+<li class="chapter" data-level="1.4.9" data-path="start.html"><a href="start.html#style-guide"><i class="fa fa-check"></i><b>1.4.9</b> Style Guide</a></li>
+<li class="chapter" data-level="1.4.10" data-path="start.html"><a href="start.html#last-words"><i class="fa fa-check"></i><b>1.4.10</b> Last Words</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Basics</a>
@@ -311,8 +313,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Start an R Project in the folder where you saved the data file.</li>
 <li>Open up a new script file in RStudio.</li>
 <li>Load <code>tidyverse</code> and <code>psych</code> packages.</li>
-<li>Read in the data file <code>SWB.csv</code>. Give this dataset the name <code>data</code>.</li>
-<li>Examine <code>data</code>. Minimally you should be able to tell there are 343 rows and 23 columns. You should also be able to tell the variable names and the data type for each variable.</li>
+<li>Read in the data file <code>SWB.csv</code>. Give this dataset the name <code>dataset</code>.</li>
+<li>Examine <code>dataset</code>. Minimally you should be able to tell there are 343 rows and 23 columns. You should also be able to tell the variable names and the data type for each variable.</li>
 <li>Convert <code>marital_status</code> and <code>have_children</code> from integer to factor. Add value labels to the factors. See the legend below to see how each variable is coded.</li>
 <li>Check that the two variables are indeed converted to factors.</li>
 <li>Create a subset of the dataset of only married parents (i.e., married people who have children). Further subset the dataset such that only the variables <code>swls2021_1</code>, <code>swls2021_2</code>, <code>swls2021_3</code>, <code>swls2021_4</code>, and <code>swls2021_5</code> are in the dataset. You should have 68 rows and 5 columns in this subset. Give this subset the name <code>subset</code>.</li>
@@ -458,75 +460,81 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="suggested-answers-1" class="section level2 hasAnchor" number="5.3">
 <h2><span class="header-section-number">5.3</span> Suggested Answers<a href="tha2.html#suggested-answers-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="tha2.html#cb69-1" tabindex="-1"></a><span class="co"># Skipped Steps 1 to 3. </span></span>
-<span id="cb69-2"><a href="tha2.html#cb69-2" tabindex="-1"></a></span>
-<span id="cb69-3"><a href="tha2.html#cb69-3" tabindex="-1"></a><span class="co"># 4. Load packages</span></span>
-<span id="cb69-4"><a href="tha2.html#cb69-4" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb69-5"><a href="tha2.html#cb69-5" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
-<span id="cb69-6"><a href="tha2.html#cb69-6" tabindex="-1"></a></span>
-<span id="cb69-7"><a href="tha2.html#cb69-7" tabindex="-1"></a><span class="co"># 5. Read .csv file</span></span>
-<span id="cb69-8"><a href="tha2.html#cb69-8" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;SWB.csv&quot;</span>) </span>
-<span id="cb69-9"><a href="tha2.html#cb69-9" tabindex="-1"></a><span class="co"># read.csv(&quot;SWB.csv&quot;) also okay</span></span>
-<span id="cb69-10"><a href="tha2.html#cb69-10" tabindex="-1"></a></span>
-<span id="cb69-11"><a href="tha2.html#cb69-11" tabindex="-1"></a><span class="co"># 6. Examine the data</span></span>
-<span id="cb69-12"><a href="tha2.html#cb69-12" tabindex="-1"></a><span class="co"># Take a look at the variable names and data types</span></span>
-<span id="cb69-13"><a href="tha2.html#cb69-13" tabindex="-1"></a><span class="fu">glimpse</span>(data)  <span class="co"># str(data) or View(data) also okay</span></span>
-<span id="cb69-14"><a href="tha2.html#cb69-14" tabindex="-1"></a></span>
-<span id="cb69-15"><a href="tha2.html#cb69-15" tabindex="-1"></a><span class="co"># 7. Convert integer to factor and add value labels to the factor.</span></span>
-<span id="cb69-16"><a href="tha2.html#cb69-16" tabindex="-1"></a>data<span class="sc">$</span>marital_status <span class="ot">&lt;-</span> <span class="fu">factor</span>(data<span class="sc">$</span>marital_status, </span>
-<span id="cb69-17"><a href="tha2.html#cb69-17" tabindex="-1"></a>                              <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), </span>
-<span id="cb69-18"><a href="tha2.html#cb69-18" tabindex="-1"></a>                              <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;married&quot;</span>, <span class="st">&quot;divorced&quot;</span>, <span class="st">&quot;widowed&quot;</span>))</span>
-<span id="cb69-19"><a href="tha2.html#cb69-19" tabindex="-1"></a></span>
-<span id="cb69-20"><a href="tha2.html#cb69-20" tabindex="-1"></a>data<span class="sc">$</span>have_children <span class="ot">&lt;-</span> <span class="fu">factor</span>(data<span class="sc">$</span>have_children, </span>
-<span id="cb69-21"><a href="tha2.html#cb69-21" tabindex="-1"></a>                             <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
-<span id="cb69-22"><a href="tha2.html#cb69-22" tabindex="-1"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;no children&quot;</span>, <span class="st">&quot;have children&quot;</span>))</span>
-<span id="cb69-23"><a href="tha2.html#cb69-23" tabindex="-1"></a></span>
-<span id="cb69-24"><a href="tha2.html#cb69-24" tabindex="-1"></a><span class="co"># 8. Check variables are now factors</span></span>
-<span id="cb69-25"><a href="tha2.html#cb69-25" tabindex="-1"></a><span class="fu">glimpse</span>(data<span class="sc">$</span>marital_status)  <span class="co"># str(data$marital_status) also okay</span></span>
-<span id="cb69-26"><a href="tha2.html#cb69-26" tabindex="-1"></a><span class="fu">glimpse</span>(data<span class="sc">$</span>have_children) <span class="co"># str(data$have_children) also okay</span></span>
-<span id="cb69-27"><a href="tha2.html#cb69-27" tabindex="-1"></a></span>
-<span id="cb69-28"><a href="tha2.html#cb69-28" tabindex="-1"></a><span class="co"># 9. Create subset </span></span>
-<span id="cb69-29"><a href="tha2.html#cb69-29" tabindex="-1"></a>subset <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
-<span id="cb69-30"><a href="tha2.html#cb69-30" tabindex="-1"></a>  <span class="fu">filter</span>(marital_status <span class="sc">==</span> <span class="st">&quot;married&quot;</span> <span class="sc">&amp;</span> have_children <span class="sc">==</span> <span class="st">&quot;have children&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb69-31"><a href="tha2.html#cb69-31" tabindex="-1"></a>  <span class="fu">select</span>(swls2021_1<span class="sc">:</span>swls2021_5)</span>
-<span id="cb69-32"><a href="tha2.html#cb69-32" tabindex="-1"></a></span>
-<span id="cb69-33"><a href="tha2.html#cb69-33" tabindex="-1"></a><span class="co"># 10. Compute swls2021_avg</span></span>
-<span id="cb69-34"><a href="tha2.html#cb69-34" tabindex="-1"></a>subset <span class="ot">&lt;-</span> subset <span class="sc">%&gt;%</span> </span>
-<span id="cb69-35"><a href="tha2.html#cb69-35" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">swls2021_avg =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(swls2021_1<span class="sc">:</span>swls2021_5)))) </span>
-<span id="cb69-36"><a href="tha2.html#cb69-36" tabindex="-1"></a></span>
-<span id="cb69-37"><a href="tha2.html#cb69-37" tabindex="-1"></a><span class="co"># 11. Create a histogram for swls2021_avg</span></span>
-<span id="cb69-38"><a href="tha2.html#cb69-38" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> subset) <span class="sc">+</span> </span>
-<span id="cb69-39"><a href="tha2.html#cb69-39" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> swls2021_avg)) <span class="sc">+</span> </span>
-<span id="cb69-40"><a href="tha2.html#cb69-40" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb69-41"><a href="tha2.html#cb69-41" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">8</span>),</span>
-<span id="cb69-42"><a href="tha2.html#cb69-42" tabindex="-1"></a>                     <span class="co"># Every 0.5 units, a tick will appear on x-axis</span></span>
-<span id="cb69-43"><a href="tha2.html#cb69-43" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">8</span>, <span class="fl">0.5</span>)) <span class="sc">+</span> </span>
-<span id="cb69-44"><a href="tha2.html#cb69-44" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), </span>
-<span id="cb69-45"><a href="tha2.html#cb69-45" tabindex="-1"></a>                     <span class="co"># Every 1 unit, a tick will appear on y-axis</span></span>
-<span id="cb69-46"><a href="tha2.html#cb69-46" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">20</span>, <span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb69-47"><a href="tha2.html#cb69-47" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Average 2021 Satisfaction With Life Scores&quot;</span>,</span>
-<span id="cb69-48"><a href="tha2.html#cb69-48" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Frequency&quot;</span>, </span>
-<span id="cb69-49"><a href="tha2.html#cb69-49" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Histogram of Average 2021 Satisfaction With Life Scores&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb69-50"><a href="tha2.html#cb69-50" tabindex="-1"></a>  <span class="co"># Choose the theme (there are different themes to choose, just type theme and some suggestions will pop up)</span></span>
-<span id="cb69-51"><a href="tha2.html#cb69-51" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb69-52"><a href="tha2.html#cb69-52" tabindex="-1"></a></span>
-<span id="cb69-53"><a href="tha2.html#cb69-53" tabindex="-1"></a><span class="co"># 12A. Get summary statistics using the summarise() function</span></span>
-<span id="cb69-54"><a href="tha2.html#cb69-54" tabindex="-1"></a><span class="co"># Maximum is 5.4, minimum is 2.6, mean is 4.18, and sd is 0.707.</span></span>
-<span id="cb69-55"><a href="tha2.html#cb69-55" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
-<span id="cb69-56"><a href="tha2.html#cb69-56" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_swls =</span> <span class="fu">mean</span>(swls2021_avg), </span>
-<span id="cb69-57"><a href="tha2.html#cb69-57" tabindex="-1"></a>            <span class="at">min_swls =</span> <span class="fu">min</span>(swls2021_avg), </span>
-<span id="cb69-58"><a href="tha2.html#cb69-58" tabindex="-1"></a>            <span class="at">max_swls =</span> <span class="fu">max</span>(swls2021_avg), </span>
-<span id="cb69-59"><a href="tha2.html#cb69-59" tabindex="-1"></a>            <span class="at">sd_swls =</span> <span class="fu">sd</span>(swls2021_avg))</span>
-<span id="cb69-60"><a href="tha2.html#cb69-60" tabindex="-1"></a></span>
-<span id="cb69-61"><a href="tha2.html#cb69-61" tabindex="-1"></a><span class="co"># 12B. Get summary statistics using the describe() function</span></span>
-<span id="cb69-62"><a href="tha2.html#cb69-62" tabindex="-1"></a><span class="co"># Maximum is 5.4, minimum is 2.6, mean is 4.18, and sd is 0.707.</span></span>
-<span id="cb69-63"><a href="tha2.html#cb69-63" tabindex="-1"></a><span class="fu">describe</span>(subset<span class="sc">$</span>swls2021_avg)</span>
-<span id="cb69-64"><a href="tha2.html#cb69-64" tabindex="-1"></a></span>
-<span id="cb69-65"><a href="tha2.html#cb69-65" tabindex="-1"></a><span class="co"># 13. Create a subset that only contains people with an average SWLS of 4.18 and above</span></span>
-<span id="cb69-66"><a href="tha2.html#cb69-66" tabindex="-1"></a><span class="co"># Then, count the number of people remaining </span></span>
-<span id="cb69-67"><a href="tha2.html#cb69-67" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
-<span id="cb69-68"><a href="tha2.html#cb69-68" tabindex="-1"></a>  <span class="fu">filter</span>(swls2021_avg <span class="sc">&gt;=</span> <span class="fl">4.18</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb69-69"><a href="tha2.html#cb69-69" tabindex="-1"></a>  <span class="fu">summarise</span> (<span class="at">total =</span> <span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="tha2.html#cb78-1" tabindex="-1"></a><span class="co"># Skipped Steps 1 to 3. </span></span>
+<span id="cb78-2"><a href="tha2.html#cb78-2" tabindex="-1"></a></span>
+<span id="cb78-3"><a href="tha2.html#cb78-3" tabindex="-1"></a><span class="co"># 4. Load packages</span></span>
+<span id="cb78-4"><a href="tha2.html#cb78-4" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb78-5"><a href="tha2.html#cb78-5" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
+<span id="cb78-6"><a href="tha2.html#cb78-6" tabindex="-1"></a></span>
+<span id="cb78-7"><a href="tha2.html#cb78-7" tabindex="-1"></a><span class="co"># 5. Read .csv file</span></span>
+<span id="cb78-8"><a href="tha2.html#cb78-8" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;SWB.csv&quot;</span>) </span>
+<span id="cb78-9"><a href="tha2.html#cb78-9" tabindex="-1"></a><span class="co"># read.csv(&quot;SWB.csv&quot;) also okay</span></span>
+<span id="cb78-10"><a href="tha2.html#cb78-10" tabindex="-1"></a></span>
+<span id="cb78-11"><a href="tha2.html#cb78-11" tabindex="-1"></a><span class="co"># 6. Examine the data</span></span>
+<span id="cb78-12"><a href="tha2.html#cb78-12" tabindex="-1"></a><span class="co"># Take a look at the variable names and data types</span></span>
+<span id="cb78-13"><a href="tha2.html#cb78-13" tabindex="-1"></a><span class="fu">glimpse</span>(dataset)  <span class="co"># str(dataset) or View(dataset) also okay</span></span>
+<span id="cb78-14"><a href="tha2.html#cb78-14" tabindex="-1"></a></span>
+<span id="cb78-15"><a href="tha2.html#cb78-15" tabindex="-1"></a><span class="co"># 7. Convert integer to factor and add value labels to the factor.</span></span>
+<span id="cb78-16"><a href="tha2.html#cb78-16" tabindex="-1"></a>dataset<span class="sc">$</span>marital_status <span class="ot">&lt;-</span> <span class="fu">factor</span>(dataset<span class="sc">$</span>marital_status, </span>
+<span id="cb78-17"><a href="tha2.html#cb78-17" tabindex="-1"></a>                                 <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), </span>
+<span id="cb78-18"><a href="tha2.html#cb78-18" tabindex="-1"></a>                                 <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;married&quot;</span>, <span class="st">&quot;divorced&quot;</span>, <span class="st">&quot;widowed&quot;</span>))</span>
+<span id="cb78-19"><a href="tha2.html#cb78-19" tabindex="-1"></a></span>
+<span id="cb78-20"><a href="tha2.html#cb78-20" tabindex="-1"></a>dataset<span class="sc">$</span>have_children <span class="ot">&lt;-</span> <span class="fu">factor</span>(dataset<span class="sc">$</span>have_children, </span>
+<span id="cb78-21"><a href="tha2.html#cb78-21" tabindex="-1"></a>                                <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb78-22"><a href="tha2.html#cb78-22" tabindex="-1"></a>                                <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;no children&quot;</span>, <span class="st">&quot;have children&quot;</span>))</span>
+<span id="cb78-23"><a href="tha2.html#cb78-23" tabindex="-1"></a></span>
+<span id="cb78-24"><a href="tha2.html#cb78-24" tabindex="-1"></a><span class="co"># 8. Check variables are now factors</span></span>
+<span id="cb78-25"><a href="tha2.html#cb78-25" tabindex="-1"></a><span class="fu">glimpse</span>(dataset<span class="sc">$</span>marital_status)  <span class="co"># str(dataset$marital_status) also okay</span></span>
+<span id="cb78-26"><a href="tha2.html#cb78-26" tabindex="-1"></a><span class="fu">glimpse</span>(dataset<span class="sc">$</span>have_children) <span class="co"># str(dataset$have_children) also okay</span></span>
+<span id="cb78-27"><a href="tha2.html#cb78-27" tabindex="-1"></a></span>
+<span id="cb78-28"><a href="tha2.html#cb78-28" tabindex="-1"></a><span class="co"># 9. Create subset </span></span>
+<span id="cb78-29"><a href="tha2.html#cb78-29" tabindex="-1"></a>subset <span class="ot">&lt;-</span> dataset <span class="sc">%&gt;%</span> </span>
+<span id="cb78-30"><a href="tha2.html#cb78-30" tabindex="-1"></a>  <span class="fu">filter</span>(marital_status <span class="sc">==</span> <span class="st">&quot;married&quot;</span> <span class="sc">&amp;</span> have_children <span class="sc">==</span> <span class="st">&quot;have children&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb78-31"><a href="tha2.html#cb78-31" tabindex="-1"></a>  <span class="fu">select</span>(swls2021_1<span class="sc">:</span>swls2021_5)</span>
+<span id="cb78-32"><a href="tha2.html#cb78-32" tabindex="-1"></a></span>
+<span id="cb78-33"><a href="tha2.html#cb78-33" tabindex="-1"></a><span class="co"># 10. Compute swls2021_avg</span></span>
+<span id="cb78-34"><a href="tha2.html#cb78-34" tabindex="-1"></a>subset <span class="ot">&lt;-</span> subset <span class="sc">%&gt;%</span> </span>
+<span id="cb78-35"><a href="tha2.html#cb78-35" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">swls2021_avg =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(swls2021_1<span class="sc">:</span>swls2021_5)))) </span>
+<span id="cb78-36"><a href="tha2.html#cb78-36" tabindex="-1"></a></span>
+<span id="cb78-37"><a href="tha2.html#cb78-37" tabindex="-1"></a><span class="co"># 11. Create a histogram for swls2021_avg</span></span>
+<span id="cb78-38"><a href="tha2.html#cb78-38" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> subset) <span class="sc">+</span> </span>
+<span id="cb78-39"><a href="tha2.html#cb78-39" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> swls2021_avg)) <span class="sc">+</span> </span>
+<span id="cb78-40"><a href="tha2.html#cb78-40" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb78-41"><a href="tha2.html#cb78-41" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">8</span>),</span>
+<span id="cb78-42"><a href="tha2.html#cb78-42" tabindex="-1"></a>                     <span class="co"># Every 0.5 units, a tick will appear on x-axis</span></span>
+<span id="cb78-43"><a href="tha2.html#cb78-43" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">8</span>, <span class="fl">0.5</span>)) <span class="sc">+</span> </span>
+<span id="cb78-44"><a href="tha2.html#cb78-44" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), </span>
+<span id="cb78-45"><a href="tha2.html#cb78-45" tabindex="-1"></a>                     <span class="co"># Every 1 unit, a tick will appear on y-axis</span></span>
+<span id="cb78-46"><a href="tha2.html#cb78-46" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">20</span>, <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb78-47"><a href="tha2.html#cb78-47" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Average 2021 Satisfaction With Life Scores&quot;</span>,</span>
+<span id="cb78-48"><a href="tha2.html#cb78-48" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Frequency&quot;</span>, </span>
+<span id="cb78-49"><a href="tha2.html#cb78-49" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Histogram of Average 2021 Satisfaction With Life Scores&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb78-50"><a href="tha2.html#cb78-50" tabindex="-1"></a>  <span class="co"># Choose the theme (there are different themes to choose, just type theme and some suggestions will pop up)</span></span>
+<span id="cb78-51"><a href="tha2.html#cb78-51" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb78-52"><a href="tha2.html#cb78-52" tabindex="-1"></a></span>
+<span id="cb78-53"><a href="tha2.html#cb78-53" tabindex="-1"></a><span class="co"># 12A. Get summary statistics using the summarise() function</span></span>
+<span id="cb78-54"><a href="tha2.html#cb78-54" tabindex="-1"></a><span class="co"># Maximum is 5.4, minimum is 2.6, mean is 4.18, and sd is 0.707.</span></span>
+<span id="cb78-55"><a href="tha2.html#cb78-55" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
+<span id="cb78-56"><a href="tha2.html#cb78-56" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_swls =</span> <span class="fu">mean</span>(swls2021_avg), </span>
+<span id="cb78-57"><a href="tha2.html#cb78-57" tabindex="-1"></a>            <span class="at">min_swls =</span> <span class="fu">min</span>(swls2021_avg), </span>
+<span id="cb78-58"><a href="tha2.html#cb78-58" tabindex="-1"></a>            <span class="at">max_swls =</span> <span class="fu">max</span>(swls2021_avg), </span>
+<span id="cb78-59"><a href="tha2.html#cb78-59" tabindex="-1"></a>            <span class="at">sd_swls =</span> <span class="fu">sd</span>(swls2021_avg))</span>
+<span id="cb78-60"><a href="tha2.html#cb78-60" tabindex="-1"></a></span>
+<span id="cb78-61"><a href="tha2.html#cb78-61" tabindex="-1"></a><span class="co"># 12B. Get summary statistics using the describe() function</span></span>
+<span id="cb78-62"><a href="tha2.html#cb78-62" tabindex="-1"></a><span class="co"># Maximum is 5.4, minimum is 2.6, mean is 4.18, and sd is 0.707.</span></span>
+<span id="cb78-63"><a href="tha2.html#cb78-63" tabindex="-1"></a><span class="fu">describe</span>(subset<span class="sc">$</span>swls2021_avg)</span>
+<span id="cb78-64"><a href="tha2.html#cb78-64" tabindex="-1"></a></span>
+<span id="cb78-65"><a href="tha2.html#cb78-65" tabindex="-1"></a><span class="co"># 13A. Create a subset that only contains people with an average SWLS of 4.18 and above</span></span>
+<span id="cb78-66"><a href="tha2.html#cb78-66" tabindex="-1"></a><span class="co"># Then, count the number of people remaining </span></span>
+<span id="cb78-67"><a href="tha2.html#cb78-67" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
+<span id="cb78-68"><a href="tha2.html#cb78-68" tabindex="-1"></a>  <span class="fu">filter</span>(swls2021_avg <span class="sc">&gt;=</span> <span class="fl">4.18</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb78-69"><a href="tha2.html#cb78-69" tabindex="-1"></a>  <span class="fu">summarise</span> (<span class="at">total =</span> <span class="fu">n</span>())</span>
+<span id="cb78-70"><a href="tha2.html#cb78-70" tabindex="-1"></a></span>
+<span id="cb78-71"><a href="tha2.html#cb78-71" tabindex="-1"></a><span class="co"># 13B. Create a subset that only contains people with an average SWLS of 4.18 and above</span></span>
+<span id="cb78-72"><a href="tha2.html#cb78-72" tabindex="-1"></a><span class="co"># Then, count the number of people remaining </span></span>
+<span id="cb78-73"><a href="tha2.html#cb78-73" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
+<span id="cb78-74"><a href="tha2.html#cb78-74" tabindex="-1"></a>  <span class="fu">filter</span>(swls2021_avg <span class="sc">&gt;=</span> <span class="fl">4.18</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb78-75"><a href="tha2.html#cb78-75" tabindex="-1"></a>  nrow  <span class="co"># count the number of rows remaining</span></span></code></pre></div>
 
 </div>
 </div>

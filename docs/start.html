@@ -23,7 +23,7 @@
 <meta name="author" content="Huey Woon LEE" />
 
 
-<meta name="date" content="2024-03-03" />
+<meta name="date" content="2025-01-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,11 +153,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.4.1" data-path="start.html"><a href="start.html#softwrap-long-lines"><i class="fa fa-check"></i><b>1.4.1</b> Softwrap Long Lines</a></li>
 <li class="chapter" data-level="1.4.2" data-path="start.html"><a href="start.html#make-notes-or-comments"><i class="fa fa-check"></i><b>1.4.2</b> Make Notes or Comments</a></li>
 <li class="chapter" data-level="1.4.3" data-path="start.html"><a href="start.html#multi-line-comments"><i class="fa fa-check"></i><b>1.4.3</b> Multi-Line Comments</a></li>
-<li class="chapter" data-level="1.4.4" data-path="start.html"><a href="start.html#style-guide"><i class="fa fa-check"></i><b>1.4.4</b> Style Guide</a></li>
+<li class="chapter" data-level="1.4.4" data-path="start.html"><a href="start.html#create-code-sections-in-r-script"><i class="fa fa-check"></i><b>1.4.4</b> Create Code Sections in R Script</a></li>
 <li class="chapter" data-level="1.4.5" data-path="start.html"><a href="start.html#setting-working-directory"><i class="fa fa-check"></i><b>1.4.5</b> Setting Working Directory</a></li>
-<li class="chapter" data-level="1.4.6" data-path="start.html"><a href="start.html#using-r-projects"><i class="fa fa-check"></i><b>1.4.6</b> Using R Projects</a></li>
-<li class="chapter" data-level="1.4.7" data-path="start.html"><a href="start.html#debugging"><i class="fa fa-check"></i><b>1.4.7</b> Debugging</a></li>
-<li class="chapter" data-level="1.4.8" data-path="start.html"><a href="start.html#last-words"><i class="fa fa-check"></i><b>1.4.8</b> Last Words</a></li>
+<li class="chapter" data-level="1.4.6" data-path="start.html"><a href="start.html#using-rstudio-projects"><i class="fa fa-check"></i><b>1.4.6</b> Using RStudio Projects</a></li>
+<li class="chapter" data-level="1.4.7" data-path="start.html"><a href="start.html#compile-report"><i class="fa fa-check"></i><b>1.4.7</b> Compile Report</a></li>
+<li class="chapter" data-level="1.4.8" data-path="start.html"><a href="start.html#debugging"><i class="fa fa-check"></i><b>1.4.8</b> Debugging</a></li>
+<li class="chapter" data-level="1.4.9" data-path="start.html"><a href="start.html#style-guide"><i class="fa fa-check"></i><b>1.4.9</b> Style Guide</a></li>
+<li class="chapter" data-level="1.4.10" data-path="start.html"><a href="start.html#last-words"><i class="fa fa-check"></i><b>1.4.10</b> Last Words</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Basics</a>
@@ -387,9 +389,19 @@ Figure 1.2: R Studio With Four Panes
 <span id="cb2-4"><a href="start.html#cb2-4" tabindex="-1"></a><span class="co">#&gt; lines.</span></span>
 <span id="cb2-5"><a href="start.html#cb2-5" tabindex="-1"></a><span class="co">#&gt; :) </span></span></code></pre></div>
 </div>
-<div id="style-guide" class="section level3 hasAnchor" number="1.4.4">
-<h3><span class="header-section-number">1.4.4</span> Style Guide<a href="start.html#style-guide" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>I strongly believe that people should be able to reproduce each others’ analyses. This provides the checks and balances that is important for science to advance. Therefore, you should be willing and able to share your code. But even if you do share your code, if it is unintelligible, it will not be of much help. Therefore, to make your code understandable, in addition to writing comments in the script, you should also try to follow certain conventions when writing code. These conventions are laid out in the tidyverse Style Guide. You can read the Style Guide here: <a href="https://style.tidyverse.org/syntax.html" class="uri">https://style.tidyverse.org/syntax.html</a>.</p>
+<div id="create-code-sections-in-r-script" class="section level3 hasAnchor" number="1.4.4">
+<h3><span class="header-section-number">1.4.4</span> Create Code Sections in R Script<a href="start.html#create-code-sections-in-r-script" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Often times when we are analysing data, we need to include multiple steps. It can feel incredibly confusing and overwhelming to navigate a long R script. We can use code sections to organise and structure the code, by grouping related tasks together. This way the R script is easier to navigate.</p>
+<p>To insert a new code section, start the line with # and then use any of the following: <em>at least</em> four trailing dashes (-), equal signs (=), or pound signs (#).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="start.html#cb3-1" tabindex="-1"></a><span class="co"># Section One ---------------------------------</span></span>
+<span id="cb3-2"><a href="start.html#cb3-2" tabindex="-1"></a><span class="co"># Section One ----</span></span>
+<span id="cb3-3"><a href="start.html#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="start.html#cb3-4" tabindex="-1"></a><span class="co"># Section Two =================================</span></span>
+<span id="cb3-5"><a href="start.html#cb3-5" tabindex="-1"></a><span class="co"># Section Two ====</span></span>
+<span id="cb3-6"><a href="start.html#cb3-6" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="start.html#cb3-7" tabindex="-1"></a><span class="do">### Section Three ############################# </span></span>
+<span id="cb3-8"><a href="start.html#cb3-8" tabindex="-1"></a><span class="do">### Section Three ####</span></span></code></pre></div>
+<p>To fold all code sections (i.e., hide the content within all sections, leaving only the section header for navigation), go to <strong>Edit &gt; Folding &gt; Collapse All</strong> (The shortcut is <code>Alt + O</code>.) To expand all code sections (i.e., show all content), go to <strong>Edit &gt; Folding &gt; Expand All</strong> (The shortcut is <code>Alt + Shift + O</code>.)</p>
 </div>
 <div id="setting-working-directory" class="section level3 hasAnchor" number="1.4.5">
 <h3><span class="header-section-number">1.4.5</span> Setting Working Directory<a href="start.html#setting-working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -398,20 +410,37 @@ Figure 1.2: R Studio With Four Panes
 <p>To get the file location in Windows, we first go to the folder where the file is located, right-click on the address bar, and click <strong>Copy address as text</strong>. We then need to convert the backslashes in the file path to forward slashes before we can use it. Let’s say the file path is <code>C:\Users\Win10\Desktop\R</code>. After converting all the backslashes to forward slashes, the file path to use is <code>C:/Users/Win10/Desktop/R</code>.</p>
 <p>In macOS, there are several ways to get the file path. For instructions, please visit this website: <a href="https://www.dev2qa.com/how-to-get-file-path-in-mac/" class="uri">https://www.dev2qa.com/how-to-get-file-path-in-mac/</a>. Note that the file paths in macOS already use forward slashes, so changing backslashes to forward slashes is not an issue for macOS users.</p>
 <p>After getting the file path, you can then set the working directory as follows, with the file path encased in open/close inverted commas, within the parentheses.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="start.html#cb3-1" tabindex="-1"></a><span class="co"># Set working directory</span></span>
-<span id="cb3-2"><a href="start.html#cb3-2" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/Win10/Desktop/R&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="start.html#cb4-1" tabindex="-1"></a><span class="co"># Set working directory</span></span>
+<span id="cb4-2"><a href="start.html#cb4-2" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/Win10/Desktop/R&quot;</span>)</span></code></pre></div>
 <p>Another (perhaps easier) way to set working directory is to go to <strong>Session &gt; Set Working Directory &gt; Choose Directory</strong>. Then, select the folder you want to set as your working directory. This process needs to be repeated for each session (i.e., each time you start up RStudio).</p>
 <p>If you want to set a default working directory, go to <strong>Tools &gt; Global Options &gt; General &gt; Default working directory (when not in a project) &gt; Browse</strong>. Then, select the folder you want to set as your default working directory.</p>
 </div>
-<div id="using-r-projects" class="section level3 hasAnchor" number="1.4.6">
-<h3><span class="header-section-number">1.4.6</span> Using R Projects<a href="start.html#using-r-projects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>While setting the working directory manually is sufficient when we have one or two projects, many of us have multiple projects on-going at the same time. If we have a bunch of different files from different projects all strewn in a single directory (folder), it can get quite messy. To stay organised, it is best that we create an R project for each project we are working on.</p>
-<p>To do this, go to <strong>File &gt; New Project</strong>. A dialogue window with three options, “New Directory”, “Existing Directory” and “Version Control”, will appear. From here, you may choose either “New Directory” or “Existing Directory”. If you chose “New Directory”, R will create a new folder and create an R project within that new folder. If you chose “Existing Directory”, R will create an R project within an existing folder that you specify. Either will work, but I usually select “Existing Directory” as I would already have created my own folder to house materials related to a specific project.</p>
+<div id="using-rstudio-projects" class="section level3 hasAnchor" number="1.4.6">
+<h3><span class="header-section-number">1.4.6</span> Using RStudio Projects<a href="start.html#using-rstudio-projects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>While setting the working directory manually is sufficient when we have only one or two projects, many of us have multiple projects on-going at the same time. If we have a bunch of different files from different projects all strewn in a single directory (folder), it can get quite messy. To stay organised, it is preferable that we create an RStudio project for each project we are working on. This allows us to group the files related to a single project (e.g., data, output) together.</p>
+<p>To do this, go to <strong>File &gt; New Project</strong>. A dialogue window with three options, “New Directory”, “Existing Directory” and “Version Control”, will appear. From here, you may choose either “New Directory” or “Existing Directory”. If you chose “New Directory”, R will create a new folder and create an R project within that new folder. If you chose “Existing Directory”, R will create an RStudio project within an existing folder that you specify. Either will work, but I usually select “Existing Directory” as I would already have created my own folder to house materials related to a specific project.</p>
 <p>After RStudio has created the project, it will change the working directory to the project directory so that you can access all the files (e.g., data, script) related to this project in this directory. RStudio will also create a file with the extension .Rproj in the project directory. When you open this file, RStudio will automatically start a new session with the project directory as your working directory.</p>
-<p>While it is not absolutely necessary to use RStudio projects in this course, I recommend it because it will help keep you organized.</p>
+<p>While it is not necessary to use RStudio projects in my classes, I recommend it because it will help keep you organized.</p>
 </div>
-<div id="debugging" class="section level3 hasAnchor" number="1.4.7">
-<h3><span class="header-section-number">1.4.7</span> Debugging<a href="start.html#debugging" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="compile-report" class="section level3 hasAnchor" number="1.4.7">
+<h3><span class="header-section-number">1.4.7</span> Compile Report<a href="start.html#compile-report" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The “Compile Report” feature in RStudio generates a formatted document from your R script. It integrates code and output into a single document that can be easily shared. To compile a report, go to <strong>File &gt; Compile Report…</strong>.</p>
+<div class="figure"><span style="display:block;" id="fig:003-compile1"></span>
+<img src="img/003-compile1.png" alt="Compile Report Step 1" width="50%" />
+<p class="caption">
+Figure 1.3: Compile Report Step 1
+</p>
+</div>
+<p>Although there are several different formats you may choose (e.g., PDF, Word, HTML), I find that compiling the report into Word format works best for my classes. So, under <strong>Report output format:</strong>, choose <strong>MS Word</strong>. Then click <strong>Compile</strong>.</p>
+<div class="figure"><span style="display:block;" id="fig:003-compile2"></span>
+<img src="img/003-compile2.png" alt="Compile Report Step 2" width="50%" />
+<p class="caption">
+Figure 1.4: Compile Report Step 2
+</p>
+</div>
+</div>
+<div id="debugging" class="section level3 hasAnchor" number="1.4.8">
+<h3><span class="header-section-number">1.4.8</span> Debugging<a href="start.html#debugging" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>When you are programming, you will make errors (“bugs”) in your code. Trying to figure out where you made the error (“debugging”) can be extremely time-consuming and frustrating. To help you along, here are some of the most common bugs that you’ll run into.</p>
 <ol style="list-style-type: decimal">
 <li>Misspelled object or function
@@ -430,8 +459,12 @@ Figure 1.2: R Studio With Four Panes
 </ol>
 <p>If you’ve tried all the above and still can’t figure out what’s going on, just copy and paste the warning into the search engine. 99% of the time, you’ll be able to figure out what happened by reading responses on forums or other websites. (Programmers are super helpful!)</p>
 </div>
-<div id="last-words" class="section level3 hasAnchor" number="1.4.8">
-<h3><span class="header-section-number">1.4.8</span> Last Words<a href="start.html#last-words" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="style-guide" class="section level3 hasAnchor" number="1.4.9">
+<h3><span class="header-section-number">1.4.9</span> Style Guide<a href="start.html#style-guide" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>I strongly believe that people should be able to reproduce each others’ analyses. This provides the checks and balances that is important for science to advance. Therefore, you should be willing and able to share your code. But even if you do share your code, if it is unintelligible, it will not be of much help. Therefore, to make your code understandable, in addition to writing comments in the script, you should also try to follow certain conventions when writing code. These conventions are laid out in the tidyverse Style Guide. You can read the Style Guide here: <a href="https://style.tidyverse.org/syntax.html" class="uri">https://style.tidyverse.org/syntax.html</a>.</p>
+</div>
+<div id="last-words" class="section level3 hasAnchor" number="1.4.10">
+<h3><span class="header-section-number">1.4.10</span> Last Words<a href="start.html#last-words" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In general, students new to programming tend to be hesitant to experiment, worried that they’d break the software or something. I <em>promise</em> you that this rarely happens (except maybe when you write a loop function that doesn’t stop looping!). So just have fun and experiment. If RStudio freezes, just close it and re-start!</p>
 <p>Congrats! You’ve now installed R and RStudio! You’re now ready to move on to some basics! =D</p>
 

@@ -3,6 +3,7 @@ title: "PSYC208 R Companion Website"
 author: "Huey Woon LEE"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
+# runtime: shiny_prerendered
 # output: bookdown::gitbook
 documentclass: book
 bibliography: [book.bib, packages.bib]

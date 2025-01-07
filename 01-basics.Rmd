@@ -16,6 +16,7 @@ Before typing commands into the script editor, it might be useful for you to kno
 
 Now, let's actually get R to do stuff for us! Open a script file (`Ctrl/CMD + Shift + N`). Then copy and paste the following R codes into the script file. Run each line (`Ctrl/Cmd + Enter`) to see what they do. Note that `#` denotes a comment, and therefore it will run as a line of text. Experiment and have fun!
 
+
 ```{r eval = FALSE}
 
 # Assign a single value (e.g., 9) to an object, say x.  
@@ -144,21 +145,21 @@ age
 
 Now, let's combine the two variables into a data frame. You can think of a data frame as a spreadsheet or as a table, where each row represents the information for one person, and `name` and `age` are in side-by-side columns. 
 
-We will use  the `data.frame()` function and call this data frame `data`. 
+We will use  the `data.frame()` function and call this data frame `dataset`. 
 
 ```{r}
 
-data <- data.frame(Name = name, Age = age)  
+dataset <- data.frame(Name = name, Age = age)  
 # Name = name tells R that the column should have the header Name and the data for the column should be copied from the object name. 
 # Age = age tells R that the column should have the header Age and the data for the column should be copied from the object age. 
 
 ```
 
-Type `data` into the console. You should see: 
+Type `dataset` into the console. You should see: 
 
 ```{r echo = FALSE}
 
-data
+dataset
 
 ```
 
@@ -181,7 +182,7 @@ rm(age)
 
 ```
 
-Now, when you type ls() into the console, you'll see that all is left is the data frame, `data`. 
+Now, when you type ls() into the console, you'll see that all is left is the data frame, `dataset`. 
 
 ```{r echo = FALSE}
 
@@ -193,57 +194,57 @@ If you wish, you can directly type the data into a data frame instead of first c
 
 ```{r}
 
-data2 <- data.frame(Name = c("Bob", "Andrea", "Calvin"), Age = c(48, 47, 49))
-# data and data2 will look exactly the same
+dataset2 <- data.frame(Name = c("Bob", "Andrea", "Calvin"), Age = c(48, 47, 49))
+# dataset and dataset2 will look exactly the same
 
 ```
 
-Now, suppose we want to use the variables in the data frame `data`. We will need to attach `data$` (a dollar sign after the name of the data frame) before the variable name. This will tell R that that variable comes from the data frame `data`. 
+Now, suppose we want to use the variables in the data frame `dataset`. We will need to attach `dataset$` (a dollar sign after the name of the data frame) before the variable name. This will tell R that that variable comes from the data frame `dataset`. 
 
 For example, if we want to know the ages of the three participants. We should type: 
 
 ```{r}
 
-data$Age
-# this tells R to go to the object called data, locate the column Age and then produce the values in that column
-# remember that R is case-sensitive. So if you'd typed data$age, you'll get an error.
+dataset$Age
+# this tells R to go to the object called dataset, locate the column Age and then produce the values in that column
+# remember that R is case-sensitive. So if you'd typed dataset$age, you'll get an error.
 # typing age or Age won't work either because there isn't an object called age or Age.
 
 ```
 
-From the original table, we know that there are more variables (columns) we need to add to the data frame `data`: the number of children the person has and the person’s gender. Let’s label the number of children each person has as `Children` and the gender of each person as `Gender`.
+From the original table, we know that there are more variables (columns) we need to add to the data frame `dataset`: the number of children the person has and the person’s gender. Let’s label the number of children each person has as `Children` and the gender of each person as `Gender`.
 
 ```{r}
 
-data$Children <- c(1, 3, 2)  
-# this tells R to go to the object data and create a column called Children. Then, assign the column the values 1, 3, and 2.
+dataset$Children <- c(1, 3, 2)  
+# this tells R to go to the object dataset and create a column called Children. Then, assign the column the values 1, 3, and 2.
 
-data$Gender <- c("male", "female", "male")   
-# this tells R to go to the object data and create a column called Gender. Then, assign the column the values "male", "female", and "male"
+dataset$Gender <- c("male", "female", "male")   
+# this tells R to go to the object dataset and create a column called Gender. Then, assign the column the values "male", "female", and "male"
 
-# again, notice the order of data$Children and data$Gender match the order of the names
+# again, notice the order of dataset$Children and dataset$Gender match the order of the names
 
 ```
 
-Now, when you type `data` into the console, you'll get: 
+Now, when you type `dataset` into the console, you'll get: 
 
 ```{r echo = FALSE}
 
-data
+dataset
 
 ```
 
-Note that we created `Children` and `Gender` within the data frame `data`. So if you type `Children` and `Gender` without `data$`, you will get an error message in the console telling you that the object cannot be found because there isn't an object (independent of the data frame) that is called `Children` or `Gender`.
+Note that we created `Children` and `Gender` within the data frame `dataset`. So if you type `Children` and `Gender` without `dataset$`, you will get an error message in the console telling you that the object cannot be found because there isn't an object (independent of the data frame) that is called `Children` or `Gender`.
 
-Now, let’s say we made a mistake and need to remove `Children` from the data frame, `data`. We can type: 
+Now, let’s say we made a mistake and need to remove `Children` from the data frame, `dataset`. We can type: 
 
 ```{r}
 
-data$Children <- NULL  
-# this tells R to assign the value of NULL to data$Children
-# NULL basically represents non-existence. So, when we assign NULL to data$Children, it means we want that column to be non-existent / removed.
+dataset$Children <- NULL  
+# this tells R to assign the value of NULL to dataset$Children
+# NULL basically represents non-existence. So, when we assign NULL to dataset$Children, it means we want that column to be non-existent / removed.
 
-data 
+dataset 
 # notice that the Children column is now gone
 
 ```
@@ -252,8 +253,8 @@ Finally, if we want to save the data frame into a .csv file, we use `write.csv()
 
 ```{r}
 
-write.csv(data, "bobandreacalvin.csv")  
-# this tells R to save the object, data, as a .csv file, and to name the .csv file as bobandreacalvin.csv.
+write.csv(dataset, "bobandreacalvin.csv")  
+# this tells R to save the object, dataset, as a .csv file, and to name the .csv file as bobandreacalvin.csv.
 # remember to specify both the name and the extension of the file (e.g., bobandreacalvin.csv). 
 
 ```

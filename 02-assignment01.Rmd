@@ -6,10 +6,11 @@ Suggested answers are at the bottom of this page, but please do try the exercise
 
 ## Instructions
 
-1. Download R.
-1. Download RStudio.
+1. Download and install R.
+1. Download and install RStudio.
 1. Start an R Project. 
-1. Suppose we have the starting monthly salary of 10 men and 10 women (see **Data** section below). Enter the data provided into a data frame (call this data frame `df`) where one column represents the biological sex of the individual (call this column `BioSex`) and the other column represents the starting monthly salary (call this column `Salary`) of the individual. Make sure you have 20 rows (one for each individual) and 2 columns (one for each variable).
+1. Open up a new script file in RStudio.  
+1. Suppose we have the starting monthly salary of 10 men and 10 women (see **Data** section below). Enter the data provided into a data frame (call this data frame `dataset`) where one column represents the biological sex of the individual (call this column `BioSex`) and the other column represents the starting monthly salary (call this column `Salary`) of the individual. Make sure you have 20 rows (one for each individual) and 2 columns (one for each variable).
 1. Save the data frame into a .csv file. Name this file `data.csv`. Check in the working directory that the .csv file has been created correctly. 
 
 ## Data
@@ -28,7 +29,7 @@ knitr::kable(data, align = c('c', 'c')) # arrange data into a table, use centre 
 ```{r eval = FALSE}
 
 # Alternative 1
-df <- data.frame(BioSex = c("man", "man", "man", "man", "man", "man", "man", "man", "man", "man", "woman", "woman", "woman", "woman", "woman", "woman", "woman", "woman", "woman", "woman"), 
+dataset <- data.frame(BioSex = c("man", "man", "man", "man", "man", "man", "man", "man", "man", "man", "woman", "woman", "woman", "woman", "woman", "woman", "woman", "woman", "woman", "woman"), 
                  Salary = c(3530, 4730, 4330, 3560, 4050, 4880, 4190, 3620, 3530, 5070, 3790, 2720, 3170, 3320, 3190, 2890, 2920, 3390, 3790, 3680))
 
 # Alternative 2
@@ -41,18 +42,18 @@ sex <- c(rep("man", 10),
 money <- c(3530, 4730, 4330, 3560, 4050, 4880, 4190, 3620, 3530, 5070, 3790, 2720, 3170, 3320, 3190, 2890, 2920, 3390, 3790, 3680)
 # tell R to combine the 20 values into a list and save it as money
 
-df <- data.frame(BioSex = sex, 
-                 Salary = money) 
+dataset <- data.frame(BioSex = sex, 
+                      Salary = money) 
 # create data frame
 
 # Alternative 3
 # Similar to Alternative 2 except that the three steps are combined into one command.
 
-df <- data.frame(BioSex = c(rep("man", 10), 
-                            rep("woman", 10)), 
-                 Salary = c(3530, 4730, 4330, 3560, 4050, 4880, 4190, 3620, 3530, 5070, 3790, 2720, 3170, 3320, 3190, 2890, 2920, 3390, 3790, 3680))
+dataset <- data.frame(BioSex = c(rep("man", 10), 
+                                 rep("woman", 10)), 
+                      Salary = c(3530, 4730, 4330, 3560, 4050, 4880, 4190, 3620, 3530, 5070, 3790, 2720, 3170, 3320, 3190, 2890, 2920, 3390, 3790, 3680))
 
 # Save data file
-write.csv(df, "data.csv")
+write.csv(dataset, "data.csv")
 
 ```
