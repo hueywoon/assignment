@@ -386,10 +386,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb79-2"><a href="scale.html#cb79-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb79-3"><a href="scale.html#cb79-3" tabindex="-1"></a></span>
 <span id="cb79-4"><a href="scale.html#cb79-4" tabindex="-1"></a><span class="co"># Read in the data</span></span>
-<span id="cb79-5"><a href="scale.html#cb79-5" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;SWB.csv&quot;</span>)</span>
+<span id="cb79-5"><a href="scale.html#cb79-5" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;SWB.csv&quot;</span>)</span>
 <span id="cb79-6"><a href="scale.html#cb79-6" tabindex="-1"></a></span>
 <span id="cb79-7"><a href="scale.html#cb79-7" tabindex="-1"></a><span class="co"># Create subset with the required variables and call it MVS</span></span>
-<span id="cb79-8"><a href="scale.html#cb79-8" tabindex="-1"></a>MVS <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb79-8"><a href="scale.html#cb79-8" tabindex="-1"></a>MVS <span class="ot">&lt;-</span> dataset <span class="sc">%&gt;%</span> </span>
 <span id="cb79-9"><a href="scale.html#cb79-9" tabindex="-1"></a>  <span class="fu">select</span>(pin, mvs_1<span class="sc">:</span>mvs_9)</span>
 <span id="cb79-10"><a href="scale.html#cb79-10" tabindex="-1"></a></span>
 <span id="cb79-11"><a href="scale.html#cb79-11" tabindex="-1"></a><span class="co"># Check that the subset gives you what you want</span></span>
@@ -438,24 +438,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## mvs_7  0.62003030  1.0000000  0.40459133 -0.55145900
 ## mvs_8  0.56460779  0.4045913  1.00000000 -0.64079832
 ## mvs_9 -0.74614447 -0.5514590 -0.64079832  1.00000000</code></pre>
-<p>Personally, I think the output is much easier to read if you coerce (force) it into a dataframe with this code:</p>
+<p>Personally, I think the output is much easier to read if you coerce (force) it into a data frame with this code:</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="scale.html#cb83-1" tabindex="-1"></a><span class="co"># Alternative</span></span>
-<span id="cb83-2"><a href="scale.html#cb83-2" tabindex="-1"></a>cor.output <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cor</span>(MVS))</span></code></pre></div>
+<span id="cb83-2"><a href="scale.html#cb83-2" tabindex="-1"></a>cor.output <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cor</span>(MVS))</span></code></pre></div>
 <p>You will find <code>cor.output</code> in the Environment tab (top right hand pane of RStudio). Click on it and you can read it like a normal data frame. Alternatively, you can use the <code>View()</code> function. Either way, you’ll see a data frame, where each row by column cell shows the correlation between the row item and the column item (e.g., item <code>mvs_1</code> and item <code>mvs_2</code> have a correlation of .4525015).</p>
 <p>Of course, this alternative method only serves to make the output more readable. There is no difference in the actual result. Still, I think readability is important, especially when the original output is broken up into two rows, which can make it more difficult to understand.</p>
 <p>Regardless which method you use, the output shows you that positive-keyed items correlate positively with each other (i.e., the correlations are positive for all pairs of positive-keyed items). Also, positive-keyed items correlate negatively with the reverse-keyed item. The correlations between <code>mvs_9</code> (in the rightmost column) and each of the other items are negative. These results indicate that participants are responding to the items as we expect.</p>
-<p>To be honest, I much prefer to first reverse code all the reverse keyed items before getting the correlation coefficients. That way, it’s much easier to spot a problem—the moment I see a negative sign, it’s a problem. So, let’s do that reverse coding now.</p>
+<p>I find that when there are too many variables, the correlation matrix might be a bit overwhelming. So, it might help to create a correlation plot using the <code>corrplot()</code> function from the <code>corrplot</code> package.</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="scale.html#cb84-1" tabindex="-1"></a><span class="co"># Load package</span></span>
+<span id="cb84-2"><a href="scale.html#cb84-2" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
+<span id="cb84-3"><a href="scale.html#cb84-3" tabindex="-1"></a></span>
+<span id="cb84-4"><a href="scale.html#cb84-4" tabindex="-1"></a><span class="co"># Produce the correlation plot</span></span>
+<span id="cb84-5"><a href="scale.html#cb84-5" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(MVS), </span>
+<span id="cb84-6"><a href="scale.html#cb84-6" tabindex="-1"></a>         <span class="at">type =</span> <span class="st">&quot;upper&quot;</span>, <span class="co"># we only want the correlations reflected in the upper triangle (because the lower triangle and upper triangle will give us the same result, choosing one or the other helps reduce clutter)</span></span>
+<span id="cb84-7"><a href="scale.html#cb84-7" tabindex="-1"></a>         <span class="at">tl.col=</span><span class="st">&quot;black&quot;</span>,  <span class="co"># text label colour = black</span></span>
+<span id="cb84-8"><a href="scale.html#cb84-8" tabindex="-1"></a>         <span class="at">tl.srt =</span> <span class="dv">45</span>,  <span class="co"># rotate the text label by 45 degrees for readability</span></span>
+<span id="cb84-9"><a href="scale.html#cb84-9" tabindex="-1"></a>         <span class="at">diag =</span> <span class="cn">FALSE</span>)  <span class="co"># do not show the diagonal, which is essentially the correlations of the variables with themselves. Removing this will help reduce clutter in the output</span></span></code></pre></div>
+<p><img src="PSYC208_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<p>Blue represents positive correlation, red represents negative correlation, and the size of the circles represent the strength of the correlation. Notice that the column for <code>mvs_9</code> are all red circles, which is indeed what we would expect, since <code>mvs_9</code> is the only reverse keyed item.</p>
+<p>To be honest, I much prefer to first reverse code all the reverse keyed items before getting the correlation coefficients. That way, it’s much easier to spot a problem–the moment I see a negative sign, it’s a problem. So, let’s do that reverse coding now.</p>
 <p>The simple formula to use to reverse code data is this:
 (max possible value on likert scale + min possible value on likert scale) - observation. If you refer to the legend, you’ll see that the maximum possible value is 5 and the minimum possible value is 1 for the 9 items.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="scale.html#cb84-1" tabindex="-1"></a><span class="co"># Recode mvs_9 by creating a new variable called mvs_9r</span></span>
-<span id="cb84-2"><a href="scale.html#cb84-2" tabindex="-1"></a>MVS <span class="ot">&lt;-</span> MVS <span class="sc">%&gt;%</span>                       </span>
-<span id="cb84-3"><a href="scale.html#cb84-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mvs_9r =</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">-</span> mvs_9)</span>
-<span id="cb84-4"><a href="scale.html#cb84-4" tabindex="-1"></a></span>
-<span id="cb84-5"><a href="scale.html#cb84-5" tabindex="-1"></a><span class="co"># Check mvs_9 is correctly recoded for the first 6 rows</span></span>
-<span id="cb84-6"><a href="scale.html#cb84-6" tabindex="-1"></a><span class="co"># A 1 on mvs_9 should be a 5 on mvs_9r, 2 should be a 4, and so on</span></span>
-<span id="cb84-7"><a href="scale.html#cb84-7" tabindex="-1"></a>MVS <span class="sc">%&gt;%</span> </span>
-<span id="cb84-8"><a href="scale.html#cb84-8" tabindex="-1"></a>  <span class="fu">select</span>(mvs_9, mvs_9r) <span class="sc">%&gt;%</span> </span>
-<span id="cb84-9"><a href="scale.html#cb84-9" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="scale.html#cb85-1" tabindex="-1"></a><span class="co"># Recode mvs_9 by creating a new variable called mvs_9r</span></span>
+<span id="cb85-2"><a href="scale.html#cb85-2" tabindex="-1"></a>MVS <span class="ot">&lt;-</span> MVS <span class="sc">%&gt;%</span>                       </span>
+<span id="cb85-3"><a href="scale.html#cb85-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mvs_9r =</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">-</span> mvs_9)</span>
+<span id="cb85-4"><a href="scale.html#cb85-4" tabindex="-1"></a></span>
+<span id="cb85-5"><a href="scale.html#cb85-5" tabindex="-1"></a><span class="co"># Check mvs_9 is correctly recoded for the first 6 rows</span></span>
+<span id="cb85-6"><a href="scale.html#cb85-6" tabindex="-1"></a><span class="co"># A 1 on mvs_9 should be a 5 on mvs_9r, 2 should be a 4, and so on</span></span>
+<span id="cb85-7"><a href="scale.html#cb85-7" tabindex="-1"></a>MVS <span class="sc">%&gt;%</span> </span>
+<span id="cb85-8"><a href="scale.html#cb85-8" tabindex="-1"></a>  <span class="fu">select</span>(mvs_9, mvs_9r) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-9"><a href="scale.html#cb85-9" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">6</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 2
 ##   mvs_9 mvs_9r
 ##   &lt;dbl&gt;  &lt;dbl&gt;
@@ -465,14 +477,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4     3      3
 ## 5     3      3
 ## 6     2      4</code></pre>
-<p><em>Note.</em> Notice that I labelled my recoded variable as <code>mvs_9r</code> (where r stands for recoded). Some people might choose to replace the variable instead of giving the recoded variable a new name. So they might do the following: <code>mutate(mvs_9 = 5+1-mvs_9)</code>. I strongly recommend against this as it might confuse you later on–you cannot tell at a glance whether you have recoded the variable. You’ll have to keep checking your code to confirm this, which would increase the probability of making errors. (Sadly, I know this from experience…)</p>
+<p><em>Note.</em> Notice that I labelled my recoded variable as <code>mvs_9r</code> (where r stands for recoded). Some people might choose to replace (overwrite) the variable instead of giving the recoded variable a new name. So they might do the following: <code>mutate(mvs_9 = 5 + 1 - mvs_9)</code>. I strongly recommend against this as it might confuse you later on–you cannot tell at a glance whether you have recoded the variable. You’ll have to keep checking your code to confirm this, which would increase the probability of making errors. (Sadly, I know this from experience…)</p>
 <p>Once you have confirmed that you correctly recoded the variable, you can drop <code>mvs_9</code> by using <code>select()</code>. Then conduct the correlation analysis to look at the correlation matrix.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="scale.html#cb86-1" tabindex="-1"></a><span class="co"># Drop mvs_9</span></span>
-<span id="cb86-2"><a href="scale.html#cb86-2" tabindex="-1"></a>MVS <span class="ot">&lt;-</span> MVS <span class="sc">%&gt;%</span>                       </span>
-<span id="cb86-3"><a href="scale.html#cb86-3" tabindex="-1"></a>  <span class="fu">select</span>(pin, mvs_1<span class="sc">:</span>mvs_8, mvs_9r)</span>
-<span id="cb86-4"><a href="scale.html#cb86-4" tabindex="-1"></a></span>
-<span id="cb86-5"><a href="scale.html#cb86-5" tabindex="-1"></a><span class="co"># Examine the correlation matrix</span></span>
-<span id="cb86-6"><a href="scale.html#cb86-6" tabindex="-1"></a><span class="fu">cor</span>(MVS)</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="scale.html#cb87-1" tabindex="-1"></a><span class="co"># Drop mvs_9</span></span>
+<span id="cb87-2"><a href="scale.html#cb87-2" tabindex="-1"></a>MVS <span class="ot">&lt;-</span> MVS <span class="sc">%&gt;%</span>                       </span>
+<span id="cb87-3"><a href="scale.html#cb87-3" tabindex="-1"></a>  <span class="fu">select</span>(pin, mvs_1<span class="sc">:</span>mvs_8, mvs_9r)</span>
+<span id="cb87-4"><a href="scale.html#cb87-4" tabindex="-1"></a></span>
+<span id="cb87-5"><a href="scale.html#cb87-5" tabindex="-1"></a><span class="co"># Examine the correlation matrix</span></span>
+<span id="cb87-6"><a href="scale.html#cb87-6" tabindex="-1"></a><span class="fu">cor</span>(MVS)</span></code></pre></div>
 <pre><code>##                 pin      mvs_1      mvs_2     mvs_3        mvs_4      mvs_5
 ## pin     1.000000000 0.01820791 0.00261561 0.0190207 -0.004592464 0.02088333
 ## mvs_1   0.018207909 1.00000000 0.43763755 0.3899635  0.350306014 0.56608026
@@ -495,21 +507,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## mvs_7  0.62003030 1.0000000 0.40459133 0.55145900
 ## mvs_8  0.56460779 0.4045913 1.00000000 0.64079832
 ## mvs_9r 0.74614447 0.5514590 0.64079832 1.00000000</code></pre>
-<p>Now that we recoded <code>mvs_9</code> into <code>mvs_9r</code>, you can see, all correlation coefficients here are positive. So, all is good!</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="scale.html#cb89-1" tabindex="-1"></a><span class="co"># Produce the correlation plot</span></span>
+<span id="cb89-2"><a href="scale.html#cb89-2" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(MVS), <span class="at">type =</span> <span class="st">&quot;upper&quot;</span>, <span class="at">tl.col=</span><span class="st">&quot;black&quot;</span>, <span class="at">tl.srt =</span> <span class="dv">45</span>, <span class="at">diag =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="PSYC208_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<p>Now that we recoded <code>mvs_9</code> into <code>mvs_9r</code>, you can see, all correlation coefficients here are positive and the correlation plot shows all blue circles. So, all is good!</p>
 <p>Before we move on to the next bit, I should mention that <code>cor()</code> doesn’t provide the <em>p</em> values for the correlations. If you would like the <em>p</em> values, then you should consider using <code>corr.test()</code> from the <code>psych</code> package instead.</p>
 </div>
 <div id="reliability-analysis-cronbachs-alpha" class="section level2 hasAnchor" number="6.4">
 <h2><span class="header-section-number">6.4</span> Reliability Analysis: Cronbach’s Alpha<a href="scale.html#reliability-analysis-cronbachs-alpha" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Before averaging (or summing) the items to get an overall MVS score, we must demonstrate that the items have adequate reliability. Cronbach’s alpha is one of the most common measure of internal consistency reliability. It’s a number that ranges from 0 to 1 and indicates how well the items on the scale measure the same construct (in this case, materialism). An alpha of .70 is accepted by many researchers as adequate reliability. However, for certain purposes, an alpha of .60 to .70 can be accepted if justified (e.g., research is new and exploratory or focused on theory or items measure different facets of the construct). If reliability is too low, however, this might mean the responses were too inconsistent across items. Then it might not make sense to average them together. This would be an important limitation to discuss in your paper.</p>
+<p>Before averaging (or summing) the items to get an overall MVS score, we must demonstrate that the items have adequate reliability. Cronbach’s alpha is one of the most common measure of internal consistency reliability. It’s a number that ranges from 0 to 1 and indicates how well the items on the scale measure the same construct (in this case, materialism). An alpha of .70 is accepted by many researchers as adequate reliability. However, for certain purposes, an alpha of .60 to .70 can be accepted if justified (e.g., research is new and exploratory or focused on theory or items measure different facets of the construct). If reliability is too low, however, this might mean the responses were too inconsistent across items. Then it might not make sense to average them together. If this happens in your project, it would be an important limitation to discuss in the report.</p>
 <p>We will use the <code>alpha()</code> function in the <code>psych</code> package to conduct the reliability analysis. Note that this function is used on the data frame with the reverse-keyed items all reverse coded already. So, if you haven’t reverse-coded <code>mvs_9</code> yet (see above for instructions), do so before continuing.</p>
 <p>At this point, it should also be noted that <code>ggplot2</code> also has an <code>alpha()</code> function. If you have both <code>tidyverse</code> and <code>psych</code> loaded, R might be confused as to which package to use and throw up an error. You can specify the package like this: <code>package::function()</code>.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="scale.html#cb88-1" tabindex="-1"></a><span class="co"># First, ensure the dataset only has the items from mvs (meaning, remove pin)</span></span>
-<span id="cb88-2"><a href="scale.html#cb88-2" tabindex="-1"></a>MVS <span class="ot">&lt;-</span> MVS <span class="sc">%&gt;%</span> </span>
-<span id="cb88-3"><a href="scale.html#cb88-3" tabindex="-1"></a>  <span class="fu">select</span>(mvs_1<span class="sc">:</span>mvs_8, mvs_9r)</span>
-<span id="cb88-4"><a href="scale.html#cb88-4" tabindex="-1"></a></span>
-<span id="cb88-5"><a href="scale.html#cb88-5" tabindex="-1"></a><span class="co"># tell R we want to use the alpha() function from the psych package</span></span>
-<span id="cb88-6"><a href="scale.html#cb88-6" tabindex="-1"></a><span class="co"># the alpha function will give us the Cronbach’s alpha for all the items in MVS.</span></span>
-<span id="cb88-7"><a href="scale.html#cb88-7" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">alpha</span>(MVS)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="scale.html#cb90-1" tabindex="-1"></a><span class="co"># First, ensure the dataset only has the items from the scale (meaning, remove pin and keep only the 9 items)</span></span>
+<span id="cb90-2"><a href="scale.html#cb90-2" tabindex="-1"></a>MVS <span class="ot">&lt;-</span> MVS <span class="sc">%&gt;%</span> </span>
+<span id="cb90-3"><a href="scale.html#cb90-3" tabindex="-1"></a>  <span class="fu">select</span>(mvs_1<span class="sc">:</span>mvs_8, mvs_9r)</span>
+<span id="cb90-4"><a href="scale.html#cb90-4" tabindex="-1"></a></span>
+<span id="cb90-5"><a href="scale.html#cb90-5" tabindex="-1"></a><span class="co"># tell R we want to use the alpha() function from the psych package</span></span>
+<span id="cb90-6"><a href="scale.html#cb90-6" tabindex="-1"></a><span class="co"># the alpha function will give us the Cronbach’s alpha for all the items in MVS.</span></span>
+<span id="cb90-7"><a href="scale.html#cb90-7" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">alpha</span>(MVS)</span></code></pre></div>
 <p>Notice that we do not need to load the package using <code>library(psych)</code>. <code>psych::alpha()</code> temporarily loads the package (just for that chunk of code). If you want to use other functions in the <code>psych</code> package, then you’ll probably want to load the package.</p>
 <pre><code>## 
 ## Reliability analysis   
@@ -569,9 +584,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="compute-the-average-score-for-the-scale" class="section level2 hasAnchor" number="6.5">
 <h2><span class="header-section-number">6.5</span> Compute the average score for the scale<a href="scale.html#compute-the-average-score-for-the-scale" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Now that we’re sufficiently satisfied with the reliability of the scale, let’s compute the average score.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="scale.html#cb90-1" tabindex="-1"></a>MVS <span class="ot">&lt;-</span> MVS <span class="sc">%&gt;%</span></span>
-<span id="cb90-2"><a href="scale.html#cb90-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">MVS_avg =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(mvs_1<span class="sc">:</span>mvs_8, mvs_9r)))) <span class="co"># calculate the average MVS score across the set of 9 items and call the average MVS_avg</span></span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="scale.html#cb92-1" tabindex="-1"></a>MVS <span class="ot">&lt;-</span> MVS <span class="sc">%&gt;%</span></span>
+<span id="cb92-2"><a href="scale.html#cb92-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">MVS_avg =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(mvs_1<span class="sc">:</span>mvs_8, mvs_9r)))) <span class="co"># calculate the average MVS score across the set of 9 items and call the average MVS_avg</span></span></code></pre></div>
 <p>You might want to check if <code>MVS_avg</code> is correctly calculated. Go to <code>View(MVS)</code> and manually calculate the average of <code>mvs_1</code> to <code>mvs_9r</code> for the first row. You should get 3.44 (to 2 d.p.) which should match the value in the <code>MVS_avg</code> column.</p>
+<p>Of course, you could create <code>MVS_avg</code> by adding all the items together (<code>mvs_1 + mvs_2 + ... + mvs_9r</code>) and dividing that total by 9. I think that’s a bit tedious, but some people are intimidated by <code>rowMeans()</code>. So, do what makes more sense for you!</p>
 <p>Congratulations on completing this section! You’re now ready to try the next exercise! Proceed to the <a href="tha3.html#tha3">next section</a>!</p>
 
 </div>

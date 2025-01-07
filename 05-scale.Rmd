@@ -37,10 +37,10 @@ Let's start by reading in the dataset, then creating a subset of the dataset. We
 library(tidyverse)
 
 # Read in the data
-data <- read_csv("SWB.csv")
+dataset <- read_csv("SWB.csv")
 
 # Create subset with the required variables and call it MVS
-MVS <- data %>% 
+MVS <- dataset %>% 
   select(pin, mvs_1:mvs_9)
 
 # Check that the subset gives you what you want
@@ -67,12 +67,12 @@ cor(MVS)
 
 ```
 
-Personally, I think the output is much easier to read if you coerce (force) it into a dataframe with this code: 
+Personally, I think the output is much easier to read if you coerce (force) it into a data frame with this code: 
 
 ```{r}
 
 # Alternative
-cor.output <- as.data.frame(cor(MVS))
+cor.output <- data.frame(cor(MVS))
 
 ```
 
@@ -82,7 +82,25 @@ Of course, this alternative method only serves to make the output more readable.
 
 Regardless which method you use, the output shows you that positive-keyed items correlate positively with each other (i.e., the correlations are positive for all pairs of positive-keyed items). Also, positive-keyed items correlate negatively with the reverse-keyed item. The correlations between `mvs_9` (in the rightmost column) and each of the other items are negative. These results indicate that participants are responding to the items as we expect. 
 
-To be honest, I much prefer to first reverse code all the reverse keyed items before getting the correlation coefficients. That way, it’s much easier to spot a problem—the moment I see a negative sign, it’s a problem. So, let’s do that reverse coding now. 
+I find that when there are too many variables, the correlation matrix might be a bit overwhelming. So, it might help to create a correlation plot using the `corrplot()` function from the `corrplot` package. 
+
+```{r echo = TRUE, message = FALSE, warning = FALSE, error = FALSE}
+
+# Load package
+library(corrplot)
+
+# Produce the correlation plot
+corrplot(cor(MVS), 
+         type = "upper", # we only want the correlations reflected in the upper triangle (because the lower triangle and upper triangle will give us the same result, choosing one or the other helps reduce clutter)
+         tl.col="black",  # text label colour = black
+         tl.srt = 45,  # rotate the text label by 45 degrees for readability
+         diag = FALSE)  # do not show the diagonal, which is essentially the correlations of the variables with themselves. Removing this will help reduce clutter in the output
+
+```
+
+Blue represents positive correlation, red represents negative correlation, and the size of the circles represent the strength of the correlation. Notice that the column for `mvs_9` are all red circles, which is indeed what we would expect, since `mvs_9` is the only reverse keyed item.
+
+To be honest, I much prefer to first reverse code all the reverse keyed items before getting the correlation coefficients. That way, it’s much easier to spot a problem--the moment I see a negative sign, it’s a problem. So, let’s do that reverse coding now. 
 
 The simple formula to use to reverse code data is this: 
 (max possible value on likert scale + min possible value on likert scale) - observation. If you refer to the legend, you'll see that the maximum possible value is 5 and the minimum possible value is 1 for the 9 items.
@@ -98,9 +116,10 @@ MVS <- MVS %>%
 MVS %>% 
   select(mvs_9, mvs_9r) %>% 
   head(6)
+
 ```
 
-_Note._ Notice that I labelled my recoded variable as `mvs_9r` (where r stands for recoded). Some people might choose to replace the variable instead of giving the recoded variable a new name. So they might do the following: `mutate(mvs_9 = 5+1-mvs_9)`. I strongly recommend against this as it might confuse you later on--you cannot tell at a glance whether you have recoded the variable. You'll have to keep checking your code to confirm this, which would increase the probability of making errors. (Sadly, I know this from experience...) 
+_Note._ Notice that I labelled my recoded variable as `mvs_9r` (where r stands for recoded). Some people might choose to replace (overwrite) the variable instead of giving the recoded variable a new name. So they might do the following: `mutate(mvs_9 = 5 + 1 - mvs_9)`. I strongly recommend against this as it might confuse you later on--you cannot tell at a glance whether you have recoded the variable. You'll have to keep checking your code to confirm this, which would increase the probability of making errors. (Sadly, I know this from experience...) 
 
 Once you have confirmed that you correctly recoded the variable, you can drop `mvs_9` by using `select()`. Then conduct the correlation analysis to look at the correlation matrix. 
 
@@ -113,15 +132,18 @@ MVS <- MVS %>%
 # Examine the correlation matrix
 cor(MVS)
 
+# Produce the correlation plot
+corrplot(cor(MVS), type = "upper", tl.col="black", tl.srt = 45, diag = FALSE)
+
 ```
 
-Now that we recoded `mvs_9` into `mvs_9r`, you can see, all correlation coefficients here are positive. So, all is good! 
+Now that we recoded `mvs_9` into `mvs_9r`, you can see, all correlation coefficients here are positive and the correlation plot shows all blue circles. So, all is good! 
 
 Before we move on to the next bit, I should mention that `cor()` doesn't provide the *p* values for the correlations. If you would like the *p* values, then you should consider using `corr.test()` from the `psych` package instead. 
 
 ## Reliability Analysis: Cronbach’s Alpha
 
-Before averaging (or summing) the items to get an overall MVS score, we must demonstrate that the items have adequate reliability. Cronbach’s alpha is one of the most common measure of internal consistency reliability. It’s a number that ranges from 0 to 1 and indicates how well the items on the scale measure the same construct (in this case, materialism). An alpha of .70 is accepted by many researchers as adequate reliability. However, for certain purposes, an alpha of .60 to .70 can be accepted if justified (e.g., research is new and exploratory or focused on theory or items measure different facets of the construct). If reliability is too low, however, this might mean the responses were too inconsistent across items. Then it might not make sense to average them together. This would be an important limitation to discuss in your paper.
+Before averaging (or summing) the items to get an overall MVS score, we must demonstrate that the items have adequate reliability. Cronbach’s alpha is one of the most common measure of internal consistency reliability. It’s a number that ranges from 0 to 1 and indicates how well the items on the scale measure the same construct (in this case, materialism). An alpha of .70 is accepted by many researchers as adequate reliability. However, for certain purposes, an alpha of .60 to .70 can be accepted if justified (e.g., research is new and exploratory or focused on theory or items measure different facets of the construct). If reliability is too low, however, this might mean the responses were too inconsistent across items. Then it might not make sense to average them together. If this happens in your project, it would be an important limitation to discuss in the report. 
 
 We will use the `alpha()` function in the `psych` package to conduct the reliability analysis. Note that this function is used on the data frame with the reverse-keyed items all reverse coded already. So, if you haven’t reverse-coded `mvs_9` yet (see above for instructions), do so before continuing. 
 
@@ -129,7 +151,7 @@ At this point, it should also be noted that `ggplot2` also has an `alpha()` func
 
 ```{r eval = FALSE}
 
-# First, ensure the dataset only has the items from mvs (meaning, remove pin)
+# First, ensure the dataset only has the items from the scale (meaning, remove pin and keep only the 9 items)
 MVS <- MVS %>% 
   select(mvs_1:mvs_8, mvs_9r)
 
@@ -176,5 +198,7 @@ MVS <- MVS %>%
 ```
 
 You might want to check if `MVS_avg` is correctly calculated. Go to `View(MVS)` and manually calculate the average of `mvs_1` to `mvs_9r` for the first row. You should get 3.44 (to 2 d.p.) which should match the value in the `MVS_avg` column. 
+
+Of course, you could create `MVS_avg` by adding all the items together (`mvs_1 + mvs_2 + ... + mvs_9r`) and dividing that total by 9. I think that's a bit tedious, but some people are intimidated by `rowMeans()`. So, do what makes more sense for you!
 
 Congratulations on completing this section! You're now ready to try the next exercise! Proceed to the [next section](#tha3)!

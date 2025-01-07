@@ -10,12 +10,12 @@ As before, suggested answers are at the bottom of this page, but please do try t
 1. Start an R Project in the folder where you saved the data file.
 1. Open up a new script file in RStudio. 
 1. Load `tidyverse` and `psych` packages.
-1. Read in the data file `WVS2012 Singapore BFI10 Data.csv`. Name this data frame `data`.
-1. Examine `data`. Minimally you should be able to tell there are 1972 rows and 10 columns. You should also be able to tell the variable names and the data type for each variable. 
+1. Read in the data file `WVS2012 Singapore BFI10 Data.csv`. Name this data frame `dataset`.
+1. Examine `dataset`. Minimally you should be able to tell there are 1972 rows and 10 columns. You should also be able to tell the variable names and the data type for each variable. 
 1. Create a subset of the data by removing all participants who had values below 1 for ANY of the BFI10 items (e.g., -5, -2). Name this subset `subset`. (Hint: Use the `filter()` function in combination with the `if_all()` function. You'll need to read up a bit on the internet to figure out how they work and then experiment.) This is probably the hardest part of this exercise. But if all goes well, you should have 1963 rows (participants) in your subset.
 1. Using `subset`, reverse-code all the reverse-keyed items (i.e., V160A, V160C, V160D, V160E, V160G). 
 1. Get the correlation coefficient for each pair of items for the same personality trait. Check that your answer matches mine: _r_ = 0.1177 (extraversion), _r_ = 0.0636 (agreeableness), _r_ = 0.0921 (conscientiousness), _r_ = 0.0478 (neuroticism), and _r_ = -0.2959 (openness to experience). At this point, you should be surprised that openness to experience is negatively related, especially because we had already re-coded the reverse-keyed items!
-1. Get the Cronbach’s alpha for each pair of items for the same personality trait. Check that your answer matches mine: _α_ = 0.21 (extraversion), _α_ = 0.12 (agreeableness), _α_ = 0.17 (conscientiousness), _α_ = 0.09 (neuroticism), and _α_ = ERROR because items were negatively correlated (openness to experience). This suggests that the BFI10 has low reliability for the Singapore data. This finding mirrors findings elsewhere which suggest that the BFI10 has low reliability for non WEIRD (Western, Educated, Industrial, Rich, and Democratic) countries (see: https://renebekkers.wordpress.com/2017/03/21/hunting-game-targeting-the-big-five/).
+1. Get the Cronbach’s alpha for each pair of items for the same personality trait. Check that your answer matches mine: _α_ = 0.21 (extraversion), _α_ = 0.12 (agreeableness), _α_ = 0.17 (conscientiousness), _α_ = 0.09 (neuroticism), and _α_ = ERROR or -0.84 because items were negatively correlated (openness to experience). This suggests that the BFI10 has low reliability for the Singapore data. This finding mirrors findings elsewhere which suggest that the BFI10 has low reliability for non WEIRD (Western, Educated, Industrial, Rich, and Democratic) countries (see: https://renebekkers.wordpress.com/2017/03/21/hunting-game-targeting-the-big-five/).
 
 ## Legend
 
@@ -43,20 +43,20 @@ library(tidyverse)
 library(psych)
 
 # 5. Read .csv file
-data <- read_csv("WVS2012 Singapore BFI10 Data.csv")
+dataset <- read_csv("WVS2012 Singapore BFI10 Data.csv")
 
 # 6. Take a look at the variable names and types
-glimpse(data)  #str(data) also okay
+glimpse(dataset)  #str(data) also okay
 
 # Extra. Run descriptives to get min and max values for each column 
 # I didn't get you guys to do this, but in actual analysis, you should run descriptives to check what the minimum and maximum values are for this dataset. 
 # Values below 1 are invalid numbers (see legend) so we need to remove them
 # Notice that the minimum value is -5 (because there are negative values)
-data %>% 
+dataset %>% 
   describe(.)
 
 # 7. Remove all participants who have values below 1 for the BFI10 items.
-subset <- data %>%
+subset <- dataset %>%
   filter(if_all(c("V160A":"V160J"), ~ .x > 0))
 # The code above is saying... 
 # KEEP (filter) the row 
@@ -65,9 +65,8 @@ subset <- data %>%
 # VALUES GREATER THAN 0 (.x > 0).
 # Note. If you have multiple conditions, you can just add them on... For example greater than 0 and less than 6 would be ~.x > 0 & .x < 6
 
-# Extra. Run descriptives to get min and max values for each column
-# I didn't get you to do this, but you should run descriptives again to check what the minimum and maximum values are now
-# If you did this correctly, the minimum value should be 1 now, which is the lowest value on the likert scale used
+# Extra. Run descriptives to check the min and max values for each column
+# If you did the above step correctly, the minimum value should be 1 now, which is the lowest value on the likert scale used
 subset %>% 
   describe(.)
 
@@ -87,7 +86,7 @@ subset <- subset %>%
 
 # Alternative 1: Correlation Matrix
 # This is an acceptable method, although I find it difficult to pick out the important correlations from here because the matrix is a bit large.
-cor.output <- as.data.frame(cor(subset))  
+cor.output <- data.frame(cor(subset))  
 
 # Alternative 2: Individual correlations
 # This takes a bit more effort, but clearly indicates which variable we're analyzing. 
@@ -99,32 +98,32 @@ cor(subset$V160Er, subset$V160J) # openness to experience
 
 # 10. Cronbach's alpha for each pair of items
 # Here's a general explanation of the code below. 
-# We take the data frame, subset. Then we keep only the variables we're interested in (e.g., V160Ar, V160F). This results in a data frame with two variables. This two-variable data frame is then passed into the alpha function. When we're passing the data frame into the alpha function, we use the full stop.
+# We take the data frame, subset. Then we keep only the variables we're interested in (e.g., V160Ar, V160F). This results in a data frame with two variables. This two-variable data frame is then passed into the alpha() function.
 # Note that alpha() can only be used with data frames or matrices and not with vectors. So alpha(subset$V160Ar, subset$V160F) won't work since each column (e.g., subset$V160F) is a vector (think of vector as a list of values of the same type) and not a data frame.
 
 # Extraversion
 subset %>% 
   select(V160Ar, V160F) %>% 
-  alpha(.)
+  alpha()
 
 # Agreeableness
 subset %>% 
   select(V160Gr, V160B) %>% 
-  alpha(.)
+  alpha()
 
 # Conscientousness
 subset %>% 
   select(V160Cr, V160H) %>% 
-  alpha(.)
+  alpha()
 
 # Neuroticism
 subset %>% 
   select(V160Dr, V160I) %>% 
-  alpha(.)
+  alpha()
 
 # Openness to Experience
 subset %>% 
   select(V160Er, V160J) %>% 
-  alpha(.)
+  alpha()
 
 ```

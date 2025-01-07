@@ -791,7 +791,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Let’s use <code>ggplot2</code> to make a histogram for <code>swls2019_avg</code> with a very basic code.</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="tidyverse.html#cb70-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> swls2019_only, <span class="fu">aes</span>(<span class="at">x =</span> swls2019_avg)) <span class="sc">+</span>  <span class="co"># tells R what dataset to use and what variable should be on the x axis</span></span>
 <span id="cb70-2"><a href="tidyverse.html#cb70-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()  <span class="co"># we want a histogram, so geom_histogram() is used</span></span></code></pre></div>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with
+## `binwidth`.</code></pre>
 <p><img src="PSYC208_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 <p>As with the bar chart, you could do this instead and the results would be the same:</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="tidyverse.html#cb72-1" tabindex="-1"></a><span class="co"># Alternative</span></span>
