@@ -267,6 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.10.1" data-path="hypotest.html"><a href="hypotest.html#when-to-use-a-regression"><i class="fa fa-check"></i><b>8.10.1</b> When to Use A Regression</a></li>
 <li class="chapter" data-level="8.10.2" data-path="hypotest.html"><a href="hypotest.html#conducting-and-interpreting-the-regression"><i class="fa fa-check"></i><b>8.10.2</b> Conducting and Interpreting the Regression</a></li>
+<li class="chapter" data-level="8.10.3" data-path="hypotest.html"><a href="hypotest.html#r-squared"><i class="fa fa-check"></i><b>8.10.3</b> R-squared</a></li>
 </ul></li>
 <li class="chapter" data-level="8.11" data-path="hypotest.html"><a href="hypotest.html#chi-square-test-of-goodness-of-fit"><i class="fa fa-check"></i><b>8.11</b> Chi-square Test of Goodness of Fit</a>
 <ul>
@@ -445,7 +446,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Of course, this alternative method only serves to make the output more readable. There is no difference in the actual result. Still, I think readability is important, especially when the original output is broken up into two rows, which can make it more difficult to understand.</p>
 <p>Regardless which method you use, the output shows you that positive-keyed items correlate positively with each other (i.e., the correlations are positive for all pairs of positive-keyed items). Also, positive-keyed items correlate negatively with the reverse-keyed item. The correlations between <code>mvs_9</code> (in the rightmost column) and each of the other items are negative. These results indicate that participants are responding to the items as we expect.</p>
 <p>I find that when there are too many variables, the correlation matrix might be a bit overwhelming. So, it might help to create a correlation plot using the <code>corrplot()</code> function from the <code>corrplot</code> package.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="scale.html#cb84-1" tabindex="-1"></a><span class="co"># Load package</span></span>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="scale.html#cb84-1" tabindex="-1"></a><span class="co"># Load package (remember to install package before loading package)</span></span>
 <span id="cb84-2"><a href="scale.html#cb84-2" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
 <span id="cb84-3"><a href="scale.html#cb84-3" tabindex="-1"></a></span>
 <span id="cb84-4"><a href="scale.html#cb84-4" tabindex="-1"></a><span class="co"># Produce the correlation plot</span></span>

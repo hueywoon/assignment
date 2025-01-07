@@ -86,7 +86,7 @@ I find that when there are too many variables, the correlation matrix might be a
 
 ```{r echo = TRUE, message = FALSE, warning = FALSE, error = FALSE}
 
-# Load package
+# Load package (remember to install package before loading package)
 library(corrplot)
 
 # Produce the correlation plot

@@ -90,6 +90,7 @@ difference-between-correlated-groups-t-test-and-correlation
 regression
 when-to-use-a-regression
 conducting-and-interpreting-the-regression
+r-squared
 chi-square-test-of-goodness-of-fit
 when-to-use-chi-square-test-of-goodness-of-fit
 conducting-and-interpreting-the-chi-square-test-of-goodness-of-fit

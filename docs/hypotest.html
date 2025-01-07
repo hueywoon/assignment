@@ -267,6 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.10.1" data-path="hypotest.html"><a href="hypotest.html#when-to-use-a-regression"><i class="fa fa-check"></i><b>8.10.1</b> When to Use A Regression</a></li>
 <li class="chapter" data-level="8.10.2" data-path="hypotest.html"><a href="hypotest.html#conducting-and-interpreting-the-regression"><i class="fa fa-check"></i><b>8.10.2</b> Conducting and Interpreting the Regression</a></li>
+<li class="chapter" data-level="8.10.3" data-path="hypotest.html"><a href="hypotest.html#r-squared"><i class="fa fa-check"></i><b>8.10.3</b> R-squared</a></li>
 </ul></li>
 <li class="chapter" data-level="8.11" data-path="hypotest.html"><a href="hypotest.html#chi-square-test-of-goodness-of-fit"><i class="fa fa-check"></i><b>8.11</b> Chi-square Test of Goodness of Fit</a>
 <ul>
@@ -306,8 +307,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">8</span> Hypothesis Testing<a href="hypotest.html#hypotest" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="overview-1" class="section level2 hasAnchor" number="8.1">
 <h2><span class="header-section-number">8.1</span> Overview<a href="hypotest.html#overview-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The bulk of what we cover in PSYC208 is hypothesis testing.
-This section guides you through the steps of conducting the various hypothesis tests. This only serves as an overview for students who are interested to read ahead. I will demonstrate how to conduct the hypothesis tests in class as well as how to interpret the results.</p>
+<p>The bulk of what we cover in PSYC208 is hypothesis testing. This section guides you through the steps of conducting the various hypothesis tests. This only serves as an overview for students who are interested to read ahead. I will demonstrate how to conduct the hypothesis tests in class as well as how to interpret the results.</p>
 <p>To illustrate the various tests, we will use the same hypothetical dataset, <code>SWB.csv</code> as before. To follow along, please download the dataset: <a href="SWB.csv">SWB.csv</a>.</p>
 </div>
 <div id="load-packages-and-dataset" class="section level2 hasAnchor" number="8.2">
@@ -317,7 +317,8 @@ This section guides you through the steps of conducting the various hypothesis t
 <span id="cb94-3"><a href="hypotest.html#cb94-3" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
 <span id="cb94-4"><a href="hypotest.html#cb94-4" tabindex="-1"></a></span>
 <span id="cb94-5"><a href="hypotest.html#cb94-5" tabindex="-1"></a><span class="co"># Read in the dataset</span></span>
-<span id="cb94-6"><a href="hypotest.html#cb94-6" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;SWB.csv&quot;</span>)</span></code></pre></div>
+<span id="cb94-6"><a href="hypotest.html#cb94-6" tabindex="-1"></a><span class="co"># Call the dataset df</span></span>
+<span id="cb94-7"><a href="hypotest.html#cb94-7" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;SWB.csv&quot;</span>)</span></code></pre></div>
 </div>
 <div id="scientific-notation" class="section level2 hasAnchor" number="8.3">
 <h2><span class="header-section-number">8.3</span> Scientific Notation<a href="hypotest.html#scientific-notation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -325,7 +326,8 @@ This section guides you through the steps of conducting the various hypothesis t
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="hypotest.html#cb95-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)  <span class="co"># Turn off scientific notation </span></span>
 <span id="cb95-2"><a href="hypotest.html#cb95-2" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">9</span>)  <span class="co"># Display results to 9 decimal places</span></span></code></pre></div>
 <p>Scientific notation is a way of expressing numbers that are very large or very small. It usually takes the form of <code>m × 10^n</code> for very large numbers and <code>m × 10^-n</code> for very small numbers, where <code>^</code> stands for “to the power of”. So, suppose we have the following number: 0.000000000000000477. In scientific notation, this would be represented as<code>4.77 x 10^-16</code> (i.e., 16 decimal places). Alternatively, it might be represented as <code>4.77e-16</code>. They mean the same thing.</p>
-<p>Here’s a quick question to see if you understood scientific notation. Which of the following is the scientific notation for 0.0123?</p>
+<p>Here’s a quick question to see if you understood scientific notation.</p>
+<p>Which of the following is the scientific notation for 0.0123?</p>
 <ol style="list-style-type: upper-alpha">
 <li>1.23e-1 / 1.23 x 10^-1</li>
 <li>1.23e-2 / 1.23 x 10^-2</li>
@@ -376,7 +378,7 @@ This section guides you through the steps of conducting the various hypothesis t
 <span id="cb101-2"><a href="hypotest.html#cb101-2" tabindex="-1"></a><span class="co"># that each observation comes from different individuals (i.e., they are not &quot;paired&quot;), </span></span>
 <span id="cb101-3"><a href="hypotest.html#cb101-3" tabindex="-1"></a><span class="co"># and that the alpha level is .05, therefore confidence interval is 95%</span></span></code></pre></div>
 <p>The results tell you that the average of <code>swls2019_avg</code> is 4.35 (but notice it doesn’t tell you any other descriptive statistics like standard deviation or maximum, so it’s still important to get the descriptives in other ways).</p>
-<p>When we compare 4.35 to the neutral point of 4, the resulting t value is 8.53. With degrees of freedom 342, the <em>p</em> value is very small, at 0.000000000000000477477. Because <em>p</em> value is smaller than the alpha level of .05, the result is statistically significant. Because 4.35 is statistically significantly greater than 4, we would conclude that there is sufficient evidence that the satisfaction with life scores in 2019 is greater than the neutral value of 4.</p>
+<p>When we compare 4.35 to the neutral point of 4, the resulting t value is 8.53. With degrees of freedom 342, the <em>p</em> value is very small, at 0.000000000000000477477. Because <em>p</em> value is smaller than the alpha level of .05, the result is statistically significant. Because 4.35 is statistically significantly greater than 4, we would conclude that there is sufficient evidence that on average, the satisfaction with life scores in 2019 is greater than the neutral value of 4.</p>
 <p>In addition, the 95% confidence interval is [4.27, 4.43], which is interpreted as follows: We are 95% confident that the population mean 2019 satisfaction with life score is between 4.27 and 4.43.</p>
 </div>
 <div id="effect-size-cohens-d" class="section level3 hasAnchor" number="8.4.3">
@@ -387,7 +389,7 @@ This section guides you through the steps of conducting the various hypothesis t
 <span id="cb102-2"><a href="hypotest.html#cb102-2" tabindex="-1"></a><span class="fu">library</span>(effectsize)</span></code></pre></div>
 <pre><code>## Warning: package &#39;effectsize&#39; was built under R version 4.3.2</code></pre>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="hypotest.html#cb104-1" tabindex="-1"></a><span class="co"># Cohen&#39;s d, with mu = 4 (i.e., the comparison value is 4)</span></span>
-<span id="cb104-2"><a href="hypotest.html#cb104-2" tabindex="-1"></a><span class="fu">cohens_d</span>(df<span class="sc">$</span>swls2019_avg, </span>
+<span id="cb104-2"><a href="hypotest.html#cb104-2" tabindex="-1"></a><span class="fu">cohens_d</span>(<span class="at">x =</span> df<span class="sc">$</span>swls2019_avg, </span>
 <span id="cb104-3"><a href="hypotest.html#cb104-3" tabindex="-1"></a>         <span class="at">mu =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>## Cohen&#39;s d |       95% CI
 ## ------------------------
@@ -474,11 +476,12 @@ This section guides you through the steps of conducting the various hypothesis t
 <p>After converting the grouping variable into a factor, we also want to get the descriptive statistics for each group.</p>
 <div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="hypotest.html#cb115-1" tabindex="-1"></a><span class="co"># First, we need to convert gender into a factor and add the labels accordingly </span></span>
 <span id="cb115-2"><a href="hypotest.html#cb115-2" tabindex="-1"></a>df<span class="sc">$</span>gender <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>gender, </span>
-<span id="cb115-3"><a href="hypotest.html#cb115-3" tabindex="-1"></a>                      <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
-<span id="cb115-4"><a href="hypotest.html#cb115-4" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>))</span>
+<span id="cb115-3"><a href="hypotest.html#cb115-3" tabindex="-1"></a>                    <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb115-4"><a href="hypotest.html#cb115-4" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>))</span>
 <span id="cb115-5"><a href="hypotest.html#cb115-5" tabindex="-1"></a></span>
 <span id="cb115-6"><a href="hypotest.html#cb115-6" tabindex="-1"></a><span class="co"># Next, we get the descriptive statistics for each group, male and female</span></span>
-<span id="cb115-7"><a href="hypotest.html#cb115-7" tabindex="-1"></a><span class="fu">describeBy</span>(df<span class="sc">$</span>swls2019_avg, <span class="at">group =</span> df<span class="sc">$</span>gender)</span></code></pre></div>
+<span id="cb115-7"><a href="hypotest.html#cb115-7" tabindex="-1"></a><span class="fu">describeBy</span>(df<span class="sc">$</span>swls2019_avg, </span>
+<span id="cb115-8"><a href="hypotest.html#cb115-8" tabindex="-1"></a>           <span class="at">group =</span> df<span class="sc">$</span>gender)</span></code></pre></div>
 <pre><code>## 
 ##  Descriptive statistics by group 
 ## group: male
@@ -509,7 +512,7 @@ This section guides you through the steps of conducting the various hypothesis t
 <div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="hypotest.html#cb119-1" tabindex="-1"></a><span class="co"># Again... By default, R assumes a two-tailed test, </span></span>
 <span id="cb119-2"><a href="hypotest.html#cb119-2" tabindex="-1"></a><span class="co"># that each observation comes from different individuals (i.e., they are not &quot;paired&quot;), </span></span>
 <span id="cb119-3"><a href="hypotest.html#cb119-3" tabindex="-1"></a><span class="co"># and that the alpha level is .05, therefore confidence interval is 95%</span></span></code></pre></div>
-<p>The results indicate that the average 2019 satisfaction with life score for those who identify as male is 4.08 and 4.62 for those who identify as female. When we compare the difference between the two genders against 0, the resulting t value is -6.90. With degrees of freedom 341, the <em>p</em> value is very small, at 0.0000000000256373. Because <em>p</em> value is smaller than the alpha level of .05, the result is statistically significant. Because 4.62 is statistically significantly greater than 4.08, we would conclude that there is sufficient evidence that the satisfaction with life scores in 2019 is greater for females than for males.</p>
+<p>The results indicate that the average 2019 satisfaction with life score for those who identify as male is 4.08 and 4.62 for those who identify as female. When we compare the difference between the two genders against 0, the resulting t value is -6.90. With degrees of freedom 341, the <em>p</em> value is very small, at 0.0000000000256373. Because <em>p</em> value is smaller than the alpha level of .05, the result is statistically significant. Because 4.62 is statistically significantly greater than 4.08, we would conclude that there is sufficient evidence that on average, the satisfaction with life scores in 2019 is greater for females than for males.</p>
 <p>The 95% confidence interval is [-0.69, -0.38] which is interpreted as follows: We are 95% confident that the population mean difference in 2019 satisfaction with life score between males and females is between -0.69 and -0.38.</p>
 <p><em>Note.</em> In calculating the t statistic, R took male - female (since 0 = male and 1 = female, and R takes the group coded with the smaller number and subtracts the group coded with the larger number). Because males have a smaller 2019 SWLS than females, the t statistic is negative. However, if R had taken female - male (say if it had been 0 = female and 1 = male), the t statistic would be positive. To me, whether the t statistic is positive or negative doesn’t matter so long as you know which group has a higher mean and therefore can interpret correctly the direction of the effect. (And this is why descriptive statistics is important–it helps you interpret the results accurately!)</p>
 </div>
@@ -546,7 +549,8 @@ This section guides you through the steps of conducting the various hypothesis t
 <span id="cb122-4"><a href="hypotest.html#cb122-4" tabindex="-1"></a>                            <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;married&quot;</span>, <span class="st">&quot;divorced&quot;</span>, <span class="st">&quot;widowed&quot;</span>))</span>
 <span id="cb122-5"><a href="hypotest.html#cb122-5" tabindex="-1"></a></span>
 <span id="cb122-6"><a href="hypotest.html#cb122-6" tabindex="-1"></a><span class="co"># Get the descriptive statistics by marital status</span></span>
-<span id="cb122-7"><a href="hypotest.html#cb122-7" tabindex="-1"></a><span class="fu">describeBy</span>(df<span class="sc">$</span>swls2019_avg, <span class="at">group =</span> df<span class="sc">$</span>marital_status)</span></code></pre></div>
+<span id="cb122-7"><a href="hypotest.html#cb122-7" tabindex="-1"></a><span class="fu">describeBy</span>(df<span class="sc">$</span>swls2019_avg, </span>
+<span id="cb122-8"><a href="hypotest.html#cb122-8" tabindex="-1"></a>           <span class="at">group =</span> df<span class="sc">$</span>marital_status)</span></code></pre></div>
 <pre><code>## 
 ##  Descriptive statistics by group 
 ## group: married
@@ -578,9 +582,9 @@ This section guides you through the steps of conducting the various hypothesis t
 </div>
 <div id="posthoc-analysis-tukeys-hsd" class="section level3 hasAnchor" number="8.7.3">
 <h3><span class="header-section-number">8.7.3</span> Posthoc Analysis: Tukey’s HSD<a href="hypotest.html#posthoc-analysis-tukeys-hsd" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Because the ANOVA results are statistically significant, we want to follow up with a posthoc analysis such as the Tukey’s HSD to investigate which group(s) differ from which group(s).</p>
+<p>Because the ANOVA results are statistically significant, we want to follow up with a <em>post hoc</em> analysis such as the Tukey’s HSD to investigate which group(s) differ from which group(s).</p>
 <p>The Tukey’s HSD conducts all possible pairwise comparisons, while adjusting the <em>p</em> value to control inflation of family-wise error rate. In this example, we would have three pairwise comparisons: a) married vs widowed, b) married vs divorced, and c) widowed vs divorced.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="hypotest.html#cb126-1" tabindex="-1"></a><span class="co"># Perform a posthoc test on the results using Tukey&#39;s HSD and get the 95% CI </span></span>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="hypotest.html#cb126-1" tabindex="-1"></a><span class="co"># Perform a post hoc test on the results using Tukey&#39;s HSD and get the 95% CI </span></span>
 <span id="cb126-2"><a href="hypotest.html#cb126-2" tabindex="-1"></a><span class="fu">TukeyHSD</span>(mod1, <span class="at">conf.level =</span> .<span class="dv">95</span>)</span></code></pre></div>
 <pre><code>##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level
@@ -593,7 +597,7 @@ This section guides you through the steps of conducting the various hypothesis t
 ## widowed-married  -0.280241258 -0.5132115136 -0.0472710028 0.013569662
 ## widowed-divorced  0.143100996 -0.0918420376  0.3780440291 0.324684308</code></pre>
 <p>The results indicate that married people were significantly more satisfied with their lives than divorced and widowed people. However, divorced and widowed people did not differ significantly in their satisfaction with life scores.</p>
-<p><em>Note.</em> Tukey’s HSD is one of the most common posthoc tests. But there are others. If you need other posthoc tests, you might want to check out the <code>DescTools</code> package.</p>
+<p><em>Note.</em> Tukey’s HSD is one of the most common <em>post hoc</em> tests. But there are others. If you need other <em>post hoc</em> tests, you might want to check out the <code>DescTools</code> package.</p>
 </div>
 <div id="effect-size-eta-squared" class="section level3 hasAnchor" number="8.7.4">
 <h3><span class="header-section-number">8.7.4</span> Effect Size: Eta-Squared<a href="hypotest.html#effect-size-eta-squared" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -607,8 +611,10 @@ This section guides you through the steps of conducting the various hypothesis t
 ## marital_status | 0.05 | [0.02, 1.00]
 ## 
 ## - One-sided CIs: upper bound fixed at [1.00].</code></pre>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="hypotest.html#cb130-1" tabindex="-1"></a><span class="co"># partial = FALSE means we do NOT want partial eta-squared. </span></span>
-<span id="cb130-2"><a href="hypotest.html#cb130-2" tabindex="-1"></a><span class="co"># This actually doesn&#39;t matter here, since for a one-way between-subjects ANOVA, eta-squared and partial eta-squared will be exactly the same value.</span></span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="hypotest.html#cb130-1" tabindex="-1"></a><span class="co"># partial = FALSE means we do NOT want partial eta-squared; we want eta-squared</span></span>
+<span id="cb130-2"><a href="hypotest.html#cb130-2" tabindex="-1"></a><span class="co"># stating partial = TRUE / FALSE actually doesn&#39;t matter here.</span></span>
+<span id="cb130-3"><a href="hypotest.html#cb130-3" tabindex="-1"></a><span class="co"># For a one-way between-subjects ANOVA, eta-squared and partial eta-squared will be exactly the same value.</span></span>
+<span id="cb130-4"><a href="hypotest.html#cb130-4" tabindex="-1"></a><span class="co"># There is no other factor to attribute the variance to, so partial eta-squared is irrelevant here.</span></span></code></pre></div>
 <p>The eta-squared value here is .05, suggesting a small to medium effect. In other words, there is a small to medium effect of marital status on satisfaction with life scores.</p>
 <p><em>Note.</em> Eta-squared tends to overestimate the effect size. This means it will tell you that the differences between the groups are larger than they actually are. Therefore, non-biased alternatives have been developed in place of eta-squared. This would include omega-squared (ω2) and epsilon-squared (ε2), which you can find in the <code>effectsizes</code> package as well (look for <code>omega_squared()</code> and <code>epsilon_squared()</code>). Omega-squared is more frequently used than epsilon-squared, so if you want to report an unbiased effect size, choose omega-squared.</p>
 </div>
@@ -617,7 +623,7 @@ This section guides you through the steps of conducting the various hypothesis t
 <h2><span class="header-section-number">8.8</span> Two-Way Between-Subjects Factorial ANOVA<a href="hypotest.html#two-way-between-subjects-factorial-anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="when-to-use-a-two-way-between-subjects-factorial-anova" class="section level3 hasAnchor" number="8.8.1">
 <h3><span class="header-section-number">8.8.1</span> When to Use A Two-Way Between-Subjects Factorial ANOVA<a href="hypotest.html#when-to-use-a-two-way-between-subjects-factorial-anova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>A two-way between-subjects ANOVA is used when we want to examine an interaction. In other words, it is used when we’re trying to investigate whether the effect of one variable depends on a second variable (which is usually called a moderator).</p>
+<p>A two-way between-subjects ANOVA is used when we want to examine an interaction. More specifically, it is used when we’re trying to investigate whether the effect of one variable depends on a second variable (which is usually called a moderator).</p>
 <p>Let’s say we’re investigating the effect of alcohol on aggression levels. We think that for men, ingesting alcohol makes them more aggressive (compared to not ingesting alcohol). However, for women, ingesting alcohol does not lead to any change in aggression levels (compared to not ingesting alcohol). In such a case, we’re interested in an interaction: We want to know whether the effect of alcohol on aggression (the difference between ingesting and not ingesting alcohol) depends on biological sex.</p>
 <p>There are many kinds of factorial ANOVAs. A between-subjects ANOVA is used when the observations are all independent of each other (i.e., they are not paired or correlated). (If the observations are paired or related, we would use either repeated measures or mixed ANOVA. These would follow different procedures than shown below.)</p>
 <p>So, suppose we want to know whether the difference in satisfaction with life scores between male and female depends on whether they have children. To find out, we will need to conduct a two-way between-subjects ANOVA.</p>
@@ -679,7 +685,7 @@ This section guides you through the steps of conducting the various hypothesis t
 ##    vars  n mean   sd median trimmed  mad min max range  skew kurtosis   se
 ## X1    1 98 4.91 0.77    4.8    4.97 0.89   2   6     4 -1.02     1.75 0.08</code></pre>
 <p>Now that we have the descriptives (which will help us interpret the results later on), we can move on to conduct the ANOVA.</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="hypotest.html#cb140-1" tabindex="-1"></a><span class="co"># Change contrasts settings when estimating Type-3 sum of squares</span></span>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="hypotest.html#cb140-1" tabindex="-1"></a><span class="co"># IMPORTANT: Change contrasts settings when estimating Type-3 sum of squares</span></span>
 <span id="cb140-2"><a href="hypotest.html#cb140-2" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">&#39;contr.sum&#39;</span>, <span class="st">&#39;contr.poly&#39;</span>))</span>
 <span id="cb140-3"><a href="hypotest.html#cb140-3" tabindex="-1"></a></span>
 <span id="cb140-4"><a href="hypotest.html#cb140-4" tabindex="-1"></a><span class="co"># Set up the model being tested and store the model to [mod2]</span></span>
@@ -703,8 +709,8 @@ This section guides you through the steps of conducting the various hypothesis t
 ## Residuals             154.660 339                                       
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p><em>Note.</em> Read up more on the three types of sum of squares here: <a href="https://towardsdatascience.com/anovas-three-types-of-estimating-sums-of-squares-don-t-make-the-wrong-choice-91107c77a27a" class="uri">https://towardsdatascience.com/anovas-three-types-of-estimating-sums-of-squares-don-t-make-the-wrong-choice-91107c77a27a</a>. tldr: if we are trying to test an interaction, we should use Type 3 sum of squares.</p>
-<p>From the results, we can see that the main effects as well as the interaction effect are statistically significant. To interpret the results, we need to look at the descriptive statistics. The main effect of gender tells us that overall, females reported being significantly more satisfied than males (first set of descriptives). The main effect of presence of children tells us that overall, those with children reported being significantly more satisfied than those without children (second set of descriptives). The interaction effect tells us that the effect of gender on satisfaction with life scores depends on the presence of children.</p>
+<p><em>Note.</em> Read up more on the four types of sum of squares here: <a href="https://md.psych.bio.uni-goettingen.de/mv/unit/lm_cat/lm_cat_unbal_ss_explained.html#type-iii-1" class="uri">https://md.psych.bio.uni-goettingen.de/mv/unit/lm_cat/lm_cat_unbal_ss_explained.html#type-iii-1</a>. tldr: if we are trying to test an interaction, we should use Type 3 sum of squares.</p>
+<p>From the results, we can see that the main effects as well as the interaction effect are statistically significant. To interpret the results, we need to look at the descriptive statistics. The main effect of gender tells us that overall, females reported being significantly more satisfied than males (first set of descriptives). The main effect of presence of children tells us that overall, those with children reported being significantly more satisfied than those without children (second set of descriptives). However, these main effects are qualified by the interaction effect. The interaction effect tells us that the effect of gender on satisfaction with life scores depends on the presence of children.</p>
 </div>
 <div id="conducting-and-interpreting-the-simple-effects-analysis" class="section level3 hasAnchor" number="8.8.3">
 <h3><span class="header-section-number">8.8.3</span> Conducting and Interpreting the Simple Effects Analysis<a href="hypotest.html#conducting-and-interpreting-the-simple-effects-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -798,11 +804,11 @@ This section guides you through the steps of conducting the various hypothesis t
 <h2><span class="header-section-number">8.9</span> Correlation<a href="hypotest.html#correlation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="when-to-use-a-correlation" class="section level3 hasAnchor" number="8.9.1">
 <h3><span class="header-section-number">8.9.1</span> When to Use A Correlation<a href="hypotest.html#when-to-use-a-correlation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>A correlation is used when we want to examine whether two continuous variables are related to each other. Suppose we want to find out whether people who have higher satisfaction with life scores in 2019 also have higher satisfaction with life scores in 2021. Here is where you will conduct a correlation.</p>
+<p>A correlation is used when we want to examine whether two variables are related to each other. Suppose we want to find out whether people who have higher satisfaction with life scores in 2019 also have higher satisfaction with life scores in 2021. Here is where you will conduct a correlation. There are many different types of correlations (e.g., Pearson correlation, Spearman correlation, phi coefficient). The most commonly used is the Pearson correlation, so that’s what we’ll focus on here.</p>
 </div>
 <div id="conducting-and-interpreting-the-correlation" class="section level3 hasAnchor" number="8.9.2">
 <h3><span class="header-section-number">8.9.2</span> Conducting and Interpreting the Correlation<a href="hypotest.html#conducting-and-interpreting-the-correlation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>As usual, we get the descriptive statistics before conducting the hypothesis test.</p>
+<p>As usual, we get the descriptive statistics before conducting the hypothesis test. We should also test whether the variables have a linear relationship (because the Pearson correlation coefficient should only be used for variables that have a linear relationship).</p>
 <div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="hypotest.html#cb153-1" tabindex="-1"></a><span class="co"># Get the descriptive statistics</span></span>
 <span id="cb153-2"><a href="hypotest.html#cb153-2" tabindex="-1"></a><span class="fu">describe</span>(df<span class="sc">$</span>swls2019_avg)</span></code></pre></div>
 <pre><code>##    vars   n mean   sd median trimmed  mad min max range skew kurtosis   se
@@ -810,9 +816,12 @@ This section guides you through the steps of conducting the various hypothesis t
 <div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="hypotest.html#cb155-1" tabindex="-1"></a><span class="fu">describe</span>(df<span class="sc">$</span>swls2021_avg)</span></code></pre></div>
 <pre><code>##    vars   n mean   sd median trimmed  mad min max range skew kurtosis   se
 ## X1    1 343 3.85 0.67    3.8    3.84 0.89   2 5.8   3.8  0.1    -0.37 0.04</code></pre>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="hypotest.html#cb157-1" tabindex="-1"></a><span class="co"># Conduct the correlation with cor.test</span></span>
-<span id="cb157-2"><a href="hypotest.html#cb157-2" tabindex="-1"></a><span class="co"># Unlike cor(), cor.test() gives you the p value</span></span>
-<span id="cb157-3"><a href="hypotest.html#cb157-3" tabindex="-1"></a><span class="fu">cor.test</span>(df<span class="sc">$</span>swls2019_avg, df<span class="sc">$</span>swls2021_avg)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="hypotest.html#cb157-1" tabindex="-1"></a><span class="co"># Check linearity assumption</span></span>
+<span id="cb157-2"><a href="hypotest.html#cb157-2" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>swls2019_avg, df<span class="sc">$</span>swls2021_avg)</span></code></pre></div>
+<p><img src="PSYC208_files/figure-html/unnamed-chunk-91-1.png" width="672" /></p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="hypotest.html#cb158-1" tabindex="-1"></a><span class="co"># Conduct the correlation with cor.test</span></span>
+<span id="cb158-2"><a href="hypotest.html#cb158-2" tabindex="-1"></a><span class="co"># Unlike cor(), cor.test() gives you the p value</span></span>
+<span id="cb158-3"><a href="hypotest.html#cb158-3" tabindex="-1"></a><span class="fu">cor.test</span>(df<span class="sc">$</span>swls2019_avg, df<span class="sc">$</span>swls2021_avg)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
@@ -824,15 +833,15 @@ This section guides you through the steps of conducting the various hypothesis t
 ## sample estimates:
 ##         cor 
 ## 0.901191727</code></pre>
-<p>The correlation is r = 0.90, with a 95% confidence interval [0.88, 0.92]. The <em>p</em> value is very small, smaller than .05, and so we will conclude that the relationship is positive. In other words, people who have higher satisfaction with life scores in 2019 also have higher satisfaction with life scores in 2021.</p>
+<p>The correlation is <em>r</em> = 0.90, with a 95% confidence interval [0.88, 0.92]. The <em>p</em> value is very small, smaller than .05, and so we will conclude that the relationship is positive. In other words, people who have higher satisfaction with life scores in 2019 also have significantly higher satisfaction with life scores in 2021.</p>
 <p>There are other ways we can write the R code. Here are two alternatives.</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="hypotest.html#cb159-1" tabindex="-1"></a><span class="co"># Alternative 1</span></span>
-<span id="cb159-2"><a href="hypotest.html#cb159-2" tabindex="-1"></a><span class="fu">cor.test</span>(<span class="sc">~</span> swls2019_avg <span class="sc">+</span> swls2021_avg, </span>
-<span id="cb159-3"><a href="hypotest.html#cb159-3" tabindex="-1"></a>         <span class="at">data =</span> df)</span>
-<span id="cb159-4"><a href="hypotest.html#cb159-4" tabindex="-1"></a></span>
-<span id="cb159-5"><a href="hypotest.html#cb159-5" tabindex="-1"></a><span class="co"># Alternative 2</span></span>
-<span id="cb159-6"><a href="hypotest.html#cb159-6" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb159-7"><a href="hypotest.html#cb159-7" tabindex="-1"></a>  <span class="fu">cor.test</span>(<span class="at">formula =</span> <span class="sc">~</span> swls2019_avg <span class="sc">+</span> swls2021_avg, .)</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="hypotest.html#cb160-1" tabindex="-1"></a><span class="co"># Alternative 1</span></span>
+<span id="cb160-2"><a href="hypotest.html#cb160-2" tabindex="-1"></a><span class="fu">cor.test</span>(<span class="sc">~</span> swls2019_avg <span class="sc">+</span> swls2021_avg, </span>
+<span id="cb160-3"><a href="hypotest.html#cb160-3" tabindex="-1"></a>         <span class="at">data =</span> df)</span>
+<span id="cb160-4"><a href="hypotest.html#cb160-4" tabindex="-1"></a></span>
+<span id="cb160-5"><a href="hypotest.html#cb160-5" tabindex="-1"></a><span class="co"># Alternative 2</span></span>
+<span id="cb160-6"><a href="hypotest.html#cb160-6" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb160-7"><a href="hypotest.html#cb160-7" tabindex="-1"></a>  <span class="fu">cor.test</span>(<span class="at">formula =</span> <span class="sc">~</span> swls2019_avg <span class="sc">+</span> swls2021_avg, .)</span></code></pre></div>
 <p>Both ways would give us the same result as the earlier one but neither are intuitive. I personally prefer the much simpler <code>cor.test(df$swls2019_avg, df$swls2021_avg)</code>.</p>
 </div>
 <div id="difference-between-correlated-groups-t-test-and-correlation" class="section level3 hasAnchor" number="8.9.3">
@@ -840,15 +849,16 @@ This section guides you through the steps of conducting the various hypothesis t
 <p>Students sometimes get confused between correlated groups t test and correlation. I’ll attempt to explain the difference below.</p>
 <p>Correlated groups t test and correlation have different purposes. Correlated groups t test is used when we are trying to find the <em>difference</em> between two paired scores. For example, whether there is a difference between satisfaction with life scores in 2019 and in 2021. Correlation is used when we are trying to find the <em>relationship</em> between two variables. This would be applied when we’re trying to see whether the higher one variable is, the higher/lower another variable is. It is possible for us to have a correlated groups t test that is not statistically significant and a correlation that is significant when we run both on the same data.</p>
 <p>Below is a worked example to illustrate the difference.</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="hypotest.html#cb160-1" tabindex="-1"></a><span class="co"># Two Variables X and Y</span></span>
-<span id="cb160-2"><a href="hypotest.html#cb160-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
-<span id="cb160-3"><a href="hypotest.html#cb160-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
-<span id="cb160-4"><a href="hypotest.html#cb160-4" tabindex="-1"></a></span>
-<span id="cb160-5"><a href="hypotest.html#cb160-5" tabindex="-1"></a><span class="co"># Conduct Correlated Groups T Test</span></span>
-<span id="cb160-6"><a href="hypotest.html#cb160-6" tabindex="-1"></a><span class="co"># To see if there is a difference between x and y scores</span></span>
-<span id="cb160-7"><a href="hypotest.html#cb160-7" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, </span>
-<span id="cb160-8"><a href="hypotest.html#cb160-8" tabindex="-1"></a>       <span class="at">mu =</span> <span class="dv">0</span>, </span>
-<span id="cb160-9"><a href="hypotest.html#cb160-9" tabindex="-1"></a>       <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="hypotest.html#cb161-1" tabindex="-1"></a><span class="co"># Two Variables X and Y</span></span>
+<span id="cb161-2"><a href="hypotest.html#cb161-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb161-3"><a href="hypotest.html#cb161-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb161-4"><a href="hypotest.html#cb161-4" tabindex="-1"></a></span>
+<span id="cb161-5"><a href="hypotest.html#cb161-5" tabindex="-1"></a><span class="co"># Conduct Correlated Groups T Test</span></span>
+<span id="cb161-6"><a href="hypotest.html#cb161-6" tabindex="-1"></a><span class="co"># To see if there is a difference between x and y scores</span></span>
+<span id="cb161-7"><a href="hypotest.html#cb161-7" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">x =</span> x, </span>
+<span id="cb161-8"><a href="hypotest.html#cb161-8" tabindex="-1"></a>       <span class="at">y =</span> y, </span>
+<span id="cb161-9"><a href="hypotest.html#cb161-9" tabindex="-1"></a>       <span class="at">mu =</span> <span class="dv">0</span>, </span>
+<span id="cb161-10"><a href="hypotest.html#cb161-10" tabindex="-1"></a>       <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Paired t-test
 ## 
@@ -860,8 +870,8 @@ This section guides you through the steps of conducting the various hypothesis t
 ## sample estimates:
 ## mean difference 
 ##               0</code></pre>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="hypotest.html#cb162-1" tabindex="-1"></a><span class="co"># Conduct the Correlation</span></span>
-<span id="cb162-2"><a href="hypotest.html#cb162-2" tabindex="-1"></a><span class="fu">cor.test</span>(x, y)</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="hypotest.html#cb163-1" tabindex="-1"></a><span class="co"># Conduct the Correlation</span></span>
+<span id="cb163-2"><a href="hypotest.html#cb163-2" tabindex="-1"></a><span class="fu">cor.test</span>(x, y)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
@@ -881,16 +891,16 @@ This section guides you through the steps of conducting the various hypothesis t
 <h2><span class="header-section-number">8.10</span> Regression<a href="hypotest.html#regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="when-to-use-a-regression" class="section level3 hasAnchor" number="8.10.1">
 <h3><span class="header-section-number">8.10.1</span> When to Use A Regression<a href="hypotest.html#when-to-use-a-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>A regression is used when we want to use one variable to predict another. The simplest form of linear regression is called simple linear regression. It only has two variables: one predictor and one outcome. If you have multiple predictors, then we would use a multiple linear regression instead. We will stick with simple linear regression here.</p>
+<p>A regression is used when we want to use one variable to predict another. The simplest form of linear regression is called simple linear regression. It only has two variables: one predictor and one outcome. If you have multiple predictors, then we would use a multiple linear regression instead. For this course, we will stick to simple linear regression.</p>
 <p>Suppose we want to predict <code>swls2021_avg</code> from <code>swls2019_avg</code>. Here, we want to conduct a simple linear regression as we have one predictor and one outcome.</p>
 </div>
 <div id="conducting-and-interpreting-the-regression" class="section level3 hasAnchor" number="8.10.2">
 <h3><span class="header-section-number">8.10.2</span> Conducting and Interpreting the Regression<a href="hypotest.html#conducting-and-interpreting-the-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>As the descriptives have been calculated previously, we will go straight to the regression here.</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="hypotest.html#cb164-1" tabindex="-1"></a><span class="co"># Conduct regression</span></span>
-<span id="cb164-2"><a href="hypotest.html#cb164-2" tabindex="-1"></a><span class="co"># the model takes the form of Y ~ X (where Y = outcome, X = predictor)</span></span>
-<span id="cb164-3"><a href="hypotest.html#cb164-3" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(df<span class="sc">$</span>swls2021_avg <span class="sc">~</span> df<span class="sc">$</span>swls2019_avg)</span>
-<span id="cb164-4"><a href="hypotest.html#cb164-4" tabindex="-1"></a><span class="fu">summary</span>(mod3)</span></code></pre></div>
+<p>As the descriptives have been calculated previously, and the linearity assumption tested, we will go straight to the regression here.</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="hypotest.html#cb165-1" tabindex="-1"></a><span class="co"># Conduct regression</span></span>
+<span id="cb165-2"><a href="hypotest.html#cb165-2" tabindex="-1"></a><span class="co"># the model takes the form of Y ~ X (where Y = outcome, X = predictor)</span></span>
+<span id="cb165-3"><a href="hypotest.html#cb165-3" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(df<span class="sc">$</span>swls2021_avg <span class="sc">~</span> df<span class="sc">$</span>swls2019_avg)</span>
+<span id="cb165-4"><a href="hypotest.html#cb165-4" tabindex="-1"></a><span class="fu">summary</span>(mod3)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = df$swls2021_avg ~ df$swls2019_avg)
@@ -909,27 +919,34 @@ This section guides you through the steps of conducting the various hypothesis t
 ## Residual standard error: 0.292508 on 341 degrees of freedom
 ## Multiple R-squared:  0.812147,   Adjusted R-squared:  0.811596 
 ## F-statistic: 1474.24 on 1 and 341 DF,  p-value: &lt; 0.000000000000000222</code></pre>
-<p>The results indicate that <code>swls2021_avg</code> significantly predicted <code>swls2019_avg</code> (<em>p</em> value is &lt; 0.000000000000000222).</p>
+<p>The results indicate that <code>swls2019_avg</code> significantly predicted <code>swls2021_avg</code> (<em>p</em> value is &lt; 0.000000000000000222). The slope is 0.7916825, meaning that a unit increase in <code>df$swls2019_avg</code> is associated with an average increase of 0.7916825 in <code>df$swls2021_avg</code>.</p>
 <p>Unfortunately, the summary doesn’t give us the confidence interval. To get that, we need to specify that we want the confidence interval with the <code>confint()</code> function.</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="hypotest.html#cb166-1" tabindex="-1"></a><span class="co"># To get the 95% confidence interval</span></span>
-<span id="cb166-2"><a href="hypotest.html#cb166-2" tabindex="-1"></a><span class="fu">confint</span>(mod3)</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="hypotest.html#cb167-1" tabindex="-1"></a><span class="co"># To get the 95% confidence interval</span></span>
+<span id="cb167-2"><a href="hypotest.html#cb167-2" tabindex="-1"></a><span class="fu">confint</span>(mod3)</span></code></pre></div>
 <pre><code>##                       2.5 %      97.5 %
 ## (Intercept)     0.227320000 0.585856416
 ## df$swls2019_avg 0.751126141 0.832238772</code></pre>
-<p>We interpret the 95% confidence interval as, “We are 95% confident that the population slope is between 0.75 and 0.83.”</p>
+<p>We interpret the 95% confidence interval as, “We are 95% confident that the slope in the population is between 0.75 and 0.83.”</p>
 <p>There are other ways to code a linear regression. One of those alternatives is shown below.</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="hypotest.html#cb168-1" tabindex="-1"></a><span class="co"># Alternative</span></span>
-<span id="cb168-2"><a href="hypotest.html#cb168-2" tabindex="-1"></a></span>
-<span id="cb168-3"><a href="hypotest.html#cb168-3" tabindex="-1"></a><span class="co"># Linear regression</span></span>
-<span id="cb168-4"><a href="hypotest.html#cb168-4" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb168-5"><a href="hypotest.html#cb168-5" tabindex="-1"></a>  <span class="fu">lm</span>(swls2021_avg <span class="sc">~</span> swls2019_avg, <span class="at">data =</span> .) <span class="sc">%&gt;%</span> </span>
-<span id="cb168-6"><a href="hypotest.html#cb168-6" tabindex="-1"></a>  <span class="fu">summary</span>(.)</span>
-<span id="cb168-7"><a href="hypotest.html#cb168-7" tabindex="-1"></a></span>
-<span id="cb168-8"><a href="hypotest.html#cb168-8" tabindex="-1"></a><span class="co"># 95% confidence interval</span></span>
-<span id="cb168-9"><a href="hypotest.html#cb168-9" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb168-10"><a href="hypotest.html#cb168-10" tabindex="-1"></a>  <span class="fu">lm</span>(swls2021_avg <span class="sc">~</span> swls2019_avg, <span class="at">data =</span> .) <span class="sc">%&gt;%</span> </span>
-<span id="cb168-11"><a href="hypotest.html#cb168-11" tabindex="-1"></a>  <span class="fu">confint</span>(.)</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="hypotest.html#cb169-1" tabindex="-1"></a><span class="co"># Alternative</span></span>
+<span id="cb169-2"><a href="hypotest.html#cb169-2" tabindex="-1"></a></span>
+<span id="cb169-3"><a href="hypotest.html#cb169-3" tabindex="-1"></a><span class="co"># Linear regression</span></span>
+<span id="cb169-4"><a href="hypotest.html#cb169-4" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb169-5"><a href="hypotest.html#cb169-5" tabindex="-1"></a>  <span class="fu">lm</span>(swls2021_avg <span class="sc">~</span> swls2019_avg, <span class="at">data =</span> .) <span class="sc">%&gt;%</span> </span>
+<span id="cb169-6"><a href="hypotest.html#cb169-6" tabindex="-1"></a>  <span class="fu">summary</span>(.)</span>
+<span id="cb169-7"><a href="hypotest.html#cb169-7" tabindex="-1"></a></span>
+<span id="cb169-8"><a href="hypotest.html#cb169-8" tabindex="-1"></a><span class="co"># 95% confidence interval</span></span>
+<span id="cb169-9"><a href="hypotest.html#cb169-9" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb169-10"><a href="hypotest.html#cb169-10" tabindex="-1"></a>  <span class="fu">lm</span>(swls2021_avg <span class="sc">~</span> swls2019_avg, <span class="at">data =</span> .) <span class="sc">%&gt;%</span> </span>
+<span id="cb169-11"><a href="hypotest.html#cb169-11" tabindex="-1"></a>  <span class="fu">confint</span>(.)</span></code></pre></div>
 <p>You should get the same result as earlier.</p>
+</div>
+<div id="r-squared" class="section level3 hasAnchor" number="8.10.3">
+<h3><span class="header-section-number">8.10.3</span> R-squared<a href="hypotest.html#r-squared" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>R-squared (R^2), also known as the coefficient of determination, tells us the amount of variability in the dependent variable that is accounted for by the independent variable. It takes the values between 0 and 1 (inclusive), where 0 indicates that the independent variable explains none of the variance and 1 indicates it explains all of it. The value for this can be found in the regression output under <code>Multiple R-squared</code>.</p>
+<p>According to Cohen (1988, p. 413-414), R^2 = 0.02 is a small effect size, R^2 = 0.13 is medium, and R^2 = 0.26 is large.</p>
+<p>Reference</p>
+<p>Cohen J. (1988). Statistical Power Analysis for the Behavioral Sciences, 2nd Ed. Hillsdale, NJ: Laurence Erlbaum Associates</p>
 </div>
 </div>
 <div id="chi-square-test-of-goodness-of-fit" class="section level2 hasAnchor" number="8.11">
@@ -942,10 +959,10 @@ This section guides you through the steps of conducting the various hypothesis t
 <div id="conducting-and-interpreting-the-chi-square-test-of-goodness-of-fit" class="section level3 hasAnchor" number="8.11.2">
 <h3><span class="header-section-number">8.11.2</span> Conducting and Interpreting the Chi-Square Test of Goodness of Fit<a href="hypotest.html#conducting-and-interpreting-the-chi-square-test-of-goodness-of-fit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>First, we need the observed frequencies for men and women separately.</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="hypotest.html#cb169-1" tabindex="-1"></a><span class="co"># Observed frequencies for men and women (i.e., number of men and women in our study) </span></span>
-<span id="cb169-2"><a href="hypotest.html#cb169-2" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb169-3"><a href="hypotest.html#cb169-3" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span> </span>
-<span id="cb169-4"><a href="hypotest.html#cb169-4" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="hypotest.html#cb170-1" tabindex="-1"></a><span class="co"># Observed frequencies for men and women (i.e., number of men and women in our study) </span></span>
+<span id="cb170-2"><a href="hypotest.html#cb170-2" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb170-3"><a href="hypotest.html#cb170-3" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span> </span>
+<span id="cb170-4"><a href="hypotest.html#cb170-4" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ## # Groups:   gender [2]
 ##   gender     n
@@ -953,31 +970,31 @@ This section guides you through the steps of conducting the various hypothesis t
 ## 1 male     168
 ## 2 female   175</code></pre>
 <p>The descriptives above indicate that there are 168 males and 175 females. We want to know whether the observed frequencies are significantly different from the frequencies we expect if we have an equal proportion of men and women (expected frequencies).</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="hypotest.html#cb171-1" tabindex="-1"></a><span class="co"># Load package (remember to install package if you&#39;ve not done so)</span></span>
-<span id="cb171-2"><a href="hypotest.html#cb171-2" tabindex="-1"></a><span class="co"># Note that both MASS and dplyr have the select function</span></span>
-<span id="cb171-3"><a href="hypotest.html#cb171-3" tabindex="-1"></a><span class="co"># If you wish to use the select function, specify the package the function comes from (e.g., dplyr::select())</span></span>
-<span id="cb171-4"><a href="hypotest.html#cb171-4" tabindex="-1"></a><span class="fu">library</span>(MASS)  </span>
-<span id="cb171-5"><a href="hypotest.html#cb171-5" tabindex="-1"></a></span>
-<span id="cb171-6"><a href="hypotest.html#cb171-6" tabindex="-1"></a><span class="co"># Set up the values for chisq.test()</span></span>
-<span id="cb171-7"><a href="hypotest.html#cb171-7" tabindex="-1"></a>observedfreq <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">168</span>, <span class="dv">175</span>)  <span class="co"># observed frequencies for males and females</span></span>
-<span id="cb171-8"><a href="hypotest.html#cb171-8" tabindex="-1"></a>expectedprop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)  <span class="co"># expected proportions would be 0.5 for males, 0.5 for females</span></span>
-<span id="cb171-9"><a href="hypotest.html#cb171-9" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="at">x =</span> observedfreq, <span class="at">p =</span> expectedprop)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="hypotest.html#cb172-1" tabindex="-1"></a><span class="co"># Load package (remember to install package if you&#39;ve not done so)</span></span>
+<span id="cb172-2"><a href="hypotest.html#cb172-2" tabindex="-1"></a><span class="co"># Note that both MASS and dplyr have the select function</span></span>
+<span id="cb172-3"><a href="hypotest.html#cb172-3" tabindex="-1"></a><span class="co"># If you wish to use the select function, specify the package the function comes from (e.g., dplyr::select())</span></span>
+<span id="cb172-4"><a href="hypotest.html#cb172-4" tabindex="-1"></a><span class="fu">library</span>(MASS)  </span>
+<span id="cb172-5"><a href="hypotest.html#cb172-5" tabindex="-1"></a></span>
+<span id="cb172-6"><a href="hypotest.html#cb172-6" tabindex="-1"></a><span class="co"># Set up the values for chisq.test()</span></span>
+<span id="cb172-7"><a href="hypotest.html#cb172-7" tabindex="-1"></a>observedfreq <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">168</span>, <span class="dv">175</span>)  <span class="co"># observed frequencies for males and females</span></span>
+<span id="cb172-8"><a href="hypotest.html#cb172-8" tabindex="-1"></a>expectedprop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)  <span class="co"># expected proportions would be 0.5 for males, 0.5 for females</span></span>
+<span id="cb172-9"><a href="hypotest.html#cb172-9" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="at">x =</span> observedfreq, <span class="at">p =</span> expectedprop)</span></code></pre></div>
 <pre><code>## 
 ##  Chi-squared test for given probabilities
 ## 
 ## data:  observedfreq
 ## X-squared = 0.1428571, df = 1, p-value = 0.705457</code></pre>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="hypotest.html#cb173-1" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">. The order in which you enter the values for observedfreq and expectedprop should be the same. </span></span>
-<span id="cb173-2"><a href="hypotest.html#cb173-2" tabindex="-1"></a><span class="co"># If the first value for observedfreq is for males, then the first value for expectedprop should be for males also. </span></span>
-<span id="cb173-3"><a href="hypotest.html#cb173-3" tabindex="-1"></a><span class="co"># (And vice versa, of course.)</span></span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="hypotest.html#cb174-1" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">. The order in which you enter the values for observedfreq and expectedprop should be the same. </span></span>
+<span id="cb174-2"><a href="hypotest.html#cb174-2" tabindex="-1"></a><span class="co"># If the first value for observedfreq is for males, then the first value for expectedprop should be for males also. </span></span>
+<span id="cb174-3"><a href="hypotest.html#cb174-3" tabindex="-1"></a><span class="co"># (And vice versa, of course.)</span></span></code></pre></div>
 <p>Because <em>p</em> value is .705457 (greater than alpha level of .05), the results tell us that the proportion of men and women in our study is not significantly different from that in the Singapore population.</p>
 </div>
 <div id="effect-size-cohens-w" class="section level3 hasAnchor" number="8.11.3">
 <h3><span class="header-section-number">8.11.3</span> Effect Size: Cohen’s w<a href="hypotest.html#effect-size-cohens-w" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The effect size usually calculated for chi-square test of goodness of fit is the Cohen’s w (omega). By convention, in psychology, <em>w</em> = 0.1 is considered a small effect size, <em>w</em> = 0.3 is considered a medium effect size, and <em>w</em> = 0.5 is considered a large effect size.</p>
 <p>We can calculate Cohen’s w using the <code>cohens_w()</code> function from the <code>effectsize</code> package.</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="hypotest.html#cb174-1" tabindex="-1"></a><span class="co"># Cohen&#39;s w</span></span>
-<span id="cb174-2"><a href="hypotest.html#cb174-2" tabindex="-1"></a><span class="fu">cohens_w</span>(<span class="at">x =</span> observedfreq, <span class="at">p =</span> expectedprop)</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="hypotest.html#cb175-1" tabindex="-1"></a><span class="co"># Cohen&#39;s w</span></span>
+<span id="cb175-2"><a href="hypotest.html#cb175-2" tabindex="-1"></a><span class="fu">cohens_w</span>(<span class="at">x =</span> observedfreq, <span class="at">p =</span> expectedprop)</span></code></pre></div>
 <pre><code>## Cohen&#39;s w |       95% CI
 ## ------------------------
 ## 0.02      | [0.00, 1.00]
@@ -998,34 +1015,34 @@ This section guides you through the steps of conducting the various hypothesis t
 <div id="conducting-and-interpreting-the-chi-square-test-of-independence" class="section level3 hasAnchor" number="8.12.2">
 <h3><span class="header-section-number">8.12.2</span> Conducting and Interpreting the Chi-square Test of Independence<a href="hypotest.html#conducting-and-interpreting-the-chi-square-test-of-independence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>First, we need to filter the data such that we only have married and divorced participants.</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="hypotest.html#cb176-1" tabindex="-1"></a><span class="co"># Filter (keep) only divorced and married participants </span></span>
-<span id="cb176-2"><a href="hypotest.html#cb176-2" tabindex="-1"></a>div_and_mar_only <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
-<span id="cb176-3"><a href="hypotest.html#cb176-3" tabindex="-1"></a>  <span class="fu">filter</span>(marital_status <span class="sc">==</span> <span class="st">&quot;married&quot;</span> <span class="sc">|</span> marital_status <span class="sc">==</span> <span class="st">&quot;divorced&quot;</span>) </span>
-<span id="cb176-4"><a href="hypotest.html#cb176-4" tabindex="-1"></a></span>
-<span id="cb176-5"><a href="hypotest.html#cb176-5" tabindex="-1"></a><span class="co"># Drop the &quot;widowed&quot; level for marital status since it is now redundant</span></span>
-<span id="cb176-6"><a href="hypotest.html#cb176-6" tabindex="-1"></a>div_and_mar_only<span class="sc">$</span>marital_status <span class="ot">&lt;-</span> <span class="fu">droplevels</span>(div_and_mar_only<span class="sc">$</span>marital_status)</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="hypotest.html#cb177-1" tabindex="-1"></a><span class="co"># Filter (keep) only divorced and married participants </span></span>
+<span id="cb177-2"><a href="hypotest.html#cb177-2" tabindex="-1"></a>div_and_mar_only <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb177-3"><a href="hypotest.html#cb177-3" tabindex="-1"></a>  <span class="fu">filter</span>(marital_status <span class="sc">==</span> <span class="st">&quot;married&quot;</span> <span class="sc">|</span> marital_status <span class="sc">==</span> <span class="st">&quot;divorced&quot;</span>) </span>
+<span id="cb177-4"><a href="hypotest.html#cb177-4" tabindex="-1"></a></span>
+<span id="cb177-5"><a href="hypotest.html#cb177-5" tabindex="-1"></a><span class="co"># Drop the &quot;widowed&quot; level for marital status since it is now redundant</span></span>
+<span id="cb177-6"><a href="hypotest.html#cb177-6" tabindex="-1"></a>div_and_mar_only<span class="sc">$</span>marital_status <span class="ot">&lt;-</span> <span class="fu">droplevels</span>(div_and_mar_only<span class="sc">$</span>marital_status)</span></code></pre></div>
 <p>Then, we perform the chi-square test of independence.</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="hypotest.html#cb177-1" tabindex="-1"></a><span class="co"># Get the observed frequencies for each cell and save it as observedfreq</span></span>
-<span id="cb177-2"><a href="hypotest.html#cb177-2" tabindex="-1"></a>observedfreq1 <span class="ot">&lt;-</span> div_and_mar_only <span class="sc">%&gt;%</span> </span>
-<span id="cb177-3"><a href="hypotest.html#cb177-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(marital_status, have_children) <span class="sc">%&gt;%</span> </span>
-<span id="cb177-4"><a href="hypotest.html#cb177-4" tabindex="-1"></a>  <span class="fu">table</span>()</span>
-<span id="cb177-5"><a href="hypotest.html#cb177-5" tabindex="-1"></a></span>
-<span id="cb177-6"><a href="hypotest.html#cb177-6" tabindex="-1"></a><span class="co"># Perform the chi-square test of independence</span></span>
-<span id="cb177-7"><a href="hypotest.html#cb177-7" tabindex="-1"></a><span class="fu">chisq.test</span>(observedfreq1)</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="hypotest.html#cb178-1" tabindex="-1"></a><span class="co"># Get the observed frequencies for each cell and save it as observedfreq</span></span>
+<span id="cb178-2"><a href="hypotest.html#cb178-2" tabindex="-1"></a>observedfreq1 <span class="ot">&lt;-</span> div_and_mar_only <span class="sc">%&gt;%</span> </span>
+<span id="cb178-3"><a href="hypotest.html#cb178-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(marital_status, have_children) <span class="sc">%&gt;%</span> </span>
+<span id="cb178-4"><a href="hypotest.html#cb178-4" tabindex="-1"></a>  <span class="fu">table</span>()</span>
+<span id="cb178-5"><a href="hypotest.html#cb178-5" tabindex="-1"></a></span>
+<span id="cb178-6"><a href="hypotest.html#cb178-6" tabindex="-1"></a><span class="co"># Perform the chi-square test of independence</span></span>
+<span id="cb178-7"><a href="hypotest.html#cb178-7" tabindex="-1"></a><span class="fu">chisq.test</span>(observedfreq1)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
 ## 
 ## data:  observedfreq1
 ## X-squared = 1.689424, df = 1, p-value = 0.193677</code></pre>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="hypotest.html#cb179-1" tabindex="-1"></a><span class="co"># chisq.test cannot be conducted on a list</span></span>
-<span id="cb179-2"><a href="hypotest.html#cb179-2" tabindex="-1"></a><span class="co"># So the following wouldn&#39;t work since it gives you a list and not a matrix. </span></span>
-<span id="cb179-3"><a href="hypotest.html#cb179-3" tabindex="-1"></a></span>
-<span id="cb179-4"><a href="hypotest.html#cb179-4" tabindex="-1"></a>observedfreq2 <span class="ot">&lt;-</span> div_and_mar_only <span class="sc">%&gt;%</span> </span>
-<span id="cb179-5"><a href="hypotest.html#cb179-5" tabindex="-1"></a>  <span class="fu">group_by</span>(marital_status, have_children) <span class="sc">%&gt;%</span> </span>
-<span id="cb179-6"><a href="hypotest.html#cb179-6" tabindex="-1"></a>  <span class="fu">count</span>() </span>
-<span id="cb179-7"><a href="hypotest.html#cb179-7" tabindex="-1"></a></span>
-<span id="cb179-8"><a href="hypotest.html#cb179-8" tabindex="-1"></a><span class="co"># Check type for observedfreq2</span></span>
-<span id="cb179-9"><a href="hypotest.html#cb179-9" tabindex="-1"></a><span class="fu">typeof</span>(observedfreq2)</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="hypotest.html#cb180-1" tabindex="-1"></a><span class="co"># chisq.test cannot be conducted on a list</span></span>
+<span id="cb180-2"><a href="hypotest.html#cb180-2" tabindex="-1"></a><span class="co"># So the following wouldn&#39;t work since it gives you a list and not a matrix. </span></span>
+<span id="cb180-3"><a href="hypotest.html#cb180-3" tabindex="-1"></a></span>
+<span id="cb180-4"><a href="hypotest.html#cb180-4" tabindex="-1"></a>observedfreq2 <span class="ot">&lt;-</span> div_and_mar_only <span class="sc">%&gt;%</span> </span>
+<span id="cb180-5"><a href="hypotest.html#cb180-5" tabindex="-1"></a>  <span class="fu">group_by</span>(marital_status, have_children) <span class="sc">%&gt;%</span> </span>
+<span id="cb180-6"><a href="hypotest.html#cb180-6" tabindex="-1"></a>  <span class="fu">count</span>() </span>
+<span id="cb180-7"><a href="hypotest.html#cb180-7" tabindex="-1"></a></span>
+<span id="cb180-8"><a href="hypotest.html#cb180-8" tabindex="-1"></a><span class="co"># Check type for observedfreq2</span></span>
+<span id="cb180-9"><a href="hypotest.html#cb180-9" tabindex="-1"></a><span class="fu">typeof</span>(observedfreq2)</span></code></pre></div>
 <pre><code>## [1] &quot;list&quot;</code></pre>
 <p>The chi-square test of independence results indicate that there is no significant difference in marital status for people who have children and those who don’t (<em>p</em> = .19). This means that whether a person is married or divorced does not depend on whether they have children. In other words, marital status is INDEPENDENT of having children.</p>
 </div>
@@ -1033,8 +1050,8 @@ This section guides you through the steps of conducting the various hypothesis t
 <h3><span class="header-section-number">8.12.3</span> Effect Size: Phi<a href="hypotest.html#effect-size-phi" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The effect size usually calculated for a 2 x 2 table is phi. (A 2 x 2 table is one in which each of the two variables has two categories.) By convention, in psychology, phi = 0.1 is considered a small effect size, phi = 0.3 is considered a medium effect size, and phi = 0.5 is considered a large effect size.</p>
 <p>We can calculate phi using the <code>phi()</code> function from the <code>effectsize</code> package.</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="hypotest.html#cb181-1" tabindex="-1"></a><span class="co"># phi</span></span>
-<span id="cb181-2"><a href="hypotest.html#cb181-2" tabindex="-1"></a><span class="fu">phi</span>(<span class="at">x =</span> observedfreq1)</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="hypotest.html#cb182-1" tabindex="-1"></a><span class="co"># phi</span></span>
+<span id="cb182-2"><a href="hypotest.html#cb182-2" tabindex="-1"></a><span class="fu">phi</span>(<span class="at">x =</span> observedfreq1)</span></code></pre></div>
 <pre><code>## Phi (adj.) |       95% CI
 ## -------------------------
 ## 0.07       | [0.00, 1.00]

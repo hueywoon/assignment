@@ -2,8 +2,7 @@
 
 ## Overview
 
-The bulk of what we cover in PSYC208 is hypothesis testing. 
-This section guides you through the steps of conducting the various hypothesis tests. This only serves as an overview for students who are interested to read ahead. I will demonstrate how to conduct the hypothesis tests in class as well as how to interpret the results.
+The bulk of what we cover in PSYC208 is hypothesis testing. This section guides you through the steps of conducting the various hypothesis tests. This only serves as an overview for students who are interested to read ahead. I will demonstrate how to conduct the hypothesis tests in class as well as how to interpret the results.
 
 To illustrate the various tests, we will use the same hypothetical dataset, `SWB.csv` as before. To follow along, please download the dataset: [SWB.csv](SWB.csv).
 
@@ -16,6 +15,7 @@ library(tidyverse)
 library(psych)
 
 # Read in the dataset
+# Call the dataset df
 df <- read_csv("SWB.csv")
 
 ```
@@ -33,7 +33,9 @@ options(digits = 9)  # Display results to 9 decimal places
 
 Scientific notation is a way of expressing numbers that are very large or very small. It usually takes the form of `m × 10^n` for very large numbers and `m × 10^-n` for very small numbers, where `^` stands for "to the power of". So, suppose we have the following number: 0.000000000000000477. In scientific notation, this would be represented as` 4.77 x 10^-16` (i.e., 16 decimal places). Alternatively, it might be represented as `4.77e-16`. They mean the same thing.
 
-Here's a quick question to see if you understood scientific notation. Which of the following is the scientific notation for 0.0123?
+Here's a quick question to see if you understood scientific notation. 
+
+Which of the following is the scientific notation for 0.0123?
 
 A) 1.23e-1 / 1.23 x 10^-1
 A) 1.23e-2 / 1.23 x 10^-2
@@ -93,7 +95,7 @@ t.test(x = df$swls2019_avg,  # variable we're analysing
 
 The results tell you that the average of `swls2019_avg` is 4.35 (but notice it doesn't tell you any other descriptive statistics like standard deviation or maximum, so it's still important to get the descriptives in other ways). 
 
-When we compare 4.35 to the neutral point of 4, the resulting t value is 8.53. With degrees of freedom 342, the *p* value is very small, at 0.000000000000000477477. Because *p* value is smaller than the alpha level of .05, the result is statistically significant. Because 4.35 is statistically significantly greater than 4, we would conclude that there is sufficient evidence that the satisfaction with life scores in 2019 is greater than the neutral value of 4.
+When we compare 4.35 to the neutral point of 4, the resulting t value is 8.53. With degrees of freedom 342, the *p* value is very small, at 0.000000000000000477477. Because *p* value is smaller than the alpha level of .05, the result is statistically significant. Because 4.35 is statistically significantly greater than 4, we would conclude that there is sufficient evidence that on average, the satisfaction with life scores in 2019 is greater than the neutral value of 4.
 
 In addition, the 95% confidence interval is [4.27, 4.43], which is interpreted as follows: We are 95% confident that the population mean 2019 satisfaction with life score is between 4.27 and 4.43.
 
@@ -109,7 +111,7 @@ We can calculate Cohen's d using the `cohens_d()` function from the `effectsize`
 library(effectsize)
 
 # Cohen's d, with mu = 4 (i.e., the comparison value is 4)
-cohens_d(df$swls2019_avg, 
+cohens_d(x = df$swls2019_avg, 
          mu = 4)
 
 ```
@@ -160,7 +162,6 @@ t.test(x = df$swls2019_avg,  # scores in 2019
 # and that the alpha level is .05, therefore confidence interval is 95%.
 # Since observations are paired, we need to specify that using paired = TRUE.
 
-
 ```
 
 The results indicate that the average of the difference between swls2019_avg and swls2021_avg is 0.50. When we compare this difference against 0, the resulting t value is 27.83. With degrees of freedom 342, the *p* value is very small, at 0.000000000000000222. Because *p* value is smaller than the alpha level of .05, the result is statistically significant. Because 4.35 (mean for 2019) is statistically significantly greater than 3.85 (mean for 2021), we would conclude that there is sufficient evidence that on average, the satisfaction with life scores in 2019 are higher than the satisfaction with life scores in 2021.
@@ -203,11 +204,12 @@ After converting the grouping variable into a factor, we also want to get the de
 
 # First, we need to convert gender into a factor and add the labels accordingly 
 df$gender <- factor(df$gender, 
-                      levels = c(0, 1), 
-                      labels = c("male", "female"))
+                    levels = c(0, 1), 
+                    labels = c("male", "female"))
 
 # Next, we get the descriptive statistics for each group, male and female
-describeBy(df$swls2019_avg, group = df$gender)
+describeBy(df$swls2019_avg, 
+           group = df$gender)
 
 ```
 
@@ -228,7 +230,7 @@ t.test(df$swls2019_avg ~ df$gender,  # DV (outcome) ~ IV (group)
 
 ```
 
-The results indicate that the average 2019 satisfaction with life score for those who identify as male is 4.08 and 4.62 for those who identify as female. When we compare the difference between the two genders against 0, the resulting t value is -6.90. With degrees of freedom 341, the *p* value is very small, at 0.0000000000256373. Because *p* value is smaller than the alpha level of .05, the result is statistically significant. Because 4.62 is statistically significantly greater than 4.08, we would conclude that there is sufficient evidence that the satisfaction with life scores in 2019 is greater for females than for males.
+The results indicate that the average 2019 satisfaction with life score for those who identify as male is 4.08 and 4.62 for those who identify as female. When we compare the difference between the two genders against 0, the resulting t value is -6.90. With degrees of freedom 341, the *p* value is very small, at 0.0000000000256373. Because *p* value is smaller than the alpha level of .05, the result is statistically significant. Because 4.62 is statistically significantly greater than 4.08, we would conclude that there is sufficient evidence that on average, the satisfaction with life scores in 2019 is greater for females than for males.
 
 The 95% confidence interval is [-0.69, -0.38] which is interpreted as follows: We are 95% confident that the population mean difference in 2019 satisfaction with life score between males and females is between -0.69 and -0.38.
 
@@ -273,7 +275,8 @@ df$marital_status <- factor(df$marital_status,
                             labels = c("married", "divorced", "widowed"))
 
 # Get the descriptive statistics by marital status
-describeBy(df$swls2019_avg, group = df$marital_status)
+describeBy(df$swls2019_avg, 
+           group = df$marital_status)
 
 ```
 
@@ -296,20 +299,20 @@ The F ratio is 9.62. With the degrees of freedom 2 and 340, the *p* value is 0.0
 
 ### Posthoc Analysis: Tukey's HSD
 
-Because the ANOVA results are statistically significant, we want to follow up with a posthoc analysis such as the Tukey's HSD to investigate which group(s) differ from which group(s). 
+Because the ANOVA results are statistically significant, we want to follow up with a *post hoc* analysis such as the Tukey's HSD to investigate which group(s) differ from which group(s). 
 
 The Tukey's HSD conducts all possible pairwise comparisons, while adjusting the *p* value to control inflation of family-wise error rate. In this example, we would have three pairwise comparisons: a) married vs widowed, b) married vs divorced, and c) widowed vs divorced. 
 
 ```{r}
 
-# Perform a posthoc test on the results using Tukey's HSD and get the 95% CI 
+# Perform a post hoc test on the results using Tukey's HSD and get the 95% CI 
 TukeyHSD(mod1, conf.level = .95)
 
 ```
 
 The results indicate that married people were significantly more satisfied with their lives than divorced and widowed people. However, divorced and widowed people did not differ significantly in their satisfaction with life scores.
 
-_Note._ Tukey's HSD is one of the most common posthoc tests. But there are others. If you need other posthoc tests, you might want to check out the `DescTools` package.
+_Note._ Tukey's HSD is one of the most common *post hoc* tests. But there are others. If you need other *post hoc* tests, you might want to check out the `DescTools` package.
 
 ### Effect Size: Eta-Squared
 
@@ -321,8 +324,10 @@ We can get eta-squared using the `eta_squared()` function from `effectsize` pack
 
 eta_squared(mod1, partial = FALSE)  
 
-# partial = FALSE means we do NOT want partial eta-squared. 
-# This actually doesn't matter here, since for a one-way between-subjects ANOVA, eta-squared and partial eta-squared will be exactly the same value.
+# partial = FALSE means we do NOT want partial eta-squared; we want eta-squared
+# stating partial = TRUE / FALSE actually doesn't matter here.
+# For a one-way between-subjects ANOVA, eta-squared and partial eta-squared will be exactly the same value.
+# There is no other factor to attribute the variance to, so partial eta-squared is irrelevant here.
 
 ```
 
@@ -334,7 +339,7 @@ _Note._ Eta-squared tends to overestimate the effect size. This means it will te
 
 ### When to Use A Two-Way Between-Subjects Factorial ANOVA
 
-A two-way between-subjects ANOVA is used when we want to examine an interaction. In other words, it is used when we're trying to investigate whether the effect of one variable depends on a second variable (which is usually called a moderator). 
+A two-way between-subjects ANOVA is used when we want to examine an interaction. More specifically, it is used when we're trying to investigate whether the effect of one variable depends on a second variable (which is usually called a moderator). 
 
 Let's say we're investigating the effect of alcohol on aggression levels. We think that for men, ingesting alcohol makes them more aggressive (compared to not ingesting alcohol). However, for women, ingesting alcohol does not lead to any change in aggression levels (compared to not ingesting alcohol). In such a case, we're interested in an interaction: We want to know whether the effect of alcohol on aggression (the difference between ingesting and not ingesting alcohol) depends on biological sex. 
 
@@ -368,7 +373,7 @@ Now that we have the descriptives (which will help us interpret the results late
 
 ```{r}
 
-# Change contrasts settings when estimating Type-3 sum of squares
+# IMPORTANT: Change contrasts settings when estimating Type-3 sum of squares
 options(contrasts = c('contr.sum', 'contr.poly'))
 
 # Set up the model being tested and store the model to [mod2]
@@ -384,9 +389,9 @@ Anova(mod2, type = "3")
 
 ```
 
-_Note._ Read up more on the three types of sum of squares here: https://towardsdatascience.com/anovas-three-types-of-estimating-sums-of-squares-don-t-make-the-wrong-choice-91107c77a27a. tldr: if we are trying to test an interaction, we should use Type 3 sum of squares. 
+_Note._ Read up more on the four types of sum of squares here: https://md.psych.bio.uni-goettingen.de/mv/unit/lm_cat/lm_cat_unbal_ss_explained.html#type-iii-1. tldr: if we are trying to test an interaction, we should use Type 3 sum of squares. 
 
-From the results, we can see that the main effects as well as the interaction effect are statistically significant. To interpret the results, we need to look at the descriptive statistics. The main effect of gender tells us that overall, females reported being significantly more satisfied than males (first set of descriptives). The main effect of presence of children tells us that overall, those with children reported being significantly more satisfied than those without children (second set of descriptives). The interaction effect tells us that the effect of gender on satisfaction with life scores depends on the presence of children. 
+From the results, we can see that the main effects as well as the interaction effect are statistically significant. To interpret the results, we need to look at the descriptive statistics. The main effect of gender tells us that overall, females reported being significantly more satisfied than males (first set of descriptives). The main effect of presence of children tells us that overall, those with children reported being significantly more satisfied than those without children (second set of descriptives). However, these main effects are qualified by the interaction effect. The interaction effect tells us that the effect of gender on satisfaction with life scores depends on the presence of children. 
 
 ### Conducting and Interpreting the Simple Effects Analysis
 
@@ -451,11 +456,11 @@ The results indicate that we have a large effect for gender, a medium-large effe
 
 ### When to Use A Correlation
 
-A correlation is used when we want to examine whether two continuous variables are related to each other. Suppose we want to find out whether people who have higher satisfaction with life scores in 2019 also have higher satisfaction with life scores in 2021. Here is where you will conduct a correlation. 
+A correlation is used when we want to examine whether two variables are related to each other. Suppose we want to find out whether people who have higher satisfaction with life scores in 2019 also have higher satisfaction with life scores in 2021. Here is where you will conduct a correlation. There are many different types of correlations (e.g., Pearson correlation, Spearman correlation, phi coefficient). The most commonly used is the Pearson correlation, so that's what we'll focus on here. 
 
 ### Conducting and Interpreting the Correlation
 
-As usual, we get the descriptive statistics before conducting the hypothesis test. 
+As usual, we get the descriptive statistics before conducting the hypothesis test. We should also test whether the variables have a linear relationship (because the Pearson correlation coefficient should only be used for variables that have a linear relationship). 
 
 ```{r}
 
@@ -463,12 +468,16 @@ As usual, we get the descriptive statistics before conducting the hypothesis tes
 describe(df$swls2019_avg)
 describe(df$swls2021_avg)
 
+# Check linearity assumption
+plot(df$swls2019_avg, df$swls2021_avg)
+
 # Conduct the correlation with cor.test
 # Unlike cor(), cor.test() gives you the p value
 cor.test(df$swls2019_avg, df$swls2021_avg)
+
 ```
 
-The correlation is r = 0.90, with a 95% confidence interval [0.88, 0.92]. The *p* value is very small, smaller than .05, and so we will conclude that the relationship is positive. In other words, people who have higher satisfaction with life scores in 2019 also have higher satisfaction with life scores in 2021. 
+The correlation is *r* = 0.90, with a 95% confidence interval [0.88, 0.92]. The *p* value is very small, smaller than .05, and so we will conclude that the relationship is positive. In other words, people who have higher satisfaction with life scores in 2019 also have significantly higher satisfaction with life scores in 2021. 
 
 There are other ways we can write the R code. Here are two alternatives. 
 
@@ -481,6 +490,7 @@ cor.test(~ swls2019_avg + swls2021_avg,
 # Alternative 2
 df %>% 
   cor.test(formula = ~ swls2019_avg + swls2021_avg, .)
+
 ```
 
 Both ways would give us the same result as the earlier one but neither are intuitive. I personally prefer the much simpler `cor.test(df$swls2019_avg, df$swls2021_avg)`.
@@ -501,7 +511,8 @@ y <- c(1, 2, 3, 4, 5)
 
 # Conduct Correlated Groups T Test
 # To see if there is a difference between x and y scores
-t.test(x = x, y = y, 
+t.test(x = x, 
+       y = y, 
        mu = 0, 
        paired = TRUE)
 
@@ -518,13 +529,13 @@ The correlated groups t test is telling us that on average, there is no differen
 
 ### When to Use A Regression
 
-A regression is used when we want to use one variable to predict another. The simplest form of linear regression is called simple linear regression. It only has two variables: one predictor and one outcome. If you have multiple predictors, then we would use a multiple linear regression instead. We will stick with simple linear regression here. 
+A regression is used when we want to use one variable to predict another. The simplest form of linear regression is called simple linear regression. It only has two variables: one predictor and one outcome. If you have multiple predictors, then we would use a multiple linear regression instead. For this course, we will stick to simple linear regression. 
 
 Suppose we want to predict `swls2021_avg` from `swls2019_avg`. Here, we want to conduct a simple linear regression as we have one predictor and one outcome. 
 
 ### Conducting and Interpreting the Regression
 
-As the descriptives have been calculated previously, we will go straight to the regression here. 
+As the descriptives have been calculated previously, and the linearity assumption tested, we will go straight to the regression here. 
 
 ```{r}
 
@@ -535,7 +546,7 @@ summary(mod3)
 
 ```
 
-The results indicate that `swls2021_avg` significantly predicted `swls2019_avg` (*p* value is < 0.000000000000000222). 
+The results indicate that `swls2019_avg` significantly predicted `swls2021_avg` (*p* value is < 0.000000000000000222). The slope is 0.7916825, meaning that a unit increase in `df$swls2019_avg` is associated with an average increase of 0.7916825 in `df$swls2021_avg`.
 
 Unfortunately, the summary doesn't give us the confidence interval. To get that, we need to specify that we want the confidence interval with the `confint()` function. 
 
@@ -546,7 +557,7 @@ confint(mod3)
 
 ```
 
-We interpret the 95% confidence interval as, "We are 95% confident that the population slope is between 0.75 and 0.83."
+We interpret the 95% confidence interval as, "We are 95% confident that the slope in the population is between 0.75 and 0.83."
 
 There are other ways to code a linear regression. One of those alternatives is shown below. 
 
@@ -567,6 +578,16 @@ data %>%
 ```
 
 You should get the same result as earlier. 
+
+### R-squared
+
+R-squared (R^2), also known as the coefficient of determination, tells us the amount of variability in the dependent variable that is accounted for by the independent variable. It takes the values between 0 and 1 (inclusive), where 0 indicates that the independent variable explains none of the variance and 1 indicates it explains all of it. The value for this can be found in the regression output under `Multiple R-squared`. 
+
+According to Cohen (1988, p. 413-414), R^2 = 0.02 is a small effect size, R^2 = 0.13 is medium, and R^2 = 0.26 is large.
+
+Reference
+
+Cohen J. (1988). Statistical Power Analysis for the Behavioral Sciences, 2nd Ed. Hillsdale, NJ: Laurence Erlbaum Associates
 
 ## Chi-square Test of Goodness of Fit
 
