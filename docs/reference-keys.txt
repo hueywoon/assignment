@@ -98,5 +98,5 @@ effect-size-cohens-w
 chi-square-test-of-independence
 when-to-use-chi-square-test-of-independence
 conducting-and-interpreting-the-chi-square-test-of-independence
-effect-size-phi
+effect-size-phi-and-cramers-v
 next-steps

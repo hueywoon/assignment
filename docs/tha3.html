@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7 Test Yourselves 3 | PSYC208 R Companion Website</title>
   <meta name="description" content="This is the companion website to my PSYC208 class." />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7 Test Yourselves 3 | PSYC208 R Companion Website" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Huey Woon LEE" />
 
 
-<meta name="date" content="2025-01-07" />
+<meta name="date" content="2025-10-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,7 +56,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -66,7 +66,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -273,13 +273,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.11.1" data-path="hypotest.html"><a href="hypotest.html#when-to-use-chi-square-test-of-goodness-of-fit"><i class="fa fa-check"></i><b>8.11.1</b> When to Use Chi-square Test of Goodness of Fit</a></li>
 <li class="chapter" data-level="8.11.2" data-path="hypotest.html"><a href="hypotest.html#conducting-and-interpreting-the-chi-square-test-of-goodness-of-fit"><i class="fa fa-check"></i><b>8.11.2</b> Conducting and Interpreting the Chi-Square Test of Goodness of Fit</a></li>
-<li class="chapter" data-level="8.11.3" data-path="hypotest.html"><a href="hypotest.html#effect-size-cohens-w"><i class="fa fa-check"></i><b>8.11.3</b> Effect Size: Cohen’s w</a></li>
+<li class="chapter" data-level="8.11.3" data-path="hypotest.html"><a href="hypotest.html#effect-size-cohens-w"><i class="fa fa-check"></i><b>8.11.3</b> Effect Size: Cohen’s <em>w</em></a></li>
 </ul></li>
 <li class="chapter" data-level="8.12" data-path="hypotest.html"><a href="hypotest.html#chi-square-test-of-independence"><i class="fa fa-check"></i><b>8.12</b> Chi-square Test of Independence</a>
 <ul>
 <li class="chapter" data-level="8.12.1" data-path="hypotest.html"><a href="hypotest.html#when-to-use-chi-square-test-of-independence"><i class="fa fa-check"></i><b>8.12.1</b> When to Use Chi-square Test of Independence</a></li>
 <li class="chapter" data-level="8.12.2" data-path="hypotest.html"><a href="hypotest.html#conducting-and-interpreting-the-chi-square-test-of-independence"><i class="fa fa-check"></i><b>8.12.2</b> Conducting and Interpreting the Chi-square Test of Independence</a></li>
-<li class="chapter" data-level="8.12.3" data-path="hypotest.html"><a href="hypotest.html#effect-size-phi"><i class="fa fa-check"></i><b>8.12.3</b> Effect Size: Phi</a></li>
+<li class="chapter" data-level="8.12.3" data-path="hypotest.html"><a href="hypotest.html#effect-size-phi-and-cramers-v"><i class="fa fa-check"></i><b>8.12.3</b> Effect Size: Phi and Cramer’s V</a></li>
 </ul></li>
 <li class="chapter" data-level="8.13" data-path="hypotest.html"><a href="hypotest.html#next-steps"><i class="fa fa-check"></i><b>8.13</b> Next steps</a></li>
 </ul></li>
@@ -405,95 +405,95 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="suggested-answers-2" class="section level2 hasAnchor" number="7.3">
 <h2><span class="header-section-number">7.3</span> Suggested Answers<a href="tha3.html#suggested-answers-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="tha3.html#cb93-1" tabindex="-1"></a><span class="co"># Skipped Steps 1 to 3</span></span>
-<span id="cb93-2"><a href="tha3.html#cb93-2" tabindex="-1"></a></span>
-<span id="cb93-3"><a href="tha3.html#cb93-3" tabindex="-1"></a><span class="co"># 4. Load packages</span></span>
-<span id="cb93-4"><a href="tha3.html#cb93-4" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb93-5"><a href="tha3.html#cb93-5" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
-<span id="cb93-6"><a href="tha3.html#cb93-6" tabindex="-1"></a></span>
-<span id="cb93-7"><a href="tha3.html#cb93-7" tabindex="-1"></a><span class="co"># 5. Read .csv file</span></span>
-<span id="cb93-8"><a href="tha3.html#cb93-8" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;WVS2012 Singapore BFI10 Data.csv&quot;</span>)</span>
-<span id="cb93-9"><a href="tha3.html#cb93-9" tabindex="-1"></a></span>
-<span id="cb93-10"><a href="tha3.html#cb93-10" tabindex="-1"></a><span class="co"># 6. Take a look at the variable names and types</span></span>
-<span id="cb93-11"><a href="tha3.html#cb93-11" tabindex="-1"></a><span class="fu">glimpse</span>(dataset)  <span class="co">#str(data) also okay</span></span>
-<span id="cb93-12"><a href="tha3.html#cb93-12" tabindex="-1"></a></span>
-<span id="cb93-13"><a href="tha3.html#cb93-13" tabindex="-1"></a><span class="co"># Extra. Run descriptives to get min and max values for each column </span></span>
-<span id="cb93-14"><a href="tha3.html#cb93-14" tabindex="-1"></a><span class="co"># I didn&#39;t get you guys to do this, but in actual analysis, you should run descriptives to check what the minimum and maximum values are for this dataset. </span></span>
-<span id="cb93-15"><a href="tha3.html#cb93-15" tabindex="-1"></a><span class="co"># Values below 1 are invalid numbers (see legend) so we need to remove them</span></span>
-<span id="cb93-16"><a href="tha3.html#cb93-16" tabindex="-1"></a><span class="co"># Notice that the minimum value is -5 (because there are negative values)</span></span>
-<span id="cb93-17"><a href="tha3.html#cb93-17" tabindex="-1"></a>dataset <span class="sc">%&gt;%</span> </span>
-<span id="cb93-18"><a href="tha3.html#cb93-18" tabindex="-1"></a>  <span class="fu">describe</span>(.)</span>
-<span id="cb93-19"><a href="tha3.html#cb93-19" tabindex="-1"></a></span>
-<span id="cb93-20"><a href="tha3.html#cb93-20" tabindex="-1"></a><span class="co"># 7. Remove all participants who have values below 1 for the BFI10 items.</span></span>
-<span id="cb93-21"><a href="tha3.html#cb93-21" tabindex="-1"></a>subset <span class="ot">&lt;-</span> dataset <span class="sc">%&gt;%</span></span>
-<span id="cb93-22"><a href="tha3.html#cb93-22" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">if_all</span>(<span class="fu">c</span>(<span class="st">&quot;V160A&quot;</span><span class="sc">:</span><span class="st">&quot;V160J&quot;</span>), <span class="sc">~</span> .x <span class="sc">&gt;</span> <span class="dv">0</span>))</span>
-<span id="cb93-23"><a href="tha3.html#cb93-23" tabindex="-1"></a><span class="co"># The code above is saying... </span></span>
-<span id="cb93-24"><a href="tha3.html#cb93-24" tabindex="-1"></a><span class="co"># KEEP (filter) the row </span></span>
-<span id="cb93-25"><a href="tha3.html#cb93-25" tabindex="-1"></a><span class="co"># IF ALL (if_all) of the </span></span>
-<span id="cb93-26"><a href="tha3.html#cb93-26" tabindex="-1"></a><span class="co"># COLUMNS from V160A to V160J (c(&quot;V160A&quot;:V160J&quot;) have </span></span>
-<span id="cb93-27"><a href="tha3.html#cb93-27" tabindex="-1"></a><span class="co"># VALUES GREATER THAN 0 (.x &gt; 0).</span></span>
-<span id="cb93-28"><a href="tha3.html#cb93-28" tabindex="-1"></a><span class="co"># Note. If you have multiple conditions, you can just add them on... For example greater than 0 and less than 6 would be ~.x &gt; 0 &amp; .x &lt; 6</span></span>
-<span id="cb93-29"><a href="tha3.html#cb93-29" tabindex="-1"></a></span>
-<span id="cb93-30"><a href="tha3.html#cb93-30" tabindex="-1"></a><span class="co"># Extra. Run descriptives to check the min and max values for each column</span></span>
-<span id="cb93-31"><a href="tha3.html#cb93-31" tabindex="-1"></a><span class="co"># If you did the above step correctly, the minimum value should be 1 now, which is the lowest value on the likert scale used</span></span>
-<span id="cb93-32"><a href="tha3.html#cb93-32" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
-<span id="cb93-33"><a href="tha3.html#cb93-33" tabindex="-1"></a>  <span class="fu">describe</span>(.)</span>
-<span id="cb93-34"><a href="tha3.html#cb93-34" tabindex="-1"></a></span>
-<span id="cb93-35"><a href="tha3.html#cb93-35" tabindex="-1"></a><span class="co"># 8. Reverse-Code all the Reverse-Keyed Items</span></span>
-<span id="cb93-36"><a href="tha3.html#cb93-36" tabindex="-1"></a><span class="co"># Then, select only the variables that you are interested in analyzing in the subset</span></span>
-<span id="cb93-37"><a href="tha3.html#cb93-37" tabindex="-1"></a>subset <span class="ot">&lt;-</span> subset <span class="sc">%&gt;%</span>   </span>
-<span id="cb93-38"><a href="tha3.html#cb93-38" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="dv">5</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">across</span>(<span class="fu">c</span>(V160A, V160C, V160D, V160E, V160G), </span>
-<span id="cb93-39"><a href="tha3.html#cb93-39" tabindex="-1"></a>                        <span class="at">.names =</span> <span class="st">&quot;{col}r&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb93-40"><a href="tha3.html#cb93-40" tabindex="-1"></a>  <span class="fu">select</span>(V160Ar, V160F, V160B, V160Gr, V160Cr, V160H, V160Dr, V160I, V160Er, V160J)</span>
-<span id="cb93-41"><a href="tha3.html#cb93-41" tabindex="-1"></a></span>
-<span id="cb93-42"><a href="tha3.html#cb93-42" tabindex="-1"></a><span class="co"># The above code is saying... </span></span>
-<span id="cb93-43"><a href="tha3.html#cb93-43" tabindex="-1"></a><span class="co"># Mutate (i.e., create new variables) by taking 5 (max) + 1 (min) - observation, and do this across this set of columns: V160A, V160C, V160D, V160E, V160G. Name those columns by adding an r after the original column name (represented by {col}r)</span></span>
-<span id="cb93-44"><a href="tha3.html#cb93-44" tabindex="-1"></a><span class="co"># Then, select the columns you&#39;d like to keep</span></span>
-<span id="cb93-45"><a href="tha3.html#cb93-45" tabindex="-1"></a></span>
-<span id="cb93-46"><a href="tha3.html#cb93-46" tabindex="-1"></a><span class="co"># 9. Get the correlation coefficients</span></span>
-<span id="cb93-47"><a href="tha3.html#cb93-47" tabindex="-1"></a><span class="co"># I present two alternatives below. </span></span>
-<span id="cb93-48"><a href="tha3.html#cb93-48" tabindex="-1"></a></span>
-<span id="cb93-49"><a href="tha3.html#cb93-49" tabindex="-1"></a><span class="co"># Alternative 1: Correlation Matrix</span></span>
-<span id="cb93-50"><a href="tha3.html#cb93-50" tabindex="-1"></a><span class="co"># This is an acceptable method, although I find it difficult to pick out the important correlations from here because the matrix is a bit large.</span></span>
-<span id="cb93-51"><a href="tha3.html#cb93-51" tabindex="-1"></a>cor.output <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cor</span>(subset))  </span>
-<span id="cb93-52"><a href="tha3.html#cb93-52" tabindex="-1"></a></span>
-<span id="cb93-53"><a href="tha3.html#cb93-53" tabindex="-1"></a><span class="co"># Alternative 2: Individual correlations</span></span>
-<span id="cb93-54"><a href="tha3.html#cb93-54" tabindex="-1"></a><span class="co"># This takes a bit more effort, but clearly indicates which variable we&#39;re analyzing. </span></span>
-<span id="cb93-55"><a href="tha3.html#cb93-55" tabindex="-1"></a><span class="fu">cor</span>(subset<span class="sc">$</span>V160Ar, subset<span class="sc">$</span>V160F) <span class="co"># extraversion</span></span>
-<span id="cb93-56"><a href="tha3.html#cb93-56" tabindex="-1"></a><span class="fu">cor</span>(subset<span class="sc">$</span>V160B, subset<span class="sc">$</span>V160Gr) <span class="co"># agreeableness</span></span>
-<span id="cb93-57"><a href="tha3.html#cb93-57" tabindex="-1"></a><span class="fu">cor</span>(subset<span class="sc">$</span>V160Cr, subset<span class="sc">$</span>V160H) <span class="co"># conscientiousness</span></span>
-<span id="cb93-58"><a href="tha3.html#cb93-58" tabindex="-1"></a><span class="fu">cor</span>(subset<span class="sc">$</span>V160Dr, subset<span class="sc">$</span>V160I) <span class="co"># neuroticism</span></span>
-<span id="cb93-59"><a href="tha3.html#cb93-59" tabindex="-1"></a><span class="fu">cor</span>(subset<span class="sc">$</span>V160Er, subset<span class="sc">$</span>V160J) <span class="co"># openness to experience</span></span>
-<span id="cb93-60"><a href="tha3.html#cb93-60" tabindex="-1"></a></span>
-<span id="cb93-61"><a href="tha3.html#cb93-61" tabindex="-1"></a><span class="co"># 10. Cronbach&#39;s alpha for each pair of items</span></span>
-<span id="cb93-62"><a href="tha3.html#cb93-62" tabindex="-1"></a><span class="co"># Here&#39;s a general explanation of the code below. </span></span>
-<span id="cb93-63"><a href="tha3.html#cb93-63" tabindex="-1"></a><span class="co"># We take the data frame, subset. Then we keep only the variables we&#39;re interested in (e.g., V160Ar, V160F). This results in a data frame with two variables. This two-variable data frame is then passed into the alpha() function.</span></span>
-<span id="cb93-64"><a href="tha3.html#cb93-64" tabindex="-1"></a><span class="co"># Note that alpha() can only be used with data frames or matrices and not with vectors. So alpha(subset$V160Ar, subset$V160F) won&#39;t work since each column (e.g., subset$V160F) is a vector (think of vector as a list of values of the same type) and not a data frame.</span></span>
-<span id="cb93-65"><a href="tha3.html#cb93-65" tabindex="-1"></a></span>
-<span id="cb93-66"><a href="tha3.html#cb93-66" tabindex="-1"></a><span class="co"># Extraversion</span></span>
-<span id="cb93-67"><a href="tha3.html#cb93-67" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
-<span id="cb93-68"><a href="tha3.html#cb93-68" tabindex="-1"></a>  <span class="fu">select</span>(V160Ar, V160F) <span class="sc">%&gt;%</span> </span>
-<span id="cb93-69"><a href="tha3.html#cb93-69" tabindex="-1"></a>  <span class="fu">alpha</span>()</span>
-<span id="cb93-70"><a href="tha3.html#cb93-70" tabindex="-1"></a></span>
-<span id="cb93-71"><a href="tha3.html#cb93-71" tabindex="-1"></a><span class="co"># Agreeableness</span></span>
-<span id="cb93-72"><a href="tha3.html#cb93-72" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
-<span id="cb93-73"><a href="tha3.html#cb93-73" tabindex="-1"></a>  <span class="fu">select</span>(V160Gr, V160B) <span class="sc">%&gt;%</span> </span>
-<span id="cb93-74"><a href="tha3.html#cb93-74" tabindex="-1"></a>  <span class="fu">alpha</span>()</span>
-<span id="cb93-75"><a href="tha3.html#cb93-75" tabindex="-1"></a></span>
-<span id="cb93-76"><a href="tha3.html#cb93-76" tabindex="-1"></a><span class="co"># Conscientousness</span></span>
-<span id="cb93-77"><a href="tha3.html#cb93-77" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
-<span id="cb93-78"><a href="tha3.html#cb93-78" tabindex="-1"></a>  <span class="fu">select</span>(V160Cr, V160H) <span class="sc">%&gt;%</span> </span>
-<span id="cb93-79"><a href="tha3.html#cb93-79" tabindex="-1"></a>  <span class="fu">alpha</span>()</span>
-<span id="cb93-80"><a href="tha3.html#cb93-80" tabindex="-1"></a></span>
-<span id="cb93-81"><a href="tha3.html#cb93-81" tabindex="-1"></a><span class="co"># Neuroticism</span></span>
-<span id="cb93-82"><a href="tha3.html#cb93-82" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
-<span id="cb93-83"><a href="tha3.html#cb93-83" tabindex="-1"></a>  <span class="fu">select</span>(V160Dr, V160I) <span class="sc">%&gt;%</span> </span>
-<span id="cb93-84"><a href="tha3.html#cb93-84" tabindex="-1"></a>  <span class="fu">alpha</span>()</span>
-<span id="cb93-85"><a href="tha3.html#cb93-85" tabindex="-1"></a></span>
-<span id="cb93-86"><a href="tha3.html#cb93-86" tabindex="-1"></a><span class="co"># Openness to Experience</span></span>
-<span id="cb93-87"><a href="tha3.html#cb93-87" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
-<span id="cb93-88"><a href="tha3.html#cb93-88" tabindex="-1"></a>  <span class="fu">select</span>(V160Er, V160J) <span class="sc">%&gt;%</span> </span>
-<span id="cb93-89"><a href="tha3.html#cb93-89" tabindex="-1"></a>  <span class="fu">alpha</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="tha3.html#cb91-1" tabindex="-1"></a><span class="co"># Skipped Steps 1 to 3</span></span>
+<span id="cb91-2"><a href="tha3.html#cb91-2" tabindex="-1"></a></span>
+<span id="cb91-3"><a href="tha3.html#cb91-3" tabindex="-1"></a><span class="co"># 4. Load packages</span></span>
+<span id="cb91-4"><a href="tha3.html#cb91-4" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb91-5"><a href="tha3.html#cb91-5" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
+<span id="cb91-6"><a href="tha3.html#cb91-6" tabindex="-1"></a></span>
+<span id="cb91-7"><a href="tha3.html#cb91-7" tabindex="-1"></a><span class="co"># 5. Read .csv file</span></span>
+<span id="cb91-8"><a href="tha3.html#cb91-8" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;WVS2012 Singapore BFI10 Data.csv&quot;</span>)</span>
+<span id="cb91-9"><a href="tha3.html#cb91-9" tabindex="-1"></a></span>
+<span id="cb91-10"><a href="tha3.html#cb91-10" tabindex="-1"></a><span class="co"># 6. Take a look at the variable names and types</span></span>
+<span id="cb91-11"><a href="tha3.html#cb91-11" tabindex="-1"></a><span class="fu">glimpse</span>(dataset)  <span class="co">#str(data) also okay</span></span>
+<span id="cb91-12"><a href="tha3.html#cb91-12" tabindex="-1"></a></span>
+<span id="cb91-13"><a href="tha3.html#cb91-13" tabindex="-1"></a><span class="co"># Extra. Run descriptives to get min and max values for each column </span></span>
+<span id="cb91-14"><a href="tha3.html#cb91-14" tabindex="-1"></a><span class="co"># I didn&#39;t get you guys to do this, but in actual analysis, you should run descriptives to check what the minimum and maximum values are for this dataset. </span></span>
+<span id="cb91-15"><a href="tha3.html#cb91-15" tabindex="-1"></a><span class="co"># Values below 1 are invalid numbers (see legend) so we need to remove them</span></span>
+<span id="cb91-16"><a href="tha3.html#cb91-16" tabindex="-1"></a><span class="co"># Notice that the minimum value is -5 (because there are negative values)</span></span>
+<span id="cb91-17"><a href="tha3.html#cb91-17" tabindex="-1"></a>dataset <span class="sc">%&gt;%</span> </span>
+<span id="cb91-18"><a href="tha3.html#cb91-18" tabindex="-1"></a>  <span class="fu">describe</span>(.)</span>
+<span id="cb91-19"><a href="tha3.html#cb91-19" tabindex="-1"></a></span>
+<span id="cb91-20"><a href="tha3.html#cb91-20" tabindex="-1"></a><span class="co"># 7. Remove all participants who have values below 1 for the BFI10 items.</span></span>
+<span id="cb91-21"><a href="tha3.html#cb91-21" tabindex="-1"></a>subset <span class="ot">&lt;-</span> dataset <span class="sc">%&gt;%</span></span>
+<span id="cb91-22"><a href="tha3.html#cb91-22" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">if_all</span>(<span class="fu">c</span>(<span class="st">&quot;V160A&quot;</span><span class="sc">:</span><span class="st">&quot;V160J&quot;</span>), <span class="sc">~</span> .x <span class="sc">&gt;</span> <span class="dv">0</span>))</span>
+<span id="cb91-23"><a href="tha3.html#cb91-23" tabindex="-1"></a><span class="co"># The code above is saying... </span></span>
+<span id="cb91-24"><a href="tha3.html#cb91-24" tabindex="-1"></a><span class="co"># KEEP (filter) the row </span></span>
+<span id="cb91-25"><a href="tha3.html#cb91-25" tabindex="-1"></a><span class="co"># IF ALL (if_all) of the </span></span>
+<span id="cb91-26"><a href="tha3.html#cb91-26" tabindex="-1"></a><span class="co"># COLUMNS from V160A to V160J (c(&quot;V160A&quot;:V160J&quot;) have </span></span>
+<span id="cb91-27"><a href="tha3.html#cb91-27" tabindex="-1"></a><span class="co"># VALUES GREATER THAN 0 (.x &gt; 0).</span></span>
+<span id="cb91-28"><a href="tha3.html#cb91-28" tabindex="-1"></a><span class="co"># Note. If you have multiple conditions, you can just add them on... For example greater than 0 and less than 6 would be ~.x &gt; 0 &amp; .x &lt; 6</span></span>
+<span id="cb91-29"><a href="tha3.html#cb91-29" tabindex="-1"></a></span>
+<span id="cb91-30"><a href="tha3.html#cb91-30" tabindex="-1"></a><span class="co"># Extra. Run descriptives to check the min and max values for each column</span></span>
+<span id="cb91-31"><a href="tha3.html#cb91-31" tabindex="-1"></a><span class="co"># If you did the above step correctly, the minimum value should be 1 now, which is the lowest value on the likert scale used</span></span>
+<span id="cb91-32"><a href="tha3.html#cb91-32" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
+<span id="cb91-33"><a href="tha3.html#cb91-33" tabindex="-1"></a>  <span class="fu">describe</span>(.)</span>
+<span id="cb91-34"><a href="tha3.html#cb91-34" tabindex="-1"></a></span>
+<span id="cb91-35"><a href="tha3.html#cb91-35" tabindex="-1"></a><span class="co"># 8. Reverse-Code all the Reverse-Keyed Items</span></span>
+<span id="cb91-36"><a href="tha3.html#cb91-36" tabindex="-1"></a><span class="co"># Then, select only the variables that you are interested in analyzing in the subset</span></span>
+<span id="cb91-37"><a href="tha3.html#cb91-37" tabindex="-1"></a>subset <span class="ot">&lt;-</span> subset <span class="sc">%&gt;%</span>   </span>
+<span id="cb91-38"><a href="tha3.html#cb91-38" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="dv">5</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">across</span>(<span class="fu">c</span>(V160A, V160C, V160D, V160E, V160G), </span>
+<span id="cb91-39"><a href="tha3.html#cb91-39" tabindex="-1"></a>                        <span class="at">.names =</span> <span class="st">&quot;{col}r&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb91-40"><a href="tha3.html#cb91-40" tabindex="-1"></a>  <span class="fu">select</span>(V160Ar, V160F, V160B, V160Gr, V160Cr, V160H, V160Dr, V160I, V160Er, V160J)</span>
+<span id="cb91-41"><a href="tha3.html#cb91-41" tabindex="-1"></a></span>
+<span id="cb91-42"><a href="tha3.html#cb91-42" tabindex="-1"></a><span class="co"># The above code is saying... </span></span>
+<span id="cb91-43"><a href="tha3.html#cb91-43" tabindex="-1"></a><span class="co"># Mutate (i.e., create new variables) by taking 5 (max) + 1 (min) - observation, and do this across this set of columns: V160A, V160C, V160D, V160E, V160G. Name those columns by adding an r after the original column name (represented by {col}r)</span></span>
+<span id="cb91-44"><a href="tha3.html#cb91-44" tabindex="-1"></a><span class="co"># Then, select the columns you&#39;d like to keep</span></span>
+<span id="cb91-45"><a href="tha3.html#cb91-45" tabindex="-1"></a></span>
+<span id="cb91-46"><a href="tha3.html#cb91-46" tabindex="-1"></a><span class="co"># 9. Get the correlation coefficients</span></span>
+<span id="cb91-47"><a href="tha3.html#cb91-47" tabindex="-1"></a><span class="co"># I present two alternatives below. </span></span>
+<span id="cb91-48"><a href="tha3.html#cb91-48" tabindex="-1"></a></span>
+<span id="cb91-49"><a href="tha3.html#cb91-49" tabindex="-1"></a><span class="co"># Alternative 1: Correlation Matrix</span></span>
+<span id="cb91-50"><a href="tha3.html#cb91-50" tabindex="-1"></a><span class="co"># This is an acceptable method, although I find it difficult to pick out the important correlations from here because the matrix is a bit large.</span></span>
+<span id="cb91-51"><a href="tha3.html#cb91-51" tabindex="-1"></a>cor.output <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cor</span>(subset))  </span>
+<span id="cb91-52"><a href="tha3.html#cb91-52" tabindex="-1"></a></span>
+<span id="cb91-53"><a href="tha3.html#cb91-53" tabindex="-1"></a><span class="co"># Alternative 2: Individual correlations</span></span>
+<span id="cb91-54"><a href="tha3.html#cb91-54" tabindex="-1"></a><span class="co"># This takes a bit more effort, but clearly indicates which variable we&#39;re analyzing. </span></span>
+<span id="cb91-55"><a href="tha3.html#cb91-55" tabindex="-1"></a><span class="fu">cor</span>(subset<span class="sc">$</span>V160Ar, subset<span class="sc">$</span>V160F) <span class="co"># extraversion</span></span>
+<span id="cb91-56"><a href="tha3.html#cb91-56" tabindex="-1"></a><span class="fu">cor</span>(subset<span class="sc">$</span>V160B, subset<span class="sc">$</span>V160Gr) <span class="co"># agreeableness</span></span>
+<span id="cb91-57"><a href="tha3.html#cb91-57" tabindex="-1"></a><span class="fu">cor</span>(subset<span class="sc">$</span>V160Cr, subset<span class="sc">$</span>V160H) <span class="co"># conscientiousness</span></span>
+<span id="cb91-58"><a href="tha3.html#cb91-58" tabindex="-1"></a><span class="fu">cor</span>(subset<span class="sc">$</span>V160Dr, subset<span class="sc">$</span>V160I) <span class="co"># neuroticism</span></span>
+<span id="cb91-59"><a href="tha3.html#cb91-59" tabindex="-1"></a><span class="fu">cor</span>(subset<span class="sc">$</span>V160Er, subset<span class="sc">$</span>V160J) <span class="co"># openness to experience</span></span>
+<span id="cb91-60"><a href="tha3.html#cb91-60" tabindex="-1"></a></span>
+<span id="cb91-61"><a href="tha3.html#cb91-61" tabindex="-1"></a><span class="co"># 10. Cronbach&#39;s alpha for each pair of items</span></span>
+<span id="cb91-62"><a href="tha3.html#cb91-62" tabindex="-1"></a><span class="co"># Here&#39;s a general explanation of the code below. </span></span>
+<span id="cb91-63"><a href="tha3.html#cb91-63" tabindex="-1"></a><span class="co"># We take the data frame, subset. Then we keep only the variables we&#39;re interested in (e.g., V160Ar, V160F). This results in a data frame with two variables. This two-variable data frame is then passed into the alpha() function.</span></span>
+<span id="cb91-64"><a href="tha3.html#cb91-64" tabindex="-1"></a><span class="co"># Note that alpha() can only be used with data frames or matrices and not with vectors. So alpha(subset$V160Ar, subset$V160F) won&#39;t work since each column (e.g., subset$V160F) is a vector (think of vector as a list of values of the same type) and not a data frame.</span></span>
+<span id="cb91-65"><a href="tha3.html#cb91-65" tabindex="-1"></a></span>
+<span id="cb91-66"><a href="tha3.html#cb91-66" tabindex="-1"></a><span class="co"># Extraversion</span></span>
+<span id="cb91-67"><a href="tha3.html#cb91-67" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
+<span id="cb91-68"><a href="tha3.html#cb91-68" tabindex="-1"></a>  <span class="fu">select</span>(V160Ar, V160F) <span class="sc">%&gt;%</span> </span>
+<span id="cb91-69"><a href="tha3.html#cb91-69" tabindex="-1"></a>  <span class="fu">alpha</span>()</span>
+<span id="cb91-70"><a href="tha3.html#cb91-70" tabindex="-1"></a></span>
+<span id="cb91-71"><a href="tha3.html#cb91-71" tabindex="-1"></a><span class="co"># Agreeableness</span></span>
+<span id="cb91-72"><a href="tha3.html#cb91-72" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
+<span id="cb91-73"><a href="tha3.html#cb91-73" tabindex="-1"></a>  <span class="fu">select</span>(V160Gr, V160B) <span class="sc">%&gt;%</span> </span>
+<span id="cb91-74"><a href="tha3.html#cb91-74" tabindex="-1"></a>  <span class="fu">alpha</span>()</span>
+<span id="cb91-75"><a href="tha3.html#cb91-75" tabindex="-1"></a></span>
+<span id="cb91-76"><a href="tha3.html#cb91-76" tabindex="-1"></a><span class="co"># Conscientousness</span></span>
+<span id="cb91-77"><a href="tha3.html#cb91-77" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
+<span id="cb91-78"><a href="tha3.html#cb91-78" tabindex="-1"></a>  <span class="fu">select</span>(V160Cr, V160H) <span class="sc">%&gt;%</span> </span>
+<span id="cb91-79"><a href="tha3.html#cb91-79" tabindex="-1"></a>  <span class="fu">alpha</span>()</span>
+<span id="cb91-80"><a href="tha3.html#cb91-80" tabindex="-1"></a></span>
+<span id="cb91-81"><a href="tha3.html#cb91-81" tabindex="-1"></a><span class="co"># Neuroticism</span></span>
+<span id="cb91-82"><a href="tha3.html#cb91-82" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
+<span id="cb91-83"><a href="tha3.html#cb91-83" tabindex="-1"></a>  <span class="fu">select</span>(V160Dr, V160I) <span class="sc">%&gt;%</span> </span>
+<span id="cb91-84"><a href="tha3.html#cb91-84" tabindex="-1"></a>  <span class="fu">alpha</span>()</span>
+<span id="cb91-85"><a href="tha3.html#cb91-85" tabindex="-1"></a></span>
+<span id="cb91-86"><a href="tha3.html#cb91-86" tabindex="-1"></a><span class="co"># Openness to Experience</span></span>
+<span id="cb91-87"><a href="tha3.html#cb91-87" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
+<span id="cb91-88"><a href="tha3.html#cb91-88" tabindex="-1"></a>  <span class="fu">select</span>(V160Er, V160J) <span class="sc">%&gt;%</span> </span>
+<span id="cb91-89"><a href="tha3.html#cb91-89" tabindex="-1"></a>  <span class="fu">alpha</span>()</span></code></pre></div>
 
 </div>
 </div>
@@ -517,42 +517,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/hueywoon/assignment/blob/master/06-assignment03.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/hueywoon/assignment/blob/master/06-assignment03.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>
