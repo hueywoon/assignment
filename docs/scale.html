@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6 Multi-Item Measures | PSYC208 R Companion Website</title>
   <meta name="description" content="This is the companion website to my PSYC208 class." />
-  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6 Multi-Item Measures | PSYC208 R Companion Website" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Huey Woon LEE" />
 
 
-<meta name="date" content="2025-10-28" />
+<meta name="date" content="2026-03-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -55,8 +55,9 @@
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -66,7 +67,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -455,7 +456,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb82-7"><a href="scale.html#cb82-7" tabindex="-1"></a>         <span class="at">tl.col=</span><span class="st">&quot;black&quot;</span>,  <span class="co"># text label colour = black</span></span>
 <span id="cb82-8"><a href="scale.html#cb82-8" tabindex="-1"></a>         <span class="at">tl.srt =</span> <span class="dv">45</span>,  <span class="co"># rotate the text label by 45 degrees for readability</span></span>
 <span id="cb82-9"><a href="scale.html#cb82-9" tabindex="-1"></a>         <span class="at">diag =</span> <span class="cn">FALSE</span>)  <span class="co"># do not show the diagonal, which is essentially the correlations of the variables with themselves. Removing this will help reduce clutter in the output</span></span></code></pre></div>
-<p><img src="PSYC208_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<p><img src="PSYC208_files/figure-html/unnamed-chunk-62-1.png" alt="" width="672" /></p>
 <p>Blue represents positive correlation, red represents negative correlation, and the size of the circles represent the strength of the correlation. Notice that the column for <code>mvs_9</code> are all red circles, which is indeed what we would expect, since <code>mvs_9</code> is the only reverse keyed item.</p>
 <p>To be honest, I much prefer to first reverse code all the reverse keyed items before getting the correlation coefficients. That way, it’s much easier to spot a problem–the moment I see a negative sign, it’s a problem. So, let’s do that reverse coding now.</p>
 <p>The simple formula to use to reverse code data is this:
@@ -510,7 +511,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## mvs_9r 0.74614447 0.5514590 0.64079832 1.00000000</code></pre>
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="scale.html#cb87-1" tabindex="-1"></a><span class="co"># Produce the correlation plot</span></span>
 <span id="cb87-2"><a href="scale.html#cb87-2" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(MVS), <span class="at">type =</span> <span class="st">&quot;upper&quot;</span>, <span class="at">tl.col=</span><span class="st">&quot;black&quot;</span>, <span class="at">tl.srt =</span> <span class="dv">45</span>, <span class="at">diag =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="PSYC208_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<p><img src="PSYC208_files/figure-html/unnamed-chunk-64-1.png" alt="" width="672" /></p>
 <p>Now that we recoded <code>mvs_9</code> into <code>mvs_9r</code>, you can see, all correlation coefficients here are positive and the correlation plot shows all blue circles. So, all is good!</p>
 <p>Before we move on to the next bit, I should mention that <code>cor()</code> doesn’t provide the <em>p</em> values for the correlations. If you would like the <em>p</em> values, then you should consider using <code>corr.test()</code> from the <code>psych</code> package instead.</p>
 </div>
@@ -527,6 +528,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb88-6"><a href="scale.html#cb88-6" tabindex="-1"></a><span class="co"># the alpha function will give us the Cronbach’s alpha for all the items in MVS.</span></span>
 <span id="cb88-7"><a href="scale.html#cb88-7" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">alpha</span>(MVS)</span></code></pre></div>
 <p>Notice that we do not need to load the package using <code>library(psych)</code>. <code>psych::alpha()</code> temporarily loads the package (just for that chunk of code). If you want to use other functions in the <code>psych</code> package, then you’ll probably want to load the package.</p>
+<pre><code>## Warning in response.frequencies(x, max = max): response.frequency has been
+## deprecated and replaced with responseFrequecy.  Please fix your call</code></pre>
 <pre><code>## 
 ## Reliability analysis   
 ## Call: psych::alpha(x = MVS)
@@ -585,8 +588,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="compute-the-average-score-for-the-scale" class="section level2 hasAnchor" number="6.5">
 <h2><span class="header-section-number">6.5</span> Compute the average score for the scale<a href="scale.html#compute-the-average-score-for-the-scale" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Now that we’re sufficiently satisfied with the reliability of the scale, let’s compute the average score.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="scale.html#cb90-1" tabindex="-1"></a>MVS <span class="ot">&lt;-</span> MVS <span class="sc">%&gt;%</span></span>
-<span id="cb90-2"><a href="scale.html#cb90-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">MVS_avg =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(mvs_1<span class="sc">:</span>mvs_8, mvs_9r)))) <span class="co"># calculate the average MVS score across the set of 9 items and call the average MVS_avg</span></span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="scale.html#cb91-1" tabindex="-1"></a>MVS <span class="ot">&lt;-</span> MVS <span class="sc">%&gt;%</span></span>
+<span id="cb91-2"><a href="scale.html#cb91-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">MVS_avg =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(mvs_1<span class="sc">:</span>mvs_8, mvs_9r)))) <span class="co"># calculate the average MVS score across the set of 9 items and call the average MVS_avg</span></span></code></pre></div>
 <p>You might want to check if <code>MVS_avg</code> is correctly calculated. Go to <code>View(MVS)</code> and manually calculate the average of <code>mvs_1</code> to <code>mvs_9r</code> for the first row. You should get 3.44 (to 2 d.p.) which should match the value in the <code>MVS_avg</code> column.</p>
 <p>Of course, you could create <code>MVS_avg</code> by adding all the items together (<code>mvs_1 + mvs_2 + ... + mvs_9r</code>) and dividing that total by 9. I think that’s a bit tedious, but some people are intimidated by <code>rowMeans()</code>. So, do what makes more sense for you!</p>
 <p>Congratulations on completing this section! You’re now ready to try the next exercise! Proceed to the <a href="tha3.html#tha3">next section</a>!</p>
@@ -641,7 +644,7 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": null,
+  "download": ["PSYC208.pdf"],
   "search": {
     "engine": "fuse",
     "options": null

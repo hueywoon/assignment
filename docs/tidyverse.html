@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Using tidyverse | PSYC208 R Companion Website</title>
   <meta name="description" content="This is the companion website to my PSYC208 class." />
-  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Using tidyverse | PSYC208 R Companion Website" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Huey Woon LEE" />
 
 
-<meta name="date" content="2025-10-28" />
+<meta name="date" content="2026-03-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -55,8 +55,9 @@
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -66,7 +67,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -480,16 +481,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>Scroll down to ensure all rows have been imported correctly. There should be 343 rows. Scroll right to ensure all columns have been imported correctly. There should be 23 columns.</p>
 <p>Another way to check the imported dataset is using the <code>str()</code> or the <code>glimpse()</code> functions. Both give you roughly similar information (e.g., that there are 343 rows and 23 columns, the names of the variables, the values for the first 10 or so participants). Compare them below.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="tidyverse.html#cb30-1" tabindex="-1"></a><span class="fu">str</span>(data)</span></code></pre></div>
-<pre><code>##  num [1:10, 1:2] 3530 4730 4330 3560 4050 4880 4190 3620 3530 5070 ...
-##  - attr(*, &quot;dimnames&quot;)=List of 2
-##   ..$ : NULL
-##   ..$ : chr [1:2] &quot;Man&quot; &quot;Woman&quot;</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="tidyverse.html#cb32-1" tabindex="-1"></a><span class="fu">glimpse</span>(data)</span></code></pre></div>
-<pre><code>##  num [1:10, 1:2] 3530 4730 4330 3560 4050 4880 4190 3620 3530 5070 ...
-##  - attr(*, &quot;dimnames&quot;)=List of 2
-##   ..$ : NULL
-##   ..$ : chr [1:2] &quot;Man&quot; &quot;Woman&quot;</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="tidyverse.html#cb30-1" tabindex="-1"></a><span class="fu">str</span>(dataset)</span></code></pre></div>
+<pre><code>## spc_tbl_ [343 × 23] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ pin           : num [1:343] 1 2 3 4 5 6 7 8 9 10 ...
+##  $ gender        : num [1:343] 0 1 1 1 1 0 1 0 1 0 ...
+##  $ marital_status: num [1:343] 1 1 3 1 2 1 2 1 2 1 ...
+##  $ have_children : num [1:343] 0 1 0 0 0 1 0 0 0 1 ...
+##  $ mvs_1         : num [1:343] 4 4 5 2 2 3 2 2 3 2 ...
+##  $ mvs_2         : num [1:343] 3 3 4 3 2 4 3 3 4 3 ...
+##  $ mvs_3         : num [1:343] 3 3 4 3 3 4 3 3 4 3 ...
+##  $ mvs_4         : num [1:343] 3 3 3 2 2 5 4 4 3 4 ...
+##  $ mvs_5         : num [1:343] 3 3 4 3 3 4 3 3 4 2 ...
+##  $ mvs_6         : num [1:343] 4 4 5 2 2 3 4 4 5 2 ...
+##  $ mvs_7         : num [1:343] 3 2 4 2 3 3 3 3 4 3 ...
+##  $ mvs_8         : num [1:343] 4 4 5 4 4 5 3 3 4 3 ...
+##  $ mvs_9         : num [1:343] 2 2 1 3 3 2 3 3 2 4 ...
+##  $ swls2019_1    : num [1:343] 4 5 4 6 5 5 2 4 5 5 ...
+##  $ swls2019_2    : num [1:343] 4 6 4 5 4 4 3 3 5 5 ...
+##  $ swls2019_3    : num [1:343] 5 5 4 7 4 4 3 3 5 5 ...
+##  $ swls2019_4    : num [1:343] 5 6 5 6 4 5 3 3 4 6 ...
+##  $ swls2019_5    : num [1:343] 4 6 5 5 5 4 3 3 5 6 ...
+##  $ swls2021_1    : num [1:343] 4 4 3 5 4 5 2 4 4 5 ...
+##  $ swls2021_2    : num [1:343] 4 6 3 5 3 4 2 3 4 5 ...
+##  $ swls2021_3    : num [1:343] 5 4 4 6 4 3 4 3 5 4 ...
+##  $ swls2021_4    : num [1:343] 5 5 5 6 4 4 3 3 4 5 ...
+##  $ swls2021_5    : num [1:343] 4 5 5 5 5 4 3 3 5 6 ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   pin = col_double(),
+##   ..   gender = col_double(),
+##   ..   marital_status = col_double(),
+##   ..   have_children = col_double(),
+##   ..   mvs_1 = col_double(),
+##   ..   mvs_2 = col_double(),
+##   ..   mvs_3 = col_double(),
+##   ..   mvs_4 = col_double(),
+##   ..   mvs_5 = col_double(),
+##   ..   mvs_6 = col_double(),
+##   ..   mvs_7 = col_double(),
+##   ..   mvs_8 = col_double(),
+##   ..   mvs_9 = col_double(),
+##   ..   swls2019_1 = col_double(),
+##   ..   swls2019_2 = col_double(),
+##   ..   swls2019_3 = col_double(),
+##   ..   swls2019_4 = col_double(),
+##   ..   swls2019_5 = col_double(),
+##   ..   swls2021_1 = col_double(),
+##   ..   swls2021_2 = col_double(),
+##   ..   swls2021_3 = col_double(),
+##   ..   swls2021_4 = col_double(),
+##   ..   swls2021_5 = col_double()
+##   .. )
+##  - attr(*, &quot;problems&quot;)=&lt;externalptr&gt;</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="tidyverse.html#cb32-1" tabindex="-1"></a><span class="fu">glimpse</span>(dataset)</span></code></pre></div>
+<pre><code>## Rows: 343
+## Columns: 23
+## $ pin            &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, …
+## $ gender         &lt;dbl&gt; 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0…
+## $ marital_status &lt;dbl&gt; 1, 1, 3, 1, 2, 1, 2, 1, 2, 1, 3, 2, 3, 3, 3, 1, 1, 1, 3…
+## $ have_children  &lt;dbl&gt; 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0…
+## $ mvs_1          &lt;dbl&gt; 4, 4, 5, 2, 2, 3, 2, 2, 3, 2, 2, 3, 2, 2, 3, 3, 3, 4, 3…
+## $ mvs_2          &lt;dbl&gt; 3, 3, 4, 3, 2, 4, 3, 3, 4, 3, 2, 4, 1, 3, 2, 3, 2, 4, 3…
+## $ mvs_3          &lt;dbl&gt; 3, 3, 4, 3, 3, 4, 3, 3, 4, 3, 3, 4, 2, 2, 3, 4, 4, 5, 3…
+## $ mvs_4          &lt;dbl&gt; 3, 3, 3, 2, 2, 5, 4, 4, 3, 4, 4, 4, 2, 2, 4, 3, 3, 4, 4…
+## $ mvs_5          &lt;dbl&gt; 3, 3, 4, 3, 3, 4, 3, 3, 4, 2, 2, 3, 3, 3, 4, 4, 4, 5, 3…
+## $ mvs_6          &lt;dbl&gt; 4, 4, 5, 2, 2, 3, 4, 4, 5, 2, 2, 3, 3, 3, 4, 2, 2, 3, 4…
+## $ mvs_7          &lt;dbl&gt; 3, 2, 4, 2, 3, 3, 3, 3, 4, 3, 1, 4, 4, 1, 5, 1, 3, 2, 3…
+## $ mvs_8          &lt;dbl&gt; 4, 4, 5, 4, 4, 5, 3, 3, 4, 3, 3, 4, 2, 2, 3, 3, 3, 4, 4…
+## $ mvs_9          &lt;dbl&gt; 2, 2, 1, 3, 3, 2, 3, 3, 2, 4, 4, 3, 4, 4, 3, 3, 3, 2, 3…
+## $ swls2019_1     &lt;dbl&gt; 4, 5, 4, 6, 5, 5, 2, 4, 5, 5, 5, 3, 4, 5, 4, 5, 5, 6, 4…
+## $ swls2019_2     &lt;dbl&gt; 4, 6, 4, 5, 4, 4, 3, 3, 5, 5, 5, 4, 3, 5, 4, 4, 4, 6, 5…
+## $ swls2019_3     &lt;dbl&gt; 5, 5, 4, 7, 4, 4, 3, 3, 5, 5, 4, 4, 3, 4, 3, 4, 4, 5, 4…
+## $ swls2019_4     &lt;dbl&gt; 5, 6, 5, 6, 4, 5, 3, 3, 4, 6, 4, 4, 4, 5, 4, 4, 5, 6, 4…
+## $ swls2019_5     &lt;dbl&gt; 4, 6, 5, 5, 5, 4, 3, 3, 5, 6, 5, 4, 3, 4, 3, 5, 5, 6, 4…
+## $ swls2021_1     &lt;dbl&gt; 4, 4, 3, 5, 4, 5, 2, 4, 4, 5, 5, 2, 3, 5, 4, 4, 5, 6, 4…
+## $ swls2021_2     &lt;dbl&gt; 4, 6, 3, 5, 3, 4, 2, 3, 4, 5, 4, 3, 2, 4, 3, 4, 4, 6, 4…
+## $ swls2021_3     &lt;dbl&gt; 5, 4, 4, 6, 4, 3, 4, 3, 5, 4, 4, 4, 3, 4, 2, 3, 3, 4, 4…
+## $ swls2021_4     &lt;dbl&gt; 5, 5, 5, 6, 4, 4, 3, 3, 4, 5, 4, 4, 4, 5, 3, 3, 4, 5, 4…
+## $ swls2021_5     &lt;dbl&gt; 4, 5, 5, 5, 5, 4, 3, 3, 5, 6, 5, 4, 3, 4, 3, 4, 5, 6, 4…</code></pre>
 </div>
 </div>
 <div id="factors" class="section level2 hasAnchor" number="4.3">
@@ -776,7 +845,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>These three components apply when we make any plot in ggplot2. Let’s make a bar chart with <code>ggplot2</code> with the code below.</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="tidyverse.html#cb66-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> swls2019_only, <span class="fu">aes</span>(<span class="at">x =</span> gender)) <span class="sc">+</span>  <span class="co"># dataset used is swls2019_only, x (horizontal axis) is gender</span></span>
 <span id="cb66-2"><a href="tidyverse.html#cb66-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;count&quot;</span>)  <span class="co"># we want a bar plot where the statistic is the count of the values in x </span></span></code></pre></div>
-<p><img src="PSYC208_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p><img src="PSYC208_files/figure-html/unnamed-chunk-50-1.png" alt="" width="672" /></p>
 <p>Here’s an alternative that will give you the exact same output.</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="tidyverse.html#cb67-1" tabindex="-1"></a><span class="co"># Alternative</span></span>
 <span id="cb67-2"><a href="tidyverse.html#cb67-2" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span>  <span class="co"># dataset used is swls2019_only</span></span>
@@ -792,8 +861,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Let’s use <code>ggplot2</code> to make a histogram for <code>swls2019_avg</code> with a very basic code.</p>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="tidyverse.html#cb68-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> swls2019_only, <span class="fu">aes</span>(<span class="at">x =</span> swls2019_avg)) <span class="sc">+</span>  <span class="co"># tells R what dataset to use and what variable should be on the x axis</span></span>
 <span id="cb68-2"><a href="tidyverse.html#cb68-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()  <span class="co"># we want a histogram, so geom_histogram() is used</span></span></code></pre></div>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="PSYC208_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
+<p><img src="PSYC208_files/figure-html/unnamed-chunk-52-1.png" alt="" width="672" /></p>
 <p>As with the bar chart, you could do this instead and the results would be the same:</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="tidyverse.html#cb70-1" tabindex="-1"></a><span class="co"># Alternative</span></span>
 <span id="cb70-2"><a href="tidyverse.html#cb70-2" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
@@ -832,14 +901,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb71-30"><a href="tidyverse.html#cb71-30" tabindex="-1"></a>    <span class="fu">theme_classic</span>()</span></code></pre></div>
 <pre><code>## Warning: Removed 2 rows containing missing values or values outside the scale
 ## range (`geom_bar()`).</code></pre>
-<p><img src="PSYC208_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<p><img src="PSYC208_files/figure-html/unnamed-chunk-54-1.png" alt="" width="672" /></p>
 <p>Note that when you set limits on the graph, it throws up a warning: <em>Warning: Removed 2 rows containing missing values (<code>geom_bar()</code>).</em> This is a known issue, but is apparently too complex to resolve (see: <a href="https://github.com/tidyverse/ggplot2/issues/4083" class="uri">https://github.com/tidyverse/ggplot2/issues/4083</a>). You may safely ignore it if your limits are beyond the minimum and maximum values of your axes. For example, suppose your minimum value for the x-axis is 1 and your maximum value is 7. If you set the limits to 0 and 8, it should comprise all values in your dataset. You can find the minimum and maximum values using the <code>summarise()</code> function, or simply use <code>max()</code> or <code>min()</code>. As an aside, you may find other themes here: <a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="uri">https://ggplot2.tidyverse.org/reference/ggtheme.html</a>.</p>
 <p>Now… I confess that <code>ggplot2</code> intimidates me. It’s very powerful and can make super fancy graphs. But it has so many moving parts! So here’s a simple code in base R that does not require <code>ggplot2</code>.</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="tidyverse.html#cb73-1" tabindex="-1"></a><span class="fu">hist</span>(<span class="at">x =</span> swls2019_only<span class="sc">$</span>swls2019_avg,  <span class="co"># variable</span></span>
 <span id="cb73-2"><a href="tidyverse.html#cb73-2" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;2019 Satisfaction With Life Scores&quot;</span>,  <span class="co"># label for x-axis </span></span>
 <span id="cb73-3"><a href="tidyverse.html#cb73-3" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Frequency&quot;</span>,  <span class="co"># label for y-axis</span></span>
 <span id="cb73-4"><a href="tidyverse.html#cb73-4" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Histogram of SWLS2019&quot;</span>)  <span class="co"># title for the histogram</span></span></code></pre></div>
-<p><img src="PSYC208_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<p><img src="PSYC208_files/figure-html/unnamed-chunk-55-1.png" alt="" width="672" /></p>
 </div>
 <div id="scatterplot-with-ggplot2" class="section level3 hasAnchor" number="4.5.4">
 <h3><span class="header-section-number">4.5.4</span> Scatterplot with ggplot2<a href="tidyverse.html#scatterplot-with-ggplot2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -853,7 +922,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb74-4"><a href="tidyverse.html#cb74-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;swls2019_1: In most ways my life is close to my ideal&quot;</span>,</span>
 <span id="cb74-5"><a href="tidyverse.html#cb74-5" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;swls2019_2: The conditions of my life are excellent&quot;</span>, </span>
 <span id="cb74-6"><a href="tidyverse.html#cb74-6" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;As swls2019_1 increases, swls2019_2 also increases&quot;</span>)  <span class="co"># labs() is another way to add labels. You can also add a title using the labs() function, which by default is left-aligned. </span></span></code></pre></div>
-<p><img src="PSYC208_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+<p><img src="PSYC208_files/figure-html/unnamed-chunk-56-1.png" alt="" width="672" /></p>
 <p>From the scatterplot, we see that indeed, as <code>swls2019_1</code> increases, <code>swls2019_2</code> increases.</p>
 <p>Like the histogram, there are many different customisations beyond the basics I’ve shown you here. You can refer to this website for more: <a href="https://t-redactyl.io/blog/2016/02/creating-plots-in-r-using-ggplot2-part-5-scatterplots.html" class="uri">https://t-redactyl.io/blog/2016/02/creating-plots-in-r-using-ggplot2-part-5-scatterplots.html</a>.</p>
 <p>And like the histogram, there’s a function in base r for plotting scatterplots.</p>
@@ -862,7 +931,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb75-3"><a href="tidyverse.html#cb75-3" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;swls2019_1: In most ways my life is close to my ideal&quot;</span>, </span>
 <span id="cb75-4"><a href="tidyverse.html#cb75-4" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;swls2019_2: The conditions of my life are excellent&quot;</span>, </span>
 <span id="cb75-5"><a href="tidyverse.html#cb75-5" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;As swls2019_1 increases, swls2019_2 also increases&quot;</span>)</span></code></pre></div>
-<p><img src="PSYC208_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<p><img src="PSYC208_files/figure-html/unnamed-chunk-57-1.png" alt="" width="672" /></p>
 </div>
 <div id="last-words-1" class="section level3 hasAnchor" number="4.5.5">
 <h3><span class="header-section-number">4.5.5</span> Last Words<a href="tidyverse.html#last-words-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -920,7 +989,7 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": null,
+  "download": ["PSYC208.pdf"],
   "search": {
     "engine": "fuse",
     "options": null

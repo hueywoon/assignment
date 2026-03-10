@@ -113,13 +113,13 @@ Another way to check the imported dataset is using the `str()` or the `glimpse()
 
 ```{r}
 
-str(data)
+str(dataset)
 
 ```
 
 ```{r}
 
-glimpse(data)
+glimpse(dataset)
 
 ```
 
