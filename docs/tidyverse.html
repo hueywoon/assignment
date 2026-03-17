@@ -23,7 +23,7 @@
 <meta name="author" content="Huey Woon LEE" />
 
 
-<meta name="date" content="2026-03-10" />
+<meta name="date" content="2026-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -469,7 +469,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>read_csv()</code> is not the only function you can use to read in a .csv file. You can also use the built-in R function <code>read.csv()</code>.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="tidyverse.html#cb29-1" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;SWB.csv&quot;</span>)</span></code></pre></div>
 <p>If you use <code>read.csv()</code>, you don’t have to load <code>tidyverse</code>. This is because <code>read_csv()</code> comes from the <code>readr</code> package (and therefore the <code>tidyverse</code> collection) whereas <code>read.csv()</code> comes pre-installed with R.</p>
-<p><code>read.csv()</code> is supposedly slower than <code>read_csv()</code>, which in turn is slower than <code>data.table</code>’s <code>fread()</code>. For our purposes, though, it really doesn’t matter which you use, so long as you can successfully read the .csv file. Another thing about <code>read.csv()</code> is that it tries to identify categorical variables and then automatically import them as factors (see the Factors section below). I don’t quite like that because I like to control the variable type myself. But, that’s my personal preference. You’re free to use whatever function that you want.</p>
+<p><code>read.csv()</code> is supposedly slower than <code>read_csv()</code>, which in turn is slower than <code>data.table</code>’s <code>fread()</code>. For our purposes, though, it really doesn’t matter which you use, so long as you can successfully read the .csv file. Another thing about <code>read.csv()</code> is that it tries to identify categorical variables and then automatically import them as factors (see the Factors section below). I don’t quite like that because I like to control the variable type myself. But, that’s my personal preference. You’re free to use whatever function that you want. A final thing about <code>read.csv()</code> is that it does not remove trailing spaces after a number (e.g., 3 ) whereas <code>read_csv()</code> does. So when importing with <code>read.csv()</code>, there might be some issues if you have such situations.</p>
 <p>If you have other file types, such as .txt, .sav, .xlsx, you might need different packages. For example, for excel files (.xlsx), you will need the <code>readxl</code> package. For SPSS (.sav), you will need the <code>haven</code> package or the <code>foreign</code> package. For this class, I am very unlikely to use file types aside from .csv, but it is good to be aware of the packages to use if you want to import other file types.</p>
 </div>
 <div id="check-imported-dataset" class="section level3 hasAnchor" number="4.2.2">

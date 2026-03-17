@@ -10,10 +10,10 @@ bookdown::gitbook:
       after: |
         <li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
     edit: https://github.com/hueywoon/assignment/blob/master/%s
-  #download: ["pdf"]
+  #download: ["pdf"] #
 
-#bookdown::pdf_book:
-#  includes:
-#    in_header: preamble.tex
-#  latex_engine: xelatex
-#  keep_tex: no
+#bookdown::pdf_book: #
+#  includes: #
+#    in_header: preamble.tex #
+#  latex_engine: xelatex # 
+#  keep_tex: no # 
