@@ -23,7 +23,7 @@
 <meta name="author" content="Huey Woon LEE" />
 
 
-<meta name="date" content="2026-03-17" />
+<meta name="date" content="2026-07-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -146,7 +146,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About This Website</a></li>
 <li class="chapter" data-level="1" data-path="start.html"><a href="start.html"><i class="fa fa-check"></i><b>1</b> Getting Started</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="start.html"><a href="start.html#install-r-and-rstudio"><i class="fa fa-check"></i><b>1.1</b> Install R and RStudio</a></li>
+<li class="chapter" data-level="1.1" data-path="start.html"><a href="start.html#install-r-and-rstudio"><i class="fa fa-check"></i><b>1.1</b> Install R and RStudio</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="start.html"><a href="start.html#install-r"><i class="fa fa-check"></i><b>1.1.1</b> Install R</a></li>
+<li class="chapter" data-level="1.1.2" data-path="start.html"><a href="start.html#install-rstudio"><i class="fa fa-check"></i><b>1.1.2</b> Install RStudio</a></li>
+</ul></li>
 <li class="chapter" data-level="1.2" data-path="start.html"><a href="start.html#the-rstudio-interface"><i class="fa fa-check"></i><b>1.2</b> The RStudio Interface</a></li>
 <li class="chapter" data-level="1.3" data-path="start.html"><a href="start.html#r-script"><i class="fa fa-check"></i><b>1.3</b> R Script</a></li>
 <li class="chapter" data-level="1.4" data-path="start.html"><a href="start.html#some-tips-and-tricks"><i class="fa fa-check"></i><b>1.4</b> Some Tips and Tricks</a>
@@ -159,8 +163,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.4.6" data-path="start.html"><a href="start.html#using-rstudio-projects"><i class="fa fa-check"></i><b>1.4.6</b> Using RStudio Projects</a></li>
 <li class="chapter" data-level="1.4.7" data-path="start.html"><a href="start.html#compile-report"><i class="fa fa-check"></i><b>1.4.7</b> Compile Report</a></li>
 <li class="chapter" data-level="1.4.8" data-path="start.html"><a href="start.html#debugging"><i class="fa fa-check"></i><b>1.4.8</b> Debugging</a></li>
-<li class="chapter" data-level="1.4.9" data-path="start.html"><a href="start.html#style-guide"><i class="fa fa-check"></i><b>1.4.9</b> Style Guide</a></li>
-<li class="chapter" data-level="1.4.10" data-path="start.html"><a href="start.html#last-words"><i class="fa fa-check"></i><b>1.4.10</b> Last Words</a></li>
+<li class="chapter" data-level="1.4.9" data-path="start.html"><a href="start.html#on-using-llms"><i class="fa fa-check"></i><b>1.4.9</b> On Using LLMs</a></li>
+<li class="chapter" data-level="1.4.10" data-path="start.html"><a href="start.html#optional-style-guide"><i class="fa fa-check"></i><b>1.4.10</b> (Optional) Style Guide</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Basics</a>
@@ -198,7 +202,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.2" data-path="tidyverse.html"><a href="tidyverse.html#bar-plots-with-ggplot2"><i class="fa fa-check"></i><b>4.5.2</b> Bar Plots with ggplot2</a></li>
 <li class="chapter" data-level="4.5.3" data-path="tidyverse.html"><a href="tidyverse.html#histograms-with-ggplot2"><i class="fa fa-check"></i><b>4.5.3</b> Histograms with ggplot2</a></li>
 <li class="chapter" data-level="4.5.4" data-path="tidyverse.html"><a href="tidyverse.html#scatterplot-with-ggplot2"><i class="fa fa-check"></i><b>4.5.4</b> Scatterplot with ggplot2</a></li>
-<li class="chapter" data-level="4.5.5" data-path="tidyverse.html"><a href="tidyverse.html#last-words-1"><i class="fa fa-check"></i><b>4.5.5</b> Last Words</a></li>
+<li class="chapter" data-level="4.5.5" data-path="tidyverse.html"><a href="tidyverse.html#last-words"><i class="fa fa-check"></i><b>4.5.5</b> Last Words</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="tha2.html"><a href="tha2.html"><i class="fa fa-check"></i><b>5</b> Test Yourselves 2</a>
@@ -310,7 +314,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Imagine you went to a hawker centre and there’s an uncle manning the store. This uncle can only speak Hokkien but you can’t. So, you tell your friend, who can speak Hokkien, what you want. Then, your friend translates that for the uncle, who then serves up a delicious meal for you. Think of the uncle in this example as R and your friend as RStudio. While you can try to “converse” with R directly, it’s much easier to do so through RStudio. So… For the sake of your sanity, I strongly recommend you download both programmes!</p>
 <div id="install-r-and-rstudio" class="section level2 hasAnchor" number="1.1">
 <h2><span class="header-section-number">1.1</span> Install R and RStudio<a href="start.html#install-r-and-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Install R</p>
+<div id="install-r" class="section level3 hasAnchor" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Install R<a href="start.html#install-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For Windows</p>
 <ol style="list-style-type: decimal">
 <li>Open an internet browser and go to <a href="https://cloud.r-project.org/" class="uri">https://cloud.r-project.org/</a>.</li>
@@ -323,13 +328,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Under <strong>Download and Install R</strong>, click on <strong>Download R for macOS</strong>.</li>
 <li>Download the latest release by saving the .pkg file to your computer. Double-click the file and follow the installation instructions.</li>
 </ol>
-<p>Install RStudio</p>
+</div>
+<div id="install-rstudio" class="section level3 hasAnchor" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Install RStudio<a href="start.html#install-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now that R is installed, download and install RStudio.</p>
 <ol style="list-style-type: decimal">
 <li>Go to <a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a>.</li>
 <li>Click <strong>Download under RStudio Desktop</strong>.</li>
 <li>Click on the version recommended for your system, or the latest Windows / macOS version, and save the file. Double-click the file and follow the installation instructions.</li>
 </ol>
+</div>
 </div>
 <div id="the-rstudio-interface" class="section level2 hasAnchor" number="1.2">
 <h2><span class="header-section-number">1.2</span> The RStudio Interface<a href="start.html#the-rstudio-interface" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -403,7 +411,7 @@ Figure 1.2: R Studio With Four Panes
 <span id="cb3-6"><a href="start.html#cb3-6" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="start.html#cb3-7" tabindex="-1"></a><span class="do">### Section Three ############################# </span></span>
 <span id="cb3-8"><a href="start.html#cb3-8" tabindex="-1"></a><span class="do">### Section Three ####</span></span></code></pre></div>
-<p>To fold all code sections (i.e., hide the content within all sections, leaving only the section header for navigation), go to <strong>Edit &gt; Folding &gt; Collapse All</strong> (The shortcut is <code>Alt + O</code>.) To expand all code sections (i.e., show all content), go to <strong>Edit &gt; Folding &gt; Expand All</strong> (The shortcut is <code>Alt + Shift + O</code>.)</p>
+<p>To fold all code sections (i.e., hide the content within all sections, leaving only the section header for navigation), go to <strong>Edit &gt; Folding &gt; Collapse All</strong> (the shortcut is <code>Alt + O</code>). To expand all code sections (i.e., show all content), go to <strong>Edit &gt; Folding &gt; Expand All</strong> (the shortcut is <code>Alt + Shift + O</code>).</p>
 </div>
 <div id="setting-working-directory" class="section level3 hasAnchor" number="1.4.5">
 <h3><span class="header-section-number">1.4.5</span> Setting Working Directory<a href="start.html#setting-working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -459,16 +467,39 @@ Figure 1.4: Compile Report Step 2
 <li>Use the correct punctuation for the function. For example, if the function requires a comma, don’t put in full stops. If it requires a double equal sign, don’t put in a single equal sign.</li>
 </ul></li>
 </ol>
-<p>If you’ve tried all the above and still can’t figure out what’s going on, just copy and paste the warning into the search engine. 99% of the time, you’ll be able to figure out what happened by reading responses on forums or other websites. (Programmers are super helpful!)</p>
+<p>If you’ve tried all the above and still can’t figure out what’s going on, just copy and paste the warning into the search engine or large language models (LLMs). 99% of the time, you’ll be able to figure out what happened by reading the responses.</p>
+<p>And speaking of LLMs…</p>
 </div>
-<div id="style-guide" class="section level3 hasAnchor" number="1.4.9">
-<h3><span class="header-section-number">1.4.9</span> Style Guide<a href="start.html#style-guide" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="on-using-llms" class="section level3 hasAnchor" number="1.4.9">
+<h3><span class="header-section-number">1.4.9</span> On Using LLMs<a href="start.html#on-using-llms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>I understand that this is the first time that some of you are using R. It can be quite intimidating. Fortunately, LLMs are <em>very</em> good at both generating code and interpreting the output. (This is so different from my time when I had to scour the forums to figure out what had gone wrong!)</p>
+<p>The problem with LLMs is that they can lead you on a wild goose chase if you do not give them sufficient context. So, here are some things I’ve learnt that I think might be helpful.</p>
+<ol style="list-style-type: decimal">
+<li><strong>Give LLMs the full context.</strong> The LLM typically doesn’t know if a variable is a categorical variable or a quantitative one unless you tell it explicitly. (Of course, it can guess, but what if it guesses wrong?) It also won’t know about your previous decisions (e.g., you decided to use dummy vs effects coding). If it doesn’t know all these things, its interpretation of the output will be erroneous. Oh, and if you don’t tell it you want R code, it is likely to give you Python code. So make sure you give it the full context.</li>
+<li><strong>There are many ways of doing the same thing. Don’t always accept the first set of code it gives you.</strong> Due to the nature of my work, I typically prefer code that I can read and explain to someone else. So, if the LLM gives me a code that I don’t understand or is too complex, I will ask for a simpler or different one. LLMs love giving me loop functions for things that can be done easily with the <code>map()</code> function from <code>tidyverse</code>, for example. (As an aside, usually I’ll ask if it could give me a code in “tidyverse”, as I find the “tidyverse” codes to be easier to understand.)</li>
+<li><strong>Verify the code does what it’s supposed to do.</strong> Obviously, you need to check that the code runs properly and gives you the desired outcome. If it doesn’t, copy the error message back into the LLM and ask it to de-bug. It usually does okay with de-bugging. However, I have, at times, found that it doesn’t give correct explanations for why the errors appear. This is especially if the error is due to statistical issues (e.g., I forgot to convert a categorical variable into a factor so R thought it was a numeric / quantitative one). In such cases, you’ll have to rely on your statistical understanding to de-bug. Other times, it’s just a stupid typo (e.g., in the previous part of the code, I typed model1 and then 100 lines later, when referring to it in a subsequent code, I typed mod1). Unless R has all the code you typed, it won’t pick that up either.</li>
+<li><strong>Verify (almost) everything it says.</strong> Do not trust the LLM’s responses <em>prima facie</em>. Always ask for references. <em>And always click through to the references to check.</em> I have, on countless occasions, checked and found out the LLM was just hallucinating (i.e., the reference never stated whatever the LLM said it did), even in 2026, as of time of writing Or, the LLM output was just based on a single person’s dissenting opinion on the web, and the LLM reported it as if it were scientific consensus. (There is currently sufficient research showing that LLMs’ output can be “poisoned” by just a single Reddit post or a webpage.) So always click through to verify. Of course, there are some things that you don’t have to verify if you already know them to be true or you don’t really care about the veracity. :)</li>
+<li><strong>Do not trust the LLM’s reasoning unless it coheres with your own or you’re able to independently confirm the reasoning.</strong> It is very tempting for a novice to think, “The reasoning seems to make sense on the surface. I don’t know any better. ¯\_(ツ)_/¯ I’ll accept it then!” I have caught myself falling into that trap countless of times. It’s only when I make myself go through the reasoning step by step that I realised the LLM was inconsistent or out-right wrong. An LLM once told me -0.75 + 1 = 0 and I didn’t catch it until I worked through the calculation myself! If you find yourself stuck in a loop with the LLM, with it insisting it was right and you’re wrong (happens to me a lot), it helps to start a new chat or to switch to a different model or an entirely different LLM. (I found that asking at different times yielded different reasoning and conclusions!)</li>
+<li><strong>Saving tokens.</strong> AI companies are now trying to turn a profit. As a result, they’re starting to restrict the amount of tokens you have under the free version. Broadly speaking, tokens are words or part of words. The longer the query and/or the LLM output, the more tokens it will use. There are three ways to reduce tokens spent. 1) Use Caveman mode (see Caveman mode instructions below), 2) Start a new chat when possible, 3) Use the normal model for most tasks.
+<ol style="list-style-type: decimal">
+<li><strong>Caveman mode instructions (put this under personalisation or at the beginning of chat)</strong>: Unless otherwise told, you will respond in Caveman Mode. You will use short, primitive sentences. Drop all filler words (like “the”, “a”, “of”), pleasantries, apologies, and explanations. Give only facts and direct commands. Retain full technical accuracy, but keep output as dense and short as possible.<br />
+<em>Note</em>. I also add the following: “Where possible, provide sources for claims made in your responses.”
+<ul>
+<li>This pushes the LLM output to be short and direct. To de-activate this, type “Use normal mode.” To re-activate it (LLMs can start forgetting they were supposed to respond in Caveman mode after a while and revert to normal behaviour), type “Use Caveman mode.”</li>
+</ul></li>
+<li><strong>Start a new chat.</strong> When you ask additional questions in the same chat, the LLM essentially references everything (e.g., your previous queries, its previous responses, its previous thought process) to answer your question. So, the more questions you ask within the same chat, the more tokens used each time. I recommend to start a new chat, if you can. Yes, you have to provide context all over again, but let’s face it, not every response from the LLM was useful anyway and not every query was relevant. (See explanation from a computer science prof on why AI tokens are expensive <a href="https://youtu.be/-0HRzXk8vlk?si=FXfdv3P5wTYJCcSL">here</a>.)
+<ul>
+<li>Yes, I know about prompt caching. But prompt caching only works if you ask a follow-up question reasonably quickly after the initial question. If you wait longer in between queries, that cache gets erased. Mike Pound, the prof in the video, talks about this as well.</li>
+<li>Some LLMs may choose to reference only the last X number of messages, reducing the number of tokens used. I don’t know which LLMs do that. The start new chat method I recommend here works more generally.</li>
+</ul></li>
+<li><strong>Use the basic LLM model.</strong> For most coding questions, you don’t need the most advanced model. Save your tokens for questions that <em>really</em> require the compute.</li>
+</ol></li>
+</ol>
+</div>
+<div id="optional-style-guide" class="section level3 hasAnchor" number="1.4.10">
+<h3><span class="header-section-number">1.4.10</span> (Optional) Style Guide<a href="start.html#optional-style-guide" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>I strongly believe that people should be able to reproduce each others’ analyses. This provides the checks and balances that is important for science to advance. Therefore, you should be willing and able to share your code. But even if you do share your code, if it is unintelligible, it will not be of much help. Therefore, to make your code understandable, in addition to writing comments in the script, you should also try to follow certain conventions when writing code. These conventions are laid out in the tidyverse Style Guide. You can read the Style Guide here: <a href="https://style.tidyverse.org/syntax.html" class="uri">https://style.tidyverse.org/syntax.html</a>.</p>
-</div>
-<div id="last-words" class="section level3 hasAnchor" number="1.4.10">
-<h3><span class="header-section-number">1.4.10</span> Last Words<a href="start.html#last-words" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>In general, students new to programming tend to be hesitant to experiment, worried that they’d break the software or something. I <em>promise</em> you that this rarely happens (except maybe when you write a loop function that doesn’t stop looping!). So just have fun and experiment. If RStudio freezes, just close it and re-start!</p>
-<p>Congrats! You’ve now installed R and RStudio! You’re now ready to move on to some basics! =D</p>
+<p>Now that you’ve installed R and RStudio, let’s move on to some basics! =D</p>
 
 </div>
 </div>

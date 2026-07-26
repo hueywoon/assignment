@@ -4,6 +4,8 @@ fig:003-compile1
 fig:003-compile2
 start
 install-r-and-rstudio
+install-r
+install-rstudio
 the-rstudio-interface
 r-script
 some-tips-and-tricks
@@ -15,8 +17,8 @@ setting-working-directory
 using-rstudio-projects
 compile-report
 debugging
-style-guide
-last-words
+on-using-llms
+optional-style-guide
 basics
 some-basic-commands
 typing-and-executing-commands
@@ -42,7 +44,7 @@ frequency-tables
 bar-plots-with-ggplot2
 histograms-with-ggplot2
 scatterplot-with-ggplot2
-last-words-1
+last-words
 tha2
 instructions-1
 legend
