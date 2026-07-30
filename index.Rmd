@@ -17,4 +17,6 @@ description: "This is the companion website to my PSYC208 class."
 
 This is the companion website for my PSYC208 class. It is written as a gentle introduction to R. So, it is most certainly not exhaustive or comprehensive. If you're interested in furthering your skills in R, there are plenty of resources available online which you can check out [here](https://r4ds.had.co.nz/), [here](https://stat545.com/index.html) or [here](http://adv-r.had.co.nz/). But it's okay if you don't wish to check them out; you should be able to get by with the information in this website. 
 
+If you need, here is the PDF version of this website: [PSYC208.pdf](PSYC208.pdf). 
+
 _Note._ This website is developed linearly. What this means is that the later sections build on the earlier sections. For example, earlier sections may instruct you to install a particular package. Later sections will assume you have that package installed and make no mention of it. Because they are not stand-alone sections, if you jump to later sections without going through the earlier sections, you might get lost. :)

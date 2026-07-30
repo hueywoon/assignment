@@ -52,11 +52,11 @@ glimpse(dataset)  #str(data) also okay
 # I didn't get you guys to do this, but in actual analysis, you should run descriptives to check what the minimum and maximum values are for this dataset. 
 # Values below 1 are invalid numbers (see legend) so we need to remove them
 # Notice that the minimum value is -5 (because there are negative values)
-dataset %>% 
+dataset |> 
   describe(.)
 
 # 7. Remove all participants who have values below 1 for the BFI10 items.
-subset <- dataset %>%
+subset <- dataset |>
   filter(if_all(c("V160A":"V160J"), ~ .x > 0))
 # The code above is saying... 
 # KEEP (filter) the row 
@@ -67,14 +67,14 @@ subset <- dataset %>%
 
 # Extra. Run descriptives to check the min and max values for each column
 # If you did the above step correctly, the minimum value should be 1 now, which is the lowest value on the likert scale used
-subset %>% 
+subset |> 
   describe(.)
 
 # 8. Reverse-Code all the Reverse-Keyed Items
 # Then, select only the variables that you are interested in analyzing in the subset
-subset <- subset %>%   
+subset <- subset |>   
   mutate(5 + 1 - across(c(V160A, V160C, V160D, V160E, V160G), 
-                        .names = "{col}r")) %>% 
+                        .names = "{col}r")) |> 
   select(V160Ar, V160F, V160B, V160Gr, V160Cr, V160H, V160Dr, V160I, V160Er, V160J)
 
 # The above code is saying... 
@@ -102,28 +102,28 @@ cor(subset$V160Er, subset$V160J) # openness to experience
 # Note that alpha() can only be used with data frames or matrices and not with vectors. So alpha(subset$V160Ar, subset$V160F) won't work since each column (e.g., subset$V160F) is a vector (think of vector as a list of values of the same type) and not a data frame.
 
 # Extraversion
-subset %>% 
-  select(V160Ar, V160F) %>% 
+subset |> 
+  select(V160Ar, V160F) |> 
   alpha()
 
 # Agreeableness
-subset %>% 
-  select(V160Gr, V160B) %>% 
+subset |> 
+  select(V160Gr, V160B) |> 
   alpha()
 
 # Conscientousness
-subset %>% 
-  select(V160Cr, V160H) %>% 
+subset |> 
+  select(V160Cr, V160H) |> 
   alpha()
 
 # Neuroticism
-subset %>% 
-  select(V160Dr, V160I) %>% 
+subset |> 
+  select(V160Dr, V160I) |> 
   alpha()
 
 # Openness to Experience
-subset %>% 
-  select(V160Er, V160J) %>% 
+subset |> 
+  select(V160Er, V160J) |> 
   alpha()
 
 ```

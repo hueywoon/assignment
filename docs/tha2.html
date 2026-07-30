@@ -23,7 +23,7 @@
 <meta name="author" content="Huey Woon LEE" />
 
 
-<meta name="date" content="2026-07-26" />
+<meta name="date" content="2026-07-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -494,12 +494,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb76-26"><a href="tha2.html#cb76-26" tabindex="-1"></a><span class="fu">glimpse</span>(dataset<span class="sc">$</span>have_children) <span class="co"># str(dataset$have_children) also okay</span></span>
 <span id="cb76-27"><a href="tha2.html#cb76-27" tabindex="-1"></a></span>
 <span id="cb76-28"><a href="tha2.html#cb76-28" tabindex="-1"></a><span class="co"># 9. Create subset </span></span>
-<span id="cb76-29"><a href="tha2.html#cb76-29" tabindex="-1"></a>subset <span class="ot">&lt;-</span> dataset <span class="sc">%&gt;%</span> </span>
-<span id="cb76-30"><a href="tha2.html#cb76-30" tabindex="-1"></a>  <span class="fu">filter</span>(marital_status <span class="sc">==</span> <span class="st">&quot;married&quot;</span> <span class="sc">&amp;</span> have_children <span class="sc">==</span> <span class="st">&quot;have children&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb76-29"><a href="tha2.html#cb76-29" tabindex="-1"></a>subset <span class="ot">&lt;-</span> dataset <span class="sc">|&gt;</span> </span>
+<span id="cb76-30"><a href="tha2.html#cb76-30" tabindex="-1"></a>  <span class="fu">filter</span>(marital_status <span class="sc">==</span> <span class="st">&quot;married&quot;</span> <span class="sc">&amp;</span> have_children <span class="sc">==</span> <span class="st">&quot;have children&quot;</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb76-31"><a href="tha2.html#cb76-31" tabindex="-1"></a>  <span class="fu">select</span>(swls2021_1<span class="sc">:</span>swls2021_5)</span>
 <span id="cb76-32"><a href="tha2.html#cb76-32" tabindex="-1"></a></span>
 <span id="cb76-33"><a href="tha2.html#cb76-33" tabindex="-1"></a><span class="co"># 10. Compute swls2021_avg</span></span>
-<span id="cb76-34"><a href="tha2.html#cb76-34" tabindex="-1"></a>subset <span class="ot">&lt;-</span> subset <span class="sc">%&gt;%</span> </span>
+<span id="cb76-34"><a href="tha2.html#cb76-34" tabindex="-1"></a>subset <span class="ot">&lt;-</span> subset <span class="sc">|&gt;</span> </span>
 <span id="cb76-35"><a href="tha2.html#cb76-35" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">swls2021_avg =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(swls2021_1<span class="sc">:</span>swls2021_5)))) </span>
 <span id="cb76-36"><a href="tha2.html#cb76-36" tabindex="-1"></a></span>
 <span id="cb76-37"><a href="tha2.html#cb76-37" tabindex="-1"></a><span class="co"># 11. Create a histogram for swls2021_avg</span></span>
@@ -520,7 +520,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb76-52"><a href="tha2.html#cb76-52" tabindex="-1"></a></span>
 <span id="cb76-53"><a href="tha2.html#cb76-53" tabindex="-1"></a><span class="co"># 12A. Get summary statistics using the summarise() function</span></span>
 <span id="cb76-54"><a href="tha2.html#cb76-54" tabindex="-1"></a><span class="co"># Maximum is 5.4, minimum is 2.6, mean is 4.18, and sd is 0.707.</span></span>
-<span id="cb76-55"><a href="tha2.html#cb76-55" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
+<span id="cb76-55"><a href="tha2.html#cb76-55" tabindex="-1"></a>subset <span class="sc">|&gt;</span> </span>
 <span id="cb76-56"><a href="tha2.html#cb76-56" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_swls =</span> <span class="fu">mean</span>(swls2021_avg), </span>
 <span id="cb76-57"><a href="tha2.html#cb76-57" tabindex="-1"></a>            <span class="at">min_swls =</span> <span class="fu">min</span>(swls2021_avg), </span>
 <span id="cb76-58"><a href="tha2.html#cb76-58" tabindex="-1"></a>            <span class="at">max_swls =</span> <span class="fu">max</span>(swls2021_avg), </span>
@@ -532,14 +532,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb76-64"><a href="tha2.html#cb76-64" tabindex="-1"></a></span>
 <span id="cb76-65"><a href="tha2.html#cb76-65" tabindex="-1"></a><span class="co"># 13A. Create a subset that only contains people with an average SWLS of 4.18 and above</span></span>
 <span id="cb76-66"><a href="tha2.html#cb76-66" tabindex="-1"></a><span class="co"># Then, count the number of people remaining </span></span>
-<span id="cb76-67"><a href="tha2.html#cb76-67" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
-<span id="cb76-68"><a href="tha2.html#cb76-68" tabindex="-1"></a>  <span class="fu">filter</span>(swls2021_avg <span class="sc">&gt;=</span> <span class="fl">4.18</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb76-67"><a href="tha2.html#cb76-67" tabindex="-1"></a>subset <span class="sc">|&gt;</span> </span>
+<span id="cb76-68"><a href="tha2.html#cb76-68" tabindex="-1"></a>  <span class="fu">filter</span>(swls2021_avg <span class="sc">&gt;=</span> <span class="fl">4.18</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb76-69"><a href="tha2.html#cb76-69" tabindex="-1"></a>  <span class="fu">summarise</span> (<span class="at">total =</span> <span class="fu">n</span>())</span>
 <span id="cb76-70"><a href="tha2.html#cb76-70" tabindex="-1"></a></span>
 <span id="cb76-71"><a href="tha2.html#cb76-71" tabindex="-1"></a><span class="co"># 13B. Create a subset that only contains people with an average SWLS of 4.18 and above</span></span>
 <span id="cb76-72"><a href="tha2.html#cb76-72" tabindex="-1"></a><span class="co"># Then, count the number of people remaining </span></span>
-<span id="cb76-73"><a href="tha2.html#cb76-73" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
-<span id="cb76-74"><a href="tha2.html#cb76-74" tabindex="-1"></a>  <span class="fu">filter</span>(swls2021_avg <span class="sc">&gt;=</span> <span class="fl">4.18</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb76-73"><a href="tha2.html#cb76-73" tabindex="-1"></a>subset <span class="sc">|&gt;</span> </span>
+<span id="cb76-74"><a href="tha2.html#cb76-74" tabindex="-1"></a>  <span class="fu">filter</span>(swls2021_avg <span class="sc">&gt;=</span> <span class="fl">4.18</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb76-75"><a href="tha2.html#cb76-75" tabindex="-1"></a>  nrow  <span class="co"># count the number of rows remaining</span></span></code></pre></div>
 
 </div>
@@ -592,7 +592,9 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": ["PSYC208.pdf"],
+  "download": [
+    ["PSYC208.pdf", "PDF"]
+  ],
   "search": {
     "engine": "fuse",
     "options": null

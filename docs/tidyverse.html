@@ -23,7 +23,7 @@
 <meta name="author" content="Huey Woon LEE" />
 
 
-<meta name="date" content="2026-07-26" />
+<meta name="date" content="2026-07-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -617,13 +617,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>There are more functions in the dplyr package! Check out the dplyr cheat sheet here: <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf" class="uri">https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf</a>.</p>
-<p>When you go through the code below, you’ll notice that in <code>dplyr</code> (and also <code>tidyverse</code> in general), the pipe operator <code>%&gt;%</code> is used a lot. You can think of it as a symbol for “then”. For example <code>X %&gt;% Y</code> would be read as: Do X then take the result from that to do Y. Because it gets tiring to type the pipe operator so frequently, there’s a shortcut for it: <code>Ctrl/Cmd + Shift + M</code>. (You may see the pipe operator written as <code>|&gt;</code> but this is a new development as of 2023 and most users still use <code>%&gt;%</code> as their default pipe operator.)</p>
+<p>When you go through the code below, you’ll notice that in <code>dplyr</code> (and also <code>tidyverse</code> in general), the pipe operator <code>|&gt;</code> is used a lot. You can think of it as a symbol for “then”. For example <code>X |&gt; Y</code> would be read as: Do X then take the result from that to do Y. Because it gets tiring to type the pipe operator so frequently, there’s a shortcut for it: <code>Ctrl/Cmd + Shift + M</code>. (You may see the pipe operator written as <code>%&gt;%</code> as well because that was what the pipe operator looked like before 2023.)</p>
 <p>With that out of the way… Let’s go through the five functions!</p>
 <div id="select" class="section level3 hasAnchor" number="4.4.1">
 <h3><span class="header-section-number">4.4.1</span> Select()<a href="tidyverse.html#select" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <code>select()</code> function allows us to select specific <em>columns</em>. This is especially useful if we have many columns to work with and we only want to focus on a few.</p>
 <p>Let’s say we only want to select <code>gender</code> and the <code>swls2019_1</code> to <code>swls2019_5</code> columns in the <code>SWB</code> dataset. Here’s how we would do it:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="tidyverse.html#cb36-1" tabindex="-1"></a>swls2019_only <span class="ot">&lt;-</span> dataset <span class="sc">%&gt;%</span>   <span class="co"># create the subset called &quot;swls2019_only&quot; from &quot;dataset&quot;, and then</span></span>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="tidyverse.html#cb36-1" tabindex="-1"></a>swls2019_only <span class="ot">&lt;-</span> dataset <span class="sc">|&gt;</span>   <span class="co"># create the subset called &quot;swls2019_only&quot; from &quot;dataset&quot;, and then</span></span>
 <span id="cb36-2"><a href="tidyverse.html#cb36-2" tabindex="-1"></a>  <span class="fu">select</span>(gender, swls2019_1<span class="sc">:</span>swls2019_5)  <span class="co"># select gender and the columns swls2019_1 to swls2019_5</span></span></code></pre></div>
 <p>This is what the first six rows of <code>swls2019_only</code> look like:</p>
 <pre><code>## # A tibble: 6 × 6
@@ -637,7 +637,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 6 male            5          4          4          5          4</code></pre>
 <p>I sometimes also use <code>select()</code> to re-arrange the order of the columns. (In <code>dplyr</code>, the “correct” function to re-arrange the order of the columns is <code>arrange()</code>. <code>arrange()</code> allows us to re-arrange rows in addition to columns. But <code>select()</code> works too!)</p>
 <p>So, let’s say we want the <code>swls2019_1</code> to <code>swls2019_5</code> columns to come <em>before</em> <code>gender</code>. We simply list the <code>swls2019_1</code> to <code>swls2019_5</code> columns before <code>gender</code>.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="tidyverse.html#cb38-1" tabindex="-1"></a>swls2019_genderlast <span class="ot">&lt;-</span> dataset <span class="sc">%&gt;%</span>   </span>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="tidyverse.html#cb38-1" tabindex="-1"></a>swls2019_genderlast <span class="ot">&lt;-</span> dataset <span class="sc">|&gt;</span>   </span>
 <span id="cb38-2"><a href="tidyverse.html#cb38-2" tabindex="-1"></a>  <span class="fu">select</span>(swls2019_1<span class="sc">:</span>swls2019_5, gender)  </span></code></pre></div>
 <p>This is what the first six rows of <code>swls2019_genderlast</code> look like:</p>
 <pre><code>## # A tibble: 6 × 6
@@ -655,7 +655,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Maybe we don’t want to select specific columns. Instead, we want to select specific kinds of participants to conduct our analyses on (e.g., say from specific treatment groups or maybe only male participants). In other words, we want to select specific <em>rows</em>. We use <code>filter()</code> to do that.</p>
 <p>New R users sometimes confuse <code>select()</code> with <code>filter()</code> so it bears repeating: <code>select()</code> is used to select columns (i.e., variables) whereas <code>filter()</code> is used to select rows (i.e., participants).</p>
 <p>So, let’s say we want to select only male participants. In other words, we only want to keep the rows that come from male participants.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="tidyverse.html#cb40-1" tabindex="-1"></a>male_only <span class="ot">&lt;-</span> dataset <span class="sc">%&gt;%</span>     <span class="co"># create &quot;male_only&quot; subset from &quot;dataset&quot;, and then </span></span>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="tidyverse.html#cb40-1" tabindex="-1"></a>male_only <span class="ot">&lt;-</span> dataset <span class="sc">|&gt;</span>  <span class="co"># create &quot;male_only&quot; subset from &quot;dataset&quot;, and then </span></span>
 <span id="cb40-2"><a href="tidyverse.html#cb40-2" tabindex="-1"></a>  <span class="fu">filter</span>(gender <span class="sc">==</span> <span class="st">&quot;male&quot;</span>)  <span class="co"># filter (keep) only male participants</span></span></code></pre></div>
 <p>Notice that the double equal sign <code>==</code> is used here. In programming languages, the <code>==</code> sign is used when we are comparing the left and the right hand side to see if they match. Here, we’re comparing each row of the column <code>gender</code> to the word “male”. If that row matches the word “male”, we will filter (keep) that row. Otherwise, we will toss it out.</p>
 <p>This is what the first six rows of <code>male_only</code> look like:</p>
@@ -677,7 +677,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">4.4.3</span> Mutate()<a href="tidyverse.html#mutate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Sometimes, we might want to create new variables, say averages or totals. We can do this with <code>mutate()</code>.</p>
 <p>Let’s say we want to find the average of <code>swls2019_1</code> to <code>swls2019_5</code> for each participant. We will use the subset we created just now, <code>swls2019_only</code> to do this.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="tidyverse.html#cb42-1" tabindex="-1"></a>swls2019_only <span class="ot">&lt;-</span> swls2019_only <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="tidyverse.html#cb42-1" tabindex="-1"></a>swls2019_only <span class="ot">&lt;-</span> swls2019_only <span class="sc">|&gt;</span> </span>
 <span id="cb42-2"><a href="tidyverse.html#cb42-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">swls2019_avg =</span> (swls2019_1 <span class="sc">+</span> swls2019_2 <span class="sc">+</span> swls2019_3 <span class="sc">+</span> swls2019_4 <span class="sc">+</span> swls2019_5) <span class="sc">/</span> <span class="dv">5</span>)</span>
 <span id="cb42-3"><a href="tidyverse.html#cb42-3" tabindex="-1"></a><span class="co"># this code is saying... </span></span>
 <span id="cb42-4"><a href="tidyverse.html#cb42-4" tabindex="-1"></a><span class="co"># go to swls2019_only, and then</span></span>
@@ -695,7 +695,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 6 male            5          4          4          5          4          4.4</code></pre>
 <p>Notice that the <code>swls2019_avg</code> now appears as the last column of <code>swls2019_only</code>.</p>
 <p>You can achieve the same results using <code>rowMeans()</code>. (As an aside, if you want the total instead of the average, use <code>rowSums()</code>.)</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="tidyverse.html#cb44-1" tabindex="-1"></a>swls2019_only <span class="ot">&lt;-</span> swls2019_only <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="tidyverse.html#cb44-1" tabindex="-1"></a>swls2019_only <span class="ot">&lt;-</span> swls2019_only <span class="sc">|&gt;</span> </span>
 <span id="cb44-2"><a href="tidyverse.html#cb44-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">swls2019_avg_rowmeans =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(swls2019_1<span class="sc">:</span>swls2019_5))))</span>
 <span id="cb44-3"><a href="tidyverse.html#cb44-3" tabindex="-1"></a><span class="co"># rowMeans(across(c(swls2019_1:swls2019_5))) tells R that we want to find the mean (average) for each row (hence rowMeans) across the set of five variables, swls2019_1 to swls2019_5. </span></span></code></pre></div>
 <p>Let’s compare <code>swls2019_avg</code> and <code>swls2019_avg_rowmeans</code> for the first 6 rows:</p>
@@ -714,7 +714,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">4.4.4</span> Summarise()<a href="tidyverse.html#summarise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <code>summarise()</code> function is used when we want to get summary statistics such as the mean, median, maximum, minimum, etc for a given column in the data frame.</p>
 <p>Let’s say we’re interested to know the mean (<code>avg_swls</code>), minimum (<code>min_swls</code>), maximum (<code>max_swls</code>), variance (<code>var_swls</code>), standard deviation (<code>sd_swls</code>), total number of participants (<code>total</code>) for <code>swls2019_avg</code>. Again, we will use our <code>swls2019_only</code> subset.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="tidyverse.html#cb46-1" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="tidyverse.html#cb46-1" tabindex="-1"></a>swls2019_only <span class="sc">|&gt;</span> </span>
 <span id="cb46-2"><a href="tidyverse.html#cb46-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_swls =</span> <span class="fu">mean</span>(swls2019_avg), </span>
 <span id="cb46-3"><a href="tidyverse.html#cb46-3" tabindex="-1"></a>            <span class="at">min_swls =</span> <span class="fu">min</span>(swls2019_avg), </span>
 <span id="cb46-4"><a href="tidyverse.html#cb46-4" tabindex="-1"></a>            <span class="at">max_swls =</span> <span class="fu">max</span>(swls2019_avg), </span>
@@ -738,8 +738,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">4.4.5</span> Group_by()<a href="tidyverse.html#group_by" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Sometimes, we might want to apply the same function to different groups of people. For example, we might want to know what the maximum swls score is for males and for females separately. We can use the <code>group_by()</code> function to do this.</p>
 <p>Let’s say we’re interested to know the mean (<code>avg_swls</code>), minimum (<code>min_swls</code>), maximum (<code>max_swls</code>), variance (<code>var_swls</code>), standard deviation (<code>sd_swls</code>), total number of participants (<code>total</code>) for <code>swls2019_avg</code> for males and females separately.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="tidyverse.html#cb50-1" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
-<span id="cb50-2"><a href="tidyverse.html#cb50-2" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="tidyverse.html#cb50-1" tabindex="-1"></a>swls2019_only <span class="sc">|&gt;</span> </span>
+<span id="cb50-2"><a href="tidyverse.html#cb50-2" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">|&gt;</span> </span>
 <span id="cb50-3"><a href="tidyverse.html#cb50-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_swls =</span> <span class="fu">mean</span>(swls2019_avg), </span>
 <span id="cb50-4"><a href="tidyverse.html#cb50-4" tabindex="-1"></a>            <span class="at">min_swls =</span> <span class="fu">min</span>(swls2019_avg), </span>
 <span id="cb50-5"><a href="tidyverse.html#cb50-5" tabindex="-1"></a>            <span class="at">max_swls =</span> <span class="fu">max</span>(swls2019_avg), </span>
@@ -775,8 +775,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A frequency (distribution) table tells us the number of times each data value occurs for a given variable.</p>
 <p>Let’s say we want to know how many males and how many females participated in the study using the <code>swls2019_only</code> subset. The variable is <code>gender</code> and the data values we are interested in are <code>male</code> and <code>female</code>. Let’s find out!</p>
 <p>Before looking at my code below, try coming up with your own! (HINT: Use the <code>summarise()</code> function!)</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="tidyverse.html#cb54-1" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
-<span id="cb54-2"><a href="tidyverse.html#cb54-2" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span>  <span class="co"># Group the result by gender</span></span>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="tidyverse.html#cb54-1" tabindex="-1"></a>swls2019_only <span class="sc">|&gt;</span> </span>
+<span id="cb54-2"><a href="tidyverse.html#cb54-2" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">|&gt;</span>  <span class="co"># Group the result by gender</span></span>
 <span id="cb54-3"><a href="tidyverse.html#cb54-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">freq =</span> <span class="fu">n</span>())  <span class="co"># Count how many of each value in the data</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   gender  freq
@@ -785,17 +785,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 female   175</code></pre>
 <p>The output tells us 168 males and 175 females participated in the study.</p>
 <p>Here’s a faster alternative.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="tidyverse.html#cb56-1" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
-<span id="cb56-2"><a href="tidyverse.html#cb56-2" tabindex="-1"></a>  <span class="fu">select</span>(gender) <span class="sc">%&gt;%</span>  <span class="co"># Select the column gender</span></span>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="tidyverse.html#cb56-1" tabindex="-1"></a>swls2019_only <span class="sc">|&gt;</span> </span>
+<span id="cb56-2"><a href="tidyverse.html#cb56-2" tabindex="-1"></a>  <span class="fu">select</span>(gender) <span class="sc">|&gt;</span>  <span class="co"># Select the column gender</span></span>
 <span id="cb56-3"><a href="tidyverse.html#cb56-3" tabindex="-1"></a>  <span class="fu">table</span>()   <span class="co"># Count how many of each value in the data and present it in a table</span></span></code></pre></div>
 <pre><code>## gender
 ##   male female 
 ##    168    175</code></pre>
 <p>The number of times a data value occurs for a given variable is called the absolute frequency. If we want the relative frequency (i.e., the number of times a data value occurs relative to the total number of observations for a given variable), then we divide the absolute frequency by the total number of values.</p>
 <p>Again, try this on your own before looking at my code. (HINT: Use the <code>summarise()</code> function and then the <code>mutate()</code> function!)</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="tidyverse.html#cb58-1" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
-<span id="cb58-2"><a href="tidyverse.html#cb58-2" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span>   <span class="co"># Group the result by gender</span></span>
-<span id="cb58-3"><a href="tidyverse.html#cb58-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">freq =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span>  <span class="co"># Count how many of each value in the data </span></span>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="tidyverse.html#cb58-1" tabindex="-1"></a>swls2019_only <span class="sc">|&gt;</span> </span>
+<span id="cb58-2"><a href="tidyverse.html#cb58-2" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">|&gt;</span>   <span class="co"># Group the result by gender</span></span>
+<span id="cb58-3"><a href="tidyverse.html#cb58-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">freq =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span>  <span class="co"># Count how many of each value in the data </span></span>
 <span id="cb58-4"><a href="tidyverse.html#cb58-4" tabindex="-1"></a>  <span class="fu">mutate</span> (<span class="at">total =</span> <span class="fu">sum</span>(freq),  <span class="co"># Count the total number of observations </span></span>
 <span id="cb58-5"><a href="tidyverse.html#cb58-5" tabindex="-1"></a>          <span class="at">rel_freq =</span> freq <span class="sc">/</span> total)  <span class="co"># Take the frequency of each value / total number of observations</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 × 4
@@ -805,18 +805,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 female   175   343    0.510</code></pre>
 <p>The output (rel_freq) tells us that slightly less than half the sample are males (0.49) and slightly more than half are females (0.51).</p>
 <p>Here’s a faster alternative, using <code>table()</code> and <code>prop.table()</code>.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="tidyverse.html#cb60-1" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
-<span id="cb60-2"><a href="tidyverse.html#cb60-2" tabindex="-1"></a>  <span class="fu">select</span>(gender) <span class="sc">%&gt;%</span>  </span>
-<span id="cb60-3"><a href="tidyverse.html#cb60-3" tabindex="-1"></a>  <span class="fu">table</span>() <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="tidyverse.html#cb60-1" tabindex="-1"></a>swls2019_only <span class="sc">|&gt;</span> </span>
+<span id="cb60-2"><a href="tidyverse.html#cb60-2" tabindex="-1"></a>  <span class="fu">select</span>(gender) <span class="sc">|&gt;</span>  </span>
+<span id="cb60-3"><a href="tidyverse.html#cb60-3" tabindex="-1"></a>  <span class="fu">table</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb60-4"><a href="tidyverse.html#cb60-4" tabindex="-1"></a>  <span class="fu">prop.table</span>()</span></code></pre></div>
 <pre><code>## gender
 ##      male    female 
 ## 0.4897959 0.5102041</code></pre>
 <p>Relative frequency is a proportion and may be difficult for some people to interpret. For easier interpretation, we can convert the proportions into percentages by multiplying 100%.</p>
 <p>Try converting the proportions into percentages on your own before looking at my code below!</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="tidyverse.html#cb62-1" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
-<span id="cb62-2"><a href="tidyverse.html#cb62-2" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span>   </span>
-<span id="cb62-3"><a href="tidyverse.html#cb62-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">freq =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span>   </span>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="tidyverse.html#cb62-1" tabindex="-1"></a>swls2019_only <span class="sc">|&gt;</span> </span>
+<span id="cb62-2"><a href="tidyverse.html#cb62-2" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">|&gt;</span>   </span>
+<span id="cb62-3"><a href="tidyverse.html#cb62-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">freq =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span>   </span>
 <span id="cb62-4"><a href="tidyverse.html#cb62-4" tabindex="-1"></a>  <span class="fu">mutate</span> (<span class="at">total =</span> <span class="fu">sum</span>(freq), </span>
 <span id="cb62-5"><a href="tidyverse.html#cb62-5" tabindex="-1"></a>          <span class="at">rel_freq =</span> freq <span class="sc">/</span> total, </span>
 <span id="cb62-6"><a href="tidyverse.html#cb62-6" tabindex="-1"></a>          <span class="at">percentage =</span> rel_freq <span class="sc">*</span> <span class="dv">100</span>)  </span></code></pre></div>
@@ -826,11 +826,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 1 male     168   343    0.490       49.0
 ## 2 female   175   343    0.510       51.0</code></pre>
 <p>Here’s a faster alternative, using <code>table()</code>, <code>prop.table()</code>, and <code>mutate()</code>.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="tidyverse.html#cb64-1" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
-<span id="cb64-2"><a href="tidyverse.html#cb64-2" tabindex="-1"></a>  <span class="fu">select</span>(gender) <span class="sc">%&gt;%</span>  </span>
-<span id="cb64-3"><a href="tidyverse.html#cb64-3" tabindex="-1"></a>  <span class="fu">table</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb64-4"><a href="tidyverse.html#cb64-4" tabindex="-1"></a>  <span class="fu">prop.table</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb64-5"><a href="tidyverse.html#cb64-5" tabindex="-1"></a>  <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span>   <span class="co"># force table into a data frame because mutate is incompatible with tables </span></span>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="tidyverse.html#cb64-1" tabindex="-1"></a>swls2019_only <span class="sc">|&gt;</span> </span>
+<span id="cb64-2"><a href="tidyverse.html#cb64-2" tabindex="-1"></a>  <span class="fu">select</span>(gender) <span class="sc">|&gt;</span>  </span>
+<span id="cb64-3"><a href="tidyverse.html#cb64-3" tabindex="-1"></a>  <span class="fu">table</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb64-4"><a href="tidyverse.html#cb64-4" tabindex="-1"></a>  <span class="fu">prop.table</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb64-5"><a href="tidyverse.html#cb64-5" tabindex="-1"></a>  <span class="fu">data.frame</span>() <span class="sc">|&gt;</span>   <span class="co"># force table into a data frame because mutate is incompatible with tables </span></span>
 <span id="cb64-6"><a href="tidyverse.html#cb64-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Percentage =</span> Freq <span class="sc">*</span> <span class="dv">100</span>, </span>
 <span id="cb64-7"><a href="tidyverse.html#cb64-7" tabindex="-1"></a>         <span class="at">Rounded =</span> <span class="fu">round</span>(Freq <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>))  <span class="co"># you may round the results to 2 d.p. using the round() function</span></span></code></pre></div>
 <pre><code>##   gender      Freq Percentage Rounded
@@ -852,7 +852,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="PSYC208_files/figure-html/unnamed-chunk-50-1.png" alt="" width="672" /></p>
 <p>Here’s an alternative that will give you the exact same output.</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="tidyverse.html#cb67-1" tabindex="-1"></a><span class="co"># Alternative</span></span>
-<span id="cb67-2"><a href="tidyverse.html#cb67-2" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span>  <span class="co"># dataset used is swls2019_only</span></span>
+<span id="cb67-2"><a href="tidyverse.html#cb67-2" tabindex="-1"></a>swls2019_only <span class="sc">|&gt;</span>  <span class="co"># dataset used is swls2019_only</span></span>
 <span id="cb67-3"><a href="tidyverse.html#cb67-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(.) <span class="sc">+</span>  <span class="co"># R takes swls2019_only in the previous line and places it in the . on this line to tell ggplot that dataset used is swls2019_only</span></span>
 <span id="cb67-4"><a href="tidyverse.html#cb67-4" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> gender), <span class="at">stat=</span><span class="st">&quot;count&quot;</span>)  <span class="co"># we want a bar plot where x (horizontal axis) is gender and the statistic is the count of values in x</span></span></code></pre></div>
 <p>Notice that the <code>aes()</code> command can be either in the ggplot line or the geom function line. In this case, where you type it doesn’t affect the results at all. (Try this out yourself to confirm!)</p>
@@ -869,8 +869,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="PSYC208_files/figure-html/unnamed-chunk-52-1.png" alt="" width="672" /></p>
 <p>As with the bar chart, you could do this instead and the results would be the same:</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="tidyverse.html#cb70-1" tabindex="-1"></a><span class="co"># Alternative</span></span>
-<span id="cb70-2"><a href="tidyverse.html#cb70-2" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
-<span id="cb70-3"><a href="tidyverse.html#cb70-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(.) <span class="sc">+</span> </span>
+<span id="cb70-2"><a href="tidyverse.html#cb70-2" tabindex="-1"></a>swls2019_only <span class="sc">|&gt;</span> </span>
+<span id="cb70-3"><a href="tidyverse.html#cb70-3" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb70-4"><a href="tidyverse.html#cb70-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> swls2019_avg))</span></code></pre></div>
 <p>Now, the histogram that you got is okay, but kinda basic… Maybe you want to customise it. For example, you might want to add a specific label for the y-axis or the x-axis… Or maybe you want to change the colour of the graph! You can customise all of that! Here are some ideas.</p>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="tidyverse.html#cb71-1" tabindex="-1"></a><span class="co"># Assign color “red” to the object barfill (which we will use below to change the colour of the bars).</span></span>
@@ -920,8 +920,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A scatterplot is a graph of pairs of values for each subject or individual. Specifically, each individual provides two observations, one for each variable. One of the variables will be plotted along the x-axis and the other along the y-axis.</p>
 <p>So, suppose we’re interested in plotting the relationship between two items from the SWLS2019 dataset: <code>swls2019_1</code> and <code>swls2019_2</code>. Why might we be interested in this? Well, the reasoning goes something like this: Both items supposedly measure satisfaction with life. So, if a participant scores higher on one item than another participant, they should also score higher on the other item. To confirm this, we can plot a scatterplot.</p>
 <p>Here’s the basic code for a scatterplot in <code>ggplot2</code>:</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="tidyverse.html#cb74-1" tabindex="-1"></a>swls2019_only <span class="sc">%&gt;%</span> </span>
-<span id="cb74-2"><a href="tidyverse.html#cb74-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(.) <span class="sc">+</span> </span>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="tidyverse.html#cb74-1" tabindex="-1"></a>swls2019_only <span class="sc">|&gt;</span> </span>
+<span id="cb74-2"><a href="tidyverse.html#cb74-2" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb74-3"><a href="tidyverse.html#cb74-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> swls2019_1, <span class="at">y =</span> swls2019_2)) <span class="sc">+</span>  <span class="co"># A scatterplot is a plot of points on a graph. So we use geom_point.</span></span>
 <span id="cb74-4"><a href="tidyverse.html#cb74-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;swls2019_1: In most ways my life is close to my ideal&quot;</span>,</span>
 <span id="cb74-5"><a href="tidyverse.html#cb74-5" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;swls2019_2: The conditions of my life are excellent&quot;</span>, </span>
@@ -993,7 +993,9 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": ["PSYC208.pdf"],
+  "download": [
+    ["PSYC208.pdf", "PDF"]
+  ],
   "search": {
     "engine": "fuse",
     "options": null

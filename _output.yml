@@ -9,9 +9,13 @@ bookdown::gitbook:
         <li><a href="./">PSYC208 R Companion Website</a></li>
       after: |
         <li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
-    edit: https://github.com/hueywoon/assignment/blob/master/%s
-  #download: ["pdf"] #
+    edit:
+      link: https://github.com/hueywoon/assignment/blob/master/%s
+      text: Edit
+    download: [["PSYC208.pdf", "PDF"]]
 
+
+# Instructions for future: remove all the hashtags below. then, remove the upper half of this (from #download: ["pdf"] onwards. then build book. you'll find the pdf in the docs folder.)
 #bookdown::pdf_book: #
 #  includes: #
 #    in_header: preamble.tex #

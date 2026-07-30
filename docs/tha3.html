@@ -23,7 +23,7 @@
 <meta name="author" content="Huey Woon LEE" />
 
 
-<meta name="date" content="2026-07-26" />
+<meta name="date" content="2026-07-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -426,11 +426,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb92-14"><a href="tha3.html#cb92-14" tabindex="-1"></a><span class="co"># I didn&#39;t get you guys to do this, but in actual analysis, you should run descriptives to check what the minimum and maximum values are for this dataset. </span></span>
 <span id="cb92-15"><a href="tha3.html#cb92-15" tabindex="-1"></a><span class="co"># Values below 1 are invalid numbers (see legend) so we need to remove them</span></span>
 <span id="cb92-16"><a href="tha3.html#cb92-16" tabindex="-1"></a><span class="co"># Notice that the minimum value is -5 (because there are negative values)</span></span>
-<span id="cb92-17"><a href="tha3.html#cb92-17" tabindex="-1"></a>dataset <span class="sc">%&gt;%</span> </span>
+<span id="cb92-17"><a href="tha3.html#cb92-17" tabindex="-1"></a>dataset <span class="sc">|&gt;</span> </span>
 <span id="cb92-18"><a href="tha3.html#cb92-18" tabindex="-1"></a>  <span class="fu">describe</span>(.)</span>
 <span id="cb92-19"><a href="tha3.html#cb92-19" tabindex="-1"></a></span>
 <span id="cb92-20"><a href="tha3.html#cb92-20" tabindex="-1"></a><span class="co"># 7. Remove all participants who have values below 1 for the BFI10 items.</span></span>
-<span id="cb92-21"><a href="tha3.html#cb92-21" tabindex="-1"></a>subset <span class="ot">&lt;-</span> dataset <span class="sc">%&gt;%</span></span>
+<span id="cb92-21"><a href="tha3.html#cb92-21" tabindex="-1"></a>subset <span class="ot">&lt;-</span> dataset <span class="sc">|&gt;</span></span>
 <span id="cb92-22"><a href="tha3.html#cb92-22" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">if_all</span>(<span class="fu">c</span>(<span class="st">&quot;V160A&quot;</span><span class="sc">:</span><span class="st">&quot;V160J&quot;</span>), <span class="sc">~</span> .x <span class="sc">&gt;</span> <span class="dv">0</span>))</span>
 <span id="cb92-23"><a href="tha3.html#cb92-23" tabindex="-1"></a><span class="co"># The code above is saying... </span></span>
 <span id="cb92-24"><a href="tha3.html#cb92-24" tabindex="-1"></a><span class="co"># KEEP (filter) the row </span></span>
@@ -441,14 +441,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb92-29"><a href="tha3.html#cb92-29" tabindex="-1"></a></span>
 <span id="cb92-30"><a href="tha3.html#cb92-30" tabindex="-1"></a><span class="co"># Extra. Run descriptives to check the min and max values for each column</span></span>
 <span id="cb92-31"><a href="tha3.html#cb92-31" tabindex="-1"></a><span class="co"># If you did the above step correctly, the minimum value should be 1 now, which is the lowest value on the likert scale used</span></span>
-<span id="cb92-32"><a href="tha3.html#cb92-32" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
+<span id="cb92-32"><a href="tha3.html#cb92-32" tabindex="-1"></a>subset <span class="sc">|&gt;</span> </span>
 <span id="cb92-33"><a href="tha3.html#cb92-33" tabindex="-1"></a>  <span class="fu">describe</span>(.)</span>
 <span id="cb92-34"><a href="tha3.html#cb92-34" tabindex="-1"></a></span>
 <span id="cb92-35"><a href="tha3.html#cb92-35" tabindex="-1"></a><span class="co"># 8. Reverse-Code all the Reverse-Keyed Items</span></span>
 <span id="cb92-36"><a href="tha3.html#cb92-36" tabindex="-1"></a><span class="co"># Then, select only the variables that you are interested in analyzing in the subset</span></span>
-<span id="cb92-37"><a href="tha3.html#cb92-37" tabindex="-1"></a>subset <span class="ot">&lt;-</span> subset <span class="sc">%&gt;%</span>   </span>
+<span id="cb92-37"><a href="tha3.html#cb92-37" tabindex="-1"></a>subset <span class="ot">&lt;-</span> subset <span class="sc">|&gt;</span>   </span>
 <span id="cb92-38"><a href="tha3.html#cb92-38" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="dv">5</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">across</span>(<span class="fu">c</span>(V160A, V160C, V160D, V160E, V160G), </span>
-<span id="cb92-39"><a href="tha3.html#cb92-39" tabindex="-1"></a>                        <span class="at">.names =</span> <span class="st">&quot;{col}r&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb92-39"><a href="tha3.html#cb92-39" tabindex="-1"></a>                        <span class="at">.names =</span> <span class="st">&quot;{col}r&quot;</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb92-40"><a href="tha3.html#cb92-40" tabindex="-1"></a>  <span class="fu">select</span>(V160Ar, V160F, V160B, V160Gr, V160Cr, V160H, V160Dr, V160I, V160Er, V160J)</span>
 <span id="cb92-41"><a href="tha3.html#cb92-41" tabindex="-1"></a></span>
 <span id="cb92-42"><a href="tha3.html#cb92-42" tabindex="-1"></a><span class="co"># The above code is saying... </span></span>
@@ -476,28 +476,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb92-64"><a href="tha3.html#cb92-64" tabindex="-1"></a><span class="co"># Note that alpha() can only be used with data frames or matrices and not with vectors. So alpha(subset$V160Ar, subset$V160F) won&#39;t work since each column (e.g., subset$V160F) is a vector (think of vector as a list of values of the same type) and not a data frame.</span></span>
 <span id="cb92-65"><a href="tha3.html#cb92-65" tabindex="-1"></a></span>
 <span id="cb92-66"><a href="tha3.html#cb92-66" tabindex="-1"></a><span class="co"># Extraversion</span></span>
-<span id="cb92-67"><a href="tha3.html#cb92-67" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
-<span id="cb92-68"><a href="tha3.html#cb92-68" tabindex="-1"></a>  <span class="fu">select</span>(V160Ar, V160F) <span class="sc">%&gt;%</span> </span>
+<span id="cb92-67"><a href="tha3.html#cb92-67" tabindex="-1"></a>subset <span class="sc">|&gt;</span> </span>
+<span id="cb92-68"><a href="tha3.html#cb92-68" tabindex="-1"></a>  <span class="fu">select</span>(V160Ar, V160F) <span class="sc">|&gt;</span> </span>
 <span id="cb92-69"><a href="tha3.html#cb92-69" tabindex="-1"></a>  <span class="fu">alpha</span>()</span>
 <span id="cb92-70"><a href="tha3.html#cb92-70" tabindex="-1"></a></span>
 <span id="cb92-71"><a href="tha3.html#cb92-71" tabindex="-1"></a><span class="co"># Agreeableness</span></span>
-<span id="cb92-72"><a href="tha3.html#cb92-72" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
-<span id="cb92-73"><a href="tha3.html#cb92-73" tabindex="-1"></a>  <span class="fu">select</span>(V160Gr, V160B) <span class="sc">%&gt;%</span> </span>
+<span id="cb92-72"><a href="tha3.html#cb92-72" tabindex="-1"></a>subset <span class="sc">|&gt;</span> </span>
+<span id="cb92-73"><a href="tha3.html#cb92-73" tabindex="-1"></a>  <span class="fu">select</span>(V160Gr, V160B) <span class="sc">|&gt;</span> </span>
 <span id="cb92-74"><a href="tha3.html#cb92-74" tabindex="-1"></a>  <span class="fu">alpha</span>()</span>
 <span id="cb92-75"><a href="tha3.html#cb92-75" tabindex="-1"></a></span>
 <span id="cb92-76"><a href="tha3.html#cb92-76" tabindex="-1"></a><span class="co"># Conscientousness</span></span>
-<span id="cb92-77"><a href="tha3.html#cb92-77" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
-<span id="cb92-78"><a href="tha3.html#cb92-78" tabindex="-1"></a>  <span class="fu">select</span>(V160Cr, V160H) <span class="sc">%&gt;%</span> </span>
+<span id="cb92-77"><a href="tha3.html#cb92-77" tabindex="-1"></a>subset <span class="sc">|&gt;</span> </span>
+<span id="cb92-78"><a href="tha3.html#cb92-78" tabindex="-1"></a>  <span class="fu">select</span>(V160Cr, V160H) <span class="sc">|&gt;</span> </span>
 <span id="cb92-79"><a href="tha3.html#cb92-79" tabindex="-1"></a>  <span class="fu">alpha</span>()</span>
 <span id="cb92-80"><a href="tha3.html#cb92-80" tabindex="-1"></a></span>
 <span id="cb92-81"><a href="tha3.html#cb92-81" tabindex="-1"></a><span class="co"># Neuroticism</span></span>
-<span id="cb92-82"><a href="tha3.html#cb92-82" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
-<span id="cb92-83"><a href="tha3.html#cb92-83" tabindex="-1"></a>  <span class="fu">select</span>(V160Dr, V160I) <span class="sc">%&gt;%</span> </span>
+<span id="cb92-82"><a href="tha3.html#cb92-82" tabindex="-1"></a>subset <span class="sc">|&gt;</span> </span>
+<span id="cb92-83"><a href="tha3.html#cb92-83" tabindex="-1"></a>  <span class="fu">select</span>(V160Dr, V160I) <span class="sc">|&gt;</span> </span>
 <span id="cb92-84"><a href="tha3.html#cb92-84" tabindex="-1"></a>  <span class="fu">alpha</span>()</span>
 <span id="cb92-85"><a href="tha3.html#cb92-85" tabindex="-1"></a></span>
 <span id="cb92-86"><a href="tha3.html#cb92-86" tabindex="-1"></a><span class="co"># Openness to Experience</span></span>
-<span id="cb92-87"><a href="tha3.html#cb92-87" tabindex="-1"></a>subset <span class="sc">%&gt;%</span> </span>
-<span id="cb92-88"><a href="tha3.html#cb92-88" tabindex="-1"></a>  <span class="fu">select</span>(V160Er, V160J) <span class="sc">%&gt;%</span> </span>
+<span id="cb92-87"><a href="tha3.html#cb92-87" tabindex="-1"></a>subset <span class="sc">|&gt;</span> </span>
+<span id="cb92-88"><a href="tha3.html#cb92-88" tabindex="-1"></a>  <span class="fu">select</span>(V160Er, V160J) <span class="sc">|&gt;</span> </span>
 <span id="cb92-89"><a href="tha3.html#cb92-89" tabindex="-1"></a>  <span class="fu">alpha</span>()</span></code></pre></div>
 
 </div>
@@ -550,7 +550,9 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": ["PSYC208.pdf"],
+  "download": [
+    ["PSYC208.pdf", "PDF"]
+  ],
   "search": {
     "engine": "fuse",
     "options": null

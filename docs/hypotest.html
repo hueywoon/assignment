@@ -23,7 +23,7 @@
 <meta name="author" content="Huey Woon LEE" />
 
 
-<meta name="date" content="2026-07-26" />
+<meta name="date" content="2026-07-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -355,7 +355,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">8.4.2</span> Conducting and Interpreting the One-Sample T Test<a href="hypotest.html#conducting-and-interpreting-the-one-sample-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Before jumping into any hypothesis testing, though, it is good practice to first get the descriptive statistics for the variable(s) you’re investigating. At the minimum, you should get the mean and the standard deviation. (Anyway, you need to report means and standard deviations in APA style write-up!) I often also like to look at the minimum and maximum values to make sure the values are not out of ordinary (e.g., a value of -999 might throw up some red flags if, say, the likert scale only comprises values from 1 to 7).</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="hypotest.html#cb96-1" tabindex="-1"></a><span class="co"># Calculate the average satisfaction with life score in 2019 for each participant</span></span>
-<span id="cb96-2"><a href="hypotest.html#cb96-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb96-2"><a href="hypotest.html#cb96-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
 <span id="cb96-3"><a href="hypotest.html#cb96-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">swls2019_avg =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(swls2019_1<span class="sc">:</span>swls2019_5))))</span>
 <span id="cb96-4"><a href="hypotest.html#cb96-4" tabindex="-1"></a></span>
 <span id="cb96-5"><a href="hypotest.html#cb96-5" tabindex="-1"></a><span class="co"># Get the descriptive statistics</span></span>
@@ -417,7 +417,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Again, before conducting the correlated groups t test, remember to get the descriptive statistics for each set of scores.</p>
 <div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="hypotest.html#cb105-1" tabindex="-1"></a><span class="co"># Calculate the average satisfaction with life score in 2021 for each participant. </span></span>
 <span id="cb105-2"><a href="hypotest.html#cb105-2" tabindex="-1"></a><span class="co"># If you did not calculate the average satisfaction with life score in 2019 earlier, you will want to do that before continuing.</span></span>
-<span id="cb105-3"><a href="hypotest.html#cb105-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb105-3"><a href="hypotest.html#cb105-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
 <span id="cb105-4"><a href="hypotest.html#cb105-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">swls2021_avg =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(swls2021_1<span class="sc">:</span>swls2021_5))))</span>
 <span id="cb105-5"><a href="hypotest.html#cb105-5" tabindex="-1"></a></span>
 <span id="cb105-6"><a href="hypotest.html#cb105-6" tabindex="-1"></a><span class="co"># Get the descriptives</span></span>
@@ -845,7 +845,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb157-3"><a href="hypotest.html#cb157-3" tabindex="-1"></a>         <span class="at">data =</span> df)</span>
 <span id="cb157-4"><a href="hypotest.html#cb157-4" tabindex="-1"></a></span>
 <span id="cb157-5"><a href="hypotest.html#cb157-5" tabindex="-1"></a><span class="co"># Alternative 2</span></span>
-<span id="cb157-6"><a href="hypotest.html#cb157-6" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb157-6"><a href="hypotest.html#cb157-6" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
 <span id="cb157-7"><a href="hypotest.html#cb157-7" tabindex="-1"></a>  <span class="fu">cor.test</span>(<span class="at">formula =</span> <span class="sc">~</span> swls2019_avg <span class="sc">+</span> swls2021_avg, .)</span></code></pre></div>
 <p>Both ways would give us the same result as the earlier one but neither are intuitive. I personally prefer the much simpler <code>cor.test(df$swls2019_avg, df$swls2021_avg)</code>.</p>
 </div>
@@ -936,13 +936,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="hypotest.html#cb166-1" tabindex="-1"></a><span class="co"># Alternative</span></span>
 <span id="cb166-2"><a href="hypotest.html#cb166-2" tabindex="-1"></a></span>
 <span id="cb166-3"><a href="hypotest.html#cb166-3" tabindex="-1"></a><span class="co"># Linear regression</span></span>
-<span id="cb166-4"><a href="hypotest.html#cb166-4" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb166-5"><a href="hypotest.html#cb166-5" tabindex="-1"></a>  <span class="fu">lm</span>(swls2021_avg <span class="sc">~</span> swls2019_avg, <span class="at">data =</span> .) <span class="sc">%&gt;%</span> </span>
+<span id="cb166-4"><a href="hypotest.html#cb166-4" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb166-5"><a href="hypotest.html#cb166-5" tabindex="-1"></a>  <span class="fu">lm</span>(swls2021_avg <span class="sc">~</span> swls2019_avg, <span class="at">data =</span> .) <span class="sc">|&gt;</span> </span>
 <span id="cb166-6"><a href="hypotest.html#cb166-6" tabindex="-1"></a>  <span class="fu">summary</span>(.)</span>
 <span id="cb166-7"><a href="hypotest.html#cb166-7" tabindex="-1"></a></span>
 <span id="cb166-8"><a href="hypotest.html#cb166-8" tabindex="-1"></a><span class="co"># 95% confidence interval</span></span>
-<span id="cb166-9"><a href="hypotest.html#cb166-9" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb166-10"><a href="hypotest.html#cb166-10" tabindex="-1"></a>  <span class="fu">lm</span>(swls2021_avg <span class="sc">~</span> swls2019_avg, <span class="at">data =</span> .) <span class="sc">%&gt;%</span> </span>
+<span id="cb166-9"><a href="hypotest.html#cb166-9" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb166-10"><a href="hypotest.html#cb166-10" tabindex="-1"></a>  <span class="fu">lm</span>(swls2021_avg <span class="sc">~</span> swls2019_avg, <span class="at">data =</span> .) <span class="sc">|&gt;</span> </span>
 <span id="cb166-11"><a href="hypotest.html#cb166-11" tabindex="-1"></a>  <span class="fu">confint</span>(.)</span></code></pre></div>
 <p>You should get the same result as earlier.</p>
 </div>
@@ -1015,7 +1015,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">8.12.2</span> Conducting and Interpreting the Chi-square Test of Independence<a href="hypotest.html#conducting-and-interpreting-the-chi-square-test-of-independence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>First, we need to filter the data such that we only have married and divorced participants.</p>
 <div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="hypotest.html#cb174-1" tabindex="-1"></a><span class="co"># Filter (keep) only divorced and married participants </span></span>
-<span id="cb174-2"><a href="hypotest.html#cb174-2" tabindex="-1"></a>div_and_mar_only <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb174-2"><a href="hypotest.html#cb174-2" tabindex="-1"></a>div_and_mar_only <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
 <span id="cb174-3"><a href="hypotest.html#cb174-3" tabindex="-1"></a>  <span class="fu">filter</span>(marital_status <span class="sc">==</span> <span class="st">&quot;married&quot;</span> <span class="sc">|</span> marital_status <span class="sc">==</span> <span class="st">&quot;divorced&quot;</span>) </span>
 <span id="cb174-4"><a href="hypotest.html#cb174-4" tabindex="-1"></a></span>
 <span id="cb174-5"><a href="hypotest.html#cb174-5" tabindex="-1"></a><span class="co"># Drop the &quot;widowed&quot; level for marital status since it is now redundant</span></span>
@@ -1112,7 +1112,9 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": ["PSYC208.pdf"],
+  "download": [
+    ["PSYC208.pdf", "PDF"]
+  ],
   "search": {
     "engine": "fuse",
     "options": null

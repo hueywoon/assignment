@@ -11,22 +11,22 @@ Imagine you went to a hawker centre and there's an uncle manning the store. This
 For Windows
 
 1.  Open an internet browser and go to <https://cloud.r-project.org/>.
-2.  Under **Download and Install R**, Click on **Download R for Windows**. Click on **base**.
-3.  Download the latest release by saving the .exe file on your computer. Double-click the file and follow the installation instructions.
+2.  Under **Download and Install R**, click on **Download R for Windows**. Click on **base**.
+3.  **Download the latest release** by saving the .exe file on your computer. **Double-click the file and follow the installation instructions**.
 
 For macOS
 
 1.  Open an internet browser and go to <https://cloud.r-project.org/>.
 2.  Under **Download and Install R**, click on **Download R for macOS**.
-3.  Download the latest release by saving the .pkg file to your computer. Double-click the file and follow the installation instructions.
+3.  **Download the latest release** by saving the .pkg file to your computer. **Double-click the file and follow the installation instructions**.
 
 ### Install RStudio
 
 Now that R is installed, download and install RStudio.
 
-1.  Go to <https://www.rstudio.com/products/rstudio/download/>.
-2.  Click **Download under RStudio Desktop**.
-3.  Click on the version recommended for your system, or the latest Windows / macOS version, and save the file. Double-click the file and follow the installation instructions.
+1.  Go to <https://docs.posit.co/ide/user/#rstudio-ide-oss-downloads>.
+2.  Click the **download link for your operating system** (e.g., Windows or macOS).
+3.  Save the file. **Double-click the file and follow the installation instructions**.
 
 ## The RStudio Interface
 

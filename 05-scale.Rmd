@@ -40,7 +40,7 @@ library(tidyverse)
 dataset <- read_csv("SWB.csv")
 
 # Create subset with the required variables and call it MVS
-MVS <- dataset %>% 
+MVS <- dataset |> 
   select(pin, mvs_1:mvs_9)
 
 # Check that the subset gives you what you want
@@ -108,13 +108,13 @@ The simple formula to use to reverse code data is this:
 ```{r}
 
 # Recode mvs_9 by creating a new variable called mvs_9r
-MVS <- MVS %>%              		 
+MVS <- MVS |>              		 
   mutate(mvs_9r = 5 + 1 - mvs_9)
 
 # Check mvs_9 is correctly recoded for the first 6 rows
 # A 1 on mvs_9 should be a 5 on mvs_9r, 2 should be a 4, and so on
-MVS %>% 
-  select(mvs_9, mvs_9r) %>% 
+MVS |> 
+  select(mvs_9, mvs_9r) |> 
   head(6)
 
 ```
@@ -126,7 +126,7 @@ Once you have confirmed that you correctly recoded the variable, you can drop `m
 ```{r}
 
 # Drop mvs_9
-MVS <- MVS %>%              		 
+MVS <- MVS |>              		 
   select(pin, mvs_1:mvs_8, mvs_9r)
 
 # Examine the correlation matrix
@@ -152,7 +152,7 @@ At this point, it should also be noted that `ggplot2` also has an `alpha()` func
 ```{r eval = FALSE}
 
 # First, ensure the dataset only has the items from the scale (meaning, remove pin and keep only the 9 items)
-MVS <- MVS %>% 
+MVS <- MVS |> 
   select(mvs_1:mvs_8, mvs_9r)
 
 # tell R we want to use the alpha() function from the psych package
@@ -165,7 +165,7 @@ Notice that we do not need to load the package using `library(psych)`. `psych::a
 
 ```{r echo = FALSE}
 
-MVS <- MVS %>% 
+MVS <- MVS |> 
   select(mvs_1:mvs_8, mvs_9r)
 
 psych::alpha(MVS) 
@@ -192,7 +192,7 @@ Now that we're sufficiently satisfied with the reliability of the scale, let’s
 
 ``` {r}
 
-MVS <- MVS %>%
+MVS <- MVS |>
   mutate(MVS_avg = rowMeans(across(c(mvs_1:mvs_8, mvs_9r)))) # calculate the average MVS score across the set of 9 items and call the average MVS_avg
 
 ```

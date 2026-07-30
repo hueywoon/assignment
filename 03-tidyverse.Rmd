@@ -160,7 +160,7 @@ Some of the functions I've found useful in the `dplyr` package are:
 
 There are more functions in the dplyr package! Check out the dplyr cheat sheet here: <https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf>.
 
-When you go through the code below, you'll notice that in `dplyr` (and also `tidyverse` in general), the pipe operator `%>%` is used a lot. You can think of it as a symbol for "then". For example `X %>% Y` would be read as: Do X then take the result from that to do Y. Because it gets tiring to type the pipe operator so frequently, there's a shortcut for it: `Ctrl/Cmd + Shift + M`. (You may see the pipe operator written as `|>` but this is a new development as of 2023 and most users still use `%>%` as their default pipe operator.)
+When you go through the code below, you'll notice that in `dplyr` (and also `tidyverse` in general), the pipe operator `|>` is used a lot. You can think of it as a symbol for "then". For example `X |> Y` would be read as: Do X then take the result from that to do Y. Because it gets tiring to type the pipe operator so frequently, there's a shortcut for it: `Ctrl/Cmd + Shift + M`. (You may see the pipe operator written as `%>%` as well because that was what the pipe operator looked like before 2023.)
 
 With that out of the way... Let's go through the five functions!
 
@@ -172,7 +172,7 @@ Let's say we only want to select `gender` and the `swls2019_1` to `swls2019_5` c
 
 ```{r}
 
-swls2019_only <- dataset %>%   # create the subset called "swls2019_only" from "dataset", and then
+swls2019_only <- dataset |>   # create the subset called "swls2019_only" from "dataset", and then
   select(gender, swls2019_1:swls2019_5)  # select gender and the columns swls2019_1 to swls2019_5
 
 ```
@@ -191,7 +191,7 @@ So, let's say we want the `swls2019_1` to `swls2019_5` columns to come _before_ 
 
 ```{r}
 
-swls2019_genderlast <- dataset %>%   
+swls2019_genderlast <- dataset |>   
   select(swls2019_1:swls2019_5, gender)  
 
 ```
@@ -214,7 +214,7 @@ So, let's say we want to select only male participants. In other words, we only 
 
 ``` {r}
 
-male_only <- dataset %>%	 # create "male_only" subset from "dataset", and then 
+male_only <- dataset |>	 # create "male_only" subset from "dataset", and then 
   filter(gender == "male")  # filter (keep) only male participants
 
 ```
@@ -237,7 +237,7 @@ Let's say we want to find the average of `swls2019_1` to `swls2019_5` for each p
 
 ```{r}
 
-swls2019_only <- swls2019_only %>% 
+swls2019_only <- swls2019_only |> 
   mutate(swls2019_avg = (swls2019_1 + swls2019_2 + swls2019_3 + swls2019_4 + swls2019_5) / 5)
 # this code is saying... 
 # go to swls2019_only, and then
@@ -260,7 +260,7 @@ You can achieve the same results using `rowMeans()`. (As an aside, if you want t
 
 ```{r}
 
-swls2019_only <- swls2019_only %>% 
+swls2019_only <- swls2019_only |> 
   mutate(swls2019_avg_rowmeans = rowMeans(across(c(swls2019_1:swls2019_5))))
 # rowMeans(across(c(swls2019_1:swls2019_5))) tells R that we want to find the mean (average) for each row (hence rowMeans) across the set of five variables, swls2019_1 to swls2019_5. 
 
@@ -270,9 +270,9 @@ Let's compare `swls2019_avg` and `swls2019_avg_rowmeans` for the first 6 rows:
 
 ```{r echo = FALSE}
 
-swls2019_only %>% 
-  select(swls2019_avg, swls2019_avg_rowmeans) %>% 
-  head(6) %>% 
+swls2019_only |> 
+  select(swls2019_avg, swls2019_avg_rowmeans) |> 
+  head(6) |> 
   print(width = Inf)
 
 ```
@@ -287,7 +287,7 @@ Let's say we're interested to know the mean (`avg_swls`), minimum (`min_swls`), 
 
 ```{r}
 
-swls2019_only %>% 
+swls2019_only |> 
   summarise(avg_swls = mean(swls2019_avg), 
             min_swls = min(swls2019_avg), 
             max_swls = max(swls2019_avg), 
@@ -317,8 +317,8 @@ Let's say we're interested to know the mean (`avg_swls`), minimum (`min_swls`), 
 
 ```{r}
 
-swls2019_only %>% 
-  group_by(gender) %>% 
+swls2019_only |> 
+  group_by(gender) |> 
   summarise(avg_swls = mean(swls2019_avg), 
             min_swls = min(swls2019_avg), 
             max_swls = max(swls2019_avg), 
@@ -356,8 +356,8 @@ Before looking at my code below, try coming up with your own! (HINT: Use the `su
 
 ```{r}
 
-swls2019_only %>% 
-  group_by(gender) %>%  # Group the result by gender
+swls2019_only |> 
+  group_by(gender) |>  # Group the result by gender
   summarise(freq = n())  # Count how many of each value in the data
 
 ```
@@ -368,8 +368,8 @@ Here's a faster alternative.
 
 ```{r}
 
-swls2019_only %>% 
-  select(gender) %>%  # Select the column gender
+swls2019_only |> 
+  select(gender) |>  # Select the column gender
   table()   # Count how many of each value in the data and present it in a table
 
 ```
@@ -380,9 +380,9 @@ Again, try this on your own before looking at my code. (HINT: Use the `summarise
 
 ```{r}
 
-swls2019_only %>% 
-  group_by(gender) %>%   # Group the result by gender
-  summarise(freq = n()) %>%  # Count how many of each value in the data 
+swls2019_only |> 
+  group_by(gender) |>   # Group the result by gender
+  summarise(freq = n()) |>  # Count how many of each value in the data 
   mutate (total = sum(freq),  # Count the total number of observations 
           rel_freq = freq / total)  # Take the frequency of each value / total number of observations
 
@@ -394,9 +394,9 @@ Here's a faster alternative, using `table()` and `prop.table()`.
 
 ```{r}
 
-swls2019_only %>% 
-  select(gender) %>%  
-  table() %>% 
+swls2019_only |> 
+  select(gender) |>  
+  table() |> 
   prop.table()
 
 ```
@@ -408,9 +408,9 @@ Try converting the proportions into percentages on your own before looking at my
 
 ```{r}
 
-swls2019_only %>% 
-  group_by(gender) %>%   
-  summarise(freq = n()) %>%   
+swls2019_only |> 
+  group_by(gender) |>   
+  summarise(freq = n()) |>   
   mutate (total = sum(freq), 
           rel_freq = freq / total, 
           percentage = rel_freq * 100)  
@@ -421,11 +421,11 @@ Here's a faster alternative, using `table()`, `prop.table()`, and `mutate()`.
 
 ```{r}
 
-swls2019_only %>% 
-  select(gender) %>%  
-  table() %>% 
-  prop.table() %>% 
-  data.frame() %>%   # force table into a data frame because mutate is incompatible with tables 
+swls2019_only |> 
+  select(gender) |>  
+  table() |> 
+  prop.table() |> 
+  data.frame() |>   # force table into a data frame because mutate is incompatible with tables 
   mutate(Percentage = Freq * 100, 
          Rounded = round(Freq * 100, 2))  # you may round the results to 2 d.p. using the round() function
 
@@ -455,7 +455,7 @@ Here's an alternative that will give you the exact same output.
 ``` {r eval = FALSE}
 
 # Alternative
-swls2019_only %>%  # dataset used is swls2019_only
+swls2019_only |>  # dataset used is swls2019_only
   ggplot(.) +  # R takes swls2019_only in the previous line and places it in the . on this line to tell ggplot that dataset used is swls2019_only
   geom_bar(aes(x = gender), stat="count")  # we want a bar plot where x (horizontal axis) is gender and the statistic is the count of values in x
 
@@ -485,8 +485,8 @@ As with the bar chart, you could do this instead and the results would be the sa
 ``` {r eval = FALSE}
 
 # Alternative
-swls2019_only %>% 
-  ggplot(.) + 
+swls2019_only |> 
+  ggplot() + 
   geom_histogram(aes(x = swls2019_avg))
 
 ```
@@ -553,8 +553,8 @@ Here's the basic code for a scatterplot in `ggplot2`:
 
 ``` {r}
 
-swls2019_only %>% 
-  ggplot(.) + 
+swls2019_only |> 
+  ggplot() + 
   geom_point(aes(x = swls2019_1, y = swls2019_2)) +  # A scatterplot is a plot of points on a graph. So we use geom_point.
   labs(x = "swls2019_1: In most ways my life is close to my ideal",
        y = "swls2019_2: The conditions of my life are excellent", 

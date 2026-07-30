@@ -80,12 +80,12 @@ glimpse(dataset$marital_status)  # str(dataset$marital_status) also okay
 glimpse(dataset$have_children) # str(dataset$have_children) also okay
 
 # 9. Create subset 
-subset <- dataset %>% 
-  filter(marital_status == "married" & have_children == "have children") %>% 
+subset <- dataset |> 
+  filter(marital_status == "married" & have_children == "have children") |> 
   select(swls2021_1:swls2021_5)
 
 # 10. Compute swls2021_avg
-subset <- subset %>% 
+subset <- subset |> 
   mutate(swls2021_avg = rowMeans(across(c(swls2021_1:swls2021_5)))) 
 
 # 11. Create a histogram for swls2021_avg
@@ -106,7 +106,7 @@ ggplot(data = subset) +
 
 # 12A. Get summary statistics using the summarise() function
 # Maximum is 5.4, minimum is 2.6, mean is 4.18, and sd is 0.707.
-subset %>% 
+subset |> 
   summarise(avg_swls = mean(swls2021_avg), 
             min_swls = min(swls2021_avg), 
             max_swls = max(swls2021_avg), 
@@ -118,14 +118,14 @@ describe(subset$swls2021_avg)
 
 # 13A. Create a subset that only contains people with an average SWLS of 4.18 and above
 # Then, count the number of people remaining 
-subset %>% 
-  filter(swls2021_avg >= 4.18) %>% 
+subset |> 
+  filter(swls2021_avg >= 4.18) |> 
   summarise (total = n())
 
 # 13B. Create a subset that only contains people with an average SWLS of 4.18 and above
 # Then, count the number of people remaining 
-subset %>% 
-  filter(swls2021_avg >= 4.18) %>% 
+subset |> 
+  filter(swls2021_avg >= 4.18) |> 
   nrow  # count the number of rows remaining
 
 ```

@@ -69,7 +69,7 @@ Before jumping into any hypothesis testing, though, it is good practice to first
 ```{r}
 
 # Calculate the average satisfaction with life score in 2019 for each participant
-df <- df %>% 
+df <- df |> 
   mutate(swls2019_avg = rowMeans(across(c(swls2019_1:swls2019_5))))
 
 # Get the descriptive statistics
@@ -136,7 +136,7 @@ Again, before conducting the correlated groups t test, remember to get the descr
 
 # Calculate the average satisfaction with life score in 2021 for each participant. 
 # If you did not calculate the average satisfaction with life score in 2019 earlier, you will want to do that before continuing.
-df <- df %>% 
+df <- df |> 
   mutate(swls2021_avg = rowMeans(across(c(swls2021_1:swls2021_5))))
 
 # Get the descriptives
@@ -488,7 +488,7 @@ cor.test(~ swls2019_avg + swls2021_avg,
          data = df)
 
 # Alternative 2
-df %>% 
+df |> 
   cor.test(formula = ~ swls2019_avg + swls2021_avg, .)
 
 ```
@@ -566,13 +566,13 @@ There are other ways to code a linear regression. One of those alternatives is s
 # Alternative
 
 # Linear regression
-data %>% 
-  lm(swls2021_avg ~ swls2019_avg, data = .) %>% 
+data |> 
+  lm(swls2021_avg ~ swls2019_avg, data = .) |> 
   summary(.)
 
 # 95% confidence interval
-data %>% 
-  lm(swls2021_avg ~ swls2019_avg, data = .) %>% 
+data |> 
+  lm(swls2021_avg ~ swls2019_avg, data = .) |> 
   confint(.)
 
 ```
@@ -662,7 +662,7 @@ First, we need to filter the data such that we only have married and divorced pa
 ```{r}
 
 # Filter (keep) only divorced and married participants 
-div_and_mar_only <- df %>% 
+div_and_mar_only <- df |> 
   filter(marital_status == "married" | marital_status == "divorced") 
 
 # Drop the "widowed" level for marital status since it is now redundant
